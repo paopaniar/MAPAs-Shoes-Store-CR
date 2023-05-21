@@ -6,6 +6,6 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("mapas")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
