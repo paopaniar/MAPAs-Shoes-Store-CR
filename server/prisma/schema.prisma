@@ -19,7 +19,7 @@ model Usuario {
   role                  Role                          @default(USER)
   password              String?
   identificacion        String?
-  estado                Int?
+  estado                Int @default(1)
   ordenes               Orden[]
   direcciones           Direccion_Usuario[]
   productos_comentarios Producto_Usuario_Comentario[]
