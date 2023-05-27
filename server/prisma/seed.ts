@@ -52,6 +52,66 @@ async function main() {
       cantidadDisponible: 20,     
     }
   });
+
+
+  await prisma.orden.create({
+    data: {
+      fechaOrden: new Date(),
+      usuario: {
+        connect: { id: 1 },
+      },
+    },
+  });
+
+  // Insert data for table OrdenProducto
+  await prisma.ordenProducto.create({
+    data: {
+      orden: {
+        connect: { id: 1 },
+      },
+      producto: {
+        connect: { id: 1 },
+      },
+      cantidad: 2,
+      total: 9.99,
+      iva: 0.99,
+    },
+  });
+
+
+  // Insert data for table Direccion
+  await prisma.direccion.create({
+    data: {
+      provincia: 'Province 1',
+      canton: 'Canton 1',
+      distrito: 'Distrito 1',
+      barrio: 'Barrio 1',
+      otrasSennas: 'Address details',
+    },
+  });
+
+  // Insert data for table Comentario_Respuesta
+  await prisma.comentario_Respuesta.create({
+    data: {
+      comentario: 'Comment 1',
+      respuesta: 'Reply 1',
+    },
+  });
+
+  // Insert data for table Producto_Usuario_Comentario
+  await prisma.producto_Usuario_Comentario.create({
+    data: {
+      comentario_respuesta: {
+        connect: { id: 1 },
+      },
+      usuario: {
+        connect: { id: 1 },
+      },
+      producto: {
+        connect: { id: 1 },
+      },
+    },
+  });
 }
 main()
   .then(async () => {

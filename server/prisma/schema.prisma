@@ -42,7 +42,7 @@ model OrdenProducto {
  producto Producto @relation(fields: [productoId], references: [id])
   cantidad   Int?
   total      Decimal?
-  estado     Int?
+  estado     Int @default(1)
   iva        Decimal?
 }
 
