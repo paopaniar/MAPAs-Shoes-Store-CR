@@ -1,14 +1,14 @@
-export const rol = [
+export const Role = [
     //1
     {
       nombre: "Administrador",
     },
     //2
     {
-      nombre: "Vendedor",
+      nombre: "Cliente",
     },
     //3
     {
-      nombre: "Cliente",
+      nombre: "Vendedor",
     },
   ];
