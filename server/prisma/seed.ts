@@ -3,11 +3,12 @@ import { categorias } from "./seeds/categorias";
 import {Role } from "@prisma/client";
 const prisma = new PrismaClient();
 
+const fs = require('fs');
+const imagenBytes = fs.readFileSync('image/tenis.jpg');
 async function main() {
   await prisma.categorias.createMany({
     data: categorias,
   });
-
   await prisma.usuario.create({
     data: {
       email: 'panipao0@gmail.com',
@@ -19,8 +20,6 @@ async function main() {
       identificacion: '207940152',
     }
   });
-
-
   await prisma.usuario.create({
     data: {
       email: 'admin@gmail.com',
@@ -32,7 +31,6 @@ async function main() {
       identificacion: '207940153',
     }
   });
-
   await prisma.usuario.create({
     data: {
       email: 'sales@gmail.com',
@@ -44,8 +42,16 @@ async function main() {
       identificacion: '207940154',
     }
   });
-
-
+   await prisma.producto.create({
+    data: {
+      nombreProducto: 'Tenis Mujes',
+      categoriaId: 1,
+      precio: 16500,
+      description: 'Tenis blancas con detalles rosados para mujer',
+      imagen: imagenBytes,
+      cantidadDisponible: 20,     
+    }
+  });
 }
 main()
   .then(async () => {

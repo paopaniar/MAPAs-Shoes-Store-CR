@@ -60,7 +60,7 @@ model Producto {
   precio               Decimal
   description          String
   estado               Int                           @default(1) //1=InStock 0=No hay stock
-  imagen               Bytes
+  imagen               Bytes?
   cantidadDisponible   Int
   usuarios_comentarios Producto_Usuario_Comentario[]
   ordenProductos OrdenProducto[]
