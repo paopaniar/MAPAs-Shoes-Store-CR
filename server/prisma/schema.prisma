@@ -46,7 +46,7 @@ model OrdenProducto {
   iva        Decimal?
 }
 
-model Categorias {
+model Categoria {
   id              Int    @id @default(autoincrement())
   nombreCategoria String
   productos Producto[]
@@ -56,7 +56,7 @@ model Producto {
   id                   Int                           @id @default(autoincrement())
   nombreProducto       String
   categoriaId          Int
-  categoria Categorias  @relation(fields: [categoriaId], references: [id]) 
+  categoria Categoria  @relation(fields: [categoriaId], references: [id]) 
   precio               Decimal
   description          String
   estado               Int                           @default(1) //1=InStock 0=No hay stock
