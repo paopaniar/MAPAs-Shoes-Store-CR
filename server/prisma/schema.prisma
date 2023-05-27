@@ -11,55 +11,96 @@ datasource db {
 }
 
 model Usuario {
-  id              Int     @id @default(autoincrement())
-  email           String  @unique
-  nombre          String? //Puede ser nulo
-  primerApellido  String? //Puede ser nulo
-  segundoApellido String? //Puede ser nulo
-  role            Role    @default(USER)
-  password        String?
-  identificacion  String?
-  estado          Int?  
-  //relacion a Tabla direccion pendiente
-  ordenes Orden[]
+  id                    Int                           @id @default(autoincrement())
+  email                 String                        @unique
+  nombre                String? //Puede ser nulo
+  primerApellido        String? //Puede ser nulo
+  segundoApellido       String? //Puede ser nulo
+  role                  Role                          @default(USER)
+  password              String?
+  identificacion        String?
+  estado                Int?
+  ordenes               Orden[]
+  direcciones           Direccion_Usuario[]
+  productos_comentarios Producto_Usuario_Comentario[]
 }
 
 model Orden {
-  id          Int                 @id @default(autoincrement())
-  fechaOrden  DateTime            @default(now())
-  usuarioId   Int
-  usuario     Usuario             @relation(fields: [usuarioId], references: [id])
-  updatedAt   DateTime            @default(now()) @updatedAt
-
+  id            Int             @id @default(autoincrement())
+  fechaOrden    DateTime        @default(now())
+  usuarioId     Int
+  usuario       Usuario         @relation(fields: [usuarioId], references: [id])
+  updatedAt     DateTime        @default(now()) @updatedAt
+  ordenProductos OrdenProducto[]
 }
 
-model OrdenProducto{
-  id Int @id @default(autoincrement())
-  ordenId Int 
-  //orden Orden @relation(fields: [orderId], references: [id])
-  productoId Int 
-  //producto Producto @relation(fields: [productoId], references: [id])
-  cantidad Int?
-  total Decimal?
-  estado Int?
-  iva Decimal?
-
+model OrdenProducto {
+  id         Int      @id @default(autoincrement())
+  ordenId    Int
+  orden      Orden    @relation(fields: [ordenId], references: [id]) 
+  productoId Int
+ producto Producto @relation(fields: [productoId], references: [id])
+  cantidad   Int?
+  total      Decimal?
+  estado     Int?
+  iva        Decimal?
 }
-model Categorias{
-  id Int @id @default(autoincrement())
+
+model Categorias {
+  id              Int    @id @default(autoincrement())
   nombreCategoria String
+  productos Producto[]
 }
 
-model Producto{
-  id  Int @id @default(autoincrement())
-  nombreProducto String
-  categoriaId Int
- //category    Category  @relation(fields: [categoryId], references: [id]) 
-  precio Decimal
-  description String
-  estado Int @default(1) //1=InStock 0=No hay stock
-  imagen Bytes 
-  cantidadDisponible Int
+model Producto {
+  id                   Int                           @id @default(autoincrement())
+  nombreProducto       String
+  categoriaId          Int
+  categoria Categorias  @relation(fields: [categoriaId], references: [id]) 
+  precio               Decimal
+  description          String
+  estado               Int                           @default(1) //1=InStock 0=No hay stock
+  imagen               Bytes
+  cantidadDisponible   Int
+  usuarios_comentarios Producto_Usuario_Comentario[]
+  ordenProductos OrdenProducto[]
+}
+
+model Direccion_Usuario {
+  direccionId Int
+  direccion   Direccion @relation(fields: [direccionId], references: [id])
+  usuarioId   Int
+  usuario     Usuario   @relation(fields: [usuarioId], references: [id])
+
+  //Llave primaria compuesta
+  @@id([direccionId, usuarioId])
+}
+
+model Direccion {
+  id          Int                 @id @default(autoincrement())
+  provincia   String?
+  canton      String?
+  distrito    String?
+  barrio      String?
+  otrasSennas String?
+  usuario     Direccion_Usuario[]
+}
+
+model Comentario_Respuesta {
+  id                 Int                           @id @default(autoincrement())
+  comentario         String?
+  respuesta          String?
+  usuarios_productos Producto_Usuario_Comentario[]
+}
+
+model Producto_Usuario_Comentario {
+  comentario_RespuestaId Int
+  comentario_respuesta   Comentario_Respuesta @relation(fields: [comentario_RespuestaId], references: [id])
+  usuarioId              Int
+  usuario                Usuario              @relation(fields: [usuarioId], references: [id])
+  productoId             Int
+  producto               Producto             @relation(fields: [productoId], references: [id])
+  @@id([comentario_RespuestaId, usuarioId, productoId])
 }
 
 enum Role {
