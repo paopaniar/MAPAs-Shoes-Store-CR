@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/paopaniar/MAPAs-Shoes-Store-CR#readme",
   "dependencies": {
+    "@prisma/client": "^4.14.1",
     "chalk": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -33,7 +34,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
-  "prisma":{
+  "prisma": {
     "seed": "ts-node prisma/seed.ts"
   }
 }

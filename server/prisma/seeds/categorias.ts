@@ -1,3 +1,4 @@
+
 export const categorias = [
   {
     nombreCategoria: "Tenis Mujer",
@@ -26,9 +27,11 @@ export const categorias = [
   {
     nombreCategoria: "Botín Hombre",
   },
+
   {
     nombreCategoria: "Sandalias Hombre",
   },
+
   {
     nombreCategoria: "Sandalias Mujer",
   },
