@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const fs = require('fs');
 const imagenBytes = fs.readFileSync('image/tenis.jpg');
 async function main() {
-  await prisma.categorias.createMany({
+  await prisma.categoria.createMany({
     data: categorias,
   });
   await prisma.usuario.create({
