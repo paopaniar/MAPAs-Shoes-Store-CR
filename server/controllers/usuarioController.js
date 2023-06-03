@@ -21,6 +21,9 @@ module.exports.update = async (request, response, next) => {
 };
 
 
+
+//VER ESTOS EJEMPLOS PARA GUIARSE, VISTOS EN CLASE 
+
 //Ejemplo de la profe para el select 
 /*module.exports.get = async (request, response, next) => {
     const videojuegos= await prisma.videojuego.findMany({
