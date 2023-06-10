@@ -25,8 +25,11 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+             {
+              "input": "src/my-theme.scss"
+             },
               "src/styles.css"
+             
             ],
             "scripts": []
           },
