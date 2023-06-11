@@ -2,6 +2,23 @@
 
 @include mat.core();
 
+$my-primary: (
+  50: #e8f5e9,
+  100: #c8e6c9,
+  200: #a5d6a7,
+  300: #81c784,
+  400: #66bb6a,
+  500: #64a24d, // Change the value to your desired color
+  600: #559b44,
+  700: #4d8a3e,
+  800: #437733,
+  900: #365920,
+  A100: #ccff90,
+  A200: #b2ff59,
+  A400: #76ff03,
+  A700: #64dd17,
+);
+
 $my-primary: mat.define-palette(mat.$cyan-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $my-typography: mat.define-typography-config();

@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatIconModule} from '@angular/material/icon';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { trigger, transition, style, animate } from '@angular/animations';
 import { HomeRoutingModule } from './home-routing.module';
 import { AcercaDeComponent } from './acerca-de/acerca-de.component';
 import { InicioComponent } from './inicio/inicio.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 
 @NgModule({
@@ -13,7 +18,11 @@ import { InicioComponent } from './inicio/inicio.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MatGridListModule,
+    MatCardModule,
+    MatIconModule,
+    FlexLayoutModule
   ]
 })
 export class HomeModule { }

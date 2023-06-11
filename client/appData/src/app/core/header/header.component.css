@@ -1,3 +1,25 @@
 .example-spacer {
     flex: 1 1 auto;
   }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 16px; /* Adjust the margin as needed */
+  }
+  
+  .logo {
+    width: 100%; /* Adjust the size as needed */
+    height: 60px; /* Adjust the size as needed */
+
+  }
+
+  .logo-text {
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: lighter;
+    color: #1a2363;
+  }
+
+  .example-icon {
+    color: #1a2363;
+  }
+  
