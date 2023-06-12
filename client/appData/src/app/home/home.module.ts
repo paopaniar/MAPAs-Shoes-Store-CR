@@ -9,6 +9,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CardComponent } from './card/card.component';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdCarouselPause } from '../carousel-pause/carousel-pause.component';
 
 
 @NgModule({
@@ -23,7 +25,11 @@ import { CardComponent } from './card/card.component';
     MatGridListModule,
     MatCardModule,
     MatIconModule,
-    FlexLayoutModule
-  ]
+    FlexLayoutModule,
+    NgbCarousel,
+    NgbdCarouselPause
+  ],
+  bootstrap: [InicioComponent]
+
 })
 export class HomeModule { }

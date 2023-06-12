@@ -1,0 +1,53 @@
+.container {
+    padding-top: 50px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  #error-image {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px;
+    z-index: 1;
+  }
+  
+  #lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 96%;
+    height: 90%;
+    background-color: rgba(250, 50, 50, 0.596);
+    opacity: 0;
+    pointer-events: none;
+    animation: lightning 2s linear infinite;
+    border-radius: 50%;
+    transform-origin: center center;
+    transform: scale(0);
+    z-index: 0;
+  }
+  
+  @keyframes lightning {
+    0%, 20%, 60%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    25%, 55% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
