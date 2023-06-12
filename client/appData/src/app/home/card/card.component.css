@@ -1,0 +1,136 @@
+.custom-card {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-card .card-header {
+    padding: 5px;
+    background-color: #750918;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+    z-index: 8;
+  }
+  
+  
+  
+  .custom-card .card-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s;
+  }
+  
+  .custom-card:hover .card-front {
+    transform: scale(1.05);
+  }
+  
+  .custom-card .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 0fr);
+    margin-left: 10px;
+  }
+  
+  .custom-card .card-img-top {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+  }
+  
+  .centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Adjust the height as needed */
+    background-color: #f1f1f1; /* Background color for the container */
+  }
+  
+  .centered-content p {
+    font-size: 24px; /* Adjust the font size as needed */
+    text-align: center;
+    color: #333; /* Text color */
+  }
+  
+  .custom-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .custom-card:hover .card-overlay {
+    opacity: 1;
+  }
+  
+  .custom-card .card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-card .card-text {
+    margin-bottom: 20px;
+  }
+  .custom-card .card-overlay .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #060920;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-card .card-overlay .btn-primary:hover {
+    background-color: rgb(36, 218, 97);
+    color:#060920
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 50px;
+    margin-top: 40px;
+  }
+  
+  .container {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  
+  .centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: #CCCCCC;
+    transition: opacity 0.3s;
+    opacity: 1;
+  }
+
+  
+
+  
+  

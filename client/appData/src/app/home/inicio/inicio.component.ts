@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { CardComponent } from '../card/card.component';
 
 
 @Component({

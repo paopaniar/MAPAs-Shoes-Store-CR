@@ -8,13 +8,14 @@ import { AcercaDeComponent } from './acerca-de/acerca-de.component';
 import { InicioComponent } from './inicio/inicio.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     AcercaDeComponent,
-    InicioComponent
+    InicioComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

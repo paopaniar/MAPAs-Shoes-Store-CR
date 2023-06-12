@@ -1,0 +1,19 @@
+.carousel-item {
+  height: 400px;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px;
+}
+
+.carousel-caption h5 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.carousel-caption p {
+  font-size: 18px;
+  margin-bottom: 0;
+}
