@@ -9,15 +9,17 @@ async function main() {
   await prisma.categoria.createMany({
     data: categorias,
   });
+
   await prisma.usuario.create({
     data: {
       email: 'panipao0@gmail.com',
       nombre: 'Paola',
       primerApellido: 'Paniagua',
       segundoApellido: 'Arroyo',
-      role: Role.USER,
-      password: 'user1234',
+      rol: Role.USER,
+      contrasenna: 'user1234',
       identificacion: '207940152',
+      estado: 1
     }
   });
   await prisma.usuario.create({
@@ -26,9 +28,10 @@ async function main() {
       nombre: 'Administrador',
       primerApellido: 'Mapas',
       segundoApellido: 'Shoes',
-      role: Role.ADMIN,
-      password: 'user1234',
+      rol: Role.ADMIN,
+      contrasenna: 'user1234',
       identificacion: '207940153',
+      estado: 1
     }
   });
   await prisma.usuario.create({
@@ -37,34 +40,35 @@ async function main() {
       nombre: 'Vendedor',
       primerApellido: 'Mapas',
       segundoApellido: 'Shoes',
-      role: Role.SALES,
-      password: 'user1234',
+      rol: Role.SALES,
+      contrasenna: 'user1234',
       identificacion: '207940154',
-    }
-  });
+      estado: 1
+    }
+  });
    await prisma.producto.create({
     data: {
       nombreProducto: 'Tenis Mujes',
+      precio: 16500,  
+      descripcion: 'Tenis blancas con detalles rosados para mujer',
+      cantidadDisponible: 20,
       categoriaId: 1,
-      precio: 16500,
-      description: 'Tenis blancas con detalles rosados para mujer',
-      imagen: imagenBytes,
-      cantidadDisponible: 20,     
     }
   });
 
 
-  await prisma.orden.create({
+  await prisma.orden.create({   
     data: {
-      fechaOrden: new Date(),
-      usuario: {
-        connect: { id: 1 },
-      },
+      id: 1,  
+      fechaOrden: new Date(), 
+      direccionEntrega:1,
+      metodoPagoId:1,
+      usuarioId: 1,
     },
   });
 
   // Insert data for table OrdenProducto
-  await prisma.ordenProducto.create({
+  await prisma.ordenDetalle.create({
     data: {
       orden: {
         connect: { id: 1 },
@@ -73,10 +77,11 @@ async function main() {
         connect: { id: 1 },
       },
       cantidad: 2,
+      subtotal: 10.99,
       total: 9.99,
       iva: 0.99,
-    },
-  });
+      },
+    });
 
 
   // Insert data for table Direccion
@@ -87,31 +92,42 @@ async function main() {
       distrito: 'Distrito 1',
       barrio: 'Barrio 1',
       otrasSennas: 'Address details',
+      usuarioId:1,
     },
   });
 
   // Insert data for table Comentario_Respuesta
-  await prisma.comentario_Respuesta.create({
+  await prisma.consultaProductos.create({
     data: {
-      comentario: 'Comment 1',
-      respuesta: 'Reply 1',
+      id: 1,
+      mensaje: 'quiero saber cuanto cuesta',
+      respuesta: 'tiene un precio de 2000',
+      productoId:1,
+      usuarioId:1,
     },
   });
-
-  // Insert data for table Producto_Usuario_Comentario
-  await prisma.producto_Usuario_Comentario.create({
+  await prisma.metodoPago.create({
     data: {
-      comentario_respuesta: {
-        connect: { id: 1 },
-      },
-      usuario: {
-        connect: { id: 1 },
-      },
-      producto: {
-        connect: { id: 1 },
-      },
+      id: 1,
+      descripcion: 'Tarjeta',
+      usuarioId:1,
     },
   });
+  await prisma.fotografia.create({
+    data: {
+      id: 1,
+      productoId:1,
+    },
+  });
+ 
+await prisma.evaluacion.create({
+    data: {
+      comentario: 'pruebas de sistema',
+      calificacionFinal: 10,
+      usuarioId: 2,
+      ordenId: 1
+    },
+  });
 }
 main()
   .then(async () => {
