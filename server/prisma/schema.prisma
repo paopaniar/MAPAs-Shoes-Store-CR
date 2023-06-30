@@ -29,6 +29,33 @@ model Usuario {
 }
 
 //buena
+model MetodoPago {
+  id          Int     @id @default(autoincrement())
+  descripcion String
+  usuarioId   Int
+  usuario     Usuario @relation(fields: [usuarioId], references: [id])
+  ordenes     Orden[]
+}
+//Buena
+model Categoria {
+  id              Int        @id @default(autoincrement())
+  nombreCategoria String
+  productos       Producto[]
+}
+//buena
+model Direccion {
+  id          Int     @id @default(autoincrement())
+  provincia   String?
+  canton      String?
+  distrito    String?
+  barrio      String?
+  otrasSennas String?
+  usuarioId   Int
+  usuario     Usuario @relation(fields: [usuarioId], references: [id])
+  ordenes     Orden[]
+}
+
+//buena
 model Orden {
   id               Int            @id @default(autoincrement())
   fechaOrden       DateTime       @default(now())
@@ -56,13 +83,6 @@ model OrdenDetalle {
   producto   Producto @relation(fields: [productoId], references: [id])
 }
 
-//Buena
-model Categoria {
-  id              Int        @id @default(autoincrement())
-  nombreCategoria String
-  productos       Producto[]
-}
-
 //buena
 model Producto {
   id                 Int                 @id @default(autoincrement())
@@ -84,28 +104,6 @@ model Fotografia {
   imagen     Bytes?
   productoId Int
   producto   Producto @relation(fields: [productoId], references: [id])
-}
-
-//buena
-model MetodoPago {
-  id          Int     @id @default(autoincrement())
-  descripcion String
-  usuarioId   Int
-  usuario     Usuario @relation(fields: [usuarioId], references: [id])
-  ordenes     Orden[]
-}
-
-//buena
-model Direccion {
-  id          Int     @id @default(autoincrement())
-  provincia   String?
-  canton      String?
-  distrito    String?
-  barrio      String?
-  otrasSennas String?
-  usuarioId   Int
-  usuario     Usuario @relation(fields: [usuarioId], references: [id])
-  ordenes     Orden[]
 }
 
 //buena
