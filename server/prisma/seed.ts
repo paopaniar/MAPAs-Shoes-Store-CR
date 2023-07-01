@@ -43,8 +43,8 @@ async function main() {
       rol: Role.SALES,
       contrasenna: 'user1234',
       identificacion: '207940154',
-      estado: 1
-    }
+      estado:1
+    }
   });
    await prisma.producto.create({
     data: {

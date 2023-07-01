@@ -9,7 +9,8 @@ import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { MapasModule } from './mapas/mapas.module';
+
 
 
 
@@ -22,12 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule,
+    
     CoreModule,
     ShareModule,
     //todos los demas
     HomeModule,
     UserModule,
+    MapasModule,
    // VideojuegoModule,
     //siempre de ultimo
     AppRoutingModule,
