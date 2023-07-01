@@ -12,6 +12,11 @@ module.exports.get = async (request, response, next) => {
 
 //Obtener por Id
 module.exports.getById = async (request, response, next) => {
+    let idProd=parseInt(request.params.id);
+    const productos=await prisma.usuario.findUnique({
+        where: {id: idProd}
+    })
+    response.json(productos);
 };
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {

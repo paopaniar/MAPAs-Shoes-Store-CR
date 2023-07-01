@@ -4,5 +4,6 @@ const router=express.Router();
 const productoController=require("../controllers/productoController");
 
 router.get("/", productoController.get);
+router.get('/:id',productoController.getById);
 
 module.exports = router;

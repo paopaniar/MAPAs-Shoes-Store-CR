@@ -48,11 +48,111 @@ async function main() {
   });
    await prisma.producto.create({
     data: {
-      nombreProducto: 'Tenis Mujes',
+      nombreProducto: 'Tenis Mujer',
       precio: 16500,  
       descripcion: 'Tenis blancas con detalles rosados para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Casuales Mujer',
+      precio: 13450,  
+      descripcion: 'Zapatos casuales negros con detalles en cuero para mujer',
+      cantidadDisponible: 20,
+      categoriaId: 9,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Mujer',
+      precio: 4950,  
+      descripcion: 'Sandalias deportivas de suela baja para mujer',
+      cantidadDisponible: 20,
+      categoriaId: 9,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Tenis Hombre',
+      precio: 16500,  
+      descripcion: 'Tenis blancas con detalles azules para hombre',
+      cantidadDisponible: 20,
+      categoriaId: 2,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Casuales Hombre',
+      precio: 23000,  
+      descripcion: 'Zapatos casuales con detalles en cuero para hombre',
+      cantidadDisponible: 20,
+      categoriaId: 3,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Hombre',
+      precio: 4500,  
+      descripcion: 'Sandalias bajas para hombre',
+      cantidadDisponible: 20,
+      categoriaId: 4,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Tenis Niñas',
+      precio: 12500,  
+      descripcion: 'Tenis blancas con detalles rosados para niñas',
+      cantidadDisponible: 20,
+      categoriaId: 5,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Tenis Niños',
+      precio: 12000,  
+      descripcion: 'Tenis blancas con detalles azules para niños',
+      cantidadDisponible: 20,
+      categoriaId: 6,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Niñas',
+      precio: 2500,  
+      descripcion: 'Sandalias para niñas',
+      cantidadDisponible: 20,
+      categoriaId: 7,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Niños',
+      precio: 3100,  
+      descripcion: 'Sandalias para niños',
+      cantidadDisponible: 20,
+      categoriaId: 7,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Tenis Unisex',
+      precio: 15000,  
+      descripcion: 'Unisex',
+      cantidadDisponible: 20,
+      categoriaId: 8,
+    }
+  });
+
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Unisex',
+      precio: 10000,  
+      descripcion: 'Unisex',
+      cantidadDisponible: 20,
+      categoriaId: 9,
     }
   });
 
