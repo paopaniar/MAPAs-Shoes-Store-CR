@@ -60,8 +60,8 @@ model Orden {
   id               Int            @id @default(autoincrement())
   fechaOrden       DateTime       @default(now())
   estado           Int            @default(1)
-  direccionEntrega Int
-  direccion        Direccion      @relation(fields: [direccionEntrega], references: [id])
+  direccionId Int
+  direccion        Direccion      @relation(fields: [direccionId], references: [id])
   metodoPagoId     Int
   metodoPago       MetodoPago     @relation(fields: [metodoPagoId], references: [id])
   usuarioId        Int

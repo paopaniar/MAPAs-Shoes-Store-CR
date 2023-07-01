@@ -8,6 +8,9 @@ import { ShareModule } from './share/share.module';
 import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -18,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    HttpClientModule,
     CoreModule,
     ShareModule,
     //todos los demas
