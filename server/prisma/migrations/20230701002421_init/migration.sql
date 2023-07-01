@@ -49,7 +49,7 @@ CREATE TABLE `Orden` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `fechaOrden` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `estado` INTEGER NOT NULL DEFAULT 1,
-    `direccionEntrega` INTEGER NOT NULL,
+    `direccionId` INTEGER NOT NULL,
     `metodoPagoId` INTEGER NOT NULL,
     `usuarioId` INTEGER NOT NULL,
 
@@ -120,7 +120,7 @@ ALTER TABLE `MetodoPago` ADD CONSTRAINT `MetodoPago_usuarioId_fkey` FOREIGN KEY 
 ALTER TABLE `Direccion` ADD CONSTRAINT `Direccion_usuarioId_fkey` FOREIGN KEY (`usuarioId`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Orden` ADD CONSTRAINT `Orden_direccionEntrega_fkey` FOREIGN KEY (`direccionEntrega`) REFERENCES `Direccion`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Orden` ADD CONSTRAINT `Orden_direccionId_fkey` FOREIGN KEY (`direccionId`) REFERENCES `Direccion`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Orden` ADD CONSTRAINT `Orden_metodoPagoId_fkey` FOREIGN KEY (`metodoPagoId`) REFERENCES `MetodoPago`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -56,12 +56,29 @@ async function main() {
     }
   });
 
-
+  // Insert data for table Direccion
+  await prisma.direccion.create({
+    data: {
+      provincia: 'Province 1',
+      canton: 'Canton 1',
+      distrito: 'Distrito 1',
+      barrio: 'Barrio 1',
+      otrasSennas: 'Address details',
+      usuarioId:1,
+    },
+  });
+  await prisma.metodoPago.create({
+    data: {
+      id: 1,
+      descripcion: 'Tarjeta',
+      usuarioId:1,
+    },
+  });
   await prisma.orden.create({   
     data: {
       id: 1,  
       fechaOrden: new Date(), 
-      direccionEntrega:1,
+      direccionId:1,
       metodoPagoId:1,
       usuarioId: 1,
     },
@@ -84,17 +101,6 @@ async function main() {
     });
 
 
-  // Insert data for table Direccion
-  await prisma.direccion.create({
-    data: {
-      provincia: 'Province 1',
-      canton: 'Canton 1',
-      distrito: 'Distrito 1',
-      barrio: 'Barrio 1',
-      otrasSennas: 'Address details',
-      usuarioId:1,
-    },
-  });
 
   // Insert data for table Comentario_Respuesta
   await prisma.consultaProductos.create({
@@ -106,13 +112,7 @@ async function main() {
       usuarioId:1,
     },
   });
-  await prisma.metodoPago.create({
-    data: {
-      id: 1,
-      descripcion: 'Tarjeta',
-      usuarioId:1,
-    },
-  });
+
   await prisma.fotografia.create({
     data: {
       id: 1,
