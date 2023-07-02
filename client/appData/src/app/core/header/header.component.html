@@ -25,14 +25,14 @@
       <button mat-menu-item [routerLink]="['/acerca-de']" routerLinkActive="mat-raised-button">
         Acerca de
       </button>
-      <button mat-menu-item [routerLink]="['/acerca-de']" [matMenuTriggerFor]="menu2"
+      <button mat-menu-item [routerLink]="['/']" [matMenuTriggerFor]="menu2"
         routerLinkActive="mat-raised-button">
         Mantenimientos
       </button>
   
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/']" routerLinkActive="mat-raised-button">
-          Videojuego
+        <button mat-menu-item [routerLink]="['/producto/all']" routerLinkActive="mat-raised-button">
+          Productos
         </button>
       </mat-menu>
     </mat-menu>
