@@ -1,5 +1,9 @@
 
 <mat-toolbar [ngStyle]="{ 'background-color': '#D9E7F2ff' }">
+  <button [matMenuTriggerFor]="menu1" mat-icon-button class="example-icon"
+  aria-label="Example icon-button with menu icon">
+  <mat-icon>menu</mat-icon>
+</button>
      <div class="logo-container">
       <img src="assets/images/logoO.jpeg" alt="Logo" class="logo">
       <span class="logo-text">MAPAS SHOES</span>
@@ -8,4 +12,52 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
     </button>
+    <mat-menu #menu1="matMenu">
+      <!-- 
+        #= forma de llamar un componente
+        
+        https://material.angular.io/components/menu/overview
+        nested menu
+      -->
+      <button mat-menu-item [routerLink]="['/']" routerLinkActive="mat-raised-button">
+        Inicio
+      </button>
+      <button mat-menu-item [routerLink]="['/acerca-de']" routerLinkActive="mat-raised-button">
+        Acerca de
+      </button>
+      <button mat-menu-item [routerLink]="['/acerca-de']" [matMenuTriggerFor]="menu2"
+        routerLinkActive="mat-raised-button">
+        Mantenimientos
+      </button>
+  
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item [routerLink]="['/']" routerLinkActive="mat-raised-button">
+          Videojuego
+        </button>
+      </mat-menu>
+    </mat-menu>
+    <div class="example-button-container"></div>
+    <div class="example-spacer"></div>
+    <div class="example-spacer">
+      <!--enlaces de la app-->
+      <!--https://fonts.google.com/icons-->
+      <!--https://material.angular.io/guide/typography-->
+  
+      <!--Usuario-->
+      <span class="mat-caption" *ngIf="isAutenticated">{{currentUser.email}}</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu3">
+        <mat-icon [ngStyle]="{'color': isAutenticated ? 'white': '#9E9E9E' }">person</mat-icon>
+      </button>
+      <!--Menu usuario-->
+      <mat-menu #menu3="matMenu">
+        <a mat-menu-item *ngIf="!(isAutenticated)">
+          <mat-icon>person_add</mat-icon>
+          <span>Ingresar</span>
+        </a>
+        <a mat-menu-item *ngIf="isAutenticated">
+          <mat-icon>person_remove</mat-icon>
+          <span>Cerrar Sesión</span>
+        </a>
+      </mat-menu>
+    </div>
   </mat-toolbar>
