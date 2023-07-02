@@ -1,4 +1,4 @@
-<mat-card class="full-width">
+<mat-card class="full-width" style="background-color: #2B2D43;">
     <!-- Titulo del Card -->
     <mat-card-title>
       Zapatos
@@ -11,10 +11,10 @@
         <mat-icon>add</mat-icon>
       </a>
     </mat-card-title>
-    <mat-card-content>
+    <mat-card-content >
       <!-- Table -->
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
+      <div class="mat-elevation-z8" >
+        <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements" style="background-color: #060920;">
           <!-- Columna nombre -->
           <ng-container matColumnDef="nombreProducto">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
@@ -54,7 +54,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
   
-        <mat-paginator
+        <mat-paginator style="background-color: #060920;" 
           #paginator
           [length]="dataSource?.data?.length"
           [pageIndex]="0"
