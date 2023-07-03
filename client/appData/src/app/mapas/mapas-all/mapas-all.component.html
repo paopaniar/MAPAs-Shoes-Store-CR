@@ -1,17 +1,30 @@
 <mat-card class="full-width" style="background-color: #2B2D43;">
     <!-- Titulo del Card -->
-    <mat-card-title>
-      Zapatos
+<br>
+    <mat-card-title style="margin-left: 80%;">
+
       <a
         mat-fab
         matTooltip="Crear nuevo estilo"
         aria-label="Crear nuevo estilo"
         color="primary"
       >
-        <mat-icon class="add">add</mat-icon>
+       
       </a>
     </mat-card-title>
+    <br>
     <mat-card-content >
+      <mat-card-title>
+        Ingresar Nuevo
+        <a
+          mat-fab
+          matTooltip="Crear nuevo estilo"
+          aria-label="Crear nuevo estilo"
+          color="primary"
+        >
+          <mat-icon class="add">add</mat-icon>
+        </a>
+      </mat-card-title>
       <!-- Table -->
       <div class="mat-elevation-z8" >
         <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements" style="background-color: #060920;">
