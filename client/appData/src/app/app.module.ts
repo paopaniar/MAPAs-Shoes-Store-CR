@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MapasModule } from './mapas/mapas.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PedidosModule } from './pedidos/pedidos.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     //siempre de ultimo
     AppRoutingModule,
    BrowserAnimationsModule,
+   PedidosModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

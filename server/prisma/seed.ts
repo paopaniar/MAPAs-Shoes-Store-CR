@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { categorias } from "./seeds/categorias";
 import {Role } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 const fs = require('fs');
@@ -228,6 +229,39 @@ async function main() {
   await prisma.fotografia.create({
     data: {
       id: 1,
+      imagen: imagenBytes,
+      productoId:1,
+    },
+  });
+  
+  await prisma.fotografia.create({
+    data: {
+      id: 2,
+      imagen: imagenBytes,
+      productoId:1,
+    },
+  });
+  
+  await prisma.fotografia.create({
+    data: {
+      id: 3,
+      imagen: imagenBytes,
+      productoId:1,
+    },
+  });
+  
+  await prisma.fotografia.create({
+    data: {
+      id: 4,
+      imagen: imagenBytes,
+      productoId:1,
+    },
+  });
+  
+  await prisma.fotografia.create({
+    data: {
+      id: 5,
+      imagen: imagenBytes,
       productoId:1,
     },
   });

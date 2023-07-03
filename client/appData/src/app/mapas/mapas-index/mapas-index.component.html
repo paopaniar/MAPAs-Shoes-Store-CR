@@ -3,6 +3,7 @@
   <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="10px" *ngIf="datos">
     <mat-grid-tile *ngFor="let item of datos">
       <mat-card class="dashboard-card">
+
         <mat-card-header>
           <mat-card-title>{{item.nombreProducto }} </mat-card-title>
         </mat-card-header>

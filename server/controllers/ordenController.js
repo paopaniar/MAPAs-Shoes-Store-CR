@@ -4,7 +4,14 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 //Obtener listado
 module.exports.get = async (request, response, next) => {
-    const orden= await prisma.orden.findMany();
+    const orden= await prisma.orden.findMany({
+        orderBy: {
+            fechaOrden: 'asc',
+          },
+        include: {
+            usuario: true,
+        },
+    });
     response.json(orden); 
 };
 

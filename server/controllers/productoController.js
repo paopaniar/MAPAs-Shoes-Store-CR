@@ -9,7 +9,9 @@ module.exports.get = async (request, response, next) => {
     const producto= await prisma.producto.findMany({
     include: {
         usuario: true,
+        fotografias: true,
       },
+      
     }); 
     response.json(producto); // este response es como un return
 };
@@ -17,9 +19,13 @@ module.exports.get = async (request, response, next) => {
 //Obtener por Id
 module.exports.getById = async (request, response, next) => {
     let idProd=parseInt(request.params.id);
-    const productos=await prisma.usuario.findUnique({
-        where: {id: idProd}
-    })
+    const productos=await prisma.producto.findUnique({
+        where: {id: idProd},
+     include:{
+        usuario:true,
+        categoria:true,
+     },
+    });
     response.json(productos);
 };
 //Crear un videojuego
