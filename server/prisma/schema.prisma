@@ -22,6 +22,7 @@ model Usuario {
   identificacion    String?
   estado            Int                 @default(1)
   ordenes           Orden[]
+  productos         Producto[]
   direcciones       Direccion[]
   metodosPago       MetodoPago[]
   consultaProductos ConsultaProductos[]
@@ -91,6 +92,8 @@ model Producto {
   descripcion        String
   cantidadDisponible Int
   estado             Int                 @default(1) //1=InStock 0=No hay stock
+  usuarioId   Int
+  usuario     Usuario @relation(fields: [usuarioId], references: [id])
   ordenProductos     OrdenDetalle[]
   categoriaId        Int
   categoria          Categoria           @relation(fields: [categoriaId], references: [id])

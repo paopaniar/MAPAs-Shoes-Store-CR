@@ -53,6 +53,7 @@ async function main() {
       descripcion: 'Tenis blancas con detalles rosados para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -62,6 +63,7 @@ async function main() {
       descripcion: 'Zapatos casuales negros con detalles en cuero para mujer',
       cantidadDisponible: 20,
       categoriaId: 9,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -71,6 +73,7 @@ async function main() {
       descripcion: 'Sandalias deportivas de suela baja para mujer',
       cantidadDisponible: 20,
       categoriaId: 9,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -80,6 +83,7 @@ async function main() {
       descripcion: 'Tenis blancas con detalles azules para hombre',
       cantidadDisponible: 20,
       categoriaId: 2,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -89,6 +93,7 @@ async function main() {
       descripcion: 'Zapatos casuales con detalles en cuero para hombre',
       cantidadDisponible: 20,
       categoriaId: 3,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -98,6 +103,7 @@ async function main() {
       descripcion: 'Sandalias bajas para hombre',
       cantidadDisponible: 20,
       categoriaId: 4,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -107,6 +113,7 @@ async function main() {
       descripcion: 'Tenis blancas con detalles rosados para niñas',
       cantidadDisponible: 20,
       categoriaId: 5,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -116,6 +123,7 @@ async function main() {
       descripcion: 'Tenis blancas con detalles azules para niños',
       cantidadDisponible: 20,
       categoriaId: 6,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -125,6 +133,7 @@ async function main() {
       descripcion: 'Sandalias para niñas',
       cantidadDisponible: 20,
       categoriaId: 7,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -134,6 +143,7 @@ async function main() {
       descripcion: 'Sandalias para niños',
       cantidadDisponible: 20,
       categoriaId: 7,
+      usuarioId: 3,
     }
   });
   await prisma.producto.create({
@@ -143,6 +153,7 @@ async function main() {
       descripcion: 'Unisex',
       cantidadDisponible: 20,
       categoriaId: 8,
+      usuarioId: 3,
     }
   });
 
@@ -153,6 +164,7 @@ async function main() {
       descripcion: 'Unisex',
       cantidadDisponible: 20,
       categoriaId: 9,
+      usuarioId: 3,
     }
   });
 
