@@ -10,6 +10,8 @@ module.exports.get = async (request, response, next) => {
           },
         include: {
             usuario: true,
+            metodoPago:true,
+            direccion:true,
         },
     });
     response.json(orden); 
@@ -17,6 +19,41 @@ module.exports.get = async (request, response, next) => {
 
 //Obtener por Id
 module.exports.getById = async (request, response, next) => {
+    let idorden=parseInt(request.params.id);
+    const ordenes=await prisma.orden.findUnique({
+        where: {id: idorden},
+     include:{
+        usuario:true,
+        metodoPago:true,
+        direccion:true,
+        ordenProductos: {
+            select: {
+                orden: true,
+              cantidad: true,
+            },
+          },
+     },
+    });
+    response.json(ordenes);
+};
+
+module.exports.getByClient = async (request, response, next) => {
+    let id=parseInt(request.params.id);
+    const ordenes=await prisma.orden.findMany({
+        where: {usuarioId: id},
+     include:{
+        usuario:true,
+        metodoPago:true,
+        direccion:true,
+        ordenProductos: {
+            select: {
+                orden: true,
+              cantidad: true,
+            },
+          },
+     },
+    });
+    response.json(ordenes);
 };
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {

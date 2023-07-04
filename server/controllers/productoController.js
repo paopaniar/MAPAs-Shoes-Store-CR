@@ -28,6 +28,24 @@ module.exports.getById = async (request, response, next) => {
     });
     response.json(productos);
 };
+
+module.exports.getByVendedor = async (request, response, next) => {
+    const idProd = parseInt(request.params.id);
+    const userId = parseInt(request.params.userId); // Assuming you have the user ID as a request parameter
+    
+    const producto = await prisma.producto.findUnique({
+      where: { id: idProd },
+      include: {
+        usuario: {
+          where: { id: 3 }, 
+        },
+        categoria: true,
+      },
+    });
+  
+    response.json(producto);
+  };
+  
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {
 };

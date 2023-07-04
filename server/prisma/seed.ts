@@ -172,10 +172,10 @@ async function main() {
   // Insert data for table Direccion
   await prisma.direccion.create({
     data: {
-      provincia: 'Province 1',
-      canton: 'Canton 1',
-      distrito: 'Distrito 1',
-      barrio: 'Barrio 1',
+      provincia: 'Alajuela',
+      canton: 'Alajuela',
+      distrito: 'Alajuela',
+      barrio: 'UTN',
       otrasSennas: 'Address details',
       usuarioId:1,
     },
@@ -194,6 +194,16 @@ async function main() {
       direccionId:1,
       metodoPagoId:1,
       usuarioId: 1,
+    },
+  });
+
+  await prisma.orden.create({   
+    data: {
+      id: 2,  
+      fechaOrden: new Date(), 
+      direccionId:1,
+      metodoPagoId:1,
+      usuarioId: 2,
     },
   });
 
@@ -275,6 +285,8 @@ await prisma.evaluacion.create({
     },
   });
 }
+
+
 main()
   .then(async () => {
     await prisma.$disconnect();
