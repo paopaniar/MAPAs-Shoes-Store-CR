@@ -34,7 +34,6 @@ import { PedidosModule } from './pedidos/pedidos.module';
     //siempre de ultimo
     AppRoutingModule,
    BrowserAnimationsModule,
-   PedidosModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

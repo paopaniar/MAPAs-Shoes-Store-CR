@@ -10,17 +10,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PedidosRoutingModule } from './pedidos-routing.module';
 import { PedidosAllComponent } from './pedidos-all/pedidos-all.component';
-import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.component';
 import { PedidosIndexComponent } from './pedidos-index/pedidos-index.component';
-import { PedidosVendedorComponent } from './pedidos-vendedor/pedidos-vendedor.component';
+import { PedidosClienteComponent } from './pedidos-cliente/pedidos-cliente.component';
+
 
 
 @NgModule({
   declarations: [
     PedidosAllComponent,
-    PedidosDetailComponent,
     PedidosIndexComponent,
-    PedidosVendedorComponent
+    PedidosClienteComponent,
   ],
   imports: [
     CommonModule,

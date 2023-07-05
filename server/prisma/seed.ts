@@ -188,8 +188,7 @@ async function main() {
     },
   });
   await prisma.orden.create({   
-    data: {
-      id: 1,  
+    data: {  
       fechaOrden: new Date(), 
       direccionId:1,
       metodoPagoId:1,
@@ -198,8 +197,7 @@ async function main() {
   });
 
   await prisma.orden.create({   
-    data: {
-      id: 2,  
+    data: { 
       fechaOrden: new Date(), 
       direccionId:1,
       metodoPagoId:1,
@@ -207,6 +205,32 @@ async function main() {
     },
   });
 
+  await prisma.orden.create({   
+    data: { 
+      fechaOrden: new Date(), 
+      direccionId:1,
+      metodoPagoId:1,
+      usuarioId: 2,
+    },
+  });
+  
+  await prisma.orden.create({   
+    data: {
+      fechaOrden: new Date(), 
+      direccionId:1,
+      metodoPagoId:1,
+      usuarioId: 2,
+    },
+  });
+  
+  await prisma.orden.create({   
+    data: { 
+      fechaOrden: new Date(), 
+      direccionId:1,
+      metodoPagoId:1,
+      usuarioId: 2,
+    },
+  });
   // Insert data for table OrdenProducto
   await prisma.ordenDetalle.create({
     data: {
