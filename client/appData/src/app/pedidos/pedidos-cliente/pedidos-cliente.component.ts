@@ -7,13 +7,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 
-
 @Component({
-  selector: 'app-pedidos-all',
-  templateUrl: './pedidos-all.component.html',
-  styleUrls: ['./pedidos-all.component.css']
+  selector: 'app-pedidos-cliente',
+  templateUrl: './pedidos-cliente.component.html',
+  styleUrls: ['./pedidos-cliente.component.css']
 })
-export class PedidosAllComponent implements AfterViewInit{
+export class PedidosClienteComponent  implements AfterViewInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
@@ -37,9 +36,9 @@ export class PedidosAllComponent implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-    const vendedorId = 2;
+   
     this.gService
-      .list(`orden/vendedor/${vendedorId}`)
+      .list('orden/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);

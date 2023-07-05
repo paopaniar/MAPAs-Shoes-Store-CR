@@ -5,4 +5,5 @@ const ordenProductoController=require("../controllers/ordenProductoController");
 
 router.get("/", ordenProductoController.get);
 
+
 module.exports = router;

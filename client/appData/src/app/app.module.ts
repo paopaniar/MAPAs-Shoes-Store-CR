@@ -29,11 +29,11 @@ import { PedidosModule } from './pedidos/pedidos.module';
     HomeModule,
     UserModule,
     MapasModule,
+    PedidosModule,
    // VideojuegoModule,
     //siempre de ultimo
     AppRoutingModule,
    BrowserAnimationsModule,
-   PedidosModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

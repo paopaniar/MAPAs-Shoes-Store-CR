@@ -1,1 +1,38 @@
-<p>pedidos-index works!</p>
+<div class="grid-container">
+    <h1 class="mat-h1">Pedidos</h1>
+    <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="10px" *ngIf="datos">
+      <mat-grid-tile *ngFor="let item of datos">
+        <mat-card class="dashboard-card">
+  
+          <mat-card-header>
+            <mat-card-title>{{item.fechaOrden }} </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div>{{ item.direccionId }}</div>
+          </mat-card-content>
+          <mat-divider inset></mat-divider>
+          <mat-card-actions>
+            <button
+              mat-mini-fab
+              color="accent"
+              matTooltip="Detalle"
+              aria-label="Detalle"
+              color="primary"
+            >
+              <mat-icon class="mat-18">info</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="accent"
+              matTooltip="Comprar"
+              aria-label="Comprar"
+              color="primary"
+            >
+              <mat-icon class="mat-18">add_shopping_cart</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  

@@ -30,9 +30,20 @@
   
       <mat-menu #menu2="matMenu">
         <button mat-menu-item [routerLink]="['/producto/all']" routerLinkActive="mat-raised-button">
-          Productos
+          Productos Todos
+        </button>
+        <button mat-menu-item [routerLink]="['/producto/all']" routerLinkActive="mat-raised-button">
+          Productos de vendedor especifico pendiente
+        </button>
+        <button mat-menu-item [routerLink]="['/orden/vendedor']" routerLinkActive="mat-raised-button">
+          Pedidos Todos
+        </button>
+        <button mat-menu-item [routerLink]="['/orden/all']" routerLinkActive="mat-raised-button">
+          Pedidos de cliente especifico
         </button>
       </mat-menu>
+      
+     
     </mat-menu>
     <div class="example-button-container"></div>
     <div class="example-spacer"></div>
