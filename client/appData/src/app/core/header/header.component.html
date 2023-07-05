@@ -1,5 +1,5 @@
 
-<mat-toolbar [ngStyle]="{ 'background-color': '#f5f5f5' }">
+<mat-toolbar [ngStyle]="{ 'background-color': '#929292' }">
   <button  [matMenuTriggerFor]="menu1" mat-icon-button class="example-icon"
   aria-label="Example icon-button with menu icon">
   <mat-icon>menu</mat-icon>
@@ -47,7 +47,7 @@
       <!--Usuario-->
       <span class="mat-caption" *ngIf="isAutenticated">{{currentUser.email}}</span>
       <button mat-icon-button [matMenuTriggerFor]="menu3">
-        <mat-icon style="margin-right: 15px;" [ngStyle]="{'color': isAutenticated ? 'white': '#dd2727' }">person</mat-icon>
+        <mat-icon style="margin-right: 15px;" [ngStyle]="{'color': isAutenticated ? 'white': '#fff' }">person</mat-icon>
       </button>
       <!--Menu usuario-->
       <mat-menu #menu3="matMenu">

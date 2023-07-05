@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/share/generic.service';
   selector: 'app-mapas-index',
   templateUrl: './mapas-index.component.html',
   styleUrls: ['./mapas-index.component.css']
+  
 })
 export class MapasIndexComponent {
   datos:any;//Guarda la respuesta del API
