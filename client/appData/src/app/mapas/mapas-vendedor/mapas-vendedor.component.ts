@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 
 @Component({
   selector: 'app-mapas-vendedor',
@@ -22,12 +23,11 @@ export class MapasVendedorComponent implements AfterViewInit{
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['nombreProducto', 'cantidadDisponible','categoriaId','acciones'];
-
+  displayedColumns = ['nombreProducto', 'categoriaId','cantidadDisponible','acciones'];
   constructor(private gService:GenericService,
     private router: Router,
-    private route: ActivatedRoute) {
-
+    private route: ActivatedRoute,
+    private dialog: MatDialog) {
   }
 
   ngAfterViewInit(): void {
@@ -51,10 +51,13 @@ export class MapasVendedorComponent implements AfterViewInit{
   }
   //localhost:3000/videojuego/1
   detalleProducto(id:Number){
-    this.router.navigate(['/producto',id],
-    {
-      relativeTo:this.route
-    })
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(MapasDiagComponent, dialogConfig);
   }
   ngOnDestroy(){
     this.destroy$.next(true);
