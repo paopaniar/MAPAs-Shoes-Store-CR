@@ -13,8 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';  
 import { MatDialogModule } from '@angular/material/dialog';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
-import { MapasDiagComponent } from './mapas-diag.component.css/mapas-diag.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
+import { MapasDiagComponent } from './mapas-diag/mapas-diag.component';
 
 
 @NgModule({
@@ -22,8 +22,8 @@ import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.componen
     MapasIndexComponent,
     MapasAllComponent,
     MapasDetailComponent,
-    MapasDiagComponent,
-    MapasVendedorComponent
+    MapasVendedorComponent,
+    MapasDiagComponent
   ],
   imports: [
     CommonModule,

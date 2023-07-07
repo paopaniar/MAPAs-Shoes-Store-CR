@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MapasIndexComponent } from './mapas-index/mapas-index.component';
 import { MapasAllComponent } from './mapas-all/mapas-all.component';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
-import { MapasDiagComponent } from './mapas-diag.component.css/mapas-diag.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
 
 const routes: Routes = [
