@@ -213,6 +213,30 @@ async function main() {
       direccionId:1,
       metodoPagoId:1,
       usuarioId: 1,
+      ordenProductos: {
+        createMany: {
+          data: [
+            { cantidad: 1, productoId:1, iva: 0.13, subtotal: 10400, total: 12400},
+          ],
+        },
+    },
+  },
+  });
+
+  await prisma.orden.create({   
+    data: { 
+      fechaOrden: new Date(), 
+      direccionId:1,
+      metodoPagoId:1,
+      usuarioId: 2,
+      ordenProductos: {
+        createMany: {
+          data: [
+            { cantidad: 1, productoId:2, iva: 0.13, subtotal: 10000, total: 12000 },
+            { cantidad: 4, productoId:4, iva: 0.13, subtotal: 2500, total: 4350 },
+          ],
+        },
+    },
     },
   });
 
@@ -222,15 +246,14 @@ async function main() {
       direccionId:1,
       metodoPagoId:1,
       usuarioId: 2,
+      ordenProductos: {
+        createMany: {
+          data: [
+            { cantidad: 1, productoId:2, iva: 0.13, subtotal: 1200, total: 2350 },
+            { cantidad: 4, productoId:4 , iva: 0.13, subtotal: 20000, total: 22350},
+          ],
+        },
     },
-  });
-
-  await prisma.orden.create({   
-    data: { 
-      fechaOrden: new Date(), 
-      direccionId:1,
-      metodoPagoId:1,
-      usuarioId: 2,
     },
   });
   
@@ -240,6 +263,14 @@ async function main() {
       direccionId:1,
       metodoPagoId:1,
       usuarioId: 2,
+      ordenProductos: {
+        createMany: {
+          data: [
+            { cantidad: 1, productoId:2, iva: 0.13, subtotal: 9000, total: 12350 },
+            { cantidad: 4, productoId:4, iva: 0.13, subtotal: 5000, total: 8350},
+          ],
+        },
+    },
     },
   });
   
@@ -248,26 +279,19 @@ async function main() {
       fechaOrden: new Date(), 
       direccionId:1,
       metodoPagoId:1,
-      usuarioId: 2,
+      usuarioId: 1,
+      ordenProductos: {
+        createMany: {
+          data: [
+            { cantidad: 1, productoId:2, iva: 0.13, subtotal: 20000, total: 22350 },
+            { cantidad: 4, productoId:4, iva: 0.13, subtotal: 10000, total: 12350 },
+          ],
+        },
+    },
     },
   });
   // Insert data for table OrdenProducto
-  await prisma.ordenDetalle.create({
-    data: {
-      orden: {
-        connect: { id: 1 },
-      },
-      producto: {
-        connect: { id: 1 },
-      },
-      cantidad: 2,
-      subtotal: 10.99,
-      total: 9.99,
-      iva: 0.99,
-      },
-    });
-
-
+ 
 
   // Insert data for table Comentario_Respuesta
   await prisma.consultaProductos.create({

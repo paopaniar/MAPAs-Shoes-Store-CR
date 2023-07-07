@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 //Obtener listado
 module.exports.get = async (request, response, next) => {
-    const ordenProducto= await prisma.ordenProducto.findMany(); 
+    const ordenProducto= await prisma.ordenDetalle.findMany(); 
     response.json(ordenProducto); // este response es como un return
 };
 

@@ -53,7 +53,13 @@ module.exports.getByClient = async (request, response, next) => {
                 subtotal: true,
                 total: true,
                 ordenId: true,
-                producto: true, 
+                producto: {
+                    select:{
+                        nombreProducto: true,
+                        precio: true,
+                        descripcion: true,
+                    },
+                },
             },
           },
      },
