@@ -13,13 +13,17 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';  
 import { MatDialogModule } from '@angular/material/dialog';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
+import { MapasDiagComponent } from './mapas-diag.component.css/mapas-diag.component';
+import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
 
 
 @NgModule({
   declarations: [
     MapasIndexComponent,
     MapasAllComponent,
-    MapasDetailComponent
+    MapasDetailComponent,
+    MapasDiagComponent,
+    MapasVendedorComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,9 @@ import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule
+  ],
+  exports: [
+    MapasVendedorComponent
   ]
 })
 export class MapasModule { }

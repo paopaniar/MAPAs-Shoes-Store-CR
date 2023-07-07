@@ -1,37 +1,49 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Zapatos</h1>
-  <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="10px" *ngIf="datos">
+  <h1 class="mat-h1" style="text-align: center;">Catálogo de zapatos</h1>
+  <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="15px" *ngIf="datos">
     <mat-grid-tile *ngFor="let item of datos">
-      <mat-card class="dashboard-card">
+      
 
-        <mat-card-header>
-          <mat-card-title>{{item.nombreProducto }} </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>{{ item.precio | currency: "USD" }}</div>
-        </mat-card-content>
-        <mat-divider inset></mat-divider>
-        <mat-card-actions>
-          <button
-            mat-mini-fab
-            color="accent"
-            matTooltip="Detalle"
-            aria-label="Detalle"
-            color="primary"
-          >
-            <mat-icon class="mat-18">info</mat-icon>
-          </button>
-          <button
-            mat-mini-fab
-            color="accent"
-            matTooltip="Comprar"
-            aria-label="Comprar"
-            color="primary"
-          >
-            <mat-icon class="mat-18">add_shopping_cart</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+ <!--Card con foto-->
+ <mat-card class="dashboard-card">
+  <mat-card-header>
+   <mat-card-title>{{item.nombreProducto}}</mat-card-title>    
+   <mat-card-subtitle><div>₡{{ item.precio | number: '1.2-2' }}</div></mat-card-subtitle>
+  </mat-card-header>   
+
+  <mat-card-content>  
+    <img mat-card-image src="/assets/images/boyCasual.jpg" class="img" alt="Photo">
+
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <div class="example-button-row">
+    <div class="example-flex-container">
+     
+  <mat-card-actions>
+    <button
+    mat-mini-fab
+    color="accent"
+    matTooltip="Detalle"
+    aria-label="Detalle"
+    color="primary"
+    class="acciones"
+    (click)="detalleProducto(item.id)">
+    <mat-icon>info</mat-icon>
+  </button>
+  <button
+    mat-mini-fab
+    color="accent"
+    matTooltip="Comprar"
+    aria-label="Comprar"
+    color="primary"
+    class="acciones">
+    <mat-icon>add_shopping_cart</mat-icon>
+  </button>
+  </mat-card-actions>
 </div>
+</div>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
+</div>
+<br><br><br>

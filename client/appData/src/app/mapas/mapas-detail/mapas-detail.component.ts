@@ -11,7 +11,7 @@ import { GenericService } from 'src/app/share/generic.service';
 export class MapasDetailComponent {
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
-
+  categoriasList: any;
   constructor(private gService: GenericService,
     private route: ActivatedRoute
     ){
@@ -20,6 +20,7 @@ export class MapasDetailComponent {
       if(!isNaN(Number(id))){
         this.obtenerProducto(id);
       }
+      
   }
   obtenerProducto(id:any){
     this.gService
@@ -29,7 +30,17 @@ export class MapasDetailComponent {
       console.log(data);
         this.datos=data; 
     });
-   
+  }
+  
+  listaCategoria(categoriaId:Number) {
+    this.categoriasList = null;
+    this.gService
+      .list('categoria',)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        // console.log(data);
+        this.categoriasList = data;
+      });
   }
   ngOnDestroy() {
     this.destroy$.next(true);
