@@ -1,21 +1,22 @@
 <div class="principal">
     <div class="container">
-      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
         <mat-icon
           class="close-icon"
           style="background-color: #060920;"
           >close</mat-icon
         >
       </button>
-      <h2 class="headerh1">{{ datos?.nombre }}</h2>
+      <h2 class="headerh1">{{ datos?.nombreProducto }}</h2>
     </div>
+    <div class="positionImg">
+    <img mat-card-image src="/assets/images/boyCasual.jpg" class="img" alt="Photo">
+  </div>
     <div *ngIf="datos">
-      <mat-dialog-content class="bodyDiag">
+      <mat-dialog-content class="bodyDiag">   
         <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
         <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
-        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>
-       
-            
+        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>          
       </mat-dialog-content>
   
       <mat-dialog-actions> </mat-dialog-actions>

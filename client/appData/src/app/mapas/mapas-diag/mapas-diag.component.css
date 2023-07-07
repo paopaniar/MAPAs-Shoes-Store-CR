@@ -3,7 +3,9 @@
     }
   
     .principal{
-      background-color: rgb(30, 162, 238);
+      background-color: #060920;
+      max-width: 600px;
+      min-width: 400px;
     }
       
     .dashboard-card-content {
@@ -23,15 +25,22 @@
       margin-left: 15px;
 ;
       background-color: #060920;
-      color: #CACACA;
+      color: red;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
   
     .bodyDiag{
-      background-color: #CACACA;
-      color: black;
+      background-color: #060920;
+      color: white;
       margin: 0 10px;
      
+    }
+    .img{
+     max-width: 100px;
+     max-height: 100px;     
+    }
+    .positionImg{
+      text-align: center;
     }

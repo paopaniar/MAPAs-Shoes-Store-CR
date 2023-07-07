@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 
 @Component({
   selector: 'app-mapas-index',
@@ -15,7 +17,8 @@ export class MapasIndexComponent {
 
   constructor(private gService:GenericService,
     private router: Router,
-    private route: ActivatedRoute){
+    private route: ActivatedRoute,
+    private dialog: MatDialog){
     this.listaZapatos() 
 
   }
@@ -31,10 +34,13 @@ export class MapasIndexComponent {
       })
   }
   detalleProducto(id:Number){
-    this.router.navigate(['/producto',id],
-    {
-      relativeTo:this.route
-    })
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(MapasDiagComponent, dialogConfig);
   }
 
   ngOnDestroy(){
