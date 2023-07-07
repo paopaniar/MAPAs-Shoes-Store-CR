@@ -23,7 +23,13 @@ module.exports.getById = async (request, response, next) => {
         where: {id: idProd},
      include:{
         usuario:true,
-        categoria:true,
+        categoria:
+        {
+          select: {
+            id: true,
+            nombreCategoria: true,
+        },
+        }
      },
     });
     response.json(productos);
