@@ -11,10 +11,7 @@
     <mat-card-content class="dashboard-card-content">
       <p><b>Descripción: </b>{{datos.descripcion}}</p>
       <p><b>Precio: </b>₡{{datos.precio | number: '1.2-2' }}</p>
-      <p><b>Categorías: </b></p>
-      <ul *ngIf="datos.categoria">
-        <li *ngFor="let item of datos.categoria">{{ item.nombreCategoria }}</li>
-      </ul>
+      <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p> <!-- Cambio aquí -->
     </mat-card-content>
   </mat-card>
 </div>
