@@ -13,14 +13,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
-<<<<<<< HEAD
+
 import { MapasDiagComponent } from './mapas-diag/mapas-diag.component';
-=======
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
->>>>>>> bf3463bd8f7decd49858cb42c171c6751bc0fb4a
+
 
 
 @NgModule({

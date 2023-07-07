@@ -1,26 +1,17 @@
 .dashboard-card {
-    margin: 2%;
+    margin: 10%;
     }
   
     .principal{
-      background-color: #000136;
+      background-color: rgb(30, 162, 238);
     }
       
     .dashboard-card-content {
       text-align: left;
-      line-height: 1.5em;
+      line-height: 3em;
     }
   
-    .headerh1{
-      font-family: 'Press Start 2P', cursive;
-  
-      text-align: center;
-      background-color: #b80000;
-      border-radius: 20px;
-      flex-grow: 1;
-      line-height: 2.5;
-      padding:  1rem;
-    }
+    
   
     .container {
       display: flex;
@@ -30,11 +21,17 @@
     
     .close-button {
       margin-left: 15px;
+;
+      background-color: #060920;
+      color: #CACACA;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   
     .bodyDiag{
-      background-color: #888888;
-      color: #ffffff;
+      background-color: #CACACA;
+      color: black;
       margin: 0 10px;
-      border-radius: 10px;
+     
     }
