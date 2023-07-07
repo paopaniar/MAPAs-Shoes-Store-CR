@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MapasRoutingModule } from './mapas-routing.module';
 import { MapasIndexComponent } from './mapas-index/mapas-index.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -15,6 +14,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasDiagComponent } from './mapas-diag.component.css/mapas-diag.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -35,7 +38,12 @@ import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.componen
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatMenuModule,
+ 
   ],
   exports: [
     MapasVendedorComponent
