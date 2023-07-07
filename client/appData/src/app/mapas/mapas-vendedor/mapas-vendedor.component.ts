@@ -22,7 +22,7 @@ export class MapasVendedorComponent {
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fechaOrden', 'direccionId','metodoPagoId','usuarioId','estado','acciones'];
+  displayedColumns = ['nombreProducto', 'cantidadDisponible','categoriaId','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
@@ -31,14 +31,14 @@ export class MapasVendedorComponent {
   }
 
   ngAfterViewInit(): void {
-    this.listaOrdenes();
+    this.listaProductos();
   }
   //Llamar al API y obtener la lista de productos
-  listaOrdenes(){
+  listaProductos(){
     //localhost:3000/producto/
     const vendedorId = 2;
     this.gService
-      .list(`orden/vendedor/${vendedorId}`)
+      .list(`producto/vendedor/${vendedorId}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);
@@ -50,8 +50,8 @@ export class MapasVendedorComponent {
       })
   }
   //localhost:3000/videojuego/1
-  detalleOrden(id:Number){
-    this.router.navigate(['/orden',id],
+  detalleProducto(id:Number){
+    this.router.navigate(['/producto',id],
     {
       relativeTo:this.route
     })
