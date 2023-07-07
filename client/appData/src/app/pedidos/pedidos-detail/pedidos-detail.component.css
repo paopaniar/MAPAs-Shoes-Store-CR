@@ -1,0 +1,46 @@
+.dashboard-card {
+    margin: 10%;
+    }
+  
+    .principal{
+      background-color: #060920;
+      max-width: 600px;
+      min-width: 400px;
+    }
+      
+    .dashboard-card-content {
+      text-align: left;
+      line-height: 3em;
+    }
+  
+    
+  
+    .container {
+      display: flex;
+      align-items: center;
+  
+    }
+    
+    .close-button {
+      margin-left: 15px;
+;
+      background-color: #060920;
+      color: red;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    .bodyDiag{
+      background-color: #060920;
+      color: white;
+      margin: 0 10px;
+     
+    }
+    .img{
+     max-width: 100px;
+     max-height: 100px;     
+    }
+    .positionImg{
+      text-align: center;
+    }

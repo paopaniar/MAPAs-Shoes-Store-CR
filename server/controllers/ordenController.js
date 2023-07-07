@@ -47,8 +47,13 @@ module.exports.getByClient = async (request, response, next) => {
         direccion:true,
         ordenProductos: {
             select: {
-                orden: true,
-              cantidad: true,
+                id: true,
+                cantidad: true,
+                iva: true,
+                subtotal: true,
+                total: true,
+                ordenId: true,
+                producto: true, 
             },
           },
      },

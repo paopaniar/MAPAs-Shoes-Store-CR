@@ -1,0 +1,27 @@
+<div class="principal">
+    <div class="container">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
+        <mat-icon
+          class="close-icon"
+          style="background-color: #060920;"
+          >close</mat-icon
+        >
+      </button>
+      
+      <h2 >Factura N° {{datos.id}}</h2>
+    </div>
+   
+    <div *ngIf="datos">
+
+      <mat-dialog-content class="bodyDiag">   
+
+
+        <p><strong>Productos:</strong></p>
+        <p><strong>Cantidad: </strong>{{datos.ordenProductos.cantidad}}</p>
+        <p><b>Direccion: </b>{{datos.direccion.provincia}}</p>   
+        <p><b>Método de Pago: </b>{{datos.metodoPago.descripcion}}</p>        
+        <p><b>Subtotal: </b>{{datos.ordenProductos.subtotal}}</p>    
+        <p><b>Total: </b>{{ datos.ordenProductos.total }}</p>   
+        <p  class="green-text"><b>Estado: </b><span *ngIf="datos.estado === 1" class="green-text">Finalizado</span><span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span></p>
+    </mat-dialog-content>
+  

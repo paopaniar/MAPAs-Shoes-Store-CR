@@ -134,7 +134,7 @@ async function main() {
       descripcion: 'Sandalias para niñas',
       cantidadDisponible: 20,
       categoriaId: 7,
-      usuarioId: 3,
+      usuarioId: 2,
     }
   });
   await prisma.producto.create({
@@ -144,7 +144,7 @@ async function main() {
       descripcion: 'Sandalias para niños',
       cantidadDisponible: 20,
       categoriaId: 7,
-      usuarioId: 3,
+      usuarioId: 2,
     }
   });
   await prisma.producto.create({
@@ -154,7 +154,7 @@ async function main() {
       descripcion: 'Unisex',
       cantidadDisponible: 20,
       categoriaId: 8,
-      usuarioId: 3,
+      usuarioId: 2,
     }
   });
 
@@ -166,6 +166,26 @@ async function main() {
       cantidadDisponible: 20,
       categoriaId: 9,
       usuarioId: 3,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Unisex',
+      precio: 10000,  
+      descripcion: 'Unisex',
+      cantidadDisponible: 20,
+      categoriaId: 9,
+      usuarioId: 1,
+    }
+  });
+  await prisma.producto.create({
+    data: {
+      nombreProducto: 'Sandalias Unisex',
+      precio: 10000,  
+      descripcion: 'Unisex',
+      cantidadDisponible: 20,
+      categoriaId: 9,
+      usuarioId: 1,
     }
   });
 

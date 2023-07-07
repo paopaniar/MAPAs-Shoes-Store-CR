@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 
 @Component({
   selector: 'app-pedidos-all',
@@ -27,7 +27,8 @@ export class PedidosAllComponent implements AfterViewInit{
 
   constructor(private gService:GenericService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dialog: MatDialog) {
 
   }
 
@@ -50,12 +51,14 @@ export class PedidosAllComponent implements AfterViewInit{
        
       })
   }
-  //localhost:3000/videojuego/1
   detalleOrden(id:Number){
-    this.router.navigate(['/orden',id],
-    {
-      relativeTo:this.route
-    })
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(PedidosDiagComponent, dialogConfig);
   }
   ngOnDestroy(){
     this.destroy$.next(true);
