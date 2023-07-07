@@ -23,7 +23,7 @@ export class PedidosAllComponent implements AfterViewInit{
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fechaOrden', 'direccionId','metodoPagoId','usuarioId','estado','acciones'];
+  displayedColumns = ['id', 'usuarioId','estado','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
