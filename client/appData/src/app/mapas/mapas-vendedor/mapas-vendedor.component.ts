@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './mapas-vendedor.component.html',
   styleUrls: ['./mapas-vendedor.component.css']
 })
-export class MapasVendedorComponent {
+export class MapasVendedorComponent implements AfterViewInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
@@ -36,7 +36,7 @@ export class MapasVendedorComponent {
   //Llamar al API y obtener la lista de productos
   listaProductos(){
     //localhost:3000/producto/
-    const vendedorId = 2;
+    const vendedorId = 3;
     this.gService
       .list(`producto/vendedor/${vendedorId}`)
       .pipe(takeUntil(this.destroy$))

@@ -29,6 +29,9 @@ module.exports.getById = async (request, response, next) => {
     response.json(productos);
 };
 
+
+///////este era el codigo que estaba
+/* 
 module.exports.getByVendedor = async (request, response, next) => {
     const idProd = parseInt(request.params.id);
     const userId = parseInt(request.params.userId); // Assuming you have the user ID as a request parameter
@@ -45,6 +48,23 @@ module.exports.getByVendedor = async (request, response, next) => {
   
     response.json(producto);
   };
+*/
+
+//este otro es nuevo, pero igual no funciona
+  module.exports.getByClient = async (request, response, next) => {
+    let id=parseInt(request.params.id);
+    const productos=await prisma.orden.findMany({
+        where: {usuarioId: id},
+        include: {
+          usuario: {
+            where: { id: 3 }, 
+          },
+          categoria: true,
+     },
+    });
+    response.json(productos);
+};
+
   
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {
