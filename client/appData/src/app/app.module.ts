@@ -12,7 +12,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { MapasModule } from './mapas/mapas.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PedidosModule } from './pedidos/pedidos.module';
-import { ProductoUsuarioModule } from './producto-usuario/producto-usuario.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import { ProductoUsuarioModule } from './producto-usuario/producto-usuario.modul
     //siempre de ultimo
     AppRoutingModule,
    BrowserAnimationsModule,
-   ProductoUsuarioModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
