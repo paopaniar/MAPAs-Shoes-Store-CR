@@ -19,7 +19,9 @@ export class PedidosDiagComponent implements OnInit{
     private dialogRef:MatDialogRef<PedidosDiagComponent>,
     private gService:GenericService
   ) { 
+    
     this.datosDialog=data;
+    console.log(data.ordenProductos);
   }
   obtenerOrdenDetalle(id:any){
     console.log(id);
@@ -28,6 +30,7 @@ export class PedidosDiagComponent implements OnInit{
     .pipe(takeUntil(this.destroy$))
     .subscribe((data:any)=>{
         this.datos=data; 
+        console.log(this.datos);
         this.ordenProductos = this.datos.ordenProductos;
     });
    

@@ -38,7 +38,7 @@ export class PedidosAllComponent implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-    const vendedorId = 2;
+    const vendedorId = 1;
     this.gService
       .list(`orden/vendedor/${vendedorId}`)
       .pipe(takeUntil(this.destroy$))

@@ -27,9 +27,8 @@ module.exports.getById = async (request, response, next) => {
         metodoPago:true,
         direccion:true,
         ordenProductos: {
-            select: {
-                orden: true,
-              cantidad: true,
+            include: {
+                producto:true,
             },
           },
      },
@@ -38,34 +37,35 @@ module.exports.getById = async (request, response, next) => {
 };
 
 module.exports.getByClient = async (request, response, next) => {
-    let id=parseInt(request.params.id);
-    const ordenes=await prisma.orden.findMany({
-        where: {usuarioId: id},
-     include:{
-        usuario:true,
-        metodoPago:true,
-        direccion:true,
+    let id = parseInt(request.params.id);
+    const ordenes = await prisma.orden.findMany({
+      where: { usuarioId: id },
+      include: {
+        usuario: true,
+        metodoPago: true,
+        direccion: true,
         ordenProductos: {
-            select: {
-                id: true,
-                cantidad: true,
-                iva: true,
-                subtotal: true,
-                total: true,
-                ordenId: true,
-                producto: {
-                    select:{
-                        nombreProducto: true,
-                        precio: true,
-                        descripcion: true,
-                    },
-                },
+          select: {
+            id: true,
+            cantidad: true,
+            iva: true,
+            subtotal: true,
+            total: true,
+            ordenId: true,
+            producto: {
+              select: {
+                nombreProducto: true,
+                precio: true,
+                descripcion: true,
+              },
             },
           },
-     },
+        },
+      },
     });
     response.json(ordenes);
-};
+  };
+  
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {
 };

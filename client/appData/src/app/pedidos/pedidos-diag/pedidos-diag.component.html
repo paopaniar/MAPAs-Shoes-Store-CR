@@ -13,22 +13,18 @@
     <div *ngIf="datos">
 
       <mat-dialog-content class="bodyDiag">   
-        <h2 >Factura N° {{datos.id}}</h2>
+        <h2 >Factura N° {{datos?.id}}</h2>
 
-        <p><strong>Productos:</strong></p>
-<div *ngFor="let producto of ordenProductos">
-
-  <p><strong>Cantidad: </strong>{{ producto.cantidad }}</p>
-  
-  <!-- Otros datos del producto -->
-</div>     
+        <div *ngFor="let producto of datos.ordenProductos">
+            <p><strong>Productos:</strong> {{ producto.producto?.nombreProducto }}</p>
+            <p><strong>Cantidad: </strong>{{ producto.cantidad }}</p>
+            <p><strong>Subtotal: </strong>{{ producto.subtotal}}</p>
+           
+          </div>
+              
         <p><strong>Fecha de Orden: </strong>{{ datos.fechaOrden }}</p>
-        <p><strong>Dirección: </strong>{{ datos.direccion.provincia }}</p>
         <p><strong>Método de Pago: </strong>{{ datos.metodoPago.descripcion }}</p>
-        <p><strong>Usuario: </strong>{{ datos.usuario.nombre}}</p>
-        <p><strong>Subtotal: </strong>{{ datos.ordenProductos.subtotal }}</p>
-        <p><strong>Total: </strong>{{ datos.total }}</p>
-        
+        <p><strong>Usuario: </strong>{{ datos.usuario?.nombre}}</p>    
         <p class="green-text"><strong>Estado: </strong>
           <span *ngIf="datos.estado === 1" class="green-text">Finalizado</span>
           <span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span>
