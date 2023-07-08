@@ -20,11 +20,7 @@ export class PedidosDetailComponent implements OnInit{
     this.datosDialog=data;
   }
 
-  ngOnInit(): void {
-    if(this.datosDialog.id){
-      this.obtenerOrdenDetalle(this.datosDialog.id);
-    }
-  }
+  
   obtenerOrdenDetalle(id:any){
     console.log(id);
     this.gService
@@ -34,6 +30,11 @@ export class PedidosDetailComponent implements OnInit{
         this.datos=data; 
     });
    
+  }
+  ngOnInit(): void {
+    if(this.datosDialog.id){
+      this.obtenerOrdenDetalle(this.datosDialog.id);
+    }
   }
   close(){
     this.dialogRef.close();
