@@ -17,15 +17,23 @@
 
         <p><strong>Productos:</strong></p>
 <div *ngFor="let producto of ordenProductos">
+
   <p><strong>Cantidad: </strong>{{ producto.cantidad }}</p>
+  
   <!-- Otros datos del producto -->
-</div>
-        <p><strong>Productos:</strong></p>
-        <p><strong>Cantidad: </strong>{{datos.ordenProductos.cantidad}}</p>
-        <p><b>Direccion: </b>{{datos.direccion.provincia}}</p>   
-        <p><b>Método de Pago: </b>{{datos.metodoPago.descripcion}}</p>        
-        <p><b>Subtotal: </b>{{datos.ordenProductos.subtotal}}</p>    
-        <p><b>Total: </b>{{ datos.ordenProductos.total }}</p>   
-        <p  class="green-text"><b>Estado: </b><span *ngIf="datos.estado === 1" class="green-text">Finalizado</span><span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span></p>
-    </mat-dialog-content>
+</div>     
+        <p><strong>Fecha de Orden: </strong>{{ datos.fechaOrden }}</p>
+        <p><strong>Dirección: </strong>{{ datos.direccion.provincia }}</p>
+        <p><strong>Método de Pago: </strong>{{ datos.metodoPago.descripcion }}</p>
+        <p><strong>Usuario: </strong>{{ datos.usuario.nombre}}</p>
+        <p><strong>Subtotal: </strong>{{ datos.ordenProductos.subtotal }}</p>
+        <p><strong>Total: </strong>{{ datos.total }}</p>
+        
+        <p class="green-text"><strong>Estado: </strong>
+          <span *ngIf="datos.estado === 1" class="green-text">Finalizado</span>
+          <span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span>
+        </p>
+    
+    
+      </mat-dialog-content>
   
