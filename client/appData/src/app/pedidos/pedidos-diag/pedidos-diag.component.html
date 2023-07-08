@@ -16,6 +16,11 @@
         <h2 >Factura N° {{datos.id}}</h2>
 
         <p><strong>Productos:</strong></p>
+<div *ngFor="let producto of ordenProductos">
+  <p><strong>Cantidad: </strong>{{ producto.cantidad }}</p>
+  <!-- Otros datos del producto -->
+</div>
+        <p><strong>Productos:</strong></p>
         <p><strong>Cantidad: </strong>{{datos.ordenProductos.cantidad}}</p>
         <p><b>Direccion: </b>{{datos.direccion.provincia}}</p>   
         <p><b>Método de Pago: </b>{{datos.metodoPago.descripcion}}</p>        

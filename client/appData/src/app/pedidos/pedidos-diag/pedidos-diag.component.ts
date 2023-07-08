@@ -12,6 +12,8 @@ export class PedidosDiagComponent implements OnInit{
   datos:any;
   datosDialog:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
+  ordenProductos: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
     private dialogRef:MatDialogRef<PedidosDiagComponent>,
@@ -26,6 +28,7 @@ export class PedidosDiagComponent implements OnInit{
     .pipe(takeUntil(this.destroy$))
     .subscribe((data:any)=>{
         this.datos=data; 
+        this.ordenProductos = this.datos.ordenProductos;
     });
    
   }
