@@ -8,13 +8,12 @@
         >
       </button>
       
-      <h2 >Factura N° {{datos.id}}</h2>
     </div>
    
     <div *ngIf="datos">
 
       <mat-dialog-content class="bodyDiag">   
-
+        <h2 >Factura N° {{datos.id}}</h2>
 
         <p><strong>Productos:</strong></p>
         <p><strong>Cantidad: </strong>{{datos.ordenProductos.cantidad}}</p>
