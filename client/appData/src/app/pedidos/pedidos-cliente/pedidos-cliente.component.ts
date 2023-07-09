@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -22,11 +23,12 @@ export class PedidosClienteComponent  implements AfterViewInit{
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fechaOrden', 'direccionId','metodoPagoId','usuarioId','estado','acciones'];
+  displayedColumns = ['fechaOrden', 'totalOrden','usuarioId','estado','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dialog: MatDialog) {
 
   }
 
@@ -36,9 +38,9 @@ export class PedidosClienteComponent  implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-   
+    const clienteId = 3;
     this.gService
-      .list('orden/')
+      .list(`orden/vendedor/${clienteId}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);
@@ -46,15 +48,17 @@ export class PedidosClienteComponent  implements AfterViewInit{
         this.dataSource = new MatTableDataSource(this.datos);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-       
       })
   }
   //localhost:3000/videojuego/1
   detalleOrden(id:Number){
-    this.router.navigate(['/orden',id],
-    {
-      relativeTo:this.route
-    })
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(PedidosDiagComponent, dialogConfig);
   }
   ngOnDestroy(){
     this.destroy$.next(true);

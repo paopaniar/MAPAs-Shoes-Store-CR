@@ -21,8 +21,20 @@
 
         <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
         <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
-        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>          
+        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>      
+               
+      <p class="green-text"><strong>Estado: </strong>
+        <span *ngIf="datos.estado === 1" class="green-text">Nuevo</span>
+        <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
+      </p>
+      <div *ngFor="let consulta of datos.consultaProductos">
+        <p><strong>Mensaje:</strong> {{ consulta.mensaje }}</p>
+        <p><strong>Respuesta: </strong>{{ consulta.respuesta }}</p>  
+        <p><strong>Proveedor: </strong>{{ consulta.usuario.nombre }}</p>                            
+      </div> 
       </mat-dialog-content>
   
+    
+</mat-dialog-content>
       <mat-dialog-actions> </mat-dialog-actions>
 

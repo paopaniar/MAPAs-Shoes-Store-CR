@@ -11,4 +11,8 @@ export const Role = [
     {
       nombre: "Vendedor",
     },
+    {
+      nombre: "Proveedor",
+    },
+
   ];

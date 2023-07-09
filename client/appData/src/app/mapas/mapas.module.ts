@@ -45,8 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatSelectModule,
     MatMenuModule,
-    MatMenuModule,
- 
+    MatMenuModule
   ],
   exports: [
     MapasVendedorComponent

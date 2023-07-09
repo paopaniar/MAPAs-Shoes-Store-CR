@@ -49,6 +49,7 @@ CREATE TABLE `Orden` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `fechaOrden` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `estado` INTEGER NOT NULL DEFAULT 1,
+    `totalOrden` DECIMAL(65, 30) NULL,
     `direccionId` INTEGER NOT NULL,
     `metodoPagoId` INTEGER NOT NULL,
     `usuarioId` INTEGER NOT NULL,

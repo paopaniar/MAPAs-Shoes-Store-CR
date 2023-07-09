@@ -16,14 +16,13 @@ import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 export class PedidosAllComponent implements AfterViewInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   //@ViewChild(MatTable) table!: MatTable<VideojuegoAllItem>;
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'usuarioId','estado','acciones'];
+  displayedColumns = ['id', 'fechaOrden','totalOrden','estado','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
@@ -38,9 +37,9 @@ export class PedidosAllComponent implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-    const vendedorId = 1;
+    const clienteId = 1;
     this.gService
-      .list(`orden/vendedor/${vendedorId}`)
+      .list(`orden/vendedor/${clienteId}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);
@@ -48,7 +47,6 @@ export class PedidosAllComponent implements AfterViewInit{
         this.dataSource = new MatTableDataSource(this.datos);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-       
       })
   }
   detalleOrden(id:Number){

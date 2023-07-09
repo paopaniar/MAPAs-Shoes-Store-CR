@@ -36,16 +36,12 @@
     
               </ng-container>
     
-              <ng-container matColumnDef="direccionId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion de Orden</th>
-                <td mat-cell *matCellDef="let row">{{ row.direccion.provincia + ' ' + row.direccion.canton + ' ' + row.direccion.distrito}}</td>
+              <ng-container matColumnDef="totalOrden">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+                <td mat-cell *matCellDef="let row">{{ row.totalOrden| currency : "₡" }}</td>
               </ng-container>
       
               <!-- Columna precio -->
-              <ng-container matColumnDef="metodoPagoId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Método de Pago</th>
-                <td mat-cell *matCellDef="let row">{{ row.metodoPago.descripcion }}</td>
-              </ng-container> 
     
               <ng-container matColumnDef="usuarioId">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>

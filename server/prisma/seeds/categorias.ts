@@ -1,38 +1,21 @@
 
 export const categorias = [
   {
-    nombreCategoria: "Tenis Mujer",
+    nombreCategoria: "Mujer",
   },
 
   {
-    nombreCategoria: "Tenis Hombre",
+    nombreCategoria: "Hombre",
   },
 
   {
-    nombreCategoria: "Zapatillas Hombre",
+    nombreCategoria: "Niño",
   },
 
   {
-    nombreCategoria: "Zapatillas Mujer",
+    nombreCategoria: "Niña",
   },
-
   {
-    nombreCategoria: "Tacones",
-  },
-
-  {
-    nombreCategoria: "Botín Mujer",
-  },
-
-  {
-    nombreCategoria: "Botín Hombre",
-  },
-
-  {
-    nombreCategoria: "Sandalias Hombre",
-  },
-
-  {
-    nombreCategoria: "Sandalias Mujer",
+    nombreCategoria: "Unisex",
   },
 ];
