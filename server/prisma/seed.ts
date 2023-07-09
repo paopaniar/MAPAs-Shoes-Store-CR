@@ -416,7 +416,7 @@ await prisma.usuario.create({
     data: {
       id: 3,
       descripcion: 'SINPE',
-      usuarioId:7,
+      usuarioId:1,
     },
   });
 
@@ -514,7 +514,7 @@ await prisma.usuario.create({
       totalOrden: 51650, 
       direccionId:1,
       metodoPagoId:2,
-      usuarioId: 3,
+      usuarioId: 1,
       ordenProductos: {
         createMany: {
           data: [
@@ -533,7 +533,7 @@ await prisma.usuario.create({
       totalOrden: 24700,
       direccionId:1,
       metodoPagoId:3,
-      usuarioId: 7,
+      usuarioId: 1,
       ordenProductos: {
         createMany: {
           data: [
@@ -550,7 +550,7 @@ await prisma.usuario.create({
       totalOrden: 4350,
       direccionId:1,
       metodoPagoId:3,
-      usuarioId: 7,
+      usuarioId: 4,
       ordenProductos: {
         createMany: {
           data: [
@@ -566,7 +566,7 @@ await prisma.usuario.create({
       totalOrden: 16350,
       direccionId:1,
       metodoPagoId:3,
-      usuarioId: 7,
+      usuarioId: 1,
       ordenProductos: {
         createMany: {
           data: [
@@ -586,7 +586,7 @@ await prisma.usuario.create({
       totalOrden: 22350, 
       direccionId:1,
       metodoPagoId:1,
-      usuarioId: 3,
+      usuarioId: 4,
       ordenProductos: {
         createMany: {
           data: [
@@ -602,7 +602,7 @@ await prisma.usuario.create({
       totalOrden: 34700, 
       direccionId:1,
       metodoPagoId:1,
-      usuarioId: 3,
+      usuarioId: 1,
       ordenProductos: {
         createMany: {
           data: [
@@ -619,7 +619,7 @@ await prisma.usuario.create({
       totalOrden: 51650, 
       direccionId:1,
       metodoPagoId:1,
-      usuarioId: 3,
+      usuarioId: 4,
       ordenProductos: {
         createMany: {
           data: [
@@ -639,7 +639,7 @@ await prisma.orden.create({
     totalOrden: 12350, 
     direccionId:1,
     metodoPagoId:2,
-    usuarioId: 5,
+    usuarioId: 1,
     ordenProductos: {
       createMany: {
         data: [
@@ -655,7 +655,7 @@ await prisma.orden.create({
     totalOrden: 34700, 
     direccionId:1,
     metodoPagoId:1,
-    usuarioId: 5,
+    usuarioId: 4,
     ordenProductos: {
       createMany: {
         data: [
@@ -672,7 +672,7 @@ await prisma.orden.create({
     totalOrden: 22350, 
     direccionId:1,
     metodoPagoId:2,
-    usuarioId: 5,
+    usuarioId: 1,
     ordenProductos: {
       createMany: {
         data: [
@@ -692,7 +692,7 @@ await prisma.orden.create({
     totalOrden: 12350, 
     direccionId:1,
     metodoPagoId:2,
-    usuarioId: 6,
+    usuarioId: 1,
     ordenProductos: {
       createMany: {
         data: [
@@ -707,7 +707,7 @@ await prisma.orden.create({
     totalOrden: 34700, 
     direccionId:1,
     metodoPagoId:1,
-    usuarioId: 6,
+    usuarioId: 4,
     ordenProductos: {
       createMany: {
         data: [
@@ -724,7 +724,7 @@ await prisma.orden.create({
     totalOrden: 51650, 
     direccionId:1,
     metodoPagoId:1,
-    usuarioId: 6,
+    usuarioId: 1,
     ordenProductos: {
       createMany: {
         data: [

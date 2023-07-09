@@ -7,24 +7,41 @@
           >close</mat-icon
         >
       </button>
-      
+      <h2 >Factura N° {{datos?.id}}</h2>
     </div>
    
     <div *ngIf="datos">
 
       <mat-dialog-content class="bodyDiag">   
-        <h2 >Factura N° {{datos?.id}}</h2>
+    
         <p><strong>Fecha de Orden: </strong>{{ datos.fechaOrden | date:'dd/MM/yyyy'}}</p>
-        <div *ngFor="let producto of datos.ordenProductos">
-            <p><strong>Producto:</strong> {{ producto.producto?.nombreProducto }}</p>
-            <p><strong>Cantidad: </strong>{{ producto.cantidad }}</p>
-            <p><strong>Subtotal: </strong>{{ producto.subtotal | currency : "₡" }}</p>                
-          </div>                
-          <p><strong>Total Orden: </strong>{{ datos.totalOrden | currency : "₡" }}</p>  
-        <p><strong>Método de Pago: </strong>{{ datos.metodoPago.descripcion }}</p>
-        <p><strong>Dirección entrega: </strong>{{ datos.direccion.provincia + ' ' + datos.direccion.canton + ' ' + datos.direccion.distrito }}</p>
+        <p><strong>Cliente: </strong>{{ datos.usuario.nombre + ' ' + datos.usuario.primerApellido + ' ' + datos.usuario.segundoApellido}}</p>    
+
+        <table>
+          <thead>
+            <tr>
+              <th>Cantidad y Producto</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let producto of datos.ordenProductos">
+              <tr>
+                <td>{{ producto.cantidad }} {{ producto.producto?.nombreProducto }}</td>
+                <td>{{ producto.subtotal | currency : "₡" }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        
+
+          <p><strong>Dirección entrega: </strong>{{ datos.direccion.provincia + ' ' + datos.direccion.canton + ' ' + datos.direccion.distrito }}</p>
+          <p><strong>Método de Pago: </strong>{{ datos.metodoPago.descripcion }}</p>
+          <p><strong>Total IVA: </strong>{{calculateIvaAsNumber() | currency : "₡"  }}</p>
+          <p><strong>Total Subtotal: </strong>{{ calculateTotalSubtotal() | currency : "₡" }}</p>
+          <p><strong>Total Orden: </strong>{{calculateTotal() | currency : "₡" }}</p>  
+
        
-        <p><strong>Usuario: </strong>{{ datos.usuario?.nombre}}</p>    
         <p class="green-text"><strong>Estado: </strong>
           <span *ngIf="datos.estado === 1" class="green-text">Finalizado</span>
           <span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span>

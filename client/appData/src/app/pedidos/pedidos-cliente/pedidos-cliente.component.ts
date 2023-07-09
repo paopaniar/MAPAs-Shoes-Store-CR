@@ -23,7 +23,7 @@ export class PedidosClienteComponent  implements AfterViewInit{
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fechaOrden', 'totalOrden','usuarioId','estado','acciones'];
+  displayedColumns = ['fechaOrden', 'usuarioId','cantidad','totalOrden','estado','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
@@ -32,9 +32,42 @@ export class PedidosClienteComponent  implements AfterViewInit{
 
   }
 
+  calculateCantidad(row: any): number {
+    let cantidad = 0;
+    if (row && row.ordenProductos) {
+      for (let producto of row.ordenProductos) {
+        cantidad += parseFloat(producto.cantidad);
+      }
+    }
+    return cantidad;
+  };
+  calculateTotal(row: any): number {
+    let total = 0;
+    if (row && row.ordenProductos) {
+      for (let producto of row.ordenProductos) {
+        total += parseFloat(producto.subtotal);
+      }
+    }
+    return total;
+  };
+  calculateIvaAsNumber(row: any): number {
+    let iva = 0;
+    if (row && row.ordenProductos) {
+      for (let producto of row.ordenProductos) {
+        iva += parseFloat(producto.iva) * parseFloat(producto.subtotal);
+      }
+    }
+    return iva;
+  };
+  calculateAll(row: any): number {
+    const total = this.calculateTotal(row);
+    const iva = this.calculateIvaAsNumber(row);
+    return total + iva;
+  }
   ngAfterViewInit(): void {
     this.listaOrdenes();
-  }
+
+  };
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/

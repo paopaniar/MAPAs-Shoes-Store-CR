@@ -10,7 +10,7 @@ import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.componen
 const routes: Routes = [
   {path:'orden', component: PedidosIndexComponent},
 
-  {path:'orden/all', component: PedidosAllComponent},
+  {path:'orden/client', component: PedidosAllComponent},
 
   {path: 'orden/vendedor', component: PedidosClienteComponent},
 

@@ -29,3 +29,17 @@
     border-radius: 4px; /* Adjust the border-radius as needed */
     background-color:  #750918;
   }
+  .finalizado{
+    background-color: rgb(4, 77, 4);
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .pendiente{
+    background-color: #750918;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .totalOrden{
+    text-align: center;
+  }

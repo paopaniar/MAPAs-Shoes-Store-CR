@@ -39,7 +39,7 @@ export class PedidosAllComponent implements AfterViewInit{
     //localhost:3000/producto/
     const clienteId = 1;
     this.gService
-      .list(`orden/vendedor/${clienteId}`)
+      .list(`orden/client/${clienteId}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);

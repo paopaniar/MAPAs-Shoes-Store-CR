@@ -28,7 +28,11 @@ module.exports.getById = async (request, response, next) => {
         direccion:true,
         ordenProductos: {
             include: {
-                producto:true,
+                producto:{
+                  include:{
+                    usuario: true,
+                  },
+                },
             },
           },
      },
@@ -36,35 +40,86 @@ module.exports.getById = async (request, response, next) => {
     response.json(ordenes);
 };
 
+module.exports.getByVendedor = async (request, response, next) => {
+  let id = parseInt(request.params.id);
+  const ordenes = await prisma.orden.findMany({
+    where: {
+      ordenProductos: {
+        some: {
+          producto: {
+            usuarioId: id
+          }
+        }
+      }
+    },
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
+        select: {
+          id: true,
+          cantidad: true,
+          iva: true,
+          subtotal: true,
+          total: true,
+          ordenId: true,
+          producto: {
+            select: {
+              nombreProducto: true,
+              precio: true,
+              descripcion: true,
+              usuario: {
+                select: {
+                  nombre: true,
+                  primerApellido: true,
+                  segundoApellido: true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+  response.json(ordenes);
+};
 module.exports.getByClient = async (request, response, next) => {
-    let id = parseInt(request.params.id);
-    const ordenes = await prisma.orden.findMany({
-      where: { usuarioId: id },
-      include: {
-        usuario: true,
-        metodoPago: true,
-        direccion: true,
-        ordenProductos: {
-          select: {
-            id: true,
-            cantidad: true,
-            iva: true,
-            subtotal: true,
-            total: true,
-            ordenId: true,
-            producto: {
-              select: {
-                nombreProducto: true,
-                precio: true,
-                descripcion: true,
-              },
-            },
-          },
-        },
-      },
-    });
-    response.json(ordenes);
-  };
+  let id = parseInt(request.params.id);
+  const ordenes = await prisma.orden.findMany({
+    where: {usuarioId: id },
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
+        select: {
+          id: true,
+          cantidad: true,
+          iva: true,
+          subtotal: true,
+          total: true,
+          ordenId: true,
+          producto: {
+            select: {
+              nombreProducto: true,
+              precio: true,
+              descripcion: true,
+              usuario: {
+                select: {
+                  nombre: true,
+                  primerApellido: true,
+                  segundoApellido: true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+  response.json(ordenes);
+};
   
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {
