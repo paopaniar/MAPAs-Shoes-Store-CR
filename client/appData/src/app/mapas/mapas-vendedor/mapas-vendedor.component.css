@@ -29,3 +29,12 @@
     border-radius: 4px; /* Adjust the border-radius as needed */
     background-color:  #750918;
   }
+  .circle-badge {
+    display: inline-block;
+    width: 8%;
+    height: 20%;
+    border-radius: 50%;
+    border: 2px solid #750918;
+    text-align: center;
+  }
+  

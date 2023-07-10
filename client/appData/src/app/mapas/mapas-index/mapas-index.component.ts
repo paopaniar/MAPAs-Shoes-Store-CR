@@ -15,6 +15,28 @@ export class MapasIndexComponent {
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
+  itemsPerPage = 4;
+  currentPage = 1;
+
+  get displayedData(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.datos.slice(startIndex, endIndex);
+  }
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  
+  nextPage() {
+    const totalPages = Math.ceil(this.datos.length / this.itemsPerPage);
+    if (this.currentPage < totalPages) {
+      this.currentPage++;
+    }
+  }
+  
+  
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,

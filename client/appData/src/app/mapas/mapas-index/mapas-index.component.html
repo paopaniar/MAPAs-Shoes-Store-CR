@@ -1,7 +1,7 @@
 <div class="grid-container">
   <h1 class="mat-h1" style="text-align: center;">Catálogo de zapatos</h1>
   <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="15px" *ngIf="datos">
-    <mat-grid-tile *ngFor="let item of datos">
+    <mat-grid-tile *ngFor="let item of displayedData">
       
 
  <!--Card con foto-->
@@ -40,10 +40,22 @@
     <mat-icon>add_shopping_cart</mat-icon>
   </button>
   </mat-card-actions>
+
 </div>
 </div>
 </mat-card>
+
+
 </mat-grid-tile>
 </mat-grid-list>
+<div class="button-container">
+  <button mat-icon-button (click)="previousPage()" [disabled]="currentPage === 1">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="nextPage()" [disabled]="currentPage === 4">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
 </div>
-<br><br><br>
+</div>
+
