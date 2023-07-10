@@ -31,7 +31,7 @@
               <!-- Columna nombre -->
     
                <ng-container matColumnDef="nombreProducto">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
                 <td mat-cell *matCellDef="let row">{{ row.nombreProducto }}</td>
     
               </ng-container>
@@ -44,8 +44,11 @@
               
               <ng-container matColumnDef="cantidadDisponible">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad Disponible</th>
-                <td mat-cell *matCellDef="let row">{{ row.cantidadDisponible}}</td>
+                <td mat-cell *matCellDef="let row">
+                  <span class="circle-badge">{{ row.cantidadDisponible }}</span>
+                </td>
               </ng-container>
+              
 
               <!-- Columna acciones -->
               <ng-container matColumnDef="acciones">

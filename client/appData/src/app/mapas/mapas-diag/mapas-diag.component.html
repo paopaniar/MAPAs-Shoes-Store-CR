@@ -3,38 +3,51 @@
       <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
         <mat-icon
           class="close-icon"
-          style="background-color: #060920;"
+          style="background-color: #750918;"
           >close</mat-icon
         >
       </button>
-      <h2 class="headerh1">{{ datos?.nombreProducto }}</h2>
+
+      <div class="headerh1"><h2 >{{ datos?.nombreProducto }}</h2></div>
+      <div class="positionImg">
+        <img mat-card-image src="/assets/images/womenTennis.jpg" class="img" alt="Photo">
+      </div>
     </div>   
-    <div class="positionImg">
-    <img mat-card-image src="/assets/images/boyCasual.jpg" class="img" alt="Photo">
-  </div>
+  
     <div *ngIf="datos">
 
-      <mat-dialog-content class="bodyDiag">   
-
       <mat-dialog-content class="bodyDiag">
-        <img [src]="datos.fotografias" alt="Product Image">
 
         <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
-        <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
-        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>      
+        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>    
+        <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>  
                
-      <p class="green-text"><strong>Estado: </strong>
-        <span *ngIf="datos.estado === 1" class="green-text">Nuevo</span>
-        <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
-      </p>
-      <div *ngFor="let consulta of datos.consultaProductos">
-        <p><strong>Mensaje:</strong> {{ consulta.mensaje }}</p>
-        <p><strong>Respuesta: </strong>{{ consulta.respuesta }}</p>  
-        <p><strong>Proveedor: </strong>{{ consulta.usuario.nombre }}</p>                            
-      </div> 
+   <div class="green">
+    <span *ngIf="datos.estado === 1" class="green-text">Disponibles</span>
+    <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
+   </div>
+      
+   
+    <table>
+      <thead>
+        <tr class="headers">
+          <th>Mensaje</th>
+          <th>Respuesta</th>
+          <th>Proveedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let consulta of datos.consultaProductos">
+          <tr class="letters">
+            <td> {{ consulta.mensaje }}</td>
+            <td>{{ consulta.respuesta }}</td>  
+            <td>{{ consulta.usuario.nombre }}</td>  
+          </tr>                  
+        </ng-container> 
+      </tbody>
+     
+    </table>
       </mat-dialog-content>
   
-    
-</mat-dialog-content>
       <mat-dialog-actions> </mat-dialog-actions>
 
