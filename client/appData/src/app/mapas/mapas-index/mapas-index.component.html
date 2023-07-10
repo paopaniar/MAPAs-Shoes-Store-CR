@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1" style="text-align: center;">Catálogo de zapatos</h1>
-  <mat-grid-list [cols]="3" rowHeight="13em" gutterSize="15px" *ngIf="datos">
+  <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
     <mat-grid-tile *ngFor="let item of displayedData">
       
 
@@ -12,8 +12,7 @@
   </mat-card-header>   
 
   <mat-card-content>  
-    <img mat-card-image src="/assets/images/boyCasual.jpg" class="img" alt="Photo">
-
+    <p><b>Categoría: </b>{{ item.categoria.nombreCategoria }}</p>  
   </mat-card-content>
   <mat-divider></mat-divider>
   <div class="example-button-row">

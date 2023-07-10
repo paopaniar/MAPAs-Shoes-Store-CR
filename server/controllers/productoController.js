@@ -11,6 +11,13 @@ module.exports.get = async (request, response, next) => {
     include: {
         usuario: true,
         fotografias: true,
+        categoria:
+        {
+          select: {
+            id: true,
+            nombreCategoria: true,     
+        },
+        },
       },
       
     }); 
