@@ -153,6 +153,7 @@ await prisma.usuario.create({
       cantidadDisponible: 20,
       categoriaId: 1,
       usuarioId: 3,
+      proveedor:'NIKE',
       consultaProductos: {
         createMany: {
           data: [
@@ -167,6 +168,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Casuales Mujer',
       precio: 13450,  
+      proveedor:'NIKE',
       descripcion: 'Zapatos casuales negros con detalles en cuero para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
@@ -185,6 +187,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Sandalias Mujer',
       precio: 4950,  
+      proveedor:'NIKE',
       descripcion: 'Sandalias deportivas de suela baja para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
@@ -202,6 +205,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Tenis Hombre',
       precio: 16500,  
+      proveedor:'NIKE',
       descripcion: 'Tenis blancas con detalles azules para hombre',
       cantidadDisponible: 20,
       categoriaId: 2,
@@ -219,6 +223,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Casuales Hombre',
       precio: 23000,  
+      proveedor:'NIKE',
       descripcion: 'Zapatos casuales con detalles en cuero para hombre',
       cantidadDisponible: 20,
       categoriaId: 2,
@@ -235,7 +240,8 @@ await prisma.usuario.create({
   await prisma.producto.create({
     data: {
       nombreProducto: 'Sandalias Hombre',
-      precio: 4500,  
+      precio: 4500, 
+      proveedor:'NIKE', 
       descripcion: 'Sandalias bajas para hombre',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -253,6 +259,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Tenis Niñas',
       precio: 12500,  
+      proveedor:'NIKE',
       descripcion: 'Tenis blancas con detalles rosados para niñas',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -269,7 +276,8 @@ await prisma.usuario.create({
   await prisma.producto.create({
     data: {
       nombreProducto: 'Tenis Niños',
-      precio: 12000,  
+      precio: 12000, 
+      proveedor:'NIKE', 
       descripcion: 'Tenis blancas con detalles azules para niños',
       cantidadDisponible: 20,
       categoriaId: 3,
@@ -287,6 +295,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Sandalias Niñas',
       precio: 2500,  
+      proveedor:'NIKE',
       descripcion: 'Sandalias para niñas',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -304,6 +313,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Sandalias Niños',
       precio: 3100,  
+      proveedor:'ADIDAS',
       descripcion: 'Sandalias para niños',
       cantidadDisponible: 20,
       categoriaId: 3,
@@ -321,6 +331,7 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Tenis Unisex',
       precio: 15000,  
+      proveedor:'ADIDAS',
       descripcion: 'Unisex',
       cantidadDisponible: 20,
       categoriaId: 5,
@@ -340,6 +351,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Unisex',
       precio: 10000,  
       descripcion: 'Unisex',
+      proveedor:'ADIDAS',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 3,
@@ -356,7 +368,8 @@ await prisma.usuario.create({
     data: {
       nombreProducto: 'Sandalias Unisex',
       precio: 10000,  
-      descripcion: 'Unisex',
+      descripcion: 'Unisex',  
+      proveedor:'NIKE',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 6,
@@ -374,6 +387,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Unisex',
       precio: 10000,  
       descripcion: 'Unisex',
+      proveedor:'NIKE',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 5,

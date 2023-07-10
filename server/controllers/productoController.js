@@ -63,7 +63,12 @@ module.exports.getById = async (request, response, next) => {
               id: true,
               nombreCategoria: true,
           },
-          }
+          },
+        consultaProductos:{
+          include:{
+              usuario:true,
+          },
+      },
      },
     });
     response.json(productos);

@@ -19,7 +19,8 @@
       <mat-dialog-content class="bodyDiag">
 
         <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
-        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>    
+        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>  
+        <p><b>Proveedor: </b>{{ datos.usuario.nombre }}</p>    
         <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>  
                
    <div class="green">
@@ -33,7 +34,6 @@
         <tr class="headers">
           <th>Mensaje</th>
           <th>Respuesta</th>
-          <th>Proveedor</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +41,6 @@
           <tr class="letters">
             <td> {{ consulta.mensaje }}</td>
             <td>{{ consulta.respuesta }}</td>  
-            <td>{{ consulta.usuario.nombre }}</td>  
           </tr>                  
         </ng-container> 
       </tbody>

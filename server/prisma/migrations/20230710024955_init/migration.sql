@@ -75,6 +75,7 @@ CREATE TABLE `Producto` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nombreProducto` VARCHAR(191) NOT NULL,
     `precio` DECIMAL(65, 30) NOT NULL,
+    `proveedor` VARCHAR(191) NOT NULL,
     `descripcion` VARCHAR(191) NOT NULL,
     `cantidadDisponible` INTEGER NOT NULL,
     `estado` INTEGER NOT NULL DEFAULT 1,
