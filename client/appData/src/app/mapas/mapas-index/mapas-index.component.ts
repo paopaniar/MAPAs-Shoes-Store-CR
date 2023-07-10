@@ -15,7 +15,7 @@ export class MapasIndexComponent {
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
-  itemsPerPage = 4;
+  itemsPerPage = 6;
   currentPage = 1;
 
   get displayedData(): any[] {
@@ -28,6 +28,16 @@ export class MapasIndexComponent {
       this.currentPage--;
     }
   }
+  animationActive = false;
+
+startAnimation() {
+  this.animationActive = true;
+}
+
+stopAnimation() {
+  this.animationActive = false;
+}
+
   
   nextPage() {
     const totalPages = Math.ceil(this.datos.length / this.itemsPerPage);

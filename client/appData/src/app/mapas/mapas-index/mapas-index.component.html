@@ -28,7 +28,7 @@
     color="primary"
     class="acciones"
     (click)="detalleProducto(item.id)">
-    <mat-icon>info</mat-icon>
+    <mat-icon class="info" (mouseover)="startAnimation()" (mouseout)="stopAnimation()">info</mat-icon>
   </button>
   <button
     mat-mini-fab
@@ -37,7 +37,7 @@
     aria-label="Comprar"
     color="primary"
     class="acciones">
-    <mat-icon>add_shopping_cart</mat-icon>
+    <mat-icon class="info">add_shopping_cart</mat-icon>
   </button>
   </mat-card-actions>
 
