@@ -23,8 +23,8 @@
         <p><b>Proveedor: </b>{{ datos.proveedor }}</p>    
         <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>  
                
-   <div class="green">
-    <span *ngIf="datos.estado === 1" class="green-text">Disponibles</span>
+   <div class="green" >
+    <span *ngIf="datos.estado === 1" class="green-text">Nuevos</span>
     <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
    </div>
       
