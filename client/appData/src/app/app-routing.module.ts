@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MapasIndexComponent } from './mapas/mapas-index/mapas-index.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { InicioComponent } from './home/inicio/inicio.component';
 //page not found pending hacer ese import
 
 const routes: Routes = [
-  { path:'producto',component: MapasIndexComponent},
+  { path:'inicio',component: InicioComponent},
   { path:'', redirectTo:'/producto' ,pathMatch:'full'},
   { path:'**',component:PageNotFoundComponent}
 ];

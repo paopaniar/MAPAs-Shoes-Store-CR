@@ -53,13 +53,14 @@
     justify-content: center;
     align-items: center;
     height: 200px; /* Adjust the height as needed */
-    background-color: #f1f1f1; /* Background color for the container */
+    background-color: #060920; /* Background color for the container */
   }
   
   .centered-content p {
     font-size: 24px; /* Adjust the font size as needed */
     text-align: center;
-    color: #333; /* Text color */
+    color: #fff; /* Text color */
+    
   }
   
   .custom-card .card-overlay {
@@ -125,7 +126,7 @@
     justify-content: center;
     align-items: center;
     height: 60px;
-    background-color: #CCCCCC;
+     background-color: #060920;;
     transition: opacity 0.3s;
     opacity: 1;
   }
