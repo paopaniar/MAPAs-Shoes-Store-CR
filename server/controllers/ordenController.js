@@ -45,7 +45,7 @@ module.exports.getByVendedor = async (request, response, next) => {
   const ordenes = await prisma.orden.findMany({
     where: {
       ordenProductos: {
-        some: {
+        every: {
           producto: {
             usuarioId: id
           }
@@ -84,6 +84,7 @@ module.exports.getByVendedor = async (request, response, next) => {
   });
   response.json(ordenes);
 };
+
 module.exports.getByClient = async (request, response, next) => {
   let id = parseInt(request.params.id);
   const ordenes = await prisma.orden.findMany({
