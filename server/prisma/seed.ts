@@ -479,7 +479,7 @@ await prisma.usuario.create({
         createMany: {
           data: [
             { cantidad: 1, productoId:2, iva: 0.13, subtotal: 10000, total: 12000 },
-            { cantidad: 4, productoId:4, iva: 0.13, subtotal: 2500, total: 4350 },
+            { cantidad: 4, productoId:8, iva: 0.13, subtotal: 2500, total: 4350 },
           ],
         },
     },
@@ -498,7 +498,7 @@ await prisma.usuario.create({
         createMany: {
           data: [
             { cantidad: 1, productoId:2, iva: 0.13, subtotal: 1200, total: 2350 },
-            { cantidad: 4, productoId:4 , iva: 0.13, subtotal: 20000, total: 22350},
+            { cantidad: 4, productoId:8 , iva: 0.13, subtotal: 20000, total: 22350},
           ],
         },
     },

@@ -49,3 +49,30 @@
     .green-text {
       background-color: rgb(37, 97, 37);
     }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .invoice-table th,
+    .invoice-table td {
+      border-bottom: 1px solid #060920;
+      padding: 10px;
+      text-align: left;
+      background-color: #f0f0f0;
+    }
+    
+    
+    .invoice-footer {
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    
+    .status {
+      background-color: rgb(37, 97, 37);
+      padding: 10px;
+      color: white;
+      display: inline-block;
+      margin-top: 10px;
+    }
