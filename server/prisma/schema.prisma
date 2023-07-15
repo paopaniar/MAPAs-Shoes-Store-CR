@@ -93,6 +93,7 @@ model Producto {
   nombreProducto     String
   precio             Decimal
   proveedor          String
+  foto               String?
   descripcion        String
   cantidadDisponible Int
   estado             Int                 @default(1) //1=InStock 0=No hay stock
@@ -108,7 +109,7 @@ model Producto {
 //buena
 model Fotografia {
   id         Int      @id @default(autoincrement())
-  imagen     Bytes?
+  imagen     String?
   productoId Int
   producto   Producto @relation(fields: [productoId], references: [id])
 }

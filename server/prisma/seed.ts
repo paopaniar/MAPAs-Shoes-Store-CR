@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 const fs = require('fs');
 const imagenBytes = fs.readFileSync('image/tenis.jpg');
+const imageSandalsWomen =  fs.readFileSync('image/tenis.jpg');
 async function main() {
   await prisma.categoria.createMany({
     data: categorias,
@@ -147,13 +148,14 @@ await prisma.usuario.create({
 
    await prisma.producto.create({
     data: {
-      nombreProducto: 'Tenis Mujer',
+      nombreProducto: 'Casuales Mujer',
       precio: 16500,  
-      descripcion: 'Tenis blancas con detalles rosados para mujer',
+      descripcion: 'Zapato casual en cuero con suela de acrilicos',
       cantidadDisponible: 20,
       categoriaId: 1,
       usuarioId: 3,
       proveedor:'NIKE',
+      foto: 'image/womanShoes.jpg',
       consultaProductos: {
         createMany: {
           data: [
@@ -169,6 +171,7 @@ await prisma.usuario.create({
       nombreProducto: 'Casuales Mujer',
       precio: 13450,  
       proveedor:'NIKE',
+      foto: 'image/womanCasual.jpg',
       descripcion: 'Zapatos casuales negros con detalles en cuero para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
@@ -188,6 +191,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Mujer',
       precio: 4950,  
       proveedor:'NIKE',
+      foto: 'image/womanSandals.jpg',
       descripcion: 'Sandalias deportivas de suela baja para mujer',
       cantidadDisponible: 20,
       categoriaId: 1,
@@ -206,6 +210,7 @@ await prisma.usuario.create({
       nombreProducto: 'Tenis Hombre',
       precio: 16500,  
       proveedor:'NIKE',
+      foto: 'image/manTennis.jpg',
       descripcion: 'Tenis blancas con detalles azules para hombre',
       cantidadDisponible: 20,
       categoriaId: 2,
@@ -224,6 +229,7 @@ await prisma.usuario.create({
       nombreProducto: 'Casuales Hombre',
       precio: 23000,  
       proveedor:'NIKE',
+      foto: 'image/manCasual.jpg',
       descripcion: 'Zapatos casuales con detalles en cuero para hombre',
       cantidadDisponible: 20,
       categoriaId: 2,
@@ -242,6 +248,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Hombre',
       precio: 4500, 
       proveedor:'NIKE', 
+      foto: 'image/manSandals.jpg',
       descripcion: 'Sandalias bajas para hombre',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -260,6 +267,7 @@ await prisma.usuario.create({
       nombreProducto: 'Tenis Niñas',
       precio: 12500,  
       proveedor:'NIKE',
+      foto: 'image/girlTennis.jpg',
       descripcion: 'Tenis blancas con detalles rosados para niñas',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -278,6 +286,7 @@ await prisma.usuario.create({
       nombreProducto: 'Tenis Niños',
       precio: 12000, 
       proveedor:'NIKE', 
+      foto: 'image/boyTennis.jpg',
       descripcion: 'Tenis blancas con detalles azules para niños',
       cantidadDisponible: 20,
       categoriaId: 3,
@@ -296,6 +305,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Niñas',
       precio: 2500,  
       proveedor:'NIKE',
+      foto: 'image/tenis.jpg',
       descripcion: 'Sandalias para niñas',
       cantidadDisponible: 20,
       categoriaId: 4,
@@ -314,6 +324,7 @@ await prisma.usuario.create({
       nombreProducto: 'Sandalias Niños',
       precio: 3100,  
       proveedor:'ADIDAS',
+      foto: 'image/girlSandals.jpg',
       descripcion: 'Sandalias para niños',
       cantidadDisponible: 20,
       categoriaId: 3,
@@ -332,6 +343,7 @@ await prisma.usuario.create({
       nombreProducto: 'Tenis Unisex',
       precio: 15000,  
       proveedor:'ADIDAS',
+      foto: 'image/boyTennis.jpg',
       descripcion: 'Unisex',
       cantidadDisponible: 20,
       categoriaId: 5,
@@ -352,6 +364,7 @@ await prisma.usuario.create({
       precio: 10000,  
       descripcion: 'Unisex',
       proveedor:'ADIDAS',
+      foto: 'image/manSandals.jpg',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 3,
@@ -370,6 +383,7 @@ await prisma.usuario.create({
       precio: 10000,  
       descripcion: 'Unisex',  
       proveedor:'NIKE',
+      foto: 'image/womenSandals.jpg',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 6,
@@ -388,6 +402,7 @@ await prisma.usuario.create({
       precio: 10000,  
       descripcion: 'Unisex',
       proveedor:'NIKE',
+      foto: 'image/girlCasual.jpg',
       cantidadDisponible: 20,
       categoriaId: 5,
       usuarioId: 5,
@@ -760,7 +775,7 @@ await prisma.orden.create({
   await prisma.fotografia.create({
     data: {
       id: 1,
-      imagen: imagenBytes,
+      imagen: 'image/womenSandals.jpg',
       productoId:1,
     },
   });
@@ -768,7 +783,7 @@ await prisma.orden.create({
   await prisma.fotografia.create({
     data: {
       id: 2,
-      imagen: imagenBytes,
+      imagen: 'image/boySandals.jpg',
       productoId:1,
     },
   });
@@ -776,24 +791,24 @@ await prisma.orden.create({
   await prisma.fotografia.create({
     data: {
       id: 3,
-      imagen: imagenBytes,
-      productoId:1,
+      imagen:'image/girlSandals.jpg',
+      productoId:2,
     },
   });
   
   await prisma.fotografia.create({
     data: {
       id: 4,
-      imagen: imagenBytes,
-      productoId:1,
+      imagen: 'image/womanCasual.jpg',
+      productoId:3,
     },
   });
   
   await prisma.fotografia.create({
     data: {
       id: 5,
-      imagen: imagenBytes,
-      productoId:1,
+      imagen: 'image/womanShoes.jpg',
+      productoId:4,
     },
   });
  

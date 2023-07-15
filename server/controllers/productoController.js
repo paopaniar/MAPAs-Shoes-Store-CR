@@ -10,7 +10,11 @@ module.exports.get = async (request, response, next) => {
     const producto= await prisma.producto.findMany({
     include: {
         usuario: true,
-        fotografias: true,
+        fotografias:{
+          select:{
+            imagen:true,
+          }
+        },
         categoria:
         {
           select: {

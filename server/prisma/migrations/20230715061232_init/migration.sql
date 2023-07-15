@@ -76,6 +76,7 @@ CREATE TABLE `Producto` (
     `nombreProducto` VARCHAR(191) NOT NULL,
     `precio` DECIMAL(65, 30) NOT NULL,
     `proveedor` VARCHAR(191) NOT NULL,
+    `foto` VARCHAR(191) NULL,
     `descripcion` VARCHAR(191) NOT NULL,
     `cantidadDisponible` INTEGER NOT NULL,
     `estado` INTEGER NOT NULL DEFAULT 1,
@@ -88,7 +89,7 @@ CREATE TABLE `Producto` (
 -- CreateTable
 CREATE TABLE `Fotografia` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `imagen` LONGBLOB NULL,
+    `imagen` VARCHAR(191) NULL,
     `productoId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
