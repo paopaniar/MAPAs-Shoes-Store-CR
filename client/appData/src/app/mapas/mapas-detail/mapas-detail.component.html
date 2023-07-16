@@ -1,6 +1,15 @@
 <h1 class="titulo">Más información</h1>
 <div class="contenido">
 <mat-card class="dashboard-card" *ngIf="datos"  >
+  <div
+  *ngFor="let foto of datos.fotografias; let i = index"
+>
+  <img
+    [src]="'http://localhost:3000/' + foto.imagen"
+    alt="Imagen"
+  />
+  <p>{{foto.imagen}}</p>
+</div>
     <mat-card-header>
       <mat-card-title>
         {{datos.nombreProducto }}

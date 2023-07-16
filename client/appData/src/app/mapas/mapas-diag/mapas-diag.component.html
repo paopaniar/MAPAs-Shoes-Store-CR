@@ -7,7 +7,86 @@
           >close</mat-icon
         >
       </button>
-
+      <div class="col-lg-6">
+        <div
+          *ngIf="datos.fotografias && datos.fotografias.length > 0"
+          class="carousel-container2"
+        >
+          <mat-card class="carrusel">
+            <div
+              id="carouselExampleAutoplaying"
+              class="carousel carousel-dark slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <div
+                  *ngFor="let foto of datos.fotografias; let i = index"
+                  class="carousel-item"
+                  [class.active]="i === 0"
+                >
+                  <img
+                    [src]="'http://localhost:3000/' + foto.imagen"
+                    alt="Imagen"
+                    class="d-block w-100"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </mat-card>
+        </div>
+        <div
+          *ngIf="!datos.fotografias || datos.fotografias.length === 0"
+          class="no-response"
+        >
+          <div class="textfotos">Aún no hay fotos para este producto.</div>
+        </div>
+      </div>
       <div class="headerh1"><h2 >{{ datos?.nombreProducto }}</h2></div>
       <div class="positionImg">
        

@@ -93,7 +93,6 @@ model Producto {
   nombreProducto     String
   precio             Decimal
   proveedor          String
-  foto               String?
   descripcion        String
   cantidadDisponible Int
   estado             Int                 @default(1) //1=InStock 0=No hay stock

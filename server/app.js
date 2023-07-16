@@ -16,6 +16,7 @@ const productoRoutes=require("./routes/productoRoutes");
 const ordenRoutes=require("./routes/ordenRoutes");
 const ordenProductoRoutes=require("./routes/ordenProductoRoutes");
 const direccionRoutes=require("./routes/direccionRoutes");
+app.use(express.static('./image'));
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
 // Puerto que escucha por defecto 300 o definido .env

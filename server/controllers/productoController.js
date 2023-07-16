@@ -40,7 +40,6 @@ module.exports.getById = async (request, response, next) => {
         where: {id: idProd},
      include:{
         usuario:true,
-        fotografias:true,
         categoria:
         {
           select: {
@@ -56,7 +55,8 @@ module.exports.getById = async (request, response, next) => {
             respuesta: true,
             usuario:true,
         },
-        }
+        },
+        fotografias: true,
      },
     });
     response.json(productos);
