@@ -69,6 +69,21 @@
   object-fit: cover;
   border-radius: 8px;
 }
+.panel{
+  background-color: #611919;
+}
+.bodyDiag{
+  background-color: #611919;
+}
+.mesage{
+  background-color: lightslategrey;
+}
+.panel .mat-expansion-panel-header.mesage:hover {
+  background-color: #060920; /* Change to your desired hover background color */
+}
+.answer{
+  background-color: lightslategrey;
+}
 
 /* Additional styles for buttons and other elements can be added here */
 
