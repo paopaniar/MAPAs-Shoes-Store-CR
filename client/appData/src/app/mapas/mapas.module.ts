@@ -13,9 +13,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MapasDiagComponent } from './mapas-diag/mapas-diag.component';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
@@ -45,6 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatSelectModule,
     MatMenuModule,
+    MatExpansionModule,
     MatMenuModule
   ],
   exports: [
