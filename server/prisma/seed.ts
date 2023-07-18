@@ -793,7 +793,7 @@ await prisma.orden.create({
   await prisma.fotografia.create({
     data: {
       id: 5,
-      imagen: 'womanShoes.jpg',
+      imagen: 'womenShoes.jpg',
       productoId:4,
     },
   });
