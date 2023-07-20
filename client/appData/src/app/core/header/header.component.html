@@ -1,40 +1,41 @@
-
-<mat-toolbar [ngStyle]="{ 'background-color': '#CACACA' }">
-  <button  [matMenuTriggerFor]="menu1" mat-icon-button class="example-icon"
-  aria-label="Example icon-button with menu icon">
-  <mat-icon>menu</mat-icon>
-</button>
-     <div class="logo-container">
-      <img src="assets/images/originalLogo.png" alt="Logo" class="logo">
-      <span class="logo-text"></span>
-    </div>
-    <span class="example-spacer"></span>
-    
-    <mat-menu #menu1="matMenu">
-      <!-- 
-        #= forma de llamar un componente
-        
-        https://material.angular.io/components/menu/overview
-        nested menu
-      -->
-      <button mat-menu-item [routerLink]="['/inicio']" routerLinkActive="mat-raised-button">
-        Inicio
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #060920;">
+    <div class="container-fluid">
+      <div class="logo-container">
+        <img src="assets/images/logo.png" alt="Logo" class="logo">
+        <span class="logo-text"></span>
+      </div>
+     
+      <button
+        class="navbar-toggler"
+        type="button"
+       
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
       </button>
-     <!-- <button mat-menu-item [routerLink]="['/acerca-de']" routerLinkActive="mat-raised-button">
-        Acerca de
-      </button>-->
-      <button mat-menu-item [routerLink]="['/']" [matMenuTriggerFor]="menu2"
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+      
+       
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a style="color: white;" class="nav-link active" aria-current="page" href="/inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a style="color: white;" class="nav-link" href="/producto">Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a style="color: white;" class="nav-link" href="/producto/vendedor">Vendedor</a>
+          </li>
+        </ul>
+        <button mat-menu-item  [matMenuTriggerFor]="menu2"
         routerLinkActive="mat-raised-button">
-        Mantenimientos
+        Pedidos
       </button>
-  
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/producto']" routerLinkActive="mat-raised-button">
-          Catálogo
-        </button>
-        <button mat-menu-item [routerLink]="['/producto/vendedor']" routerLinkActive="mat-raised-button">
-          Productos Vendedor 
-        </button>
         <button mat-menu-item [routerLink]="['/orden/vendedor']" routerLinkActive="mat-raised-button">
           Pedidos Vendedor
         </button>
@@ -43,33 +44,32 @@
         </button>
       </mat-menu>
       
-     
-    </mat-menu>
-    <div class="example-button-container"></div>
-    <div class="example-spacer"></div>
-    <div class="example-spacer left">
-      <!--enlaces de la app-->
-      <!--https://fonts.google.com/icons-->
-      <!--https://material.angular.io/guide/typography-->
-  
-      <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
-      </button>
-      <!--Usuario-->
-      <span class="mat-caption" *ngIf="isAutenticated">{{currentUser.email}}</span>
-      <button mat-icon-button [matMenuTriggerFor]="menu3">
-        <mat-icon style="margin-right: 15px;" [ngStyle]="{'color': isAutenticated ? 'white': '#750918' }">person</mat-icon>
-      </button>
-      <!--Menu usuario-->
-      <mat-menu #menu3="matMenu">
-        <a mat-menu-item *ngIf="!(isAutenticated)">
-          <mat-icon>person_add</mat-icon>
-          <span>Ingresar</span>
-        </a>
-        <a mat-menu-item *ngIf="isAutenticated">
-          <mat-icon>person_remove</mat-icon>
-          <span>Cerrar Sesión</span>
-        </a>
-      </mat-menu>
+      <div class="example-spacer left">
+        <!--enlaces de la app-->
+        <!--https://fonts.google.com/icons-->
+        <!--https://material.angular.io/guide/typography-->
+    
+        <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
+        </button>
+        <!--Usuario-->
+        <span class="mat-caption" *ngIf="isAutenticated">{{currentUser.email}}</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu3">
+          <mat-icon style="margin-right: 15px;" [ngStyle]="{'color': isAutenticated ? 'white': '#fff' }">person</mat-icon>
+        </button>
+        <!--Menu usuario-->
+        <mat-menu #menu3="matMenu">
+          <a mat-menu-item *ngIf="!(isAutenticated)">
+            <mat-icon>person_add</mat-icon>
+            <span>Ingresar</span>
+          </a>
+          <a mat-menu-item *ngIf="isAutenticated">
+            <mat-icon>person_remove</mat-icon>
+            <span>Cerrar Sesión</span>
+          </a>
+        </mat-menu>
+      </div>
+        
+      </div>
     </div>
-  </mat-toolbar>
+  </nav>

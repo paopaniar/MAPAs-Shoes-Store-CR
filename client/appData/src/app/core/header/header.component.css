@@ -15,17 +15,20 @@
 .logo-text {
   font-size: 20px; /* Adjust the font size as needed */
   font-weight: lighter;
-  color: #750918;
+  color: #fff;
 }
 
 .example-icon {
-  color: #750918;
+  color: #fff;
 }
 .login {
-  color: #750918;
+  color: #fff;
 }
 
 .left {
   display: flex;
   justify-content: flex-end;
+}
+.menu{
+  background-color: #060920;
 }

@@ -5,6 +5,6 @@ body{
 
 body{
     margin: 0;
-    background-color: #2B2D43; /* Set the background color to black for the dark theme */
-    color: #fff; /* Set the text color to white for better visibility */
+    background-color: #fff; /* Set the background color to black for the dark theme */
+    color: black; /* Set the text color to white for better visibility */
 }

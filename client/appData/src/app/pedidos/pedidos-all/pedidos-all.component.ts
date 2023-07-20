@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pedidos-all',
@@ -18,6 +19,7 @@ export class PedidosAllComponent implements AfterViewInit{
   destroy$: Subject<boolean>=new Subject<boolean>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(NgbPaginationModule) currentPage !: NgbPaginationModule;
   //@ViewChild(MatTable) table!: MatTable<VideojuegoAllItem>;
   dataSource=new MatTableDataSource<any>();
 
