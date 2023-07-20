@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 
 
+
 @Component({
   selector: 'app-mapas-diag',
   templateUrl: './mapas-diag.component.html',
