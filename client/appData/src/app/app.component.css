@@ -1,6 +1,6 @@
-app.component.css
-
-.body-container{
-    padding-bottom: 2em;
-    
-}
+@media (min-width: 769px) {
+    .body-container {
+      padding-bottom: 2em;
+      /* Add other styles for desktops */
+    }
+  }

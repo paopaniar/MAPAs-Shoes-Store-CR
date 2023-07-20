@@ -1,59 +1,52 @@
 <div class="principal">
-    <div class="container">
-      <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
-        <mat-icon
-          class="close-icon"
-          style="background-color: #750918;"
-          >close</mat-icon
-        >
-      </button>
-      <div class="col-lg-6">
-        <div
-          *ngIf="datos.fotografias && datos.fotografias.length > 0"
-          class="carousel-container2"
-        >
-          <mat-card class="carrusel">
-            <div
-              id="carouselExampleAutoplaying"
-              class="carousel carousel-dark slide"
-              data-bs-ride="carousel"
-            >
-              <div class="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleDark"
-                  data-bs-slide-to="0"
-                  class="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleDark"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleDark"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div class="carousel-inner">
-                <div
-                  *ngFor="let foto of datos.fotografias; let i = index"
-                  class="carousel-item"
-                  [class.active]="i === 0"
-                >
-                  <img
-                    [src]="'http://localhost:3000/' + foto.imagen"
-                    alt="Imagen"
-                    class="d-block w-100"
-                  />
+  <div class="container">
+    <div class="row">
+      <!-- First column - Carousel -->
+      <div class="col-lg-4 d-flex justify-content-center align-items-center">
+        <div class="carousel-container2">
+          <div *ngIf="datos.fotografias && datos.fotografias.length > 0" class="carousel-container2">
+            <mat-card class="carrusel">
+              <div
+                id="carouselExampleAutoplaying"
+                class="carousel carousel-dark slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
                 </div>
-              </div>
-              <button
+                <div class="carousel-inner">
+                  <div
+                    *ngFor="let foto of datos.fotografias; let i = index"
+                    class="carousel-item"
+                    [class.active]="i === 0"
+                  >
+                    <img
+                      [src]="'http://localhost:3000/' + foto.imagen"
+                      alt="Imagen"
+                     
+                    />
+                  </div>
+                </div>
+                <button
                 class="carousel-control-prev"
                 type="button"
                 data-bs-target="#carouselExampleAutoplaying"
@@ -77,55 +70,53 @@
                 ></span>
                 <span class="visually-hidden">Next</span>
               </button>
+              </div>
+            </mat-card>
+          </div>
+
+          <div *ngIf="!datos.fotografias || datos.fotografias.length === 0" class="no-response">
+            <div class="textfotos">Aún no hay fotos para este producto.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second column - Product Information -->
+      <div class="col-lg-4">
+        <mat-expansion-panel class="bodyDiag" expanded>
+          <mat-expansion-panel-header>
+            <span class="mat-title">Información</span>
+          </mat-expansion-panel-header>
+          <mat-dialog-content>
+            <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
+            <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>
+            <p><b>Proveedor: </b>{{ datos.proveedor }}</p>
+            <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
+            <div class="green">
+              <span *ngIf="datos.estado === 1" class="green-text">Nuevos</span>
+              <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
             </div>
-          </mat-card>
-        </div>
-        <div
-          *ngIf="!datos.fotografias || datos.fotografias.length === 0"
-          class="no-response"
-        >
-          <div class="textfotos">Aún no hay fotos para este producto.</div>
-        </div>
+          </mat-dialog-content>
+        </mat-expansion-panel>
       </div>
-      <div class="headerh1"><h2 >{{ datos?.nombreProducto }}</h2></div>
-      <div class="positionImg">
-       
+
+      <!-- Third column - FAQs -->
+      <div class="col-lg-4">
+        <mat-expansion-panel class="panel" expanded>
+          <mat-expansion-panel-header>
+            <span class="mat-title">Preguntas Frecuentes</span>
+          </mat-expansion-panel-header>
+          <mat-accordion>
+            <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
+              <mat-expansion-panel-header >
+                <span class="mat-title">{{ consulta.mensaje }}</span>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                {{ consulta.respuesta ? consulta.respuesta : 'No hay una respuesta aún' }}
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-expansion-panel>
       </div>
-    </div>   
-  
-    <div *ngIf="datos">
-
-      <mat-dialog-content class="bodyDiag">
-
-        <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
-        <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>  
-        <p><b>Proveedor: </b>{{ datos.proveedor }}</p>    
-        <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>  
-               
-   <div class="green" >
-    <span *ngIf="datos.estado === 1" class="green-text">Nuevos</span>
-    <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
-   </div>
-      
-   
-    <table>
-      <thead>
-        <tr class="headers">
-          <th>Mensaje</th>
-          <th>Respuesta</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let consulta of datos.consultaProductos">
-          <tr class="letters">
-            <td> {{ consulta.mensaje }}</td>
-            <td>{{ consulta.respuesta }}</td>  
-          </tr>                  
-        </ng-container> 
-      </tbody>
-     
-    </table>
-      </mat-dialog-content>
-  
-      <mat-dialog-actions> </mat-dialog-actions>
-
+    </div>
+  </div>
+</div>

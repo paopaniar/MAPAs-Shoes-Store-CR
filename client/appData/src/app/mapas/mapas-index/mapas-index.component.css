@@ -1,16 +1,10 @@
 .dashboard-card {
-  min-width: 400px;
     max-width: 600px;
-    min-height: 50px;
-    max-height: 10000px;
+    max-height: 100%;
     background-color: lightslategrey;
   
 }
-.more-button {
-position: absolute;
-top: 5px;
-right: 10px;
-}
+
 .mat-card-content {
 text-align: center;  
 }
@@ -28,26 +22,79 @@ margin-left: 300px;
 
   }
 
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    color: #750918;
-  }
-  
-  .button-container button {
-    margin: 0 10px;
-    color: #750918;
-  }
+.titulo {
+  font-size: 20px;
+  color: #333;
+}
 
-  .info {
-    font-size: 24px;
-    color: #750918;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-  
+.precio {
+  font-size: 16px;
+  color: #666;
+}
+
+.mat-card-content {
+  text-align: center;
+  padding: 10px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  color: #750918;
+}
+
+.pagination-button {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #750918;
+  color: #ffffff;
+}
+
+.detalle-button,
+.comprar-button {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #750918;
+  color: #ffffff;
+}
+
+.detalle-button:hover,
+.comprar-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.detalle-button mat-icon,
+.comprar-button mat-icon {
+  font-size: 20px;
+}
+
+.detalle-button:focus,
+.detalle-button:active,
+.comprar-button:focus,
+.comprar-button:active {
+  outline: none;
+}
+
+/* ... (resto del código) ... */
+
   @keyframes bounce {
     0% {
       transform: translateY(0);

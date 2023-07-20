@@ -3,59 +3,40 @@
   <h1 class="mat-h1" style="text-align: center;">Catálogo de zapatos</h1>
   <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
     <mat-grid-tile *ngFor="let item of displayedData">
-      
+      <!-- Card con foto -->
+      <mat-card class="dashboard-card">
+        <img class="img" src="ruta_de_la_imagen.jpg" alt="Imagen del producto">
+        <mat-card-header>
+          <mat-card-title class="titulo">{{item.nombreProducto}}</mat-card-title>
+          <mat-card-subtitle class="precio">₡{{ item.precio | number: '1.2-2' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>  
+          <p><b>Categoría: </b>{{ item.categoria.nombreCategoria }}</p>  
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <div class="example-button-row">
+          <div class="example-flex-container">
+            <mat-card-actions>
+              <button mat-mini-fab color="primary" class="detalle-button" (click)="detalleProducto(item.id)">
+                <mat-icon>info</mat-icon>
+              </button>
+              <button mat-mini-fab color="primary" class="comprar-button">
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
- <!--Card con foto-->
- <mat-card class="dashboard-card">
-  <mat-card-header>
-   <mat-card-title>{{item.nombreProducto}}</mat-card-title>    
-   <mat-card-subtitle><div>₡{{ item.precio | number: '1.2-2' }}</div></mat-card-subtitle>
-  </mat-card-header>   
+  <div class="button-container">
+    <button mat-icon-button class="pagination-button" (click)="previousPage()" [disabled]="currentPage === 1">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
 
-  <mat-card-content>  
-    <p><b>Categoría: </b>{{ item.categoria.nombreCategoria }}</p>  
-  </mat-card-content>
-  <mat-divider></mat-divider>
-  <div class="example-button-row">
-    <div class="example-flex-container">
-     
-  <mat-card-actions>
-    <button
-    mat-mini-fab
-    color="accent"
-    matTooltip="Detalle"
-    aria-label="Detalle"
-    color="primary"
-    class="acciones"
-    (click)="detalleProducto(item.id)">
-    <mat-icon class="info" (mouseover)="startAnimation()" (mouseout)="stopAnimation()">info</mat-icon>
-  </button>
-  <button
-    mat-mini-fab
-    color="accent"
-    matTooltip="Comprar"
-    aria-label="Comprar"
-    color="primary"
-    class="acciones">
-    <mat-icon class="info">add_shopping_cart</mat-icon>
-  </button>
-  </mat-card-actions>
-
+    <button mat-icon-button class="pagination-button" (click)="nextPage()" [disabled]="currentPage === 20">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
 </div>
-</div>
-</mat-card>
-
-
-</mat-grid-tile>
-</mat-grid-list>
-<div class="button-container">
-  <button mat-icon-button (click)="previousPage()" [disabled]="currentPage === 1">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-  </button>
-
-  <button mat-icon-button (click)="nextPage()" [disabled]="currentPage === 20">
-    <mat-icon>keyboard_arrow_right</mat-icon>
-  </button>
-</div>
-</div>
-
