@@ -9,7 +9,7 @@
     width: 24px; /* Adjust the width as needed */
     height: 24px; /* Adjust the height as needed */
     border-radius: 4px; /* Adjust the border-radius as needed */
-    background-color: rgb(36, 218, 97);
+
   }
   .squar {
     display: inline-flex;
@@ -18,7 +18,7 @@
     width: 24px; /* Adjust the width as needed */
     height: 24px; /* Adjust the height as needed */
     border-radius: 4px; /* Adjust the border-radius as needed */
-    background-color:  rgb(30, 162, 238);
+
   }
   
   .add {
@@ -42,9 +42,12 @@
     border-radius: 4px;
   }
   .card{
-    background-color: #750918;
-    color: #fff;
+    background-color: #169EC2;
+    color: #060920;
     margin-top: 50px;
     margin-left: 45px;
     margin-right: 45px;
+  }
+  .paginator{
+    background-color: #169EC2;
   }
