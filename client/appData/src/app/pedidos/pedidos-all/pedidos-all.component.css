@@ -34,7 +34,7 @@
     background-color: rgb(4, 77, 4);
     text-align: center;
     border-radius: 4px;
-    color: #fff;
+    color: #E7E7E7;
   }
   .pendiente{
     background-color: #750918;
@@ -42,12 +42,22 @@
     border-radius: 4px;
   }
   .card{
-    background-color: #169EC2;
+    background-color: #85B8E1;
     color: #060920;
     margin-top: 50px;
     margin-left: 45px;
     margin-right: 45px;
   }
   .paginator{
-    background-color: #169EC2;
+    background-color: #85B8E1;
+    color: #060920;
+  }
+  .tab{
+    background-color: #EFEFEF ;
+  }
+  .titulo{
+    color: #457FAD;
+  }
+  .card-title{
+    color: #0E1335;
   }

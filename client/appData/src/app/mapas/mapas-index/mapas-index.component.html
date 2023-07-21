@@ -1,11 +1,36 @@
 <div class="grid-container">
   <br><br><br><br>
   <h1 class="mat-h1" style="text-align: center;">Catálogo de zapatos</h1>
+
   <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
+    
+
     <mat-grid-tile *ngFor="let item of displayedData">
-      <!-- Card con foto -->
-      <mat-card class="dashboard-card">
-        <img class="img" src="ruta_de_la_imagen.jpg" alt="Imagen del producto">
+    
+          <div class="carousel-container2">
+            <div *ngIf="item.fotografias && item.fotografias.length > 0" class="carousel-container2">
+                  <div class="carousel-inner">
+                    <div
+                      *ngFor="let foto of item.fotografias; let i = index"
+                      class="carousel-item"
+                      [class.active]="i === 0"
+                    >
+                      <img
+                        [src]="'http://localhost:3000/' + foto.imagen"
+                        alt="Imagen"
+                      />
+                    </div>
+                  </div>
+  
+            <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response">
+              <div class="textfotos">Aún no hay fotos para este producto.</div>
+            </div>
+          </div>
+        </div>
+        <div class="pruebas">
+          <br>
+       
+          
         <mat-card-header>
           <mat-card-title class="titulo">{{item.nombreProducto}}</mat-card-title>
           <mat-card-subtitle class="precio">₡{{ item.precio | number: '1.2-2' }}</mat-card-subtitle>
@@ -13,21 +38,21 @@
         <mat-card-content>  
           <p><b>Categoría: </b>{{ item.categoria.nombreCategoria }}</p>  
         </mat-card-content>
-        <mat-divider></mat-divider>
+        <mat-divider class="color"></mat-divider>
         <div class="example-button-row">
           <div class="example-flex-container">
-            <mat-card-actions>
-              <button mat-mini-fab color="primary" class="detalle-button" (click)="detalleProducto(item.id)">
-                <mat-icon>info</mat-icon>
-              </button>
-              <button mat-mini-fab color="primary" class="comprar-button">
-                <mat-icon>add_shopping_cart</mat-icon>
-              </button>
-            </mat-card-actions>
+            <button mat-mini-fab color="" class="detalle-button" (click)="detalleProducto(item.id)">
+              <mat-icon>info</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="detalle-button">
+              <mat-icon>add_shopping_cart</mat-icon>
+            </button>
           </div>
         </div>
-      </mat-card>
+      </div>
+  
     </mat-grid-tile>
+
   </mat-grid-list>
 
   <div class="button-container">
@@ -39,4 +64,5 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
+
 </div>

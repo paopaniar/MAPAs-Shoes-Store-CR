@@ -1,15 +1,17 @@
+
 /* Add these styles to your existing styles.css or styles.scss file */
 
 /* Main container */
 .principal {
   padding: 10px; /* Reduce padding */
-  background-color: #5a0909;
+  background-color: #A8D5FA;
   max-width: 100%; /* Reduce the maximum width */
   margin: 0 auto; /* Center the container */
+  
 }
 
 .container {
-  background-color: #240000;
+  background-color: #060920;
   padding: 10px; /* Reduce padding */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -31,13 +33,15 @@
 
 .faq-table th,
 .faq-table td {
-  border: 1px solid #611919;
+  border: 1px solid #A8D5FA;
   padding: 8px;
+  color: #060920;
 }
 
 .faq-table th {
   background-color: #240f0f;
   text-align: left;
+  color: aliceblue;
 }
 
 /* Green status (Nuevos/Viejo) */
@@ -61,6 +65,7 @@
   height: 200px; /* Ajusta la altura según tus necesidades */
   border-radius: 8px;
   overflow: hidden;
+  
 }
 
 .carousel-inner img {
@@ -70,10 +75,12 @@
   border-radius: 8px;
 }
 .panel{
-  background-color: #611919;
+  background-color: #A8D5FA;
+  color: #000;
 }
 .bodyDiag{
-  background-color: #611919;
+  background-color: #A8D5FA;
+  color: #060920;
 }
 .mesage{
   background-color: lightslategrey;
@@ -100,4 +107,11 @@
   .carousel-inner img {
     height: 150px; /* Adjust the height for smaller screens */
   }
+}
+
+.textfotos{
+  color: antiquewhite;
+}
+.letra{
+  color: #060920;
 }
