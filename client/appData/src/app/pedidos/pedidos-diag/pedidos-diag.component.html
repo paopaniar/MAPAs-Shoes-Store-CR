@@ -1,9 +1,9 @@
 <div class="principal">
-  <div class="container">
+  <div class="container"> 
+    <h4 class="factura">Factura N° {{datos?.id}}</h4>
     <button mat-icon-button class="close-button" [mat-dialog-close]="true">
       <mat-icon class="close-icon">close</mat-icon>
     </button>
-    <h2>Factura N° {{datos?.id}}</h2>
   </div>
 
   <div *ngIf="datos">

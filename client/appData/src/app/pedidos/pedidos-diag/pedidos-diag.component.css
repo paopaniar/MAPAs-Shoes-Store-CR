@@ -3,9 +3,10 @@
     }
   
     .principal{
-      background-color:  #750918;;
+      background-color:  #EFEFEF;;
       max-width: 600px;
-      min-width: 400px;
+
+      min-height: 500px;
     }
       
     .dashboard-card-content {
@@ -17,23 +18,20 @@
   
     .container {
       display: flex;
-      align-items: center;
-      background-color: #060920;
+      background-color: #161d50;
   
     }
     
     .close-button {
-      margin-left: 15px;
-;
-      background-color: #060920;
+      background-color: #161d50;
       color: red;
       border: none;
-      border-radius: 4px;
       cursor: pointer;
+     margin-left: 200px;
     }
   
     .bodyDiag{
-      background-color: #CACACA;
+      background-color: #EFEFEF;
       color: black;
       margin: 0 10px;
       margin-bottom: 0px;
@@ -75,4 +73,15 @@
       color: white;
       display: inline-block;
       margin-top: 10px;
+    }
+    .factura{
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
