@@ -1,7 +1,6 @@
 <div class="grid-container">
   <br><br><br><br>
   
-
   <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
     <mat-grid-tile *ngFor="let item of displayedData" class="card">         
        <!--foto-->
@@ -34,9 +33,11 @@
             <div class="example-flex-container">
               <button mat-mini-fab color="" class="detalle-button" (click)="detalleProducto(item.id)">
                 <mat-icon>info</mat-icon>
+               
               </button>
               <button mat-mini-fab color="primary" class="detalle-button">
                 <mat-icon>add_shopping_cart</mat-icon>
+                
               </button>
             </div>
           </div>
@@ -47,10 +48,11 @@
   <div class="button-container">
     <button mat-icon-button class="pagination-button" (click)="previousPage()" [disabled]="currentPage === 1">
       <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
 
+    </button>
     <button mat-icon-button class="pagination-button" (click)="nextPage()" [disabled]="currentPage === 20">
       <mat-icon>keyboard_arrow_right</mat-icon>
+
     </button>
   </div>
 

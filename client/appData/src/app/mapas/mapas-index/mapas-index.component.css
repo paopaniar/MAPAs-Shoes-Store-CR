@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height:550px;
+  max-height:850px;
 }
 .card .carousel-container2 {
   flex-grow: 1;
@@ -70,19 +70,20 @@
 }
 
 .card .detalle-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #85B8E1; /* Primary color for the buttons */
+  width: 50px;
+  height: 30px;
+  align-content: center;
+  content: icon;
+  border-radius: 5%;
+  border-style: ridge ;
+  border-color: #EFEFEF;
+  background-color: #EFEFEF; /* Primary color for the buttons */
   color: #161d50; /* Text color for the buttons */
-  border: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-size: 18px;
-  outline: none;
-  
-  align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
+  
 }
 
 .card .detalle-button.mat-mini-fab,
@@ -91,7 +92,7 @@
 }
 
 .card .detalle-button:hover {
-  background-color: #85B8E1; /* Color de fondo al hacer hover */
+  background-color: #B9E0FF; /* Color de fondo al hacer hover */
   cursor: pointer;
 }
 .card .pagination-button {
@@ -132,18 +133,7 @@
 /* Modern design for mat-card-actions buttons */
 
 
-.detalle-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  justify-content: center;
-  background-color: #A8D5FA; /* Primary color for the buttons */
-  color: black; /* Text color for the buttons */
-  border: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 18px;
-  outline: none;
-}
+
 
 /* Optional: Add some hover effects to the buttons */
 /* Pagination buttons */
@@ -178,4 +168,8 @@
 .grid-container{
   height: 100%;
   width: 100%;
+  margin-top: 35px;
+}
+.producto{
+text-align: center;
 }
