@@ -116,11 +116,7 @@
     margin-top: 40px;
   }
   
-  .container {
-    height: 100vh;
-    overflow-y: scroll;
-  }
-  
+
   .centered-content {
     display: flex;
     justify-content: center;
