@@ -7,7 +7,7 @@ import { InicioComponent } from './home/inicio/inicio.component';
 
 const routes: Routes = [
   { path:'inicio',component: InicioComponent},
-  { path:'', redirectTo:'/producto' ,pathMatch:'full'},
+  { path:'', redirectTo:'/inicio' ,pathMatch:'full'},
   { path:'**',component:PageNotFoundComponent}
 ];
 
