@@ -1,5 +1,5 @@
 
-<div class="principal">
+
   <div class="container">
     <div class="row">
       <!-- First column - Carousel -->
@@ -82,11 +82,8 @@
       </div>
 
       <!-- Second column - Product Information -->
-      <div class="col-lg-4">
-        <mat-expansion-panel class="bodyDiag" expanded>
-          <mat-expansion-panel-header>
-            <span class="mat-title">Información</span>
-          </mat-expansion-panel-header>
+      <div class="col-lg-4" id="informacion">
+        <div class="detalles"> 
           <mat-dialog-content class="letra">
             <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
             <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>
@@ -97,27 +94,27 @@
               <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
             </div>
           </mat-dialog-content>
-        </mat-expansion-panel>
+          <mat-expansion-panel class="bodyDiag" expanded>
+            <mat-expansion-panel-header>
+              <span class="mat-title" style="color:#457FAD;">Preguntas Frecuentes</span>
+            </mat-expansion-panel-header>
+            <mat-accordion>
+              <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
+                <mat-expansion-panel-header >
+                  <span class="mat-title">{{ consulta.mensaje }}</span>
+                </mat-expansion-panel-header>
+                <mat-panel-description>
+                  {{ consulta.respuesta ? consulta.respuesta : 'No hay una respuesta aún' }}
+                </mat-panel-description>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-expansion-panel>
+        </div>
+       
       </div>
 
       <!-- Third column - FAQs -->
-      <div class="col-lg-4">
-        <mat-expansion-panel class="panel" expanded>
-          <mat-expansion-panel-header>
-            <span class="mat-title">Preguntas Frecuentes</span>
-          </mat-expansion-panel-header>
-          <mat-accordion>
-            <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
-              <mat-expansion-panel-header >
-                <span class="mat-title">{{ consulta.mensaje }}</span>
-              </mat-expansion-panel-header>
-              <mat-panel-description>
-                {{ consulta.respuesta ? consulta.respuesta : 'No hay una respuesta aún' }}
-              </mat-panel-description>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </mat-expansion-panel>
-      </div>
+      
     </div>
   </div>
-</div>
+

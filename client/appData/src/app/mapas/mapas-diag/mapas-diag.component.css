@@ -2,20 +2,16 @@
 /* Add these styles to your existing styles.css or styles.scss file */
 
 /* Main container */
-.principal {
-  padding: 10px; /* Reduce padding */
-  background-color: #A8D5FA;
-  max-width: 100%; /* Reduce the maximum width */
-  margin: 0 auto; /* Center the container */
-  
-}
+
 
 .container {
-  background-color: #060920;
+  background-color: #85B8E1;
   padding: 10px; /* Reduce padding */
-  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 100%; /* Reduce the maximum width */
+  margin: 0 auto; /* Center the container */
+  max-height: 50%;
+  align-content: center;
 }
 
 /* Header for the product name */
@@ -61,35 +57,34 @@
 }
 
 .carrusel {
-  max-width: 100%;
-  height: 200px; /* Ajusta la altura según tus necesidades */
+  max-width: 350px;
+  height: 350px; /* Ajusta la altura según tus necesidades */
   border-radius: 8px;
   overflow: hidden;
   
 }
 
 .carousel-inner img {
-  max-width: 100%;
-  height: 100%; /* Ajusta la altura para que las imágenes llenen el carousel */
+  max-width: 350px;
+  height: 350px;/* Ajusta la altura para que las imágenes llenen el carousel */
   object-fit: cover;
   border-radius: 8px;
 }
-.panel{
-  background-color: #A8D5FA;
-  color: #000;
-}
 .bodyDiag{
-  background-color: #A8D5FA;
+  background-color: #fff;
   color: #060920;
+width: 350px;
+align-content: flex-start;
+
 }
 .mesage{
-  background-color: lightslategrey;
+  background-color: #161d50;
 }
 .panel .mat-expansion-panel-header.mesage:hover {
   background-color: #060920; /* Change to your desired hover background color */
 }
 .answer{
-  background-color: lightslategrey;
+  background-color: #161d50;
 }
 
 /* Additional styles for buttons and other elements can be added here */
@@ -110,8 +105,13 @@
 }
 
 .textfotos{
-  color: antiquewhite;
+  color: #060920;
 }
 .letra{
   color: #060920;
+}
+
+.detalles{
+  background-color: #fff;
+  width: 350px;
 }
