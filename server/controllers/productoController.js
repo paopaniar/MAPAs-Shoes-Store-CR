@@ -81,13 +81,60 @@ module.exports.getById = async (request, response, next) => {
     response.json(productos);
 };
 
-  
-//Crear un videojuego
 module.exports.create = async (request, response, next) => {
+  let producto = request.body;
+  const newProducto = await prisma.producto.create({
+    data: {
+
+      nombreProducto: producto.nombreProducto,
+      precio: producto.precio, 
+      proveedor: producto.proveedor, 
+      descripcion: producto.descripcion,
+      cantidadDisponible: producto.cantidadDisponible,
+      categoriaId: producto.categoriaId,
+      usuarioId: producto.usuarioId,
+
+      // generos: {
+      //   //Generos tiene que ser {id:valor}
+      //   // [{ id: 1 },{id: 3}]
+      //   connect: videojuego.generos,
+      // },
+    },
+  });
+  response.json(newProducto);
 };
-//Actualizar un videojuego
-module.exports.update = async (request, response, next) => {
-};
+// module.exports.update = async (request, response, next) => {
+//   let videojuego = request.body;
+//   let idVideojuego = parseInt(request.params.id);
+//   //Obtener videojuego viejo
+//   const videojuegoViejo = await prisma.videojuego.findUnique({
+//     where: { id: idVideojuego },
+//     include: {
+//       generos: {
+//         select:{
+//           id:true
+//         }
+//       }
+//     }
+//   });
+
+//   const newVideojuego = await prisma.videojuego.update({
+//     where: {
+//       id: idVideojuego,
+//     },
+//     data: {
+//       nombre: videojuego.nombre,
+//       descripcion: videojuego.descripcion,
+//       precio: videojuego.precio,
+//       publicar: videojuego.publicar,
+//       generos: {
+//         //Generos tiene que ser {id:valor}
+//         disconnect:videojuegoViejo.generos,
+//         connect: videojuego.generos,
+//       },
+//     },
+//   });
+//   response.json(newVideojuego);
 
 
 

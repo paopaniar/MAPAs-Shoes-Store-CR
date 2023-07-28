@@ -5,6 +5,9 @@ const router=express.Router();
 const usuarioController=require("../controllers/usuarioController");
 
 
+router.post("/login", usuarioController.login);
+
+router.post("/registrar", usuarioController.register);
 //Rutas
 //localhost:3000/videojuego/
 router.get("/", usuarioController.get);

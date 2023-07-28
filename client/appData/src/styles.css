@@ -5,6 +5,6 @@ body{
 
 body{
     margin: 0;
-    background-color: #EFEFEF; /* Set the background color to black for the dark theme */
+    background-image: url('../src/assets/images/wallper10.jpg');
     color: black; /* Set the text color to white for better visibility */
 }
