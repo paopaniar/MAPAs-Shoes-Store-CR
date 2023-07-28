@@ -5,6 +5,33 @@ body{
 
 body{
     margin: 0;
-    background-image: url('../src/assets/images/wallper10.jpg');
+    background-image: url('../src/assets/images/wallper12.jpg');
     color: black; /* Set the text color to white for better visibility */
+}
+
+/*PALETA DE COLORES
+ #06078C
+#DAF7A6
+#FFC300
+#FF5733
+#C70039 */
+
+color0  {
+    color:#060920
+}
+
+color1  {
+    color:#06078C
+}
+color2  {
+    color:#DAF7A6
+}
+color3  {
+    color:#FFC300
+}
+color4  {
+    color:#FF5733
+}
+color5  {
+    color:#C70039
 }
