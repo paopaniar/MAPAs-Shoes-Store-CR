@@ -6,6 +6,7 @@ body{
 body{
     margin: 0;
     background-image: url('../src/assets/images/ladrillos4.jpg');
+    backdrop-filter: blur(3px);
     color: black; /* Set the text color to white for better visibility */
 }
 
