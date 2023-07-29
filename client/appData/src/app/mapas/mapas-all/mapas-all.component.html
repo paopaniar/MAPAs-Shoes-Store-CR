@@ -1,15 +1,20 @@
 <!-- mapas-create.component.html -->
-
+<mat-card>
+  Cátalogo a la par esto para el admin por la actualizacion 
+  de fotos hay que hacer un catalogo para el admin
+</mat-card>
+<br>
 <mat-card class="modern-card">
   <!-- Title -->
-  <mat-card-title>
-    Ingresar Nuevo
-    <a mat-fab matTooltip="Crear nuevo estilo" aria-label="Crear nuevo estilo" color="primary" (click)="crearVideojuego()">
-      <mat-icon class="add">add</mat-icon>
-    </a>
-  </mat-card-title>
-
-  <mat-card-content>
+ 
+  <mat-card-content> 
+    <mat-card-title>
+      Ingresar Nuevo
+      <a mat-fab matTooltip="Crear nuevo estilo" aria-label="Crear nuevo estilo" color="primary" (click)="crearVideojuego()">
+        <mat-icon class="add">add</mat-icon>
+      </a>
+    </mat-card-title>
+  
     <!-- Table -->
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
@@ -33,13 +38,10 @@
 
         <!-- Columna Acciones -->
         <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <th mat-header-cell *matHeaderCellDef>Actualizar</th>
           <td mat-cell *matCellDef="let row" class="action-cell">
             <a mat-icon-button matTooltip="Actualizar" aria-label="Actualizar" color="primary">
               <mat-icon>edit</mat-icon>
-            </a>
-            <a mat-icon-button matTooltip="Detalle" aria-label="Detalle" color="primary" (click)="detalleProducto(row.id)">
-              <mat-icon>info</mat-icon>
             </a>
           </td>
         </ng-container>
