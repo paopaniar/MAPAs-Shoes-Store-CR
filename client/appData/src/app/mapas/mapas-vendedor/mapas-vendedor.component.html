@@ -41,8 +41,13 @@
       <!-- Columna Categoría -->
       <ng-container matColumnDef="categoriaId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Categoría</th>
-        <td mat-cell *matCellDef="let row">{{ row.categoria.nombreCategoria}}</td>
-      </ng-container> 
+        <td mat-cell *matCellDef="let row">
+          <p *ngIf="row.categorias">
+            <li *ngFor="let categorias of row.categorias">{{ categorias.nombreCategoria }}</li>
+          </p>
+        </td>
+      </ng-container>
+      
       
       <ng-container matColumnDef="cantidadDisponible">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Cantidad Disponible</th>

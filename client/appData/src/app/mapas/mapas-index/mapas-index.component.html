@@ -28,7 +28,9 @@
         <div class="card-body">
           <h5 class="card-title">{{item.nombreProducto}}</h5>
           <p class="card-text" style="color: darkslateblue;">₡{{ item.precio | number: '1.2-2' }}</p>
-          <p class="card-text"><b>Categoría: </b>{{ item.categoria.nombreCategoria }}</p>
+          <ul *ngIf="item.categorias">
+            <li *ngFor="let item of item.categorias"> {{item.nombreCategoria}}</li>
+         </ul>
           <div class="example-button-row">
             <div class="example-flex-container">
               <button mat-mini-fab color="" class="detalle-button" (click)="detalleProducto(item.id)">

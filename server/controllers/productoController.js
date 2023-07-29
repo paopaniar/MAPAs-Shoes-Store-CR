@@ -41,12 +41,7 @@ module.exports.getById = async (request, response, next) => {
         where: {usuarioId: id},
         include: {
           usuario:true,
-          categoria: {
-            select: {
-              id: true,
-              nombreCategoria: true,
-          },
-          },
+          categorias: true,
         consultaProductos:{
           include:{
               usuario:true,

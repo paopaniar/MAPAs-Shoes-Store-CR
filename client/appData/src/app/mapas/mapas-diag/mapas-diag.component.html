@@ -86,7 +86,9 @@
         <div class="detalles"> 
           <mat-dialog-content class="letra">
             <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
-            <p><b>Categoría: </b>{{ datos.categoria.nombreCategoria }}</p>
+            <b>Categoría: </b> <ul *ngIf="datos.categorias">
+              <li *ngFor="let datos of datos.categorias"> {{datos.nombreCategoria}}</li>
+           </ul>
             <p><b>Proveedor: </b>{{ datos.proveedor }}</p>
             <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
             <div class="green">
