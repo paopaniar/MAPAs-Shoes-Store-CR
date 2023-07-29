@@ -18,9 +18,9 @@ const routes: Routes = [
   
   {path: 'producto/vendedor', component: MapasVendedorComponent},
 
-  {path:'producto/:id', component: MapasDetailComponent}
+  {path:'producto/:id', component: MapasDetailComponent},
 
-
+  {path:'producto/update/:id', component: MapasCreateComponent}
   
 ];
 
