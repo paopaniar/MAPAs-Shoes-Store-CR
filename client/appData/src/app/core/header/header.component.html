@@ -28,6 +28,9 @@
             <a style="color: white;" class="nav-link" href="/producto">Catálogo</a>
           </li>
           <li class="nav-item">
+            <a style="color: white;" class="nav-link" href="/producto/crear">Productos</a>
+          </li>
+          <li class="nav-item">
             <a style="color: white;" class="nav-link" href="/producto/vendedor">Vendedor</a>
           </li>
         </ul>
@@ -36,7 +39,7 @@
         Pedidos
       </button>
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/orden/vendedor']" routerLinkActive="mat-raised-button">
+        <button mat-menu-item [routerLink]="['/producto/crear']" routerLinkActive="mat-raised-button">
           Pedidos Vendedor
         </button>
         <button mat-menu-item [routerLink]="['/orden/client']" routerLinkActive="mat-raised-button">

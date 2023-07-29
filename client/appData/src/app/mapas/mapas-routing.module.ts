@@ -12,7 +12,7 @@ import { AuthGuard } from '../share/guards/auth.guard';
 const routes: Routes = [
   {path:'producto', component: MapasIndexComponent},
 
-  {path:'producto/pao', component: MapasCreateComponent},
+  {path:'producto/crear', component: MapasCreateComponent},
 
   {path:'producto/all', component: MapasAllComponent},
   

@@ -62,6 +62,11 @@ export class MapasAllComponent implements AfterViewInit{
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
   }
+  crearVideojuego() {
+    this.router.navigate(['/producto/crear'], {
+      relativeTo: this.route,
+    });
+  }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
