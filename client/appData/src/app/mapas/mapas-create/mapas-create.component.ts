@@ -29,7 +29,7 @@ export class MapasCreateComponent implements OnInit {
     private activeRouter: ActivatedRoute
   ) {
     this.formularioReactive();
-
+    this.listaCategorias();
   }
   ngOnInit(): void {
 
@@ -48,6 +48,7 @@ export class MapasCreateComponent implements OnInit {
             nombre:this.videojuegoInfo.nombre,
             descripcion:this.videojuegoInfo.descripcion,
             precio:this.videojuegoInfo.precio,
+            categorias:this.videojuegoInfo.categorias.map(({id}) => id),
             publicar:this.videojuegoInfo.publicar,
 
           })
@@ -70,6 +71,7 @@ export class MapasCreateComponent implements OnInit {
       cantidadDisponible: [null, Validators.required],
       proveedor:  [null, Validators.required],
       publicar: [true, Validators.required],
+      categorias: [null, Validators.required],
      
     })
   }
@@ -79,7 +81,7 @@ export class MapasCreateComponent implements OnInit {
       .list('categoria')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-
+        // console.log(data);
         this.categoriasList = data;
       });
   }
@@ -96,7 +98,9 @@ export class MapasCreateComponent implements OnInit {
     if(this.videojuegoForm.invalid){
       return;
     }
-   
+    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x}))
+
+    this.videojuegoForm.patchValue({generos: gFormat});
 
     console.log(this.videojuegoForm.value);
 
@@ -116,6 +120,9 @@ export class MapasCreateComponent implements OnInit {
     if(this.videojuegoForm.invalid){
       return;
     }
+    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
+    this.videojuegoForm.patchValue({ categorias:gFormat});
+
     
     console.log(this.videojuegoForm.value);
     this.gService.update('producto',this.videojuegoForm.value)

@@ -22,6 +22,21 @@
         </div>
 
         <div class="row">
+          <div class="col" *ngIf="categoriasList">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Categorias" formControlName="categorias"  multiple>
+                <mat-option *ngFor="let g of categoriasList" [value]="g.id">
+                    {{g.nombreCategoria}}
+                </mat-option>
+              </mat-select>
+              <mat-error >
+                categorias es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Descripción" formControlName="descripcion">

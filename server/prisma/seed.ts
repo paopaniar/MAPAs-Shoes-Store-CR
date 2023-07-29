@@ -9,7 +9,7 @@ const imagenBytes = fs.readFileSync('image/tenis.jpg');
 const imageSandalsWomen =  fs.readFileSync('image/tenis.jpg');
 async function main() {
   await prisma.categoria.createMany({
-    data: categorias,
+    data: categorias
   });
 
   await prisma.usuario.create({
@@ -152,7 +152,9 @@ await prisma.usuario.create({
       precio: 16500,  
       descripcion: 'Zapato casual en cuero con suela de acrilicos',
       cantidadDisponible: 20,
-      categoriaId: 1,
+      categorias: {
+      connect: [{ id: 1 }]
+    },
       usuarioId: 3,
       proveedor:'NIKE',
       consultaProductos: {
@@ -172,7 +174,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Zapatos casuales negros con detalles en cuero para mujer',
       cantidadDisponible: 20,
-      categoriaId: 1,
+      categorias: {
+        connect: [{ id: 1 }]
+      },
       usuarioId: 3,
       consultaProductos: {
         createMany: {
@@ -191,7 +195,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Sandalias deportivas de suela baja para mujer',
       cantidadDisponible: 20,
-      categoriaId: 1,
+      categorias: {
+        connect: [{ id: 1 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {
@@ -209,7 +215,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Tenis blancas con detalles azules para hombre',
       cantidadDisponible: 20,
-      categoriaId: 2,
+      categorias: {
+        connect: [{ id: 1 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {
@@ -227,7 +235,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Zapatos casuales con detalles en cuero para hombre',
       cantidadDisponible: 20,
-      categoriaId: 2,
+      categorias: {
+        connect: [{ id: 2 }]
+      },
       usuarioId: 3,
       consultaProductos: {
         createMany: {
@@ -245,7 +255,9 @@ await prisma.usuario.create({
       proveedor:'NIKE', 
       descripcion: 'Sandalias bajas para hombre',
       cantidadDisponible: 20,
-      categoriaId: 4,
+      categorias: {
+        connect: [{ id: 4 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {
@@ -263,7 +275,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Tenis blancas con detalles rosados para niñas',
       cantidadDisponible: 20,
-      categoriaId: 4,
+      categorias: {
+        connect: [{ id: 4 }]
+      },
       usuarioId: 6,
       consultaProductos: {
         createMany: {
@@ -281,7 +295,9 @@ await prisma.usuario.create({
       proveedor:'NIKE', 
       descripcion: 'Tenis blancas con detalles azules para niños',
       cantidadDisponible: 20,
-      categoriaId: 3,
+      categorias: {
+        connect: [{ id: 3 }]
+      },
       usuarioId: 3,
       consultaProductos: {
         createMany: {
@@ -299,7 +315,9 @@ await prisma.usuario.create({
       proveedor:'NIKE',
       descripcion: 'Sandalias para niñas',
       cantidadDisponible: 20,
-      categoriaId: 4,
+      categorias: {
+        connect: [{ id: 4 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {
@@ -317,7 +335,9 @@ await prisma.usuario.create({
       proveedor:'ADIDAS',
       descripcion: 'Sandalias para niños',
       cantidadDisponible: 20,
-      categoriaId: 3,
+      categorias: {
+        connect: [{ id: 3 }]
+      },
       usuarioId: 6,
       consultaProductos: {
         createMany: {
@@ -335,7 +355,9 @@ await prisma.usuario.create({
       proveedor:'ADIDAS',
       descripcion: 'Unisex',
       cantidadDisponible: 20,
-      categoriaId: 5,
+      categorias: {
+        connect: [{ id: 5 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {
@@ -354,7 +376,9 @@ await prisma.usuario.create({
       descripcion: 'Unisex',
       proveedor:'ADIDAS',
       cantidadDisponible: 20,
-      categoriaId: 5,
+      categorias: {
+        connect: [{ id: 5 }]
+      },
       usuarioId: 3,
       consultaProductos: {
         createMany: {
@@ -372,7 +396,9 @@ await prisma.usuario.create({
       descripcion: 'Unisex',  
       proveedor:'NIKE',
       cantidadDisponible: 20,
-      categoriaId: 5,
+      categorias: {
+        connect: [{ id: 5 }]
+      },
       usuarioId: 6,
       consultaProductos: {
         createMany: {
@@ -390,7 +416,9 @@ await prisma.usuario.create({
       descripcion: 'Unisex',
       proveedor:'NIKE',
       cantidadDisponible: 20,
-      categoriaId: 5,
+      categorias: {
+        connect: [{ id: 5 }]
+      },
       usuarioId: 5,
       consultaProductos: {
         createMany: {

@@ -99,8 +99,7 @@ model Producto {
   usuarioId          Int
   usuario            Usuario             @relation(fields: [usuarioId], references: [id])
   ordenProductos     OrdenDetalle[]
-  categoriaId        Int
-  categoria          Categoria           @relation(fields: [categoriaId], references: [id])
+  categorias          Categoria[]
   fotografias        Fotografia[]
   consultaProductos  ConsultaProductos[]
 }

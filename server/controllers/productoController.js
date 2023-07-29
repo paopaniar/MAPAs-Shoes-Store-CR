@@ -11,13 +11,7 @@ module.exports.get = async (request, response, next) => {
     include: {
         usuario: true,
         fotografias:true,
-        categoria:
-        {
-          select: {
-            id: true,
-            nombreCategoria: true,     
-        },
-        },
+        categorias:true,
       },
       
     }); 
@@ -36,13 +30,7 @@ module.exports.getById = async (request, response, next) => {
         where: {id: idProd},
      include:{
         usuario:true,
-        categoria:
-        {
-          select: {
-            id: true,
-            nombreCategoria: true,     
-        },
-        },
+        categorias:true,
         consultaProductos:
         {
           select: {
@@ -92,8 +80,10 @@ module.exports.create = async (request, response, next) => {
       descripcion: producto.descripcion,
       cantidadDisponible:parseInt(producto.cantidadDisponible),
       usuarioId:3,
-      categoriaId: 2        
-    },
+      categorias: {
+        connect: producto.categorias,
+      },
+        },
   });
   response.json(newProducto);
 };
