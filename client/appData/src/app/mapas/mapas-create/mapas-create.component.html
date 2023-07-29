@@ -5,21 +5,22 @@
         <mat-card-title>{{titleForm}} Producto</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+   
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput formControlName="nombre" maxlength="20" placeholder="Nombre" >
+              <input matInput formControlName="nombreProducto" maxlength="20" placeholder="Nombre" >
               <mat-hint align="end"> / 20</mat-hint>
-              <mat-error *ngIf="errorHandling('nombre','required')">
-                Nombre es <strong>requerido</strong>
+              <mat-error *ngIf="errorHandling('nombreProducto','required')">
+                nombreProducto es <strong>requerido</strong>
               </mat-error>
-              <mat-error *ngIf="errorHandling('nombre','minlength')">
-                Nombre debe tener <strong>3 caracteres</strong>
+              <mat-error *ngIf="errorHandling('nombreProducto','minlength')">
+                nombreProducto debe tener <strong>3 caracteres</strong>
               </mat-error>
             </mat-form-field>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -37,18 +38,19 @@
               </mat-error>
             </mat-form-field>
           </div>
-        </div>
-        
-        <div class="row">
-          <div class="col" *ngIf="generosList">
+          <div class="col">
             <mat-form-field class="full-width">
-              <mat-select placeholder="Generos" formControlName="generos"  multiple>
-                <mat-option *ngFor="let g of generosList" [value]="g.id">
-                    {{g.nombre}}
-                </mat-option>
-              </mat-select>
-              <mat-error >
-                Generos es <strong>requerido</strong>
+              <input matInput placeholder="Proveedor" formControlName="proveedor">
+              <mat-error *ngIf="errorHandling('proveedor','required')">
+                proveedor es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="cantidadDisponible" formControlName="cantidadDisponible">
+              <mat-error *ngIf="errorHandling('cantidadDisponible','required')">
+                cantidadDisponible es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
           </div>

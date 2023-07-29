@@ -81,28 +81,23 @@ module.exports.getById = async (request, response, next) => {
     response.json(productos);
 };
 
+
 module.exports.create = async (request, response, next) => {
   let producto = request.body;
   const newProducto = await prisma.producto.create({
     data: {
-
       nombreProducto: producto.nombreProducto,
       precio: producto.precio, 
       proveedor: producto.proveedor, 
       descripcion: producto.descripcion,
-      cantidadDisponible: producto.cantidadDisponible,
-      categoriaId: producto.categoriaId,
-      usuarioId: producto.usuarioId,
-
-      // generos: {
-      //   //Generos tiene que ser {id:valor}
-      //   // [{ id: 1 },{id: 3}]
-      //   connect: videojuego.generos,
-      // },
+      cantidadDisponible:parseInt(producto.cantidadDisponible),
+      usuarioId:3,
+      categoriaId: 2        
     },
   });
   response.json(newProducto);
 };
+
 // module.exports.update = async (request, response, next) => {
 //   let videojuego = request.body;
 //   let idVideojuego = parseInt(request.params.id);

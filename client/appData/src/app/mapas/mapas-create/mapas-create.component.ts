@@ -14,7 +14,7 @@ export class MapasCreateComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   //Titulo
   titleForm: string = 'Crear';
-  generosList: any;
+  categoriasList: any;
   videojuegoInfo: any;
   respVideojuego: any;
   submitted = false;
@@ -29,103 +29,97 @@ export class MapasCreateComponent implements OnInit {
     private activeRouter: ActivatedRoute
   ) {
     this.formularioReactive();
-    // this.listaGeneros();
+
   }
   ngOnInit(): void {
-    //Verificar si se envio un id por parametro para crear formulario para actualizar
+
     this.activeRouter.params.subscribe((params:Params)=>{
       this.idVideojuego=params['id'];
       if(this.idVideojuego!=undefined){
         this.isCreate=false;
         this.titleForm="Actualizar";
-         //Obtener videojuego a actualizar del API
-         this.gService.get('producto',this.idVideojuego).pipe(takeUntil(this.destroy$))
+
+        this.gService.get('producto',this.idVideojuego).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
           this.videojuegoInfo=data;
-          //Establecer los valores en cada una de las entradas del formulario
+
           this.videojuegoForm.setValue({
             id:this.videojuegoInfo.id,
             nombre:this.videojuegoInfo.nombre,
             descripcion:this.videojuegoInfo.descripcion,
             precio:this.videojuegoInfo.precio,
             publicar:this.videojuegoInfo.publicar,
-            // generos:this.videojuegoInfo.generos.map(({id}) => id)
+
           })
          });
       }
 
     });
   }
-  //Crear Formulario
+
   formularioReactive() {
-    //[null, Validators.required]
+ 
     this.videojuegoForm=this.fb.group({
       id:[null,null],
-      nombre:[null, Validators.compose([
+      nombreProducto:[null, Validators.compose([
         Validators.required,
         Validators.minLength(3)
       ])],
       descripcion: [null, Validators.required],
       precio: [null, Validators.required],
+      cantidadDisponible: [null, Validators.required],
+      proveedor:  [null, Validators.required],
       publicar: [true, Validators.required],
-      generos: [null, Validators.required],
+     
     })
   }
-  // listaGeneros() {
-  //   this.generosList = null;
-  //   this.gService
-  //     .list('genero')
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe((data: any) => {
-  //       // console.log(data);
-  //       this.generosList = data;
-  //     });
-  // }
+  listaCategorias() {
+    this.categoriasList = null;
+    this.gService
+      .list('categoria')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+
+        this.categoriasList = data;
+      });
+  }
+
 
   public errorHandling = (control: string, error: string) => {
     return this.videojuegoForm.controls[control].hasError(error);
   };
-  //Crear Videojueogo
+  
   crearVideojuego(): void {
-    //Establecer submit verdadero
+
     this.submitted = true;
-    //Verificar validación
+
     if(this.videojuegoForm.invalid){
       return;
     }
-    //Obtener id Generos del Formulario y Crear arreglo con {id: value}
-    // let gFormat:any=this.videojuegoForm.get('generos').value.map(x=>({['id']: x}))
-    //Asignar valor al formulario
-    // this.videojuegoForm.patchValue({generos: gFormat});
+   
+
     console.log(this.videojuegoForm.value);
-    //Accion API create enviando toda la informacion del formulario
-    this.gService.create('producto',this.videojuegoForm.value)
+
+    this.gService.create('producto/crear',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
-      //Obtener respuesta
+
       this.respVideojuego=data;
       this.router.navigate(['/producto/all'],{
         queryParams: {create:'true'}
       });
     });
   }
-  //Actualizar Videojuego
+ 
   actualizarVideojuego() {
-    //Establecer submit verdadero
+    
     this.submitted=true;
-    //Verificar validación
     if(this.videojuegoForm.invalid){
       return;
     }
     
-    //Obtener id Generos del Formulario y Crear arreglo con {id: value}
-    // let gFormat:any=this.videojuegoForm.get('generos').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    // this.videojuegoForm.patchValue({ generos:gFormat});
     console.log(this.videojuegoForm.value);
-    //Accion API create enviando toda la informacion del formulario
     this.gService.update('producto',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
-      //Obtener respuesta
       this.respVideojuego=data;
       this.router.navigate(['/producto/all'],{
         queryParams: {update:'true'}
@@ -141,7 +135,6 @@ export class MapasCreateComponent implements OnInit {
   }
   ngOnDestroy() {
     this.destroy$.next(true);
-    // Desinscribirse
     this.destroy$.unsubscribe();
   }
 }

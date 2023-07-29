@@ -21,6 +21,8 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from '@angular/material/input';
+
 
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
 
@@ -52,8 +54,10 @@ import { MapasCreateComponent } from './mapas-create/mapas-create.component';
     MatRadioModule,
     MatExpansionModule,
     MatMenuModule,
+    MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatButtonModule,
     FormsModule
   ],
   exports: [
