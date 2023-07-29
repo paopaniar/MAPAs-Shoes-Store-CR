@@ -22,6 +22,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
@@ -56,6 +58,7 @@ import { MapasCreateComponent } from './mapas-create/mapas-create.component';
     MatMenuModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     MatButtonModule,
     FormsModule

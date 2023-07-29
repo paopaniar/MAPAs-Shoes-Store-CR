@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
+
 
 @Component({
   selector: 'app-mapas-create',
@@ -26,7 +28,9 @@ export class MapasCreateComponent implements OnInit {
     private fb: FormBuilder,
     private gService: GenericService,
     private router: Router,
-    private activeRouter: ActivatedRoute
+    private activeRouter: ActivatedRoute,
+    private snackBar: MatSnackBar // Inject MatSnackBar
+
   ) {
     this.formularioReactive();
     this.listaCategorias();
@@ -111,9 +115,16 @@ export class MapasCreateComponent implements OnInit {
       this.router.navigate(['/producto/all'],{
         queryParams: {create:'true'}
       });
+
+      this.showSuccessMessage('Producto creado exitosamente!');
     });
   }
- n
+  showSuccessMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000, // Set the duration for how long the snackbar should be visible
+      panelClass: 'success-snackbar' // Optionally apply custom CSS class for styling
+    });
+  }
   actualizarVideojuego() {
     
     this.submitted=true;
