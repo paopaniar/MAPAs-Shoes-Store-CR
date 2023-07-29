@@ -69,7 +69,7 @@ module.exports.create = async (request, response, next) => {
       cantidadDisponible:parseInt(producto.cantidadDisponible),
       usuarioId:3,
       categorias: {
-        connect: producto.categorias,
+        connect: producto.categorias.map((categoryId) => ({ id: categoryId })),
       },
         },
   });

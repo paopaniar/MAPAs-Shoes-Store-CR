@@ -113,7 +113,7 @@ export class MapasCreateComponent implements OnInit {
       });
     });
   }
- 
+ n
   actualizarVideojuego() {
     
     this.submitted=true;
