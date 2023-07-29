@@ -44,7 +44,11 @@ module.exports.register = async (request, response, next) => {
         nombre: userData.nombre,
         email: userData.email,
         contrasenna: hash,
-        rol: Role[userData.role]
+        primerApellido: userData.primerApellido,
+        segundoApellido: userData.segundoApellido,
+        identificacion: userData.identificacion,
+        estado: userData.estado,
+        rol: Role[userData.rol]
       },
     });
     response.status(200).json({

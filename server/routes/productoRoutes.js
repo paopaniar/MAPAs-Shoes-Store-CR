@@ -5,8 +5,9 @@ const productoController=require("../controllers/productoController");
 const auth=require("../middleware/auth");
 
 router.get("/", productoController.get);
+router.post("/",productoController.create);
 router.get('/:id',productoController.getById);
 router.get('/vendedor/:id',productoController.getByClient);
-router.post('/',auth.grantRole(["ADMIN"]),productoController.create);
+
 
 module.exports = router;

@@ -15,10 +15,14 @@ import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapasDiagComponent } from './mapas-diag/mapas-diag.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from "@angular/material/form-field";
+
+import { MapasCreateComponent } from './mapas-create/mapas-create.component';
 
 
 
@@ -28,7 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
     MapasAllComponent,
     MapasDetailComponent,
     MapasVendedorComponent,
-    MapasDiagComponent
+    MapasDiagComponent,
+
+    MapasCreateComponent
   ],
   imports: [
     CommonModule,
@@ -41,11 +47,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    ReactiveFormsModule,
     MatSelectModule,
     MatMenuModule,
+    MatRadioModule,
     MatExpansionModule,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     MapasVendedorComponent

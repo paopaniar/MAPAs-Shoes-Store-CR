@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 
+
 @NgModule({
   declarations: [
     AppComponent
