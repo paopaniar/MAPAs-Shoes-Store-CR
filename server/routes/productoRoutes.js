@@ -8,6 +8,7 @@ router.get("/", productoController.get);
 router.post("/crear",productoController.create);
 router.get('/:id',productoController.getById);
 router.get('/vendedor/:id',productoController.getByClient);
+router.put('/:id',productoController.update);
 
-
+//router.get('/:id',auth.grantRole(["ADMIN","USER"]),videojuegoController.getById);
 module.exports = router;
