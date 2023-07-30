@@ -3,4 +3,15 @@
     max-width: 80%;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
   }
+.barra{
+  background-color: #022146;
+
+}
+
+.titulo{
+  color: #022146;
+}
