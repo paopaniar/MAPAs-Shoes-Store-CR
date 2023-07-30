@@ -1,70 +1,72 @@
-/* mapas-create.component.css */
-/* Custom modern card style */
-.modern-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  background-color: #f1f1f1;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-
-/* Table style */
 .full-width-table {
   width: 100%;
-  margin-top: 16px;
-  border-collapse: collapse;
+ background-color: #060920;
 }
-
-th.mat-header-cell,
-td.mat-cell {
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  border-bottom: 1px solid #ccc;
-}
-
-th.mat-header-cell {
-  font-weight: bold;
-}
-
-/* Action icons style */
-.action-cell {
-  display: flex;
-  justify-content: flex-end;
+.square-icon {
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-}
+  width: 24px; /* Adjust the width as needed */
+  height: 24px; /* Adjust the height as needed */
+  border-radius: 4px; /* Adjust the border-radius as needed */
 
-.mat-icon-button {
-  background-color: #2196f3;
-  color: #fff;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  transition: background-color 0.3s ease;
 }
-
-.mat-icon-button:hover {
-  background-color: #1976d2;
-}
-
-/* Add icon style */
-.add {
-  background-color: #4caf50;
-}
-
-.add:hover {
-  background-color: #45a049;
-}
-
-/* Info icon style */
 .squar {
-  background-color: #f44336;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px; /* Adjust the width as needed */
+  height: 24px; /* Adjust the height as needed */
+  border-radius: 4px; /* Adjust the border-radius as needed */
+
+}
+.custom-fab-button {
+  width: 38px; /* Set the desired width */
+  height: 38px; /* Set the desired height */
+  background-color: #FF8977;
 }
 
-.squar:hover {
-  background-color: #d32f2f;
+.add {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px; /* Adjust the width as needed */
+  height: 20px; /* Adjust the height as needed */
+  border-radius: 2px; /* Adjust the border-radius as needed */
+  background-color:  #343B6C;
+}
+.finalizado{
+  background-color: rgb(4, 77, 4);
+  text-align: center;
+  border-radius: 4px;
+  color: #E7E7E7;
+}
+.pendiente{
+  background-color: #750918;
+  text-align: center;
+  border-radius: 4px;
+}
+.card{
+  background-color: #85B8E1;
+  color: #060920;
+  margin-top: 50px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+.paginator{
+  background-color: #85B8E1;
+  color: #060920;
+}
+.tab{
+  background-color: #EFEFEF ;
+}
+.titulo{
+  color: #457FAD;
+}
+.card-title{
+  color: #0E1335;
+}
+.tit{
+  text-align: left;
+  margin-left: 5px;
 }
