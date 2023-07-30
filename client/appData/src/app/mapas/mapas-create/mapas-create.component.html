@@ -1,26 +1,39 @@
-<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearVideojuego(): actualizarVideojuego()"  novalidate >
+<br><br><br><br>
+<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearVideojuego(): actualizarVideojuego()"  novalidate class="contenido">
     <input type="hidden" formControlName="id" />
     <mat-card class="shipping-card"> 
       <mat-card-header>
-        <mat-card-title>{{titleForm}} Producto</mat-card-title>
+        <mat-card-title style="color: #e84a33;">{{titleForm}} Producto</mat-card-title>
       </mat-card-header>
       <mat-card-content>
    
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
+        <div class="row" >
+          <div class="col" >
+            <mat-form-field class="full-width" >
               <input matInput formControlName="nombreProducto" maxlength="20" placeholder="Nombre" >
               <mat-hint align="end"> / 20</mat-hint>
               <mat-error *ngIf="errorHandling('nombreProducto','required')">
-                nombreProducto es <strong>requerido</strong>
+                El nombre es <strong>requerido</strong>
               </mat-error>
               <mat-error *ngIf="errorHandling('nombreProducto','minlength')">
-                nombreProducto debe tener <strong>3 caracteres</strong>
+                El nombre debe tener <strong>3 caracteres</strong>
               </mat-error>
             </mat-form-field>
           </div>
         </div>
 
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Descripción" formControlName="descripcion">
+              <mat-error *ngIf="errorHandling('descripcion','required')">
+                La descripción es <strong>requerida</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+        </div>
+        
         <div class="row">
           <div class="col" *ngIf="categoriasList">
             <mat-form-field class="full-width">
@@ -30,18 +43,7 @@
                 </mat-option>
               </mat-select>
               <mat-error >
-                categorias es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Descripción" formControlName="descripcion">
-              <mat-error *ngIf="errorHandling('descripcion','required')">
-                Descripción es <strong>requerido</strong>
+                La categoría es <strong>requerida</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -49,7 +51,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Precio" formControlName="precio">
               <mat-error *ngIf="errorHandling('precio','required')">
-                Precio es <strong>requerido</strong>
+                El precio es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -57,15 +59,15 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Proveedor" formControlName="proveedor">
               <mat-error *ngIf="errorHandling('proveedor','required')">
-                proveedor es <strong>requerido</strong>
+                El proveedor es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="cantidadDisponible" formControlName="cantidadDisponible">
+              <input matInput placeholder="Cantidad disponible" formControlName="cantidadDisponible">
               <mat-error *ngIf="errorHandling('cantidadDisponible','required')">
-                cantidadDisponible es <strong>requerido</strong>
+                La cantidad es <strong>requerida</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -74,15 +76,16 @@
         <div class="row">
           <div class="col">
             <mat-label>Publicar</mat-label>
-            <mat-radio-group formControlName="publicar">
-              <mat-radio-button [value]="true">Sí</mat-radio-button>
-              <mat-radio-button [value]="false">No</mat-radio-button>
+            <mat-radio-group formControlName="publicar" style="color: #040618;">
+              <mat-radio-button [value]="true" class="dark-radio" style="border-color: #040618;"><a style="color: #040618;">Sí</a></mat-radio-button>
+              <mat-radio-button [value]="false" class="dark-radio"><a style="color: #040618;">No</a></mat-radio-button>
             </mat-radio-group>
           </div>
         </div>
+        
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Guardar</button>
+        <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Guardar</button>
       </mat-card-actions>
     </mat-card>
   </form>

@@ -5,6 +5,7 @@
 .shipping-card {
   min-width: 120px;
   margin: 20px auto;
+  background-color: #E7E7E7;
 }
 
 .mat-radio-button {
@@ -24,4 +25,16 @@
 
 .col:last-child {
   margin-right: 0;
+}
+.contenido{
+  margin-top: 50px;
+  margin-left: 45px;
+  margin-right: 45px;
+ 
+}
+/* Assuming this CSS code is in a separate CSS file or the component's CSS block */
+
+/* Apply a dark color to the text of mat-radio-button elements */
+.dark-radio .mat-radio-label-content {
+  color: #333; /* Replace with your desired dark color */
 }
