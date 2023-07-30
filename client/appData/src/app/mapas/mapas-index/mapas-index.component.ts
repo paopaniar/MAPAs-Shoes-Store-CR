@@ -4,6 +4,8 @@ import { GenericService } from 'src/app/share/generic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
+import { CartService } from 'src/app/share/cart.service';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
 @Component({
   selector: 'app-mapas-index',
@@ -50,6 +52,8 @@ stopAnimation() {
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
+    private cartService:CartService,
+    private notificacion:NotificacionService,
     private dialog: MatDialog){
     this.listaZapatos() 
 
@@ -74,7 +78,21 @@ stopAnimation() {
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
   }
-
+  comprar(id:number){
+    this.gService
+    .get('producto',id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data:any)=>{
+      //Agregar videojuego obtenido del API al carrito
+      this.cartService.addToCart(data);
+      //Notificar al usuario
+      this.notificacion.mensaje(
+        'orden',
+        'producto: '+data.nombre+ ' agregado a la orden',
+        TipoMessage.success
+      )
+    });
+  }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

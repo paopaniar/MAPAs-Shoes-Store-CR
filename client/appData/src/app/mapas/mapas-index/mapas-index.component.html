@@ -37,10 +37,16 @@
                 <mat-icon>info</mat-icon>
                
               </button>
-              <button mat-mini-fab color="primary" class="detalle-button">
-                <mat-icon>add_shopping_cart</mat-icon>
-                
-              </button>
+              <button
+              mat-mini-fab
+              color="accent"
+              matTooltip="Comprar"
+              aria-label="Comprar"
+              color="primary"
+              (click)="comprar(item.id)"
+            >
+              <mat-icon class="mat-18">add_shopping_cart</mat-icon>
+            </button>
             </div>
           </div>
         </div> 

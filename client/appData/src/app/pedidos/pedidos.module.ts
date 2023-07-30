@@ -14,6 +14,12 @@ import { PedidosIndexComponent } from './pedidos-index/pedidos-index.component';
 import { PedidosClienteComponent } from './pedidos-cliente/pedidos-cliente.component';
 import { PedidosDiagComponent } from './pedidos-diag/pedidos-diag.component';
 import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.component';
+import { PedidosCarritoComponent } from './pedidos-carrito/pedidos-carrito.component';
+ 
+import {MatButtonModule} from '@angular/material/button'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -24,6 +30,7 @@ import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.componen
     PedidosClienteComponent,
     PedidosDiagComponent,
     PedidosDetailComponent,
+    PedidosCarritoComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +42,11 @@ import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.componen
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatDialogModule,
+    FormsModule, ReactiveFormsModule,
   ]
 })
 export class PedidosModule { }
