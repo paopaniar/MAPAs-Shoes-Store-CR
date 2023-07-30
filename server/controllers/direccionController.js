@@ -7,7 +7,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 //Obtener listado
-const axios = require('axios');
+const axios = require('axios'); 
 
 module.exports.get = async (request, response, next) => {
   try {

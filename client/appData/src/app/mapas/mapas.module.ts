@@ -19,10 +19,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -61,7 +62,7 @@ import { MapasCreateComponent } from './mapas-create/mapas-create.component';
     MatSnackBarModule,
     ReactiveFormsModule,
     MatButtonModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   exports: [
     MapasVendedorComponent

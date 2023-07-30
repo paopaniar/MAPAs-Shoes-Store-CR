@@ -1,5 +1,5 @@
 <br><br><br><br>
-<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearVideojuego(): actualizarVideojuego()"  novalidate class="contenido">
+<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearProducto(): actualizarProducto()"  novalidate class="contenido">
     <input type="hidden" formControlName="id" />
     <mat-card class="shipping-card"> 
       <mat-card-header>
@@ -73,15 +73,7 @@
           </div>
         </div>
         
-        <div class="row">
-          <div class="col">
-            <mat-label>Publicar</mat-label>
-            <mat-radio-group formControlName="publicar" style="color: #040618;">
-              <mat-radio-button [value]="true" class="dark-radio" style="border-color: #040618;"><a style="color: #040618;">Sí</a></mat-radio-button>
-              <mat-radio-button [value]="false" class="dark-radio"><a style="color: #040618;">No</a></mat-radio-button>
-            </mat-radio-group>
-          </div>
-        </div>
+       
         
       </mat-card-content>
       <mat-card-actions>

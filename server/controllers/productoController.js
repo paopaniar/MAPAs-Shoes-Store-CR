@@ -56,14 +56,14 @@ module.exports.getById = async (request, response, next) => {
 module.exports.create = async (request, response, next) => {
   let producto = request.body;
   const newProducto = await prisma.producto.create({
-    data: {
+    data: { 
       nombreProducto: producto.nombreProducto,
       precio: producto.precio, 
       proveedor: producto.proveedor, 
       descripcion: producto.descripcion,
       cantidadDisponible:parseInt(producto.cantidadDisponible),
       usuarioId:3,
-      categorias: {
+      categorias: { 
         connect: producto.categorias.map((categoryId) => ({ id: categoryId })),
       },
         },
@@ -77,7 +77,7 @@ module.exports.update = async (request, response, next) => {
   //Obtener videojuego viejo
   const productoViejo = await prisma.producto.findUnique({
     where: { id: idproducto },
-    include: {
+    include: { 
       categorias: {
         select:{
           id:true
@@ -86,22 +86,23 @@ module.exports.update = async (request, response, next) => {
     }
   });
 
-  const newroducto = await prisma.producto.update({
+  const newProducto = await prisma.producto.update({
     where: {
       id: idproducto,
     },
     data: {
-      nombre: producto.nombre,
+      nombreProducto: producto.nombreProducto,
       descripcion: producto.descripcion,
       precio: producto.precio,
-      publicar: producto.publicar,
+      cantidadDisponible: producto.cantidadDisponible,
+     
       categorias: {
         disconnect:productoViejo.categorias,
         connect: producto.categorias,
       },
     },
   });
-  response.json(newVideojuego);
+  response.json(newProducto);
 
 }
 

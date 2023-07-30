@@ -9,7 +9,7 @@ module.exports.get = async (request, response, next) => {
     const ordenProducto= await prisma.ordenDetalle.findMany(); 
     response.json(ordenProducto); // este response es como un return
 };
-
+ 
 //Obtener por Id
 module.exports.getById = async (request, response, next) => {
 };

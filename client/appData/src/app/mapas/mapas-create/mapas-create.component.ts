@@ -21,7 +21,7 @@ export class MapasCreateComponent implements OnInit {
   respVideojuego: any;
   submitted = false;
   videojuegoForm: FormGroup;
-  idVideojuego: number = 0;
+  idProducto: number = 0;
   isCreate: boolean = true;
 
   constructor(
@@ -38,23 +38,26 @@ export class MapasCreateComponent implements OnInit {
   ngOnInit(): void {
 
     this.activeRouter.params.subscribe((params:Params)=>{
-      this.idVideojuego=params['id'];
-      if(this.idVideojuego!=undefined){
+      this.idProducto=params['id'];
+      if(this.idProducto!=undefined){
         this.isCreate=false;
         this.titleForm="Actualizar";
 
-        this.gService.get('producto',this.idVideojuego).pipe(takeUntil(this.destroy$))
-         .subscribe((data:any)=>{
+        this.gService
+        .get('producto',this.idProducto)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data:any)=>{
           this.videojuegoInfo=data;
-
           this.videojuegoForm.setValue({
             id:this.videojuegoInfo.id,
-            nombre:this.videojuegoInfo.nombre,
+            nombreProducto:this.videojuegoInfo.nombreProducto,
             descripcion:this.videojuegoInfo.descripcion,
             precio:this.videojuegoInfo.precio,
             categorias:this.videojuegoInfo.categorias.map(({id}) => id),
-            publicar:this.videojuegoInfo.publicar,
-
+            cantidadDisponible:this.videojuegoInfo.cantidadDisponible,
+            proveedor:this.videojuegoInfo.proveedor,
+         
+            
           })
          });
       }
@@ -74,7 +77,7 @@ export class MapasCreateComponent implements OnInit {
       precio: [null, Validators.required],
       cantidadDisponible: [null, Validators.required],
       proveedor:  [null, Validators.required],
-      publicar: [true, Validators.required],
+
       categorias: [null, Validators.required],
      
     })
@@ -89,13 +92,11 @@ export class MapasCreateComponent implements OnInit {
         this.categoriasList = data;
       });
   }
-
-
   public errorHandling = (control: string, error: string) => {
     return this.videojuegoForm.controls[control].hasError(error);
   };
   
-  crearVideojuego(): void {
+  crearProducto(): void {
 
     this.submitted = true;
 
@@ -108,7 +109,7 @@ export class MapasCreateComponent implements OnInit {
 
     console.log(this.videojuegoForm.value);
 
-    this.gService.create('producto/crear',this.videojuegoForm.value)
+    this.gService.create('producto',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
 
       this.respVideojuego=data;
@@ -125,7 +126,7 @@ export class MapasCreateComponent implements OnInit {
       panelClass: 'success-snackbar' // Optionally apply custom CSS class for styling
     });
   }
-  actualizarVideojuego() {
+  actualizarProducto() {
     
     this.submitted=true;
     if(this.videojuegoForm.invalid){
@@ -133,7 +134,8 @@ export class MapasCreateComponent implements OnInit {
     }
     let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
     this.videojuegoForm.patchValue({ categorias:gFormat});
-
+    let nombreProducto = this.videojuegoForm.get('nombreProducto').value;
+    this.videojuegoForm.patchValue({ nombreProducto: nombreProducto });
     
     console.log(this.videojuegoForm.value);
     this.gService.update('producto',this.videojuegoForm.value)
