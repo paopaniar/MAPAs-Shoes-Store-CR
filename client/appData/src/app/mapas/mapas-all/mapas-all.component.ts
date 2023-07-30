@@ -67,6 +67,11 @@ export class MapasAllComponent implements AfterViewInit{
       relativeTo: this.route,
     });
   }
+  actualizarVideojuego(id: number) {
+    this.router.navigate(['/producto/update', id], {
+      relativeTo: this.route,
+    });
+  }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
