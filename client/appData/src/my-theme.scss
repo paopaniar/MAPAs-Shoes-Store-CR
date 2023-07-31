@@ -19,7 +19,7 @@ $my-primary: (
   A700: #64dd17,
 );
 
-$my-primary: mat.define-palette(mat.$cyan-palette, 500);
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $my-typography: mat.define-typography-config();
 
@@ -39,16 +39,13 @@ $my-theme: mat.define-light-theme((
 
   // Typography config based on the default, but using "Comic Sans" as the
   // default font family for all levels.
-  $kids-typography: mat.define-typography-config(
-    $font-family: 'Comic Sans',
-  );
+
 
   $kids-theme: mat.define-light-theme((
    color: (
      primary: $kids-primary,
      accent: $kids-accent,
-   ),
-   typography: $kids-typography,
+   )
   ));
 
   @include mat.all-component-themes($kids-theme);

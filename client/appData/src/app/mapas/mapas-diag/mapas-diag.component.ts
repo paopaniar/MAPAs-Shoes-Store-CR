@@ -2,7 +2,11 @@ import { Component, Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,7 +22,10 @@ export class MapasDiagComponent implements OnInit{
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
     private dialogRef:MatDialogRef<MapasDiagComponent>,
-    private gService:GenericService
+    private gService:GenericService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { 
     this.datosDialog=data;
     
@@ -35,6 +42,7 @@ export class MapasDiagComponent implements OnInit{
     });
    
   }
+
   ngOnInit(): void {
     if(this.datosDialog.id){
       this.obtenerProducto(this.datosDialog.id);
