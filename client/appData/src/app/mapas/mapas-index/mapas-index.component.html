@@ -32,14 +32,19 @@
             <li *ngFor="let item of item.categorias"> {{item.nombreCategoria}}</li>
          </ul>
           <div class="example-button-row">
-            <div class="example-flex-container">
-              <button mat-mini-fab color="" class="detalle-button" (click)="detalleProducto(item.id)">
-                <mat-icon>info</mat-icon>
-               
+            <div class="example-flex-container">             
+              <button 
+              mat-mini-fab
+              style="background-color: #FF8977;"
+              matTooltip="Comprar"
+              aria-label="Comprar"
+              color="primary"
+              (click)="detalleProducto(item.id)">
+              <mat-icon>info</mat-icon>
               </button>
               <button
               mat-mini-fab
-              color="accent"
+              style="background-color: #FF8977;"
               matTooltip="Comprar"
               aria-label="Comprar"
               color="primary"
