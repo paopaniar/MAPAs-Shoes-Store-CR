@@ -33,16 +33,17 @@
          </ul>
           <div class="example-button-row">
             <div class="example-flex-container">
-              <button mat-mini-fab color="" class="detalle-button" (click)="detalleProducto(item.id)">
-                <mat-icon>info</mat-icon>
-               
+              <button mat-mini-fab
+              color="primary"
+              (click)="detalleProducto(item.id)">
+              <mat-icon class="mat-18">info</mat-icon>
               </button>
+
               <button
               mat-mini-fab
-              color="accent"
+              color="primary"
               matTooltip="Comprar"
               aria-label="Comprar"
-              color="primary"
               (click)="comprar(item.id)"
             >
               <mat-icon class="mat-18">add_shopping_cart</mat-icon>

@@ -103,7 +103,23 @@ module.exports.update = async (request, response, next) => {
     },
   });
   response.json(newProducto);
+};
 
-}
+module.exports.createQuestion = async (request, response, next) => {
+  let { pregunta, usuarioId } = request.body;
+  let idproducto = parseInt(request.params.id);
+  // Aquí puedes realizar cualquier validación adicional necesaria
+  // antes de insertar la pregunta, como verificar si el usuario existe, etc.
+  const newPregunta = await prisma.productoPregunta.create({
+    data: {
+      pregunta,
+      productoId: idproducto,
+      usuarioId:1,
+    },
+  });
+
+  response.json(newPregunta);
+};
+
 
 

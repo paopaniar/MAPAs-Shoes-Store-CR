@@ -6,6 +6,7 @@ const auth=require("../middleware/auth");
 
 router.get("/", productoController.get);
 router.post("/crear",productoController.create);
+router.post('/pregunta/:id', productoController.createQuestion);
 router.get('/:id',productoController.getById);
 router.get('/vendedor/:id',productoController.getByClient);
 router.put('/:id',productoController.update);
