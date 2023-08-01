@@ -12,15 +12,36 @@ import { AuthGuard } from '../share/guards/auth.guard';
 const routes: Routes = [
   {path:'producto', component: MapasIndexComponent},
 
-  {path:'producto/crear', component: MapasCreateComponent},
+  {path:'producto/crear', component: MapasCreateComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['ADMIN']
+  }},
 
-  {path:'producto/all', component: MapasAllComponent},
+  {path:'producto/all', component: MapasAllComponent,
+  canActivate:[AuthGuard],
+    data:{
+      roles: ['ADMIN']
+    }
+  },
   
-  {path: 'producto/vendedor', component: MapasVendedorComponent},
+  {path: 'producto/vendedor', component: MapasVendedorComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['SALES']
+  }},
 
-  {path:'producto/:id', component: MapasDetailComponent},
+  {path:'producto/:id', component: MapasDetailComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['ADMIN']
+  }},
 
-  {path:'producto/update/:id', component: MapasCreateComponent},
+  {path:'producto/update/:id', component: MapasCreateComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['ADMIN', 'SALES']
+  }},
 
   {path:'producto/crearPregunta/:id', component: MapasDetailComponent}
 
