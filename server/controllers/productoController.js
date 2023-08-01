@@ -106,20 +106,26 @@ module.exports.update = async (request, response, next) => {
 };
 
 module.exports.createQuestion = async (request, response, next) => {
-  let { pregunta, usuarioId } = request.body;
-  let idproducto = parseInt(request.params.id);
-  // Aquí puedes realizar cualquier validación adicional necesaria
-  // antes de insertar la pregunta, como verificar si el usuario existe, etc.
-  const newPregunta = await prisma.productoPregunta.create({
-    data: {
-      pregunta,
-      productoId: idproducto,
-      usuarioId:1,
-    },
-  });
+  try {
+    let { mensaje } = request.body;
+    let idproducto = parseInt(request.params.id);
 
-  response.json(newPregunta);
+    // Insert the new question into the database
+    const newPregunta = await prisma.consultaProductos.create({
+      data: {
+        mensaje: mensaje,
+        productoId: idproducto,
+        usuarioId: 1, // Replace 1 with the actual user ID from the request or your authentication mechanism
+      },
+    });
+
+    response.json(newPregunta);
+  } catch (error) {
+    console.error('Error creating question:', error);
+    response.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 
 
 

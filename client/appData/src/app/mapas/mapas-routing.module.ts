@@ -43,7 +43,7 @@ const routes: Routes = [
     roles: ['ADMIN', 'SALES']
   }},
 
-  {path:'producto/crearPregunta/:id', component: MapasDetailComponent}
+  {path:'producto/pregunta/:id', component: MapasDetailComponent}
 
 ];
 
