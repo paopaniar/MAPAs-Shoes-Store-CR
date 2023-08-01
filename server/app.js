@@ -15,7 +15,7 @@ const usuarioRoutes=require("./routes/usuarioRoutes");
 const productoRoutes=require("./routes/productoRoutes");
 const ordenRoutes=require("./routes/ordenRoutes");
 const categoriaRoutes = require("./routes/categoriasRoutes");
-
+const consultaProductosRoutes=require("./routes/consultaProductosRoutes")
 const ordenProductoRoutes=require("./routes/ordenProductoRoutes");
 const direccionRoutes=require("./routes/direccionRoutes");
 app.use(express.static('./image'));
@@ -41,6 +41,7 @@ app.use("/orden/", ordenRoutes);
 app.use("/ordenProducto/", ordenProductoRoutes);
 app.use("/direccion/", direccionRoutes);
 app.use("/categoria/", categoriaRoutes);
+app.use("/consultaProductos/", consultaProductosRoutes)
 // Servidor
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
