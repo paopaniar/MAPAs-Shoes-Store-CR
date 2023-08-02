@@ -45,12 +45,12 @@ export class MapasRespuestasComponent {
   obtenerProducto(id:any){
     console.log(id);
     this.gService
-    .get('producto',id)
+    .get('consultaProductos',id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((data:any)=>{
         this.datos=data; 
         console.log(this.datos);
-        this.consultaProductos = this.datos.consultaProductos;
+        this.datos = this.datos.id;
     });
    
   }
