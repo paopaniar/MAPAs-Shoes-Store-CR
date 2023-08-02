@@ -35,6 +35,10 @@ export class MapasRespuestasComponent {
     private formBuilder: FormBuilder, // Inject the formBuilder here
     private snackBar: MatSnackBar
   ) { 
+    let id=this.route.snapshot.paramMap.get('id');
+    if(!isNaN(Number(id))){
+      this.obtenerProducto(id);
+    }
     this.datosDialog=data;
     this.preguntasForm = this.formBuilder.group({
       respuesta: ['', [Validators.required, Validators.maxLength(20)]]
