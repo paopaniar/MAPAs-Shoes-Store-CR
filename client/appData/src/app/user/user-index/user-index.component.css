@@ -9,9 +9,13 @@
   }
 .barra{
   background-color: #022146;
-
+color: aliceblue;
 }
 
 .titulo{
   color: #022146;
+}
+.titu{
+  margin-top: 15px;
+  color: #fff;
 }
