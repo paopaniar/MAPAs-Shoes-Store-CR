@@ -108,12 +108,14 @@ module.exports.update = async (request, response, next) => {
 module.exports.createQuestion = async (request, response, next) => {
   try {
     let { mensaje } = request.body;
+    let { respuesta } = request.body;
     let idproducto = parseInt(request.params.id);
 
     // Insert the new question into the database
     const newPregunta = await prisma.consultaProductos.create({
       data: {
         mensaje: mensaje,
+        respuesta: respuesta,
         productoId: idproducto,
         usuarioId: 1, // Replace 1 with the actual user ID from the request or your authentication mechanism
       },
@@ -125,7 +127,5 @@ module.exports.createQuestion = async (request, response, next) => {
     response.status(500).json({ error: 'Internal server error' });
   }
 };
-
-
 
 
