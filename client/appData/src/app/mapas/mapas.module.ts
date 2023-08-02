@@ -26,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
+import { MapasRespuestasComponent } from './mapas-respuestas/mapas-respuestas.component';
 
 
 
@@ -37,7 +38,8 @@ import { MapasCreateComponent } from './mapas-create/mapas-create.component';
     MapasVendedorComponent,
     MapasDiagComponent,
 
-    MapasCreateComponent
+    MapasCreateComponent,
+      MapasRespuestasComponent
   ],
   imports: [
     CommonModule,
