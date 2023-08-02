@@ -56,7 +56,7 @@ export class MapasRespuestasComponent {
   
 
 
-  actualizarProducto() {
+  actualizarProducto(consulta: any) {
     
     this.submitted=true;
     if(this.preguntasForm.invalid){
@@ -67,7 +67,7 @@ export class MapasRespuestasComponent {
     console.log(this.preguntasForm.value);
 
     const updateData = {
-      id: this.datosDialog.id,
+      id: this.consultaProductos.id,
       respuesta: respuesta
     };
 
