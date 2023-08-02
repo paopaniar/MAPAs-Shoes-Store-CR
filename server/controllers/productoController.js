@@ -111,7 +111,7 @@ module.exports.createQuestion = async (request, response, next) => {
     let { respuesta } = request.body;
     let idproducto = parseInt(request.params.id);
 
-    // Insert the new question into the database
+    // Insert the  new question into the database
     const newPregunta = await prisma.consultaProductos.create({
       data: {
         mensaje: mensaje,
