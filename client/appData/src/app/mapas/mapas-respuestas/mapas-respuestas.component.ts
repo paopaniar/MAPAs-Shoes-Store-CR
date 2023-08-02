@@ -35,10 +35,7 @@ export class MapasRespuestasComponent {
     private formBuilder: FormBuilder, // Inject the formBuilder here
     private snackBar: MatSnackBar
   ) { 
-    let id=this.route.snapshot.paramMap.get('id');
-    if(!isNaN(Number(id))){
-      this.obtenerProducto(id);
-    }
+ 
     this.datosDialog=data;
     this.preguntasForm = this.formBuilder.group({
       respuesta: ['', [Validators.required, Validators.maxLength(20)]]
@@ -46,18 +43,17 @@ export class MapasRespuestasComponent {
     
   }
 
-  obtenerProducto(id:any){
+  obtenerProducto(id: any) {
     console.log(id);
     this.gService
-    .get('consultaProductos',id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
-        this.datos=data; 
-        console.log(this.datos);
-        this.datos=data; 
-    });
-   
+      .get('consultaProductos', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.datos = data; 
+        this.consultaProductos = this.datos; // Assign the fetched data
+      });
   }
+  
 
 
   actualizarProducto() {

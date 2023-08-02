@@ -39,7 +39,7 @@ import { MapasRespuestasComponent } from './mapas-respuestas/mapas-respuestas.co
     MapasDiagComponent,
 
     MapasCreateComponent,
-      MapasRespuestasComponent
+    MapasRespuestasComponent
   ],
   imports: [
     CommonModule,

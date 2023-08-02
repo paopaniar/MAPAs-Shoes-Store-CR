@@ -4,13 +4,13 @@
     <ul *ngIf="consultaProductos">
       <br>
       <h6 class="pregunta" *ngFor="let consulta of consultaProductos">
-        {{consulta.mensaje}}
+        {{ consulta.mensaje }}
         <form [formGroup]="preguntasForm" (ngSubmit)="actualizarProducto()">
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
-                {{consulta.respuesta}}
-                                <input matInput formControlName="respuesta" maxlength="20" placeholder="Responder">
+                {{ consulta.respuesta }}
+                <input matInput formControlName="respuesta" maxlength="20" placeholder="Responder">
               </mat-form-field>
             </div>
           </div>
