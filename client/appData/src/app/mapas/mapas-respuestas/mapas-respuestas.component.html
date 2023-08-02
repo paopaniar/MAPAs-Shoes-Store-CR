@@ -1,7 +1,8 @@
-<div class="contenido">
-       <mat-dialog-content class="letra">        
-         <b>Preguntas: </b> <ul *ngIf="datos.consultaProductos">
-           <li *ngFor="let consulta of datos.consultaProductos"> {{consulta.mensaje}}
+<div class="contenido">    
+       <mat-dialog-content class="letra">       
+         <b style="color: #161d50;">Preguntas: </b> <ul *ngIf="datos.consultaProductos">   
+          <br>   
+           <h6  class="pregunta" *ngFor="let consulta of datos.consultaProductos"> {{consulta.mensaje}}
             <form [formGroup]="">
               <div class="row">
                 <div class="col">
@@ -15,8 +16,9 @@
                 <!-- Call the createQuestion1() method on form submission -->
                 <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
               </mat-card-actions>
+              <br><br>
             </form>
-           </li>      
+          </h6>              
         </ul>             
        </mat-dialog-content>
  </div>

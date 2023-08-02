@@ -1,5 +1,5 @@
 .contenido{
-    background-color: #85B8E1;
+    background-color: #DCDFE0;
     padding: 10px; /* Reduce padding */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 100%; /* Reduce the maximum width */
@@ -9,8 +9,6 @@
     min-width: 50%;
 
 }
-.detalles{
-    max-width: 100%; 
-    margin: 0 auto; /* Center the container */
-    max-height: 100%;
+.pregunta{
+    color: #0E1335;
 }
