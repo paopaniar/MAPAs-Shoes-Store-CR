@@ -1,52 +1,29 @@
 <div class="contenido">
- <div class="col-lg-4" id="informacion">
-    <div class="detalles"> 
-      <mat-dialog-content class="letra">
-        <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
-        <b>Categoría: </b> <ul *ngIf="datos.categorias">
-          <li *ngFor="let datos of datos.categorias"> {{datos.nombreCategoria}}</li>
-       </ul>
-        <p><b>Proveedor: </b>{{ datos.proveedor }}</p>
-        <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
-        <div class="green">
-          <span *ngIf="datos.estado === 1" class="green-text">Nuevos</span>
-          <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
-        </div>
-      </mat-dialog-content>
-      <mat-expansion-panel class="bodyDiag" expanded>
-        <mat-expansion-panel-header>
-          <span class="mat-title" style="color:#457FAD;">Preguntas Frecuentes</span>
-        </mat-expansion-panel-header>
-        <mat-accordion>
-          <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
-            <mat-expansion-panel-header >
-              <span class="mat-title">{{ consulta.mensaje }}</span>
-            </mat-expansion-panel-header>
-            <mat-panel-description>
-              {{ consulta.respuesta ? consulta.respuesta : 'No hay una respuesta aún' }}
-            </mat-panel-description>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </mat-expansion-panel>
-             
-      <mat-dialog-content class="letra">
-     Add formGroup directive to the <form> element 
-      <form [formGroup]="">
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <!-- Use formControlName to bind to the 'pregunta' form control -->
-              <!-- <input matInput formControlName="pregunta" maxlength="20" placeholder="Hacer pregunta">
-            </mat-form-field>
-          </div>
-        </div>
-        <mat-card-actions>
-        Call the createQuestion1() method on form submission -->
-          <!-- <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit" (click)="createQuestion1()">Enviar</button>
-        </mat-card-actions>
-      </form>
-
-      </mat-dialog-content>
-    </div>
-   
-  </div> -->
+  <div class="col-lg-4" id="informacion">
+     <div class="detalles"> 
+       <mat-dialog-content class="letra">
+         
+         <b>Pregunta: </b> <ul *ngIf="datos.consultaProductos">
+           <li *ngFor="let consulta of datos.consultaProductos"> {{consulta.mensaje}}
+            <form [formGroup]="">
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <!-- Use formControlName to bind to the 'pregunta' form control -->
+                    <input matInput formControlName="pregunta" maxlength="20" placeholder="Responder">
+                  </mat-form-field>
+                </div>
+              </div>
+              <mat-card-actions>
+                <!-- Call the createQuestion1() method on form submission -->
+                <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
+              </mat-card-actions>
+            </form>
+           </li>
+           
+        </ul>       
+         
+       </mat-dialog-content>
+     </div>
+  </div>
+ </div>
