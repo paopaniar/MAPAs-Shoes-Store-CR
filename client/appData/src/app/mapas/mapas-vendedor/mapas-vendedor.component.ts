@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mapas-vendedor',
@@ -16,6 +18,11 @@ import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 export class MapasVendedorComponent implements AfterViewInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
+  submitted = false;
+  inputRespuesta: FormGroup;
+  mensaje: any;
+  datosDialog:any;
+  consultaProductos: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,7 +34,9 @@ export class MapasVendedorComponent implements AfterViewInit{
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder, // Inject the formBuilder here
+    private snackBar: MatSnackBar) {
   }
 
   ngAfterViewInit(): void {
@@ -59,6 +68,42 @@ export class MapasVendedorComponent implements AfterViewInit{
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
   }
+
+  createAnswer1(): void {
+    this.submitted = true;
+  
+    if (this.inputRespuesta.invalid) {
+      return;
+    }
+  
+    const productId = this.datosDialog.id;
+    const requestData = {
+      mensaje: this.inputRespuesta.value.respuesta, // Access the pregunta value from the form
+    };
+  
+    this.gService.create('producto/pregunta/' + productId, requestData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          // Handle the API response, if necessary
+          this.router.navigate(['/producto'], {
+            queryParams: { create: 'true' }
+          });
+          this.showSuccessMessage('Respuesta creada exitosamente!');
+        },
+        (error) => {
+          // Handle the error here, you can log it or show a proper error message
+          console.error('Error:', error);
+        }
+      );
+  }
+  showSuccessMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000, // Set the duration for how long the snackbar should be visible
+      panelClass: 'success-snackbar' // Optionally apply custom CSS class for styling
+    });
+  }
+  
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
