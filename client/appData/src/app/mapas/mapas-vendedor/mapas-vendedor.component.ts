@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MapasRespuestasComponent } from '../mapas-respuestas/mapas-respuestas.component';
 
 @Component({
   selector: 'app-mapas-vendedor',
@@ -67,6 +68,16 @@ export class MapasVendedorComponent implements AfterViewInit{
       id: id,
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
+  }
+
+  listaPreguntas(id:Number){
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(MapasRespuestasComponent, dialogConfig);
   }
 
   createAnswer1(): void {
