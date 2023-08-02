@@ -1,9 +1,6 @@
 <div class="contenido">
-  <div class="col-lg-4" id="informacion">
-     <div class="detalles"> 
-       <mat-dialog-content class="letra">
-         
-         <b>Pregunta: </b> <ul *ngIf="datos.consultaProductos">
+       <mat-dialog-content class="letra">        
+         <b>Preguntas: </b> <ul *ngIf="datos.consultaProductos">
            <li *ngFor="let consulta of datos.consultaProductos"> {{consulta.mensaje}}
             <form [formGroup]="">
               <div class="row">
@@ -19,11 +16,7 @@
                 <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
               </mat-card-actions>
             </form>
-           </li>
-           
-        </ul>       
-         
+           </li>      
+        </ul>             
        </mat-dialog-content>
-     </div>
-  </div>
  </div>
