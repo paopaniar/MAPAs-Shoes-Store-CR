@@ -12,10 +12,10 @@ module.exports.get = async (request, response, next) => {
 };
 
 
-module.exports.getByPregunta = async (request, response, next) => {
+module.exports.getByProducto = async (request, response, next) => {
     let idPregunta=parseInt(request.params.id);
-    const preguntas= await prisma.consultaProductos.findUnique({
-        where: {id: idPregunta},
+    const preguntas= await prisma.consultaProductos.findMany({
+        where: {productoId: idPregunta},
         include: {
             producto  : true,
             usuario   : true,

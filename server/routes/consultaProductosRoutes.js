@@ -5,7 +5,7 @@ const consultaProductoController=require("../controllers/consultaProductosContro
 const auth=require("../middleware/auth");
 
 router.get("/", consultaProductoController.get);
-router.get('/:id',consultaProductoController.getByPregunta);
+router.get('/:id',consultaProductoController.getByProducto);
 router.post('/respuesta/:id', consultaProductoController.createResponses);
 
 
