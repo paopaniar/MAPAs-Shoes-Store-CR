@@ -19,6 +19,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MapasRespuestasComponent {
   datos:any;
   datosDialog:any;
+  preguntasForm: FormGroup;
+  submitted = false;
+  respPregunta: any;
   consultaProductos: any;
   destroy$:Subject<boolean>= new Subject<boolean>();
 
@@ -48,6 +51,34 @@ export class MapasRespuestasComponent {
     });
    
   }
+
+
+  actualizarProducto() {
+    
+    this.submitted=true;
+    if(this.preguntasForm.invalid){
+      return;
+    }
+    let respuesta = this.preguntasForm.get('respuesta').value;
+    this.preguntasForm.patchValue({ respuesta: respuesta });
+    
+    console.log(this.preguntasForm.value);
+    this.gService.update('consultaProductos',this.preguntasForm.value)
+    .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
+      this.respPregunta=data;
+      this.router.navigate(['/producto/all'],{
+        queryParams: {update:'true'}
+      });
+    });
+  }
+
+  actualizar(id: number) {
+    this.router.navigate(['consultas/id', id], {
+      relativeTo: this.route,
+    });
+  }
+
+
   showSuccessMessage(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000, // Set the duration for how long the snackbar should be visible
@@ -66,14 +97,4 @@ export class MapasRespuestasComponent {
     this.dialogRef.close();
   }
 }
-
-//  ListaPreguntas(id:Number){
-//   console.log(id);
-//   const dialogConfig = new MatDialogConfig();
-//   dialogConfig.disableClose = false;
-//   dialogConfig.data = {
-//     id: id,
-//   };
-//   this.dialog.open(MapasDiagComponent, dialogConfig);
-// }
 

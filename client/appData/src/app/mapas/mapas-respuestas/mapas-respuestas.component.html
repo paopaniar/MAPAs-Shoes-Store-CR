@@ -1,24 +1,25 @@
-<div class="contenido">    
-       <mat-dialog-content class="letra">       
-         <b style="color: #161d50;">Preguntas: </b> <ul *ngIf="datos.consultaProductos">   
-          <br>   
-           <h6  class="pregunta" *ngFor="let consulta of datos.consultaProductos"> {{consulta.mensaje}}
-            <form [formGroup]="">
-              <div class="row">
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <!-- Use formControlName to bind to the 'pregunta' form control -->
-                    <input matInput formControlName="pregunta" maxlength="20" placeholder="Responder">
-                  </mat-form-field>
-                </div>
-              </div>
-              <mat-card-actions>
-                <!-- Call the createQuestion1() method on form submission -->
-                <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
-              </mat-card-actions>
-              <br><br>
-            </form>
-          </h6>              
-        </ul>             
-       </mat-dialog-content>
- </div>
+<div class="contenido">
+  <mat-dialog-content class="letra">
+    <b style="color: #161d50;">Preguntas: </b>
+    <ul *ngIf="consultaProductos">
+      <br>
+      <h6 class="pregunta" *ngFor="let consulta of consultaProductos">
+        {{consulta.mensaje}}
+        <form [formGroup]="preguntasForm" (ngSubmit)="actualizarProducto()">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <!-- Use formControlName to bind to the 'respuesta' form control -->
+                <input matInput formControlName="respuesta" maxlength="20" placeholder="Responder">
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
+          </mat-card-actions>
+          <br><br>
+        </form>
+      </h6>
+    </ul>
+  </mat-dialog-content>
+</div>

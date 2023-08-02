@@ -6,6 +6,6 @@ const auth=require("../middleware/auth");
 
 router.get("/", consultaProductoController.get);
 router.get('/:id',consultaProductoController.getByProducto);
-router.put('/consultas/:id/respuesta', consultaProductoController.createResponseForMessage);
+router.put('/consultas/:id', consultaProductoController.createResponseForMessage);
 
 module.exports = router;
