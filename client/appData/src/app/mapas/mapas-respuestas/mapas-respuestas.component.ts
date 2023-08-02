@@ -36,6 +36,9 @@ export class MapasRespuestasComponent {
     private snackBar: MatSnackBar
   ) { 
     this.datosDialog=data;
+    this.preguntasForm = this.formBuilder.group({
+      respuesta: ['', [Validators.required, Validators.maxLength(20)]]
+    });
     
   }
 
@@ -61,12 +64,17 @@ export class MapasRespuestasComponent {
     }
     let respuesta = this.preguntasForm.get('respuesta').value;
     this.preguntasForm.patchValue({ respuesta: respuesta });
-    
     console.log(this.preguntasForm.value);
-    this.gService.update('consultaProductos',this.preguntasForm.value)
+
+    const updateData = {
+      id: this.datosDialog.id,
+      respuesta: respuesta
+    };
+
+    this.gService.update('consultaProductos/consultas',updateData)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
       this.respPregunta=data;
-      this.router.navigate(['/producto/all'],{
+      this.router.navigate(['/producto'],{
         queryParams: {update:'true'}
       });
     });
