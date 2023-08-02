@@ -50,7 +50,7 @@ export class MapasRespuestasComponent {
     .subscribe((data:any)=>{
         this.datos=data; 
         console.log(this.datos);
-        this.datos = this.datos.id;
+        this.datos=data; 
     });
    
   }
