@@ -87,6 +87,22 @@ export class MapasDiagComponent implements OnInit{
       );
   }
   
+  updateResponse(consultaId: number, respuesta: string) {
+    this.gService
+      .update(`consultaProductos/respuesta/${consultaId}`, { respuesta })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          // Handle the API response, if necessary
+          this.showSuccessMessage('Respuesta actualizada exitosamente!');
+        },
+        (error) => {
+          // Handle the error here, you can log it or show a proper error message
+          console.error('Error:', error);
+        }
+      );
+  }
+  
   
   showSuccessMessage(message: string) {
     this.snackBar.open(message, 'Close', {

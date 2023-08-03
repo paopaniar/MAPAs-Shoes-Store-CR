@@ -102,11 +102,24 @@
             </mat-expansion-panel-header>
             <mat-accordion>
               <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
-                <mat-expansion-panel-header >
-                  <span class="mat-title">{{ consulta.mensaje }}</span>
+                <mat-expansion-panel-header>
+                  <span style="color: #fff;" class="mat-title">{{ consulta.mensaje }}</span>
                 </mat-expansion-panel-header>
                 <mat-panel-description>
-                  {{ consulta.respuesta ? consulta.respuesta : 'No hay una respuesta aún' }}
+                  <form [formGroup]="inputPregunta">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <!-- Use formControlName to bind to the 'pregunta' form control -->
+                         <a> {{ consulta.respuesta }}<input matInput formControlName="pregunta" maxlength="20"></a>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <mat-card-actions>
+                      <!-- Call the createQuestion1() method on form submission -->
+                      <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit" (click)="updateResponse(consulta.id, consulta.respuesta)">Enviar</button>
+                    </mat-card-actions>
+                  </form>
                 </mat-panel-description>
               </mat-expansion-panel>
             </mat-accordion>
@@ -130,6 +143,8 @@
           </form>
 
           </mat-dialog-content>
+          
+          
         </div>
        
       </div>
