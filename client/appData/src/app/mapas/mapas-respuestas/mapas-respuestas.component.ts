@@ -46,7 +46,7 @@ export class MapasRespuestasComponent {
   obtenerProducto(id: any) {
     console.log(id);
     this.gService
-      .get('consultaProductos', id)
+      .get('consultaProductos/', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.datos = data; 
@@ -55,37 +55,30 @@ export class MapasRespuestasComponent {
   }
   
 
-
   actualizarProducto(consulta: any) {
-    
-    this.submitted=true;
-    if(this.preguntasForm.invalid){
+    this.submitted = true;
+    if (this.preguntasForm.invalid) {
       return;
     }
     let respuesta = this.preguntasForm.get('respuesta').value;
     this.preguntasForm.patchValue({ respuesta: respuesta });
     console.log(this.preguntasForm.value);
-
+  
     const updateData = {
-      id: this.consultaProductos.id,
+      id: consulta.id, // Use consulta.id here
       respuesta: respuesta
     };
-
-    this.gService.update('consultaProductos/consultas',updateData)
-    .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
-      this.respPregunta=data;
-      this.router.navigate(['/producto'],{
-        queryParams: {update:'true'}
+  
+    this.gService.update('consultaProductos/consultas', updateData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.respPregunta = data;
+        this.router.navigate(['/producto'], {
+          queryParams: { update: 'true' }
+        });
       });
-    });
   }
-
-  actualizar(id: number) {
-    this.router.navigate(['consultas/id', id], {
-      relativeTo: this.route,
-    });
-  }
-
+  
 
   showSuccessMessage(message: string) {
     this.snackBar.open(message, 'Close', {
