@@ -24,6 +24,8 @@ export class MapasRespuestasComponent {
   respPregunta: any;
   consultaProductos: any;
   destroy$:Subject<boolean>= new Subject<boolean>();
+  respVideojuego: any;
+  inputPregunta: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
@@ -54,32 +56,32 @@ export class MapasRespuestasComponent {
       });
   }
   
-
-
   actualizarProducto(consulta: any) {
-    
-    this.submitted=true;
-    if(this.preguntasForm.invalid){
+    this.submitted = true;
+    if (this.preguntasForm.invalid) {
       return;
     }
     let respuesta = this.preguntasForm.get('respuesta').value;
     this.preguntasForm.patchValue({ respuesta: respuesta });
     console.log(this.preguntasForm.value);
-
+    const productId = this.datosDialog.id;
+    const requestData = {
+      respuesta: respuesta, // Usamos directamente la variable respuesta
+    };
     const updateData = {
-      id: this.consultaProductos.id,
+      id: consulta.id, // Utilizamos consulta.id para obtener el id correcto
       respuesta: respuesta
     };
-
-    this.gService.update('consultaProductos/consultas',updateData)
-    .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
-      this.respPregunta=data;
-      this.router.navigate(['/producto'],{
-        queryParams: {update:'true'}
+    this.gService.update(`consultaProductos/consultas/${productId}`, requestData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.respPregunta = data;
+        this.router.navigate(['/producto'], {
+          queryParams: { update: 'true' }
+        });
       });
-    });
   }
-
+  
   actualizar(id: number) {
     this.router.navigate(['consultas/id', id], {
       relativeTo: this.route,

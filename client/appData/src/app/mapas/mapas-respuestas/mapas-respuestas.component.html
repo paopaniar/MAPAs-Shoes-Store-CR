@@ -5,7 +5,7 @@
       <br>
       <h6 class="pregunta" *ngFor="let consulta of consultaProductos">
         {{ consulta.mensaje }}
-        <form [formGroup]="preguntasForm" (ngSubmit)="actualizarProducto(consulta.id)">
+        <form [formGroup]="preguntasForm">
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
@@ -15,7 +15,7 @@
             </div>
           </div>
           <mat-card-actions>
-            <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
+            <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit" (click)="actualizarProducto(consulta.id)" >Enviar</button>
           </mat-card-actions>
           <br><br>
         </form>
