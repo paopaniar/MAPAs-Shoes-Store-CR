@@ -35,25 +35,28 @@ export class MapasRespuestasComponent {
     private formBuilder: FormBuilder, // Inject the formBuilder here
     private snackBar: MatSnackBar
   ) { 
+ 
     this.datosDialog=data;
+    this.preguntasForm = this.formBuilder.group({
+      respuesta: ['', [Validators.required, Validators.maxLength(20)]]
+    });
     
   }
 
-  obtenerProducto(id:any){
+  obtenerProducto(id: any) {
     console.log(id);
     this.gService
-    .get('producto',id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
-        this.datos=data; 
-        console.log(this.datos);
-        this.consultaProductos = this.datos.consultaProductos;
-    });
-   
+      .get('consultaProductos', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.datos = data; 
+        this.consultaProductos = this.datos; // Assign the fetched data
+      });
   }
+  
 
 
-  actualizarProducto() {
+  actualizarProducto(consulta: any) {
     
     this.submitted=true;
     if(this.preguntasForm.invalid){
@@ -61,12 +64,17 @@ export class MapasRespuestasComponent {
     }
     let respuesta = this.preguntasForm.get('respuesta').value;
     this.preguntasForm.patchValue({ respuesta: respuesta });
-    
     console.log(this.preguntasForm.value);
-    this.gService.update('consultaProductos',this.preguntasForm.value)
+
+    const updateData = {
+      id: this.consultaProductos.id,
+      respuesta: respuesta
+    };
+
+    this.gService.update('consultaProductos/consultas',updateData)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
       this.respPregunta=data;
-      this.router.navigate(['/producto/all'],{
+      this.router.navigate(['/producto'],{
         queryParams: {update:'true'}
       });
     });
