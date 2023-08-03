@@ -46,8 +46,8 @@ export class MapasDiagComponent implements OnInit{
         console.log(this.datos);
         this.consultaProductos = this.datos.consultaProductos;
     });
-   
   }
+
   createQuestion() {
     // Assuming you have the necessary question data to be sent
     const questionData = {
@@ -86,22 +86,23 @@ export class MapasDiagComponent implements OnInit{
         }
       );
   }
-  
-  updateResponse(consultaId: number, respuesta: string) {
-    this.gService
-      .update(`consultaProductos/respuesta/${consultaId}`, { respuesta })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data: any) => {
-          // Handle the API response, if necessary
-          this.showSuccessMessage('Respuesta actualizada exitosamente!');
-        },
-        (error) => {
-          // Handle the error here, you can log it or show a proper error message
-          console.error('Error:', error);
-        }
-      );
-  }
+
+updateResponse(consultaId: number, respuesta: string) {
+  this.gService
+    .update(`consulta/${consultaId}`,  respuesta ) // <-- Cambiar la ruta a consultas/:id
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      (data: any) => {
+        // Handle the API response, if necessary
+        this.showSuccessMessage('Respuesta actualizada exitosamente!');
+      },
+      (error) => {
+        // Handle the error here, you can log it or show a proper error message
+        console.error('Error:', error);
+      }
+    );
+}
+
   
   
   showSuccessMessage(message: string) {
@@ -111,13 +112,12 @@ export class MapasDiagComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    if(this.datosDialog.id){
+    if (this.datosDialog && this.datosDialog.id) {
       this.obtenerProducto(this.datosDialog.id);
     }
     this.inputPregunta = this.formBuilder.group({
       pregunta: ['', [Validators.required, Validators.maxLength(20)]]
     });
-
   }
   
   close(){

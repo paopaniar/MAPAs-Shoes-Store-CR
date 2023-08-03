@@ -63,12 +63,13 @@ module.exports.getByProducto = async (request, response, next) => {
 module.exports.update = async (request, response, next) => {
   let producto = request.body;
   let idConsulta = parseInt(request.params.id);
-  //Obtener videojuego viejo
-  const preguntaVieja = await prisma.producto.findUnique({
+  
+  // Obtener la consultaProducto vieja
+  const preguntaVieja = await prisma.consultaProductos.findUnique({
     where: { id: idConsulta },
-    include: { 
-    producto: true,
-    usuario: true
+    include: {
+      producto: true,
+      usuario: true
     }
   });
 
@@ -77,8 +78,8 @@ module.exports.update = async (request, response, next) => {
       id: idConsulta,
     },
     data: {
-      respuesta: consultaProductos.respuesta,
-     
+      respuesta: consultaProductos.respuesta, // <-- Cambiar a producto.respuesta
+      // Otras propiedades del producto que necesites actualizar
     },
   });
   response.json(newProducto);
