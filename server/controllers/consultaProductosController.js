@@ -25,41 +25,64 @@ module.exports.getByProducto = async (request, response, next) => {
 };
 
 
-module.exports.createResponseForMessage = async (request, response, next) => {
-  try {
-    const { respuesta } = request.body;
-    const idConsultaProducto = parseInt(request.params.id);
+// module.exports.createResponseForMessage = async (request, response, next) => {
+//   try {
+//     const { respuesta } = request.body;
+//     const idConsultaProducto = parseInt(request.params.id);
 
-    // Fetch the consultaProducto based on the given ID
-    const consultaProducto = await prisma.consultaProductos.findUnique({
-      where: {
-        id: idConsultaProducto,
-      },
-    });
-    if (!consultaProducto) {
-      return response.status(404).json({ error: 'ConsultaProducto not found' });
+//     // Fetch the consultaProducto based on the given ID
+//     const consultaProducto = await prisma.consultaProductos.findUnique({
+//       where: {
+//         id: idConsultaProducto,
+//       },
+//     });
+//     if (!consultaProducto) {
+//       return response.status(404).json({ error: 'ConsultaProducto not found' });
+//     }
+
+//     // Update the existing consultaProducto with the new response
+//     const updatedConsultaProducto = await prisma.consultaProductos.update({
+//       where: {
+//         id: consultaProductos.id,
+//       },
+//       data: {
+//         respuesta: respuesta,
+//       },
+//     });
+
+//     response.json(updatedConsultaProducto);
+//   } catch (error) {
+//     console.error('Error creating response:', error);
+//     response.status(500).json({ error: 'Internal server error' });
+//   } finally {
+//     await prisma.$disconnect(); // Make sure to disconnect from Prisma when done
+//   }
+// };
+  
+  
+module.exports.update = async (request, response, next) => {
+  let producto = request.body;
+  let idConsulta = parseInt(request.params.id);
+  //Obtener videojuego viejo
+  const preguntaVieja = await prisma.producto.findUnique({
+    where: { id: idConsulta },
+    include: { 
+    producto: true,
+    usuario: true
     }
+  });
 
-    // Update the existing consultaProducto with the new response
-    const updatedConsultaProducto = await prisma.consultaProductos.update({
-      where: {
-        id: consultaProductos.id,
-      },
-      data: {
-        respuesta: respuesta,
-      },
-    });
-
-    response.json(updatedConsultaProducto);
-  } catch (error) {
-    console.error('Error creating response:', error);
-    response.status(500).json({ error: 'Internal server error' });
-  } finally {
-    await prisma.$disconnect(); // Make sure to disconnect from Prisma when done
-  }
+  const newProducto = await prisma.consultaProductos.update({
+    where: {
+      id: idConsulta,
+    },
+    data: {
+      respuesta: consultaProductos.respuesta,
+     
+    },
+  });
+  response.json(newProducto);
 };
-  
-  
 
 
 
