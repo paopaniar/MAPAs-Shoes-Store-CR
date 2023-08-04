@@ -105,6 +105,15 @@ CREATE TABLE `ConsultaProductos` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `Respuesta` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `respuesta` VARCHAR(191) NULL,
+    `idPregunta` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Evaluacion` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `comentario` VARCHAR(191) NULL,
@@ -156,6 +165,9 @@ ALTER TABLE `ConsultaProductos` ADD CONSTRAINT `ConsultaProductos_productoId_fke
 
 -- AddForeignKey
 ALTER TABLE `ConsultaProductos` ADD CONSTRAINT `ConsultaProductos_usuarioId_fkey` FOREIGN KEY (`usuarioId`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Respuesta` ADD CONSTRAINT `Respuesta_idPregunta_fkey` FOREIGN KEY (`idPregunta`) REFERENCES `ConsultaProductos`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Evaluacion` ADD CONSTRAINT `Evaluacion_usuarioId_fkey` FOREIGN KEY (`usuarioId`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

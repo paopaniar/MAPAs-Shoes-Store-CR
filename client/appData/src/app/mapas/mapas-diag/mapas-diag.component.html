@@ -103,27 +103,31 @@
             <mat-accordion>
               <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
                 <mat-expansion-panel-header>
-                  <span style="color: #fff;" class="mat-title">{{ consulta.mensaje }}</span>
+                  <span style="color: #fff;" class="mat-title">{{ consulta.mensaje + "  " }}</span>
+
+                  
                 </mat-expansion-panel-header>
+                <div *ngFor="let consulta of consulta.respuestas">
+                  <span style="color: #fff;" class="mat-title">  {{ "-" + consulta.respuesta }}</span>
+                </div>
                 <mat-panel-description>
-                  <form [formGroup]="inputPregunta">
+                  <form [formGroup]="inputRespuesta">
                     <div class="row">
                       <div class="col">
                         <mat-form-field class="full-width">
                           <!-- Use formControlName to bind to the 'pregunta' form control -->
-                         <a> {{ consulta.respuesta }}</a>
                          <ng-container *ngIf="datos.usuario.rol === 'SALES'; else pendiente">
-                          <input matInput formControlName="pregunta" maxlength="20">
+                          <input matInput formControlName="respuesta" maxlength="20">
                         </ng-container>
                         <ng-template #pendiente>
-                          <input matInput formControlName="pregunta" maxlength="20" [disabled]="true">
+                          <input matInput formControlName="respuesta" maxlength="20" [disabled]="true">
                         </ng-template>
                         </mat-form-field>
                       </div>
                     </div>
                     <mat-card-actions>
                       <!-- Call the createQuestion1() method on form submission -->
-                      <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit" (click)="updateResponse(21, consulta.respuesta)">Responder</button>
+                      <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="createAnswer1(consulta.id)">Responder</button>
                     </mat-card-actions>
                   </form>
                 </mat-panel-description>

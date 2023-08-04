@@ -19,6 +19,7 @@ export class MapasDiagComponent implements OnInit{
   datos:any;
   submitted = false;
   inputPregunta: FormGroup;
+  inputRespuesta: FormGroup;
   mensaje: any;
   datosDialog:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
@@ -38,14 +39,15 @@ export class MapasDiagComponent implements OnInit{
   }
   obtenerProducto(id:any){
     console.log(id);
-    this.gService
-    .get('producto',id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
-        this.datos=data; 
-        console.log(this.datos);
-        this.consultaProductos = this.datos.consultaProductos;
-    });
+   this.gService
+  .get('producto', id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((data: any) => {
+    this.datos = data; 
+    console.log(this.datos);
+    this.consultaProductos = this.datos.consultaProductos;
+  });
+
   }
 
   createQuestion() {
@@ -87,21 +89,40 @@ export class MapasDiagComponent implements OnInit{
       );
   }
 
-updateResponse(consultaId: number, respuesta: string) {
-  this.gService
-    .update(`consulta/${consultaId}`,  respuesta ) // <-- Cambiar la ruta a consultas/:id
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(
-      (data: any) => {
-        // Handle the API response, if necessary
-        this.showSuccessMessage('Respuesta actualizada exitosamente!');
-      },
-      (error) => {
-        // Handle the error here, you can log it or show a proper error message
-        console.error('Error:', error);
-      }
-    );
+  
+  
+  
+  
+  
+  createAnswer1(preguntaId: number): void {
+    this.submitted = true;
+
+    if (this.inputRespuesta.invalid) {
+        return;
+    }
+
+    const requestData = {
+        respuesta: this.inputRespuesta.value.respuesta,
+    };
+
+    this.gService.create('producto/respuesta/' + preguntaId, requestData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+            (data: any) => {
+                // Handle the API response, if necessary
+                this.router.navigate(['/producto'], {
+                    queryParams: { create: 'true' }
+                });
+                this.showSuccessMessage('Respuesta creada exitosamente!');
+            },
+            (error) => {
+                // Handle the error here, you can log it or show a proper error message
+                console.error('Error:', error);
+            }
+        );
 }
+
+  
 
   
   
@@ -117,6 +138,9 @@ updateResponse(consultaId: number, respuesta: string) {
     }
     this.inputPregunta = this.formBuilder.group({
       pregunta: ['', [Validators.required, Validators.maxLength(20)]]
+    });
+    this.inputRespuesta = this.formBuilder.group({
+      respuesta: ['', [Validators.required, Validators.maxLength(20)]]
     });
   }
   

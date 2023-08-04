@@ -121,8 +121,14 @@ model ConsultaProductos {
   producto   Producto @relation(fields: [productoId], references: [id])
   usuarioId  Int
   usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  respuestas  Respuesta[]
 }
-
+model Respuesta {
+  id Int @id @default(autoincrement())
+  respuesta String?
+  idPregunta Int
+  consultaProducto ConsultaProductos @relation(fields: [idPregunta], references: [id])
+}
 //buena
 model Evaluacion {
   id                Int     @id @default(autoincrement())

@@ -14,26 +14,32 @@ module.exports.get = async (request, response, next) => {
 };
 
 module.exports.getById = async (request, response, next) => {
-    let idProd=parseInt(request.params.id);
-    const productos=await prisma.producto.findUnique({
-        where: {id: idProd},
-     include:{
-        usuario:true,
-        categorias:true,
-        consultaProductos:
-        {
-          select: {
-            id:true,
-            mensaje: true,
-            respuesta: true,
-            usuario:true,
+  let idProd = parseInt(request.params.id);
+  const productos = await prisma.producto.findUnique({
+    where: { id: idProd },
+    include: {
+      usuario: true,
+      categorias: true,
+      consultaProductos: {
+        select: {
+          id: true,
+          mensaje: true,
+          respuesta: true,
+          usuario: true,
+          respuestas: {
+            select: {
+              id: true,
+              respuesta: true,
+            },
+          },
         },
-        },
-        fotografias: true,
-     },
-    });
-    response.json(productos);
+      },
+      fotografias: true,
+    },
+  });
+  response.json(productos);
 };
+
 
   module.exports.getByClient = async (request, response, next) => {
     let id=parseInt(request.params.id);
@@ -126,6 +132,52 @@ module.exports.createQuestion = async (request, response, next) => {
     console.error('Error creating question:', error);
     response.status(500).json({ error: 'Internal server error' });
   }
+};
+
+
+module.exports.createAnswer = async (request, response, next) => {
+  try {
+    let { respuesta } = request.body;
+    let idPreguntas = parseInt(request.params.id);
+
+    // Insert the  new question into the database
+    const newRespusta = await prisma.respuesta.create({
+      data: {
+        respuesta: respuesta,
+        idPregunta: idPreguntas,
+      },
+    });
+
+    response.json(newRespusta);
+  } catch (error) {
+    console.error('Error creating question:', error);
+    response.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+  
+module.exports.updateConsulta = async (request, response, next) => {
+  let consultaProductos = request.body;
+  let idConsultaProducto = parseInt(request.params.consultaProductos.id);
+  //Obtener videojuego viejo
+  const consulta = await prisma.consultaProductos.findUnique({
+    where: { id: idConsultaProducto },
+    include: { 
+      usuario:true,
+      producto:true
+    }
+  });
+
+  const newProducto = await prisma.consultaProductos.update({
+    where: {
+      id: idConsultaProducto,
+    },
+    data: {
+      mensaje: consultaProductos.mensaje,
+      respuesta: consultaProductos.respuesta,
+    },
+  });
+  response.json(newProducto);
 };
 
 
