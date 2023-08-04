@@ -124,8 +124,20 @@ module.exports.getByClient = async (request, response, next) => {
   
 //Crear un videojuego
 module.exports.create = async (request, response, next) => {
+  let infoOrden=request.body;
+  const newProducto =await prisma.orden.create({
+    data:{
+      fechaOrden:infoOrden.fechaOrden,
+      usuarioId:1,
+      ordenProductos:{
+        createMany:{
+          data: infoOrden.ordenProductos
+        }
+      }
+    }   
+  })
+  response.json(newProducto)
 };
-//Actualizar un videojuego
 module.exports.update = async (request, response, next) => {
 };
 

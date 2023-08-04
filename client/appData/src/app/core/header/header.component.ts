@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
     this.cartService.countItems.subscribe((value)=>{
       this.qtyItems=value
      })
+     this.cartService.countItems.subscribe((value)=>{
+      this.qtyItems=value
+     })
     }
      login(){
       this.router.navigate(['usuario/login']);

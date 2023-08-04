@@ -40,7 +40,7 @@ app.use(
 app.use("/usuario/", usuarioRoutes);
 app.use("/producto/", productoRoutes);
 app.use("/orden/", ordenRoutes);
-app.use("/ordenProducto/", ordenProductoRoutes);
+app.use("/ordenProductos/", ordenProductoRoutes);
 app.use("/direccion/", direccionRoutes);
 app.use("/categoria/", categoriaRoutes);
 app.use("/consultaProductos/", consultaProductosRoutes)

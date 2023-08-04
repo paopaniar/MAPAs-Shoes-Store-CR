@@ -52,8 +52,9 @@
         <!--https://fonts.google.com/icons-->
         <!--https://material.angular.io/guide/typography-->
     
-        <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
+        <button class="example-icon" mat-icon-button matBadgeColor="accent" [matBadge]="qtyItems.toString()" 
+        [routerLink]="'/ordenProducto'" [routerLinkActive]="'mat-raised-button'"  aria-label="Cantidad">
+        <mat-icon>shopping_cart</mat-icon>
         </button>
         <!--Usuario-->
         <span class="mat-caption" *ngIf="isAutenticated">{{currentUser.user.email}}</span>

@@ -45,22 +45,18 @@ export class PedidosCarritoComponent implements OnInit {
   }
   registrarOrden() {
    if(this.cartService.getItems!=null){
-      //Obtener los items del carrito de compras
       let itemsCarrito=this.cartService.getItems;
-      //Armar la estructura de la tabla intermedia
-      //[{'videojuegoId':valor, 'cantidad':valor}]
       let detalles=itemsCarrito.map(
         x=>({
           ['productoId']:x.idItem,
           ['cantidad']: x.cantidad
         })
       )
-      //Datos para el API
       let infoOrden={
         'fechaOrden': new Date(this.fecha),
         'ordenProductos':detalles
       }
-      this.gService.create('orden',infoOrden)
+      this.gService.create('ordenProductos',infoOrden)
       .subscribe((respuesta:any)=>{
         this.noti.mensaje('Orden',
         'Orden registrada #'+respuesta.id,
@@ -71,7 +67,7 @@ export class PedidosCarritoComponent implements OnInit {
       })
    }else{
     this.noti.mensaje('Orden',
-    'Agregue videojuegos a la orden',
+    'Agregue productos a la orden',
     TipoMessage.warning)
    }
   }

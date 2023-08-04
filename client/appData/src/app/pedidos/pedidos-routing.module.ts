@@ -4,6 +4,7 @@ import { PedidosAllComponent } from './pedidos-all/pedidos-all.component';
 import { PedidosIndexComponent } from './pedidos-index/pedidos-index.component';
 import { PedidosClienteComponent } from './pedidos-cliente/pedidos-cliente.component';
 import { PedidosDiagComponent } from './pedidos-diag/pedidos-diag.component';
+import { PedidosCarritoComponent } from './pedidos-carrito/pedidos-carrito.component';
 import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.component';
 import { AuthGuard } from '../share/guards/auth.guard';
 
@@ -31,7 +32,12 @@ const routes: Routes = [
   canActivate:[AuthGuard],
   data:{
     roles: ['ADMIN']
-  }}
+  }},
+
+  {
+     path: 'ordenProducto',
+    component: PedidosCarritoComponent
+  },
 
 ];
 

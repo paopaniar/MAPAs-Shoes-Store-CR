@@ -87,8 +87,8 @@ stopAnimation() {
       this.cartService.addToCart(data);
       //Notificar al usuario
       this.notificacion.mensaje(
-        'orden',
-        'producto: '+data.nombre+ ' agregado a la orden',
+        'Orden',
+        'Producto: '+data.nombreProducto+ ' agregado a la orden',
         TipoMessage.success
       )
     });
