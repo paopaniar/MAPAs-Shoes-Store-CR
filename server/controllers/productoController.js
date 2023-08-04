@@ -72,7 +72,7 @@ module.exports.create = async (request, response, next) => {
       categorias: { 
         connect: producto.categorias.map((categoryId) => ({ id: categoryId })),
       },
-        },
+        }, 
   });
   response.json(newProducto);
 };

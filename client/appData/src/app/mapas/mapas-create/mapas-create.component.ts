@@ -109,7 +109,7 @@ export class MapasCreateComponent implements OnInit {
 
     console.log(this.videojuegoForm.value);
 
-    this.gService.create('producto',this.videojuegoForm.value)
+    this.gService.create('producto/crear',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
 
       this.respVideojuego=data;

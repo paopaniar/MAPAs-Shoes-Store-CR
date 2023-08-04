@@ -15,26 +15,26 @@ const routes: Routes = [
   {path:'producto/crear', component: MapasCreateComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['ADMIN', 'SALES']
   }},
 
   {path:'producto/all', component: MapasAllComponent,
   canActivate:[AuthGuard],
     data:{
-      roles: ['ADMIN']
+      roles: ['ADMIN','SALES']
     }
   },
   
   {path: 'producto/vendedor', component: MapasVendedorComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES']
+    roles: ['SALES','ADMIN']
   }},
 
   {path:'producto/:id', component: MapasDetailComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['ADMIN', 'SALES']
   }},
 
   {path:'producto/update/:id', component: MapasCreateComponent,
