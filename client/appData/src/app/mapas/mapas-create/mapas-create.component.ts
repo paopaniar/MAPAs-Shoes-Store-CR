@@ -65,6 +65,7 @@ export class MapasCreateComponent implements OnInit {
     });
   }
 
+  
   formularioReactive() {
  
     this.videojuegoForm=this.fb.group({
@@ -73,8 +74,12 @@ export class MapasCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ])],
-      descripcion: [null, Validators.required],
-      precio: [null, Validators.required],
+      descripcion: [null, 
+        Validators.required,
+        Validators.minLength(3)],
+      precio: [null, 
+      Validators.required,
+      Validators.pattern("^[0-9]*$")],
       cantidadDisponible: [null, Validators.required],
       proveedor:  [null, Validators.required],
 
@@ -108,6 +113,9 @@ export class MapasCreateComponent implements OnInit {
     this.videojuegoForm.patchValue({generos: gFormat});
 
     console.log(this.videojuegoForm.value);
+    console.log("Precio value:", this.videojuegoForm.get('precio').value);
+    console.log("Precio validity:", this.videojuegoForm.get('precio').valid);
+
 
     this.gService.create('producto/crear',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
