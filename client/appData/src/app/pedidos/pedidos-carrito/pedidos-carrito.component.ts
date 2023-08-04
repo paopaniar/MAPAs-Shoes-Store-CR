@@ -49,14 +49,15 @@ export class PedidosCarritoComponent implements OnInit {
       let detalles=itemsCarrito.map(
         x=>({
           ['productoId']:x.idItem,
-          ['cantidad']: x.cantidad
+          ['cantidad']: x.cantidad,
+
         })
       )
       let infoOrden={
         'fechaOrden': new Date(this.fecha),
         'ordenProductos':detalles
       }
-      this.gService.create('ordenProductos',infoOrden)
+      this.gService.create('orden',infoOrden)
       .subscribe((respuesta:any)=>{
         this.noti.mensaje('Orden',
         'Orden registrada #'+respuesta.id,

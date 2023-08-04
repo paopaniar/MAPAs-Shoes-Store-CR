@@ -122,19 +122,31 @@ module.exports.getByClient = async (request, response, next) => {
   response.json(ordenes);
 };
   
-//Crear un videojuego
+//Crear un 
+// fechaOrden     DateTime       @default(now())
+// estado         Int            @default(1)
+// totalOrden     Decimal?
+// direccionId    Int
+// direccion      Direccion      @relation(fields: [direccionId], references: [id])
+// metodoPagoId   Int
+// metodoPago     MetodoPago     @relation(fields: [metodoPagoId], references: [id])
+// usuarioId      Int
+// usuario        Usuario        @relation(fields: [usuarioId], references: [id])
+// ordenProductos OrdenDetalle[]
 module.exports.create = async (request, response, next) => {
   let infoOrden=request.body;
   const newProducto =await prisma.orden.create({
     data:{
       fechaOrden:infoOrden.fechaOrden,
       usuarioId:1,
+      metodoPagoId:1,
+      direccionId:1,
       ordenProductos:{
         createMany:{
           data: infoOrden.ordenProductos
         }
       }
-    }   
+  }
   })
   response.json(newProducto)
 };
