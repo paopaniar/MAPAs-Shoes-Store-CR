@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 
 @Component({
@@ -17,9 +18,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./mapas-respuestas.component.css']
 })
 export class MapasRespuestasComponent {
+  isAutenticated: boolean;
+  currentUser: any;
   datos:any;
   datosDialog:any;
   preguntasForm: FormGroup;
+  isUser: boolean; 
   submitted = false;
   questionForms: { [key: string]: FormGroup } = {}; // Store question forms with IDs as keys
   respPregunta: any;
@@ -31,12 +35,12 @@ export class MapasRespuestasComponent {
     private dialogRef:MatDialogRef<MapasRespuestasComponent>,
     private gService:GenericService,
     private router: Router,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private formBuilder: FormBuilder, // Inject the formBuilder here
     private snackBar: MatSnackBar
   ) { 
- 
     this.datosDialog=data;
     this.preguntasForm = this.formBuilder.group({
       respuesta: ['', [Validators.required, Validators.maxLength(20)]]
@@ -103,6 +107,10 @@ export class MapasRespuestasComponent {
     });
   }
   ngOnInit(): void {
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.isUser = this.currentUser?.rol === 'USER';
+    console.log(this.currentUser);
     if(this.datosDialog.id){
       this.obtenerProducto(this.datosDialog.id);
     }

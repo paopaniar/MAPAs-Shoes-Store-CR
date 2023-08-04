@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
   selector: 'app-mapas-diag',
@@ -16,11 +17,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./mapas-diag.component.css']
 })
 export class MapasDiagComponent implements OnInit{
+  isAutenticated: boolean;
   datos:any;
   submitted = false;
+  currentUser: any;
   inputPregunta: FormGroup;
   inputRespuesta: FormGroup;
-  mensaje: any;
+  mensaje: any; 
   datosDialog:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
   consultaProductos: any;
@@ -29,6 +32,7 @@ export class MapasDiagComponent implements OnInit{
     private dialogRef:MatDialogRef<MapasDiagComponent>,
     private gService:GenericService,
     private router: Router,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private formBuilder: FormBuilder, // Inject the formBuilder here
@@ -87,6 +91,7 @@ export class MapasDiagComponent implements OnInit{
           console.error('Error:', error);
         }
       );
+      this.close()
   }
 
   
@@ -110,7 +115,7 @@ export class MapasDiagComponent implements OnInit{
         .subscribe(
             (data: any) => {
                 // Handle the API response, if necessary
-                this.router.navigate(['/producto'], {
+                this.router.navigate(['/producto/vendedor'], {
                     queryParams: { create: 'true' }
                 });
                 this.showSuccessMessage('Respuesta creada exitosamente!');
@@ -120,6 +125,7 @@ export class MapasDiagComponent implements OnInit{
                 console.error('Error:', error);
             }
         );
+        this.close()
 }
 
   
@@ -136,12 +142,21 @@ export class MapasDiagComponent implements OnInit{
     if (this.datosDialog && this.datosDialog.id) {
       this.obtenerProducto(this.datosDialog.id);
     }
+    
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     this.inputPregunta = this.formBuilder.group({
       pregunta: ['', [Validators.required, Validators.maxLength(20)]]
     });
+    console.log(this.currentUser.user)
     this.inputRespuesta = this.formBuilder.group({
       respuesta: ['', [Validators.required, Validators.maxLength(20)]]
     });
+    console.log(this.currentUser)
+  }
+
+  isUser():boolean{
+    return  this.currentUser.user.rol === "SALES";
   }
   
   close(){

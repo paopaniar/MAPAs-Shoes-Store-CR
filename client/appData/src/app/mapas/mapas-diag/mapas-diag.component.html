@@ -111,17 +111,12 @@
                   <span style="color: #fff;" class="mat-title">  {{ "-" + consulta.respuesta }}</span>
                 </div>
                 <mat-panel-description>
-                  <form [formGroup]="inputRespuesta">
+                  <div class="nose" *ngIf="isUser()">
+                  <form [formGroup]="inputRespuesta" >
                     <div class="row">
                       <div class="col">
                         <mat-form-field class="full-width">
-                          <!-- Use formControlName to bind to the 'pregunta' form control -->
-                         <ng-container *ngIf="datos.usuario.rol === 'SALES'; else pendiente">
-                          <input matInput formControlName="respuesta" maxlength="20">
-                        </ng-container>
-                        <ng-template #pendiente>
-                          <input matInput formControlName="respuesta" maxlength="20" [disabled]="true">
-                        </ng-template>
+                          <input matInput formControlName="respuesta" maxlength="20" placeholder="Responder" >
                         </mat-form-field>
                       </div>
                     </div>
@@ -130,6 +125,7 @@
                       <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="createAnswer1(consulta.id)">Responder</button>
                     </mat-card-actions>
                   </form>
+                </div>
                 </mat-panel-description>
               </mat-expansion-panel>
             </mat-accordion>

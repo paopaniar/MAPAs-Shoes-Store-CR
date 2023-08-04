@@ -5,12 +5,15 @@
       <br>
       <h6 class="pregunta" *ngFor="let consulta of consultaProductos">
         {{ consulta.mensaje }}
+      
         <form [formGroup]="getQuestionForm(consulta.id)" (ngSubmit)="actualizarProducto(consulta)">
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
                 {{ consulta.respuesta }}
-                <input matInput formControlName="respuesta" maxlength="20" placeholder="Responder">
+
+<input matInput formControlName="respuesta" maxlength="20"
+       placeholder="Responder" [disabled]="isUser">
               </mat-form-field>
             </div>
           </div>

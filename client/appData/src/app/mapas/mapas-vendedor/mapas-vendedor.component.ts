@@ -77,7 +77,7 @@ export class MapasVendedorComponent implements AfterViewInit{
     dialogConfig.data = {
       id: id,
     };
-    this.dialog.open(MapasRespuestasComponent, dialogConfig);
+    this.dialog.open(MapasDiagComponent, dialogConfig);
   }
 
   createAnswer1(): void {
