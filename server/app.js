@@ -18,6 +18,7 @@ const categoriaRoutes = require("./routes/categoriasRoutes");
 const consultaProductosRoutes=require("./routes/consultaProductosRoutes")
 const ordenProductoRoutes=require("./routes/ordenProductoRoutes");
 const direccionRoutes=require("./routes/direccionRoutes");
+const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
 
 app.use(express.static('./image'));
@@ -43,8 +44,9 @@ app.use("/orden/", ordenRoutes);
 app.use("/ordenProductos/", ordenProductoRoutes);
 app.use("/direccion/", direccionRoutes);
 app.use("/categoria/", categoriaRoutes);
-app.use("/consultaProductos/", consultaProductosRoutes)
-app.use("/respuesta/", respuestaRoutes)
+app.use("/consultaProductos/", consultaProductosRoutes);
+app.use("/respuesta/", respuestaRoutes);
+app.use("/metodoPago/", metodoPagoRoutes);
 
 // Servidor
 app.listen(port, () => {

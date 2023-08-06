@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { CartService, ItemCart } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
@@ -10,8 +11,11 @@ import { NotificacionService, TipoMessage } from 'src/app/share/notification.ser
   styleUrls: ['./pedidos-carrito.component.css']
 })
 export class PedidosCarritoComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   total = 0;
   fecha = Date.now();
+  metodosPagoList: any;
   qtyItems = 0;
   //Tabla
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
@@ -43,6 +47,18 @@ export class PedidosCarritoComponent implements OnInit {
     'Producto eliminado',
     TipoMessage.warning)
   }
+
+  listaMetodosPago() {
+    this.metodosPagoList = null;
+    this.gService
+      .list('metodoPago')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        // console.log(data);
+        this.metodosPagoList = data;
+      });
+  }
+  
   registrarOrden() {
    if(this.cartService.getItems!=null){
       let itemsCarrito=this.cartService.getItems;

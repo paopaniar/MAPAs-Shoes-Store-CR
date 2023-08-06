@@ -18,11 +18,14 @@ export class MapasCreateComponent implements OnInit {
   titleForm: string = 'Crear';
   categoriasList: any;
   videojuegoInfo: any;
+  usuariosSales: any[] = [];
   respVideojuego: any;
   submitted = false;
   videojuegoForm: FormGroup;
   idProducto: number = 0;
+  usuariosList: any;
   isCreate: boolean = true;
+  currentUser: any;
 
   constructor(
     private fb: FormBuilder,
@@ -34,11 +37,13 @@ export class MapasCreateComponent implements OnInit {
   ) {
     this.formularioReactive();
     this.listaCategorias();
+    this.listaUsuariosSales();
   }
   ngOnInit(): void {
 
     this.activeRouter.params.subscribe((params:Params)=>{
       this.idProducto=params['id'];
+      // this.idUsuarioSales=params['id'];
       if(this.idProducto!=undefined){
         this.isCreate=false;
         this.titleForm="Actualizar";
@@ -54,6 +59,7 @@ export class MapasCreateComponent implements OnInit {
             descripcion:this.videojuegoInfo.descripcion,
             precio:this.videojuegoInfo.precio,
             categorias:this.videojuegoInfo.categorias.map(({id}) => id),
+            usuario:this.videojuegoInfo.usuarioId,
             cantidadDisponible:this.videojuegoInfo.cantidadDisponible,
             proveedor:this.videojuegoInfo.proveedor,
          
@@ -84,9 +90,23 @@ export class MapasCreateComponent implements OnInit {
       proveedor:  [null, Validators.required],
 
       categorias: [null, Validators.required],
+      usuario: [null, Validators.required],
      
     })
   }
+  
+  listaUsuariosSales() {
+    this.gService
+    .list('usuario') // Cambiar 'usuario' por el endpoint correcto para obtener la lista de usuarios
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+      // Filtrar la lista de usuarios por rol SALES
+      this.usuariosList = data.filter((usuario: any) => usuario.rol === 'SALES');
+      });
+  }
+  
+  
+
   listaCategorias() {
     this.categoriasList = null;
     this.gService
@@ -108,9 +128,11 @@ export class MapasCreateComponent implements OnInit {
     if(this.videojuegoForm.invalid){
       return;
     }
-    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x}))
+    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x}));
+    let usuarioId:any=this.videojuegoForm.get('usuario').value;
 
     this.videojuegoForm.patchValue({generos: gFormat});
+    this.videojuegoForm.patchValue({usuario: usuarioId});
 
     console.log(this.videojuegoForm.value);
     console.log("Precio value:", this.videojuegoForm.get('precio').value);
@@ -140,11 +162,13 @@ export class MapasCreateComponent implements OnInit {
     if(this.videojuegoForm.invalid){
       return;
     }
+    let uFormat:any=this.videojuegoForm.get('usuario').value;
     let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
     this.videojuegoForm.patchValue({ categorias:gFormat});
     let nombreProducto = this.videojuegoForm.get('nombreProducto').value;
     this.videojuegoForm.patchValue({ nombreProducto: nombreProducto });
-    
+    this.videojuegoForm.patchValue({usuario: uFormat});
+
     console.log(this.videojuegoForm.value);
     this.gService.update('producto',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
