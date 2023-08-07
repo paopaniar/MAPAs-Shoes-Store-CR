@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
   selector: 'app-pedidos-all',
@@ -22,13 +23,16 @@ export class PedidosAllComponent implements AfterViewInit{
   @ViewChild(NgbPaginationModule) currentPage !: NgbPaginationModule;
   //@ViewChild(MatTable) table!: MatTable<VideojuegoAllItem>;
   dataSource=new MatTableDataSource<any>();
-
+  isUser: boolean; 
+  currentUser: any;
+  isAutenticated: boolean;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'fechaOrden','totalOrden','estado','acciones'];
 
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthenticationService,
     private dialog: MatDialog) {
 
   }
@@ -39,7 +43,9 @@ export class PedidosAllComponent implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-    const clienteId = 1;
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    const clienteId = this.currentUser.user.id;
     this.gService
       .list(`orden/client/${clienteId}`)
       .pipe(takeUntil(this.destroy$))
