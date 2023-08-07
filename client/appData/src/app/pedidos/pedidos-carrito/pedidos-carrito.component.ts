@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 import { CartService, ItemCart } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
@@ -12,17 +13,20 @@ import { NotificacionService, TipoMessage } from 'src/app/share/notification.ser
 })
 export class PedidosCarritoComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
-
+  isAutenticated: boolean;
   total = 0;
   fecha = Date.now();
   metodosPagoList: any;
   qtyItems = 0;
+  isUser: boolean; 
+  currentUser: any;
   //Tabla
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
   constructor(
     private cartService: CartService,
     private noti: NotificacionService,
+    private authService: AuthenticationService,
     private gService: GenericService,
     private router: Router
   ) {}
@@ -68,11 +72,17 @@ export class PedidosCarritoComponent implements OnInit {
           ['cantidad']: x.cantidad,
 
         })
-      )
+      );
+      this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+      this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
       let infoOrden={
         'fechaOrden': new Date(this.fecha),
-        'ordenProductos':detalles
+        'ordenProductos':detalles,
+        'usuarioId': this.currentUser.user.id,
       }
+      console.log('currentUser:', this.currentUser);
+      console.log('isAuthenticated:', this.isAutenticated);
+
       this.gService.create('orden',infoOrden)
       .subscribe((respuesta:any)=>{
         this.noti.mensaje('Orden',

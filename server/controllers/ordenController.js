@@ -17,7 +17,6 @@ module.exports.get = async (request, response, next) => {
     response.json(orden); 
 };
 
-//Obtener por Id
 module.exports.getById = async (request, response, next) => {
     let idorden=parseInt(request.params.id);
     const ordenes=await prisma.orden.findUnique({
@@ -124,11 +123,12 @@ module.exports.getByClient = async (request, response, next) => {
   
 module.exports.create = async (request, response, next) => {
   let infoOrden=request.body;
+
   const newProducto =await prisma.orden.create({
     data:{
       fechaOrden:infoOrden.fechaOrden,
-      usuarioId:1,
-      metodoPagoId:infoOrden.metodoPagoId,
+      usuarioId: infoOrden.usuarioId,
+      metodoPagoId:1,
       direccionId:1,
       ordenProductos:{
         createMany:{
