@@ -99,5 +99,10 @@
       <mat-icon class="squar">shopping_bag</mat-icon>
     </button>
   </mat-card-actions>
-  <mat-card class="metodoPago"> </mat-card>
+ 
+  <mat-label>Métodos de Pago</mat-label>
+  <select [(ngModel)]="selectedMetodoPago" name="metodoPagoId">
+    <option *ngFor="let metodo of metodosPagoList" [value]="metodo.id">{{ metodo.descripcion }}</option>
+  </select>
+  
 </div>

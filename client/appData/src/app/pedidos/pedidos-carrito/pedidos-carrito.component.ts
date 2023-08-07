@@ -15,6 +15,7 @@ export class PedidosCarritoComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   isAutenticated: boolean;
   total = 0;
+  selectedMetodoPago : number = 0;
   fecha = Date.now();
   metodosPagoList: any;
   qtyItems = 0;
@@ -29,7 +30,9 @@ export class PedidosCarritoComponent implements OnInit {
     private authService: AuthenticationService,
     private gService: GenericService,
     private router: Router
-  ) {}
+  ) {
+    this.listaMetodosPago();
+  }
 
   ngOnInit(): void {
    this.cartService.currentDataCart$.subscribe(data=>{
@@ -77,11 +80,13 @@ export class PedidosCarritoComponent implements OnInit {
       this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
       let infoOrden={
         'fechaOrden': new Date(this.fecha),
-        'ordenProductos':detalles,
+        'ordenProductos':detalles,  
         'usuarioId': this.currentUser.user.id,
+        'metodoPagoId': this.selectedMetodoPago.toString(),
       }
       console.log('currentUser:', this.currentUser);
       console.log('isAuthenticated:', this.isAutenticated);
+      console.log('Metodo de pago', this.selectedMetodoPago);
 
       this.gService.create('orden',infoOrden)
       .subscribe((respuesta:any)=>{

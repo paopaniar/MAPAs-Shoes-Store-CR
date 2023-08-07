@@ -120,7 +120,7 @@ module.exports.getByClient = async (request, response, next) => {
   });
   response.json(ordenes);
 };
-  
+
 module.exports.create = async (request, response, next) => {
   let infoOrden=request.body;
 
@@ -128,7 +128,7 @@ module.exports.create = async (request, response, next) => {
     data:{
       fechaOrden:infoOrden.fechaOrden,
       usuarioId: infoOrden.usuarioId,
-      metodoPagoId:1,
+      metodoPagoId:parseInt(infoOrden.metodoPagoId),
       direccionId:1,
       ordenProductos:{
         createMany:{
