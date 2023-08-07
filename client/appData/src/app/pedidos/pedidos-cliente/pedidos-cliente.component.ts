@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -14,6 +15,9 @@ import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
   styleUrls: ['./pedidos-cliente.component.css']
 })
 export class PedidosClienteComponent  implements AfterViewInit{
+  isUser: boolean; 
+  currentUser: any;
+  isAutenticated: boolean;
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
@@ -28,6 +32,7 @@ export class PedidosClienteComponent  implements AfterViewInit{
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthenticationService,
     private dialog: MatDialog) {
 
   }
@@ -71,7 +76,9 @@ export class PedidosClienteComponent  implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
     //localhost:3000/producto/
-    const clienteId = 3;
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    const clienteId = this.currentUser.user.id;
     this.gService
       .list(`orden/vendedor/${clienteId}`)
       .pipe(takeUntil(this.destroy$))
