@@ -10,6 +10,7 @@ import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MapasRespuestasComponent } from '../mapas-respuestas/mapas-respuestas.component';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
   selector: 'app-mapas-vendedor',
@@ -24,6 +25,9 @@ export class MapasVendedorComponent implements AfterViewInit{
   mensaje: any;
   datosDialog:any;
   consultaProductos: any;
+  isUser: boolean; 
+  currentUser: any;
+  isAutenticated: boolean;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -36,6 +40,7 @@ export class MapasVendedorComponent implements AfterViewInit{
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private authService: AuthenticationService,
     private formBuilder: FormBuilder, // Inject the formBuilder here
     private snackBar: MatSnackBar) {
   }
@@ -46,7 +51,9 @@ export class MapasVendedorComponent implements AfterViewInit{
   //Llamar al API y obtener la lista de productos
   listaProductos(){
     //localhost:3000/producto/
-    const vendedorId = 3;
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    const vendedorId = this.currentUser.user.id;
     this.gService
       .list(`producto/vendedor/${vendedorId}`)
       .pipe(takeUntil(this.destroy$))
