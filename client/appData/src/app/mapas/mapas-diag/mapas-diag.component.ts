@@ -70,14 +70,16 @@ export class MapasDiagComponent implements OnInit{
     if (this.inputPregunta.invalid) {
       return;
     }
-  
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     const productId = this.datosDialog.id;
     const requestData = {
-      mensaje: this.inputPregunta.value.pregunta, // Access the pregunta value from the form
+      mensaje: this.inputPregunta.value.pregunta,
+      usuarioId: this.currentUser.user.id,
     };
   
     this.gService.create('producto/pregunta/' + productId, requestData)
-      .pipe(takeUntil(this.destroy$))
+    .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {
           // Handle the API response, if necessary
@@ -105,10 +107,12 @@ export class MapasDiagComponent implements OnInit{
     if (this.inputRespuesta.invalid) {
         return;
     }
-
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     const requestData = {
         respuesta: this.inputRespuesta.value.respuesta,
-    };
+      };
+      console.log('curretn user', this.currentUser.user.id)
 
     this.gService.create('producto/respuesta/' + preguntaId, requestData)
         .pipe(takeUntil(this.destroy$))
