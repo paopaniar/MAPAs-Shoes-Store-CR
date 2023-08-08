@@ -21,7 +21,7 @@ const direccionRoutes=require("./routes/direccionRoutes");
 const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
 const fotografiasRoutes=require("./routes/fotografiasRoutes");
-
+const rolRoutes=require("./routes/rolRoutes");
 app.use(express.static('./image'));
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -49,7 +49,7 @@ app.use("/consultaProductos/", consultaProductosRoutes);
 app.use("/respuesta/", respuestaRoutes);
 app.use("/metodoPago/", metodoPagoRoutes);
 app.use("/fotografias/", fotografiasRoutes);
-
+app.use("/rol/", rolRoutes);
 // Servidor
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
