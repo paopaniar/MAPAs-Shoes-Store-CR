@@ -1,32 +1,29 @@
-mat-form-field.mat-form-field {
-    font-size: 16px;
-  }
-  .full-width {
-    width: 100%;
-  }
-  
-  .shipping-card {
-    width: 300px;
+.custom-card {
+  width: 400px;
   margin: auto;
-  background-color: #E7E7E7;
-  }
-  
-  .mat-radio-button {
-    display: block;
-    margin: 5px 0;
-  }
-  
-  .row {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .col {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .col:last-child {
-    margin-right: 0;
-  }
-  
+  padding: 20px;
+}
+
+.card-title {
+  color: #022146;
+}
+
+.card-content {
+  padding: 20px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.action-button {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
