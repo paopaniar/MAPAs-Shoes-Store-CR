@@ -90,6 +90,17 @@ export class PedidosClienteComponent  implements AfterViewInit{
         this.dataSource.paginator = this.paginator;
       })
   }
+
+  crearVideojuego() {
+    this.router.navigate(['/producto/crear'], {
+      relativeTo: this.route,
+    });
+  }
+  actualizarVideojuego(id: number) {
+    this.router.navigate(['/producto/update', id], {
+      relativeTo: this.route,
+    });
+  }
   //localhost:3000/videojuego/1
   detalleOrden(id:Number){
     console.log(id);
