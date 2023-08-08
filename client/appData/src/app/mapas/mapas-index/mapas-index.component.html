@@ -19,23 +19,23 @@
                 </div>
               </div>
 
-        <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response">
+        <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response" style="background-color: #85B8E1;">
           <div class="textfotos">Aún no hay fotos para este producto.</div>
         </div>
       </div>
     </div>
        <!--fin foto-->
-        <div class="card-body">
+        <div class="card-body" style="background-color: #ff8977;">
           <h5 class="card-title">{{item.nombreProducto}}</h5>
-          <p class="card-text" style="color: darkslateblue;">₡{{ item.precio | number: '1.2-2' }}</p>
-          <ul *ngIf="item.categorias">
-            <li *ngFor="let item of item.categorias"> {{item.nombreCategoria}}</li>
-         </ul>
+          <p class="card-text" style="color: #0e1335;" >Precio: ₡{{ item.precio | number: '1.2-2' }}</p>
+          <div *ngIf="item.categorias">
+            <p *ngFor="let categoria of item.categorias">{{'Categoría:'+ " "+ categoria.nombreCategoria }}</p>
+          </div>          
           <div class="example-button-row">
             <div class="example-flex-container">             
               <button 
               mat-mini-fab
-              style="background-color: #FF8977; color: #0E1335;"
+              style="background-color: #0e1335; "
               matTooltip="Comprar"
               aria-label="Comprar"
               color="primary"
@@ -46,7 +46,7 @@
             <div class="example-flex-container">
               <button
               mat-mini-fab
-              style="background-color: #FF8977; color: #0E1335;"
+              style="background-color: #0e1335;"
               color="primary"
               matTooltip="Comprar"
               aria-label="Comprar"

@@ -79,7 +79,7 @@
   border-style: ridge ;
   border-color: #EFEFEF;
   background-color: #EFEFEF; /* Primary color for the buttons */
-  color: #FF5733; /* Text color for the buttons */
+  color: #0e1335; /* Text color for the buttons */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-size: 18px;
   justify-content: center;
@@ -108,7 +108,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
+.textfotos{
+color:black
+}
 .card .pagination-button:hover:not([disabled]) {
   background-color: #e0442185;
 }
@@ -138,32 +140,26 @@
 
 /* Optional: Add some hover effects to the buttons */
 /* Pagination buttons */
+.info-button,
+.cart-button {
+  background-color: #0e1335;
+  color: #0e1335;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 20px;
-  color: #750918;
-}
-.pagination-button {
-  background-color: #6bb2ec;
-  border: 1px solid #86c9ff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.pagination-button:hover:not([disabled]) {
-  background-color: #457FAD;
 }
 
-.pagination-button[disabled] {
-  opacity: 0.5;
-  pointer-events: none;
+.pagination-button {
+  background-color: transparent;
+  color: #022146;
+}
+
+.pagination-button:hover {
+  background-color: #022146;
+  color: #ffffff;
 }
 
 .grid-container{

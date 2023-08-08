@@ -49,3 +49,22 @@ color8{
 /* #080a18, #c9db4e, #c87d99, #e84a33, #fee65f, #9bcfdf */
 
 /* #090a11, #fff89e, #ebdc7e, #9c5220, #006939, #efef98, #5ec7b3, #d1e9b7, #4e6642, #3e0427, #f0f8b7, #e3ea39, #f8da62, #fda76b, #979d41, #77a026, #13722f, #bdb76c, #d88286, #8d1b26 */
+
+
+
+:root {
+    --primary-color: #060920;
+    --primary-light: #2b2c3c;
+    --primary-dark: #03060c;
+  
+    --secondary-color: #ff8977;
+    --secondary-light: #ffb09a;
+    --secondary-dark: #e76a5e;
+  
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --accent-color: #457fad;
+    --success-color: #34c759;
+    --error-color: #ff3b30;
+  }
+  
