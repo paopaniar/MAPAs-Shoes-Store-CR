@@ -42,22 +42,22 @@
     border-radius: 4px;
   }
   .card{
-    background-color: #85B8E1;
+    background-color: #022146;
     color: #060920;
     margin-top: 50px;
     margin-left: 45px;
     margin-right: 45px;
   }
   .paginator{
-    background-color: #85B8E1;
+    background-color: #022146;
     color: #060920;
   }
   .tab{
     background-color: #EFEFEF ;
   }
   .titulo{
-    color: #457FAD;
+    color: #022146;
   }
   .card-title{
-    color: #0E1335;
+    color: #ffff;
   }

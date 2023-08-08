@@ -67,7 +67,13 @@
       <ng-container matColumnDef="acciones" >
         <th mat-header-cell *matHeaderCellDef class="titulo">Acciones</th>
         <td mat-cell *matCellDef="let row">
-          <a
+          <a style="color: #022146; background-color: #ffe862;
+           display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5em;
+            height: 2.5em;
+            border-radius: 0.25em;"
             mat-fab
             matTooltip="Actualizar"
             aria-label="Actualizar"
@@ -77,14 +83,25 @@
 
           </a>
           <a
-            mat-fab
-            matTooltip="Detalle"
-            aria-label="Detalle"
-            color="primary"
-            (click)="detalleOrden(row.id)"
-          >
-            <mat-icon class="squar">info</mat-icon>
-          </a>
+          style="
+            color: #022146;
+            background-color: #9dbcfd;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5em;
+            height: 2.5em;
+            border-radius: 0.25em;
+          "
+          mat-fab
+          matTooltip="Detalle"
+          aria-label="Detalle"
+          color="primary"
+          (click)="detalleOrden(row.id)"
+        >
+          <mat-icon class="square-icon">info</mat-icon>
+        </a>
+        
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
