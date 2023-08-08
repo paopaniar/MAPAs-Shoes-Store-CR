@@ -1,8 +1,12 @@
-
+<!-- <a mat-fab matTooltip="Crear nuevo estilo" aria-label="Crear nuevo estilo" (click)="crearVideojuego()" class="custom-fab-button"> -->
   <br>  <br>  <br>
 <div class="card">
 <div class="card-header card-header-warning" >
-<h4 class="card-title">Pedidos</h4>
+<h4 class="card-title">Pedidos
+   <a mat-fab matTooltip="Crear nuevo estilo" aria-label="Crear nuevo estilo"  style="background-color: #5cb85c; color: #333333;">
+       <mat-icon>add</mat-icon> 
+      </a>
+    </h4>
 </div>
 <div class="mat-elevation-z8" >
   <table mat-table [dataSource]="dataSource" class="table" matSort aria-label="Elements" style="background-color:#fff;" >
@@ -50,20 +54,20 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef class="titulo">Acciones</th>
       <td mat-cell *matCellDef="let row">
-        <a
+        <a style="color: #022146; background-color: #ffe862;"
           mat-fab
           matTooltip="Actualizar"
           aria-label="Actualizar"
-          color="primary"
+     
         >
         <mat-icon class="square-icon">edit</mat-icon>
 
         </a>
-        <a
+        <a style="color: #022146; background-color: #9dbcfd;"
           mat-fab
           matTooltip="Detalle"
           aria-label="Detalle"
-          color="primary"
+      
           (click)="detalleOrden(row.id)"
         >
           <mat-icon class="squar">info</mat-icon>

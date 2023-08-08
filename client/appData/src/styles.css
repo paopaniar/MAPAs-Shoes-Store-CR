@@ -68,3 +68,49 @@ color8{
     --error-color: #ff3b30;
   }
   
+  :root {
+    --primary-color: #022146;
+    --secondary-color: #ff6b6b;
+    --accent-color: #5cb85c;
+    --neutral-color-1: #f5f5f5;
+    --neutral-color-2: #333333;
+    --highlight-color: #ffd700;
+  }
+  /* <a style="color: #022146; background-color: #9dbcfd;" */
+.amarillo{
+    color:#ffe862
+}
+.verde{
+    color:#9dfdcd
+}
+.celeste{
+    color: #9dbcfd
+}
+.lila{
+    color: #ba9dfd
+}
+  /* Example usage */
+  .card {
+    background-color: var(--neutral-color-1);
+    color: var(--neutral-color-2);
+    /* border: 1px solid var(--primary-color); */
+  }
+  
+  .button-primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .button-accent {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  .link {
+    color: var(--secondary-color);
+  }
+  
+  .success-message {
+    color: var(--highlight-color);
+  }
+  
