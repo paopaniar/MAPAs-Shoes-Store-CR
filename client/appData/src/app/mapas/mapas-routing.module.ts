@@ -5,6 +5,7 @@ import { MapasAllComponent } from './mapas-all/mapas-all.component';
 import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
+import { MapasFotografiasComponent } from './mapas-fotografias/mapas-fotografias.component';
 
 
 import { AuthGuard } from '../share/guards/auth.guard';
@@ -26,6 +27,12 @@ const routes: Routes = [
   },
   
   {path: 'producto/vendedor', component: MapasVendedorComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['SALES','ADMIN']
+  }},
+
+  {path: 'producto/foto', component: MapasFotografiasComponent,
   canActivate:[AuthGuard],
   data:{
     roles: ['SALES','ADMIN']

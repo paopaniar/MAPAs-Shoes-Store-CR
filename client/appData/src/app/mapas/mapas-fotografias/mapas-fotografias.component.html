@@ -1,0 +1,19 @@
+<div class="photo-selector">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      Seleccionar Fotos
+    </button>
+    <input
+      hidden
+      type="file"
+      #fileInput
+      (change)="onFilesSelected(fileInput)"
+      multiple
+    />
+    <button mat-raised-button color="primary" (click)="createFotografia()">Guardar Fotos</button>
+  </div>
+  <!-- <form id="imageForm">
+    <input type="file" id="imageInput" accept="image/*" (change)="onImageSelected($event)">
+    <button type="button" (click)="uploadImage(selectedFiles[0])">Upload Image</button>
+  </form>
+   -->
+  

@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MapasRespuestasComponent } from '../mapas-respuestas/mapas-respuestas.component';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { MapasFotografiasComponent } from '../mapas-fotografias/mapas-fotografias.component';
 
 @Component({
   selector: 'app-mapas-vendedor',
@@ -75,6 +76,15 @@ export class MapasVendedorComponent implements AfterViewInit{
       id: id,
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
+  }
+  asignarFotoProducto(id:Number){
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(MapasFotografiasComponent, dialogConfig);
   }
 
   listaPreguntas(id:Number){

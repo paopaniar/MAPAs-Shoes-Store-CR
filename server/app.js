@@ -20,6 +20,7 @@ const ordenProductoRoutes=require("./routes/ordenProductoRoutes");
 const direccionRoutes=require("./routes/direccionRoutes");
 const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
+const fotografiasRoutes=require("./routes/fotografiasRoutes");
 
 app.use(express.static('./image'));
 // Acceder a la configuracion del archivo .env
@@ -47,6 +48,7 @@ app.use("/categoria/", categoriaRoutes);
 app.use("/consultaProductos/", consultaProductosRoutes);
 app.use("/respuesta/", respuestaRoutes);
 app.use("/metodoPago/", metodoPagoRoutes);
+app.use("/fotografias/", fotografiasRoutes);
 
 // Servidor
 app.listen(port, () => {
