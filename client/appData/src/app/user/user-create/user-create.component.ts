@@ -58,8 +58,9 @@ export class UserCreateComponent implements OnInit {
     this.formCreate.reset();
   }
   getRoles() {
+    let id=1;
     this.gService
-      .list('rol')
+      .list('rol/usuario')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.roles = data;

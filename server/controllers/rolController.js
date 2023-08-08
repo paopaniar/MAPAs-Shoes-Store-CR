@@ -52,3 +52,14 @@ module.exports.getById = async (request, response, next) => {
   let rol = { ["id"]: Role[id], ["nombre"]: nombre };
   response.json(rol);
 };
+
+
+module.exports.getUsuario = async (request, response, next) => {
+    response.json([
+      {
+        id: Role.USER,
+        nombre: 'Usuario'
+      }
+    ]);
+  };
+  
