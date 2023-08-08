@@ -65,9 +65,9 @@
       </ng-container>    
       <!-- Columna acciones -->
       <ng-container matColumnDef="acciones" >
-        <th mat-header-cell *matHeaderCellDef class="titulo">Acciones</th>
+        <th mat-header-cell *matHeaderCellDef class="titulo">Detalles de facturación</th>
         <td mat-cell *matCellDef="let row">
-          <a style="color: #022146; background-color: #ffe862;
+          <!-- <a style="color: #022146; background-color: #ffe862;
            display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -81,17 +81,12 @@
           >
           <mat-icon class="square-icon">edit</mat-icon>
 
-          </a>
+          </a> -->
           <a
           style="
             color: #022146;
             background-color: #9dbcfd;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5em;
-            height: 2.5em;
-            border-radius: 0.25em;
+           
           "
           mat-fab
           matTooltip="Detalle"
@@ -99,7 +94,7 @@
           color="primary"
           (click)="detalleOrden(row.id)"
         >
-          <mat-icon class="square-icon">info</mat-icon>
+          <mat-icon class="square-icon">account_balance_wallet</mat-icon>
         </a>
         
         </td>

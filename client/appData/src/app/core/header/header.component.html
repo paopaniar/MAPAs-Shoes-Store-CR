@@ -27,25 +27,21 @@
           <li class="nav-item">
             <a style="color: white;" class="nav-link" href="/producto">Catálogo</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
             <a style="color: white;" class="nav-link" href="/producto/all">Productos</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
             <a style="color: white;" class="nav-link" href="/producto/vendedor">Vendedor</a>
-          </li>
+          </li>          
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
+            <a style="color: white;" class="nav-link" href="/orden/vendedor">Pedidos Vendedor</a>
+          </li>   
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'USER'">
+            <a style="color: white;" class="nav-link" href="/orden/client">Mis Pedidos</a>
+          </li>   
         </ul>
-        <button mat-menu-item  [matMenuTriggerFor]="menu2"
-        routerLinkActive="mat-raised-button">
-        <a style="color: white;" class="nav-link">Pedidos</a>
-      </button>
-      <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/orden/vendedor']" routerLinkActive="mat-raised-button">
-          Pedidos Vendedor
-        </button>
-        <button mat-menu-item [routerLink]="['/orden/client']" routerLinkActive="mat-raised-button">
-          Pedidos Cliente
-        </button>
-      </mat-menu>
+       
+      
       
       <div class="example-spacer left">
         <!--enlaces de la app-->
