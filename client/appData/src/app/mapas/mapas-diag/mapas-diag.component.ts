@@ -53,6 +53,9 @@ export class MapasDiagComponent implements OnInit{
   });
 
   }
+  updateConsultaProductos(newData: any) {
+    this.consultaProductos.push(newData);
+  }
 
   createQuestion() {
     // Assuming you have the necessary question data to be sent
@@ -83,17 +86,19 @@ export class MapasDiagComponent implements OnInit{
       .subscribe(
         (data: any) => {
           // Handle the API response, if necessary
+          this.updateConsultaProductos(data);
           this.router.navigate(['/producto'], {
             queryParams: { create: 'true' }
           });
           this.showSuccessMessage('Pregunta creada exitosamente!');
+          
         },
         (error) => {
           // Handle the error here, you can log it or show a proper error message
           console.error('Error:', error);
         }
       );
-      this.close()
+
   }
 
   
@@ -119,6 +124,7 @@ export class MapasDiagComponent implements OnInit{
         .subscribe(
             (data: any) => {
                 // Handle the API response, if necessary
+                this.updateConsultaProductos(data); 
                 this.router.navigate(['/producto/vendedor'], {
                     queryParams: { create: 'true' }
                 });

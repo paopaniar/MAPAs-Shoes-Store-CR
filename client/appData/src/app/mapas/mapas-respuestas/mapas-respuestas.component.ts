@@ -97,7 +97,8 @@ export class MapasRespuestasComponent {
         this.consultaProductos[indexToUpdate] = data; // Assuming the response contains the updated data
       }
     });
-  
+    this.obtenerProducto(this.datosDialog.id);
+
   }
   
   showSuccessMessage(message: string) {
