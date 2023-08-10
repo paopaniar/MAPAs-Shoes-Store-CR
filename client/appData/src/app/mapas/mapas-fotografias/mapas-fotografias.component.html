@@ -6,8 +6,7 @@
       hidden
       type="file"
       #fileInput
-      (change)="onFilesSelected(fileInput)"
-      multiple
+      (change)="onImageSelected($event)" accept="image/*"
     />
     <button mat-raised-button color="primary" (click)="createFotografia()">Guardar Fotos</button>
   </div>

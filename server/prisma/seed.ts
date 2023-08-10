@@ -5,8 +5,6 @@ import {Role } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const fs = require('fs');
-const imagenBytes = fs.readFileSync('image/tenis.jpg');
-const imageSandalsWomen =  fs.readFileSync('image/tenis.jpg');
 async function main() {
   await prisma.categoria.createMany({
     data: categorias
@@ -233,6 +231,15 @@ await prisma.usuario.create({
       nombreProducto: 'Casuales Hombre',
       precio: 23000,  
       proveedor:'NIKE',
+      fotografias: {
+        create: [
+          {
+            imagen: Buffer.from(fs.readFileSync('images/boyCasual.jpg')).toString('base64'),
+          },
+          {
+            imagen: Buffer.from(fs.readFileSync('images/boyTennis.jpg')).toString('base64'),
+          },
+        ]},
       descripcion: 'Zapatos casuales con detalles en cuero para hombre',
       cantidadDisponible: 20,
       categorias: {
@@ -786,45 +793,45 @@ await prisma.orden.create({
   // Insert data for table Comentario_Respuesta
  
 
-  await prisma.fotografia.create({
-    data: {
-      id: 1,
-      imagen: 'womenSandals.jpg',
-      productoId:1,
-    },
-  });
+  // await prisma.fotografia.create({
+  //   data: {
+  //     id: 1,
+  //     imagen: 'womenSandals.jpg',
+  //     productoId:1,
+  //   },
+  // });
   
-  await prisma.fotografia.create({
-    data: {
-      id: 2,
-      imagen: 'boySandals.jpg',
-      productoId:1,
-    },
-  });
+  // await prisma.fotografia.create({
+  //   data: {
+  //     id: 2,
+  //     imagen: 'boySandals.jpg',
+  //     productoId:1,
+  //   },
+  // });
   
-  await prisma.fotografia.create({
-    data: {
-      id: 3,
-      imagen:'girlSandals.jpg',
-      productoId:2,
-    },
-  });
+  // await prisma.fotografia.create({
+  //   data: {
+  //     id: 3,
+  //     imagen:'girlSandals.jpg',
+  //     productoId:2,
+  //   },
+  // });
   
-  await prisma.fotografia.create({
-    data: {
-      id: 4,
-      imagen: 'womenCasual.jpg',
-      productoId:3,
-    },
-  });
+  // await prisma.fotografia.create({
+  //   data: {
+  //     id: 4,
+  //     imagen: 'womenCasual.jpg',
+  //     productoId:3,
+  //   },
+  // });
   
-  await prisma.fotografia.create({
-    data: {
-      id: 5,
-      imagen: 'womenShoes.jpg',
-      productoId:4,
-    },
-  });
+  // await prisma.fotografia.create({
+  //   data: {
+  //     id: 5,
+  //     imagen: 'womenShoes.jpg',
+  //     productoId:4,
+  //   },
+  // });
  
 await prisma.evaluacion.create({
     data: {

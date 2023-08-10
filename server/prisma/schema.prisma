@@ -107,7 +107,7 @@ model Producto {
 //buena
 model Fotografia {
   id         Int      @id @default(autoincrement())
-  imagen     String?
+  imagen     String   @db.LongText
   productoId Int
   producto   Producto @relation(fields: [productoId], references: [id])
 }

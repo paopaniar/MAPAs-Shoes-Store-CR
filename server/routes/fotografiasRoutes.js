@@ -7,4 +7,5 @@ router.get("/", fotografiasController.get);
 router.post('/crear/:id', fotografiasController.create);
 
 
+
 module.exports = router;

@@ -87,7 +87,7 @@ CREATE TABLE `Producto` (
 -- CreateTable
 CREATE TABLE `Fotografia` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `imagen` VARCHAR(191) NULL,
+    `imagen` LONGTEXT NOT NULL,
     `productoId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
