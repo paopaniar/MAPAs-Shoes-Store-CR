@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-mapas-fotografias',
@@ -29,18 +30,12 @@ export class MapasFotografiasComponent  implements OnInit{
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private http: HttpClient,
     private formBuilder: FormBuilder, 
     private snackBar: MatSnackBar
   ) { 
     this.datosDialog=data;
   }
-  // ngAfterViewInit(): void {
-  //   // Access the fileInput element and add the change event listener
-  //   const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-  //   if (fileInput) {
-  //     fileInput.addEventListener('change', (event) => this.onFilesSelected(event));
-  //   }
-  // }
 
   obtenerProducto(id:any){
     console.log(id);
@@ -55,21 +50,50 @@ export class MapasFotografiasComponent  implements OnInit{
 
   }
 
+  onFilesSelected(fileInput: HTMLInputElement): void {
+    const selectedFiles = fileInput.files;
+    if (selectedFiles) {
+      this.selectedFiles = Array.from(selectedFiles);
+    }
+  }
+
+  onImageSelected(event: any): void {
+    const selectedImage = event.target.files[0]; // Get the selected file
+    this.uploadImage(selectedImage); // Call the uploadImage function with the selected image
+  }
+
+  async uploadImage(selectedImage: File): Promise<void> {
+    if (!selectedImage) {
+      alert('Please select an image.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', selectedImage); // 'image' should match the field name in your backend
+
+    const idproducto = 4; // Replace with the actual product ID
+    try {
+      const response = await this.http.post<any>(`/fotografias/crear/${idproducto}`, formData).toPromise();
+      console.log('Image uploaded:', response);
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('An error occurred while uploading the image.');
+    }
+  }
+  
   createFotografia(): void {
     this.submitted = true;
-  
     const productId = this.datosDialog.id;
+  
     if (this.selectedFiles.length > 0) {
       const formData = new FormData();
-      
-      // Append each selected file to the FormData object
+  
       for (let i = 0; i < this.selectedFiles.length; i++) {
         formData.append('imagen', this.selectedFiles[i]);
       }
-      console.log('datosDialog:', productId);
-
-      this.gService.create('fotografias/crear/' + productId, formData)
-        .pipe(takeUntil(this.destroy$))
+  
+      this.gService.create(`http://localhost:3000/fotografias/crear/${productId}`, formData)
+      .pipe(takeUntil(this.destroy$))
         .subscribe(
           (data: any) => {
             this.router.navigate(['/producto'], {
@@ -79,7 +103,9 @@ export class MapasFotografiasComponent  implements OnInit{
           },
           (error) => {
             console.error('Error:', error);
+            // Handle error appropriately (e.g., show error message to user)
           }
+        
         );
     } else {
       console.error('No images selected.');
@@ -87,44 +113,6 @@ export class MapasFotografiasComponent  implements OnInit{
     this.close();
   }
   
-
-  // onImageSelected(event: any): void {
-  //   const selectedImage = event.target.files[0]; // Get the selected file
-  //   this.uploadImage(selectedImage); // Call the uploadImage function with the selected image
-  // }
-  // async uploadImage(selectedImage: File): Promise<void> {
-  //   const imageInput = document.getElementById('imageInput') as HTMLInputElement;
-  
-  //   if (!selectedImage) {
-  //     alert('Please select an image.');
-  //     return;
-  //   }
-  
-  //   const formData = new FormData();
-  //   formData.append('imagen', selectedImage);
-  
-  //   try {
-  //     const idproducto = 1; // Replace with the actual product ID
-  //     const response = await fetch(`fotografias/crear/${idproducto}`, {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-  
-  //     if (response.ok) {
-  //       const newFoto = await response.json();
-  //       console.log('New photograph:', newFoto);
-  //       alert('Image uploaded successfully.');
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error('Upload error:', errorData);
-  //       alert('Image upload failed.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Upload error:', error);
-  //     alert('An error occurred while uploading the image.');
-  //   }
-  // }
-
 
   ngOnInit(): void {
     if (this.datosDialog && this.datosDialog.id) {
@@ -140,12 +128,5 @@ export class MapasFotografiasComponent  implements OnInit{
   close(){
     this.dialogRef.close();
   }
- 
-  onFilesSelected(fileInput: HTMLInputElement): void {
-    const selectedFiles = fileInput.files;
-    if (selectedFiles) {
-      this.selectedFiles = Array.from(selectedFiles);
-    }
-    console.log('fotos seleccionadas nombres:', selectedFiles)
-  }
+
 }

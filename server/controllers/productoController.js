@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const upload = require("../middleware/multerConfig");
 
 module.exports.get = async (request, response, next) => {
     const producto= await prisma.producto.findMany({
@@ -61,6 +62,7 @@ module.exports.getById = async (request, response, next) => {
 
 module.exports.create = async (request, response, next) => {
   let producto = request.body;
+  const imagenes = request.files;
   const newProducto = await prisma.producto.create({
     data: { 
       nombreProducto: producto.nombreProducto,
@@ -74,6 +76,17 @@ module.exports.create = async (request, response, next) => {
       },
         }, 
   });
+   
+    if (imagenes && imagenes.length > 0) {
+      const imagenesData = imagenes.map((imagen) => ({
+        imagen: "http://localhost:3000/" + imagen.destination + "/" + imagen.filename,
+        productoId: newProducto.id,
+      }));
+      await prisma.fotografia.createMany({
+        data: imagenesData,
+      });
+    }
+
   response.json(newProducto);
 };
 

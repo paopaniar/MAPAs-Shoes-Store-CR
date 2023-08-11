@@ -19,14 +19,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import {ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
 import { MapasRespuestasComponent } from './mapas-respuestas/mapas-respuestas.component';
 import { MapasFotografiasComponent } from './mapas-fotografias/mapas-fotografias.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -59,9 +58,9 @@ import { MapasFotografiasComponent } from './mapas-fotografias/mapas-fotografias
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    ReactiveFormsModule
   ],
   exports: [
     MapasVendedorComponent
