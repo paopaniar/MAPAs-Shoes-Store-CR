@@ -16,7 +16,7 @@ import { NotificacionService, TipoMessage } from 'src/app/share/notification.ser
 export class MapasIndexComponent {
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
-filterDatos: any;
+  filterDatos: any;
   itemsPerPage = 6;
   currentPage = 1;
 
@@ -75,7 +75,8 @@ stopAnimation() {
       this.filterDatos=this.datos
     }else{
       this.filterDatos=this.datos.filter(
-        
+        producto=> producto?.nombreProducto.toLowerCase().
+                            includes(text.toLowerCase())
       )
     }
   }

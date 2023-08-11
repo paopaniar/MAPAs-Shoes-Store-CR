@@ -6,7 +6,7 @@ const productoController=require("../controllers/productoController");
 const auth=require("../middleware/auth");
 
 router.get("/", productoController.get);
-;router.post("/", upload.array("myFile", 5), productoController.create);
+// router.post("/", upload.array("myFile", 5), productoController.create);
 router.post('/pregunta/:id', productoController.createQuestion);
 router.post('/respuesta/:id', productoController.createAnswer);
 router.get('/:id',productoController.getById);
