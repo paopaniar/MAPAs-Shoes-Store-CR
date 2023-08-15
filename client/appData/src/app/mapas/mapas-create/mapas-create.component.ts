@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { MatSnackBar } from '@angular/material/snack-bar'; 
+import { AuthenticationService } from 'src/app/share/authentication.service';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
 
 @Component({
@@ -18,12 +20,13 @@ export class MapasCreateComponent implements OnInit {
   titleForm: string = 'Crear';
   categoriasList: any;
   videojuegoInfo: any;
-  usuariosSales: any[] = [];
   respVideojuego: any;
   submitted = false;
   videojuegoForm: FormGroup;
   idProducto: number = 0;
   usuariosList: any;
+  idUsuario: number;
+  isAutenticated: boolean;
   isCreate: boolean = true;
   currentUser: any;
 
@@ -31,6 +34,8 @@ export class MapasCreateComponent implements OnInit {
     private fb: FormBuilder,
     private gService: GenericService,
     private router: Router,
+    private noti: NotificacionService,
+    private authService: AuthenticationService,
     private activeRouter: ActivatedRoute,
     private snackBar: MatSnackBar // Inject MatSnackBar
 
@@ -59,17 +64,15 @@ export class MapasCreateComponent implements OnInit {
             descripcion:this.videojuegoInfo.descripcion,
             precio:this.videojuegoInfo.precio,
             categorias:this.videojuegoInfo.categorias.map(({id}) => id),
-            usuario:this.videojuegoInfo.usuarioId,
             cantidadDisponible:this.videojuegoInfo.cantidadDisponible,
             proveedor:this.videojuegoInfo.proveedor,
-            myFile: "",
-            
+            usuario:this.videojuegoInfo.usuarioId,
           });
          });
       }
 
-    });
-  }
+    })
+   }
 
   
   formularioReactive() {
@@ -88,14 +91,11 @@ export class MapasCreateComponent implements OnInit {
       Validators.pattern("^[0-9]*$")],
       cantidadDisponible: [null, Validators.required],
       proveedor:  [null, Validators.required],
-
       categorias: [null, Validators.required],
       usuario: [null, Validators.required],
-      myFile: [null, Validators.required],
-
     })
   }
-  
+
   listaUsuariosSales() {
     this.gService
     .list('usuario') // Cambiar 'usuario' por el endpoint correcto para obtener la lista de usuarios
@@ -121,63 +121,33 @@ export class MapasCreateComponent implements OnInit {
     return this.videojuegoForm.controls[control].hasError(error);
   };
   
-  crearProducto(): void {
-    this.submitted = true;
-    // this.productoForm.patchValue({ vendedorId: this.idUsuario });
 
+  crearVideojuego(): void {
+    this.submitted = true;
+    
     if (this.videojuegoForm.invalid) {
       return;
     }
   
-    const formData = new FormData();
-    const formValue = this.videojuegoForm.value;
-  
-    // Agregar los datos al FormData
-    Object.keys(formValue).forEach((key) => {
-      const value = formValue[key];
-      if (key === 'myFile') {
-        const files: File[] = value as File[];
-        for (const file of files) {
-          formData.append('myFile', file, file.name);
-        }
-      } else if (key === 'publicar') {
-        formData.append(key, JSON.stringify(value));
-      } else {
-        // Agregar otros valores al FormData
-        formData.append(key, value);
-      }
-    });
-  
     let gFormat: any = this.videojuegoForm.get('categorias').value.map(x => ({ ['id']: x }));
     let usuarioId: any = this.videojuegoForm.get('usuario').value;
-  
+
     this.videojuegoForm.patchValue({ generos: gFormat });
-    this.videojuegoForm.patchValue({ usuario: usuarioId });
-  
+    this.videojuegoForm.patchValue({ usuario: usuarioId}); 
+
     console.log(this.videojuegoForm.value);
-    console.log("Precio value:", this.videojuegoForm.get('precio').value);
-    console.log("Precio validity:", this.videojuegoForm.get('precio').valid);
-  
-    this.gService.create('producto', formData)
+    
+    this.gService.create('producto/crear', this.videojuegoForm.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
+        this.noti.mensaje('Producto', 'Producto Creado!', TipoMessage.success)
         this.respVideojuego = data;
-        this.router.navigate(['/producto/all'], {
-         //     queryParams: { create: 'true' }
+        this.router.navigate(['orden/vendedor'], {
+          queryParams: { create: 'true' }
         });
-  
-        this.showSuccessMessage('Producto creado exitosamente!');
       });
   }
 
-
-
-  showSuccessMessage(message: string) {
-    this.snackBar.open(message, 'Close', {
-      duration: 5000, // Set the duration for how long the snackbar should be visible
-      panelClass: 'success-snackbar' // Optionally apply custom CSS class for styling
-    });
-  }
   actualizarProducto() {
     
     this.submitted=true;
@@ -212,22 +182,6 @@ export class MapasCreateComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
   
-  onFileChange(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      const imageArray: File[] = [];
-      for (const file of files) {
-        imageArray.push(file);
-      }
-      const maxImages = 5; 
-      const imagesToUpload = imageArray.slice(0, maxImages);
-      this.videojuegoForm.patchValue({ myFile: imagesToUpload });
-    }
-  }
-  countSelectedImages(): number {
-    const myFileControl = this.videojuegoForm.get('myFile');
-    return myFileControl.value ? myFileControl.value.length : 0;
   
-  }
  
 }

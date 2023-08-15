@@ -22,7 +22,7 @@ const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
 const fotografiasRoutes=require("./routes/fotografiasRoutes");
 const rolRoutes=require("./routes/rolRoutes");
-app.use(express.static('./image'));
+
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
 // Puerto que escucha por defecto 300 o definido .env
