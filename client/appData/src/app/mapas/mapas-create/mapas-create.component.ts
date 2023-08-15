@@ -66,8 +66,8 @@ export class MapasCreateComponent implements OnInit {
             categorias:this.videojuegoInfo.categorias.map(({id}) => id),
             cantidadDisponible:this.videojuegoInfo.cantidadDisponible,
             proveedor:this.videojuegoInfo.proveedor,
-            usuario:this.videojuegoInfo.usuarioId,
-          });
+            usuario: this.videojuegoInfo.usuarioId,
+           });
          });
       }
 
@@ -92,7 +92,7 @@ export class MapasCreateComponent implements OnInit {
       cantidadDisponible: [null, Validators.required],
       proveedor:  [null, Validators.required],
       categorias: [null, Validators.required],
-      usuario: [null, Validators.required],
+      usuario: [null],
     })
   }
 
@@ -130,9 +130,13 @@ export class MapasCreateComponent implements OnInit {
     }
   
     let gFormat: any = this.videojuegoForm.get('categorias').value.map(x => ({ ['id']: x }));
-    let usuarioId: any = this.videojuegoForm.get('usuario').value;
+    // let usuarioId: any = this.videojuegoForm.get('usuario').value;
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    let usuarioId= this.currentUser.user.id;
 
     this.videojuegoForm.patchValue({ generos: gFormat });
+    // this.videojuegoForm.patchValue({ usuario: usuarioId}); 
     this.videojuegoForm.patchValue({ usuario: usuarioId}); 
 
     console.log(this.videojuegoForm.value);
