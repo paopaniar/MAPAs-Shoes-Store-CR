@@ -22,14 +22,14 @@ const routes: Routes = [
   {path:'producto/all', component: MapasAllComponent,
   canActivate:[AuthGuard],
     data:{
-      roles: ['ADMIN','SALES']
+      roles: ['ADMIN']
     }
   },
   
   {path: 'producto/vendedor', component: MapasVendedorComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES','ADMIN']
+    roles: ['SALES']
   }},
 
   {path: 'producto/foto', component: MapasFotografiasComponent,
