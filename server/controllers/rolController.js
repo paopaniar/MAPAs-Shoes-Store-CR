@@ -59,6 +59,10 @@ module.exports.getUsuario = async (request, response, next) => {
       {
         id: Role.USER,
         nombre: 'Usuario'
+      },
+      {
+        id: Role.SALES,
+        nombre: 'Vendedor'
       }
     ]);
   };
