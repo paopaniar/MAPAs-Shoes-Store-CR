@@ -10,6 +10,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const app = express();
 const prism = new PrismaClient();
+app.use(express.static('./images'));
 //---Archivos de rutas---
 const usuarioRoutes=require("./routes/usuarioRoutes");
 const productoRoutes=require("./routes/productoRoutes");
@@ -20,7 +21,6 @@ const ordenProductoRoutes=require("./routes/ordenProductoRoutes");
 const direccionRoutes=require("./routes/direccionRoutes");
 const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
-const fotografiasRoutes=require("./routes/fotografiasRoutes");
 const rolRoutes=require("./routes/rolRoutes");
 
 // Acceder a la configuracion del archivo .env
@@ -48,7 +48,6 @@ app.use("/categoria/", categoriaRoutes);
 app.use("/consultaProductos/", consultaProductosRoutes);
 app.use("/respuesta/", respuestaRoutes);
 app.use("/metodoPago/", metodoPagoRoutes);
-app.use("/fotografias/", fotografiasRoutes);
 app.use("/rol/", rolRoutes);
 // Servidor
 app.listen(port, () => {
