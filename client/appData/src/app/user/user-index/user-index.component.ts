@@ -12,8 +12,6 @@ export class UserIndexComponent implements OnInit {
   constructor(
     private router: Router, 
     private route: ActivatedRoute) {
-  
-
   }
 
   ngOnInit(): void {

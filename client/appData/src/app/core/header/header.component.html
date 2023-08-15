@@ -39,6 +39,10 @@
           <li class="nav-item" *ngIf="currentUser?.user?.rol === 'USER'">
             <a style="color: white;" class="nav-link" href="/orden/client">Mis Pedidos</a>
           </li>   
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+            <a style="color: white;" class="nav-link" href="/usuario">Usuarios</a>
+          </li>
+            
         </ul>
        
       

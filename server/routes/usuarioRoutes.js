@@ -12,4 +12,6 @@ router.post("/registrar", usuarioController.register);
 //localhost:3000/videojuego/
 router.get("/", usuarioController.get);
 router.get('/:id',usuarioController.getById);
+router.get("/estado", usuarioController.getByStatusTrue);
+router.get("/estado", usuarioController.getByStatusFalse);
 module.exports = router;

@@ -10,8 +10,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //Obtener listado
 module.exports.get = async (request, response, next) => {
-    const usuario= await prisma.usuario.findMany(); //NOTAS: esto es como un select de usuarios
-    response.json(usuario); // este response es como un return
+  const usuarios= await prisma.usuario.findMany({
+  include: {
+      id: true,
+      nombre:true,
+      email:true,
+      estado:true,
+      rol: true,
+    },
+    
+  }); 
+  response.json(usuarios);
 };
 
 //Obtener por Id
@@ -29,7 +38,34 @@ module.exports.create = async (request, response, next) => {
 module.exports.update = async (request, response, next) => {
 };
 
-
+module.exports.getByStatusTrue = async (request, response, next) => {
+  let estado=parseInt(request.params.estado);
+  const usuarios = await prisma.usuario.findUnique({
+    where: { estado: estado },
+    include: {
+      id: true,
+      nombre: true,    
+      email: true,
+      estado: true,
+      rol: true,
+    },
+  });
+  response.json(usuarios);
+};
+module.exports.getByStatusFalse = async (request, response, next) => {
+  let estado=parseInt(request.params.estado);
+  const usuarios = await prisma.usuario.findUnique({
+    where: { estado: estado },
+    include: {
+      id: true,
+      nombre: true,    
+      email: true,
+      estado: true,
+      rol: true,
+    },
+  });
+  response.json(usuarios);
+};
 module.exports.register = async (request, response, next) => {
     const userData = request.body;
   
