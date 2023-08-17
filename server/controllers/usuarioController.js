@@ -85,12 +85,7 @@ module.exports.getByStatusFalse = async (request, response, next) => {
 };
 module.exports.register = async (request, response, next) => {
     const userData = request.body;
-  
-    //Salt es una cadena aleatoria.
-    //"salt round" factor de costo controla cuánto tiempo se necesita para calcular un solo hash de BCrypt
-    // salt es un valor aleatorio y debe ser diferente para cada cálculo, por lo que el resultado casi nunca debe ser el mismo, incluso para contraseñas iguales
-    let salt= bcrypt.genSaltSync(10);
-    // Hash password
+      let salt= bcrypt.genSaltSync(10);
     let hash=bcrypt.hashSync(userData.contrasenna,salt);
     const user = await prisma.usuario.create({
       data: {

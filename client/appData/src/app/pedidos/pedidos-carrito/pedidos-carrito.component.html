@@ -89,6 +89,23 @@
       ></mat-footer-row>
     </mat-table>
   </mat-card-content>
+  <div class="card-header card-header-warning" style="border: none;background-color: #d1c6c4;">
+<mat-card-content>
+  <mat-label>Métodos de Pago</mat-label>
+  <mat-select  [(ngModel)]="selectedMetodoPago" name="metodoPagoId">
+    <mat-option *ngFor="let metodo of metodosPagoList" [value]="metodo.id">{{ metodo.descripcion }}</mat-option>
+  </mat-select >
+  <!-- <mat-label>Direcciones</mat-label>
+  <mat-select *ngIf="provinciasList" [(ngModel)]="selectedProvinceId" (ngModelChange)="selectProvince($event)">
+    <mat-option *ngFor="let provinceName of provinceNames" [value]="provinceName">{{ provinceName }}</mat-option>
+  </mat-select>
+  
+  <mat-select *ngIf="cantonesNames && cantonesNames.length > 0">
+    <mat-option *ngFor="let cantonName of cantonesNames" [value]="cantonName">{{ cantonName }}</mat-option>
+  </mat-select>
+     -->
+  
+  
   <mat-card-actions align="end">
     <button
       mat-flat-button
@@ -99,10 +116,6 @@
       <mat-icon class="squar">shopping_bag</mat-icon>
     </button>
   </mat-card-actions>
- 
-  <mat-label>Métodos de Pago</mat-label>
-  <select [(ngModel)]="selectedMetodoPago" name="metodoPagoId">
-    <option *ngFor="let metodo of metodosPagoList" [value]="metodo.id">{{ metodo.descripcion }}</option>
-  </select>
-  
+</mat-card-content>
+</div>
 </div>

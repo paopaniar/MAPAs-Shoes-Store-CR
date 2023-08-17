@@ -16,11 +16,18 @@ export class PedidosCarritoComponent implements OnInit {
   isAutenticated: boolean;
   total = 0;
   selectedMetodoPago : number = 0;
+  provinciasList: any;
+  cantonesList: any;
+  provinceNames: string[] = []
+  cantonesNames: string[] = []
   fecha = Date.now();
   metodosPagoList: any;
   qtyItems = 0;
   isUser: boolean; 
   currentUser: any;
+  selectedProvinceId: string | null = null;
+  selectedCantonName: string | null = null;
+
   //Tabla
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
@@ -31,7 +38,14 @@ export class PedidosCarritoComponent implements OnInit {
     private gService: GenericService,
     private router: Router
   ) {
-    this.listaMetodosPago();
+    this.listaMetodosPago();    
+    // this.listaProvincias();
+    // this.listaCantones(this.selectedProvinceId);
+
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -65,6 +79,64 @@ export class PedidosCarritoComponent implements OnInit {
         this.metodosPagoList = data;
       });
   }
+
+
+
+
+  // filterProvinceNames(data: any): string[] {
+  //   const provinceNames: string[] = [];
+  
+  //   for (const provinceId in data.provincias) {
+  //     if (data.provincias.hasOwnProperty(provinceId)) {
+  //       const province = data.provincias[provinceId];
+  //       provinceNames.push(province.nombre);
+  //     }
+  //   }
+  
+  //   return provinceNames;
+  // }
+
+  // filterCantonesNames(data: any, selectedProvinceId: string): string[] {
+  //   const cantonNames: string[] = [];
+  
+  //   const selectedProvince = data.provincias[selectedProvinceId];
+  //   if (selectedProvince && selectedProvince.cantones) {
+  //     for (const cantonId in selectedProvince.cantones) {
+  //       if (selectedProvince.cantones.hasOwnProperty(cantonId)) {
+  //         const canton = selectedProvince.cantones[cantonId];
+  //         cantonNames.push(canton.nombre);
+  //       }
+  //     }
+  //   }
+  
+  //   return cantonNames;
+  // }
+  // selectProvince(provinceId: string) {
+  //   this.selectedProvinceId = provinceId;
+  //   this.listaCantones(provinceId); 
+  // }
+  // listaCantones(selectedProvinceId: string) {
+  //   this.cantonesList = null;
+  //   this.gService
+  //     .list('direccion')
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe((data: any) => {
+  //       this.cantonesList = data;
+  //       this.cantonesNames = this.filterCantonesNames(data, selectedProvinceId);
+  //       console.log('cantones', this.cantonesNames);
+  //     });
+  // }
+  
+  // listaProvincias() {
+  //   this.provinciasList = null;
+  //   this.gService
+  //     .list('direccion')
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe((data: any) => {
+  //       this.provinciasList = data;
+  //       this.provinceNames = this.filterProvinceNames(data); // Store filtered names
+  //     });
+  // }
   
   registrarOrden() {
    if(this.cartService.getItems!=null){
