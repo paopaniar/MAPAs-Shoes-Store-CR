@@ -35,6 +35,17 @@ module.exports.create = async (request, response, next) => {
 };
 //Actualizar un videojuego
 module.exports.update = async (request, response, next) => {
+  try {
+    const idUsuario = parseInt(request.params.id);
+    const newData = request.body;
+    const usuarioActualizado = await prisma.usuario.update({
+      where: { id: idUsuario },
+      data: newData,
+    });
+    response.json(usuarioActualizado);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.getByStatus = async (request, response, next) => {

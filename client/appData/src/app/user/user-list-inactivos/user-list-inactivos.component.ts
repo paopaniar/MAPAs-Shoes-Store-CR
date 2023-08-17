@@ -23,7 +23,7 @@ export class UserListInactivosComponent {
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'email ','rol','estado','acciones'];
+  displayedColumns = ['id', 'email', 'rol', 'estado', 'acciones'];
 
   constructor(
     private gService:GenericService,

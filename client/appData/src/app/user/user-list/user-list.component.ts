@@ -52,9 +52,16 @@ export class UserListComponent {
         this.dataSource.paginator = this.paginator;
       });
   }
-  actualizarEstado() {
-    // Asumiendo que en la URL tienes un parámetro 'estado' para filtrar (1 para activos, 0 para inactivos)
-  
+  actualizarEstado(usuario: any) {
+    const nuevoEstado = usuario.estado === 1 ? 0 : 1;
+    this.gService
+      .update(`usuario/${usuario.id}`, { estado: nuevoEstado }) // Make sure 'usuario.id' is defined and valid
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        console.log(data);
+        // Actualizar la lista después de la actualización
+        this.listaUsuariosActivos();
+      });
   }
 
   //localhost:3000/videojuego/1
