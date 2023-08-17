@@ -1,18 +1,19 @@
-<p>user-edit works!</p>
-<div class="grid-container" *ngIf="usuario">
+<br><br>
+<br><br><div class="grid-container" *ngIf="usuario">
     <div class="contenedor">
-      <h1>Mi perfil</h1>
+      <img src="assets/images/logo6.png" alt="Your Image">
+      <h2>Bienvenido {{usuario.nombre}}!</h2>
     </div>
     <div class="row">
       <div class="col-4">
-        <h2>Mi información</h2>
+        <h2>Datos Personales</h2>
         <p><strong>Identificación:</strong> {{ usuario.identificacion }}</p>
         <p><strong>Nombre:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
         <p><strong>Email:</strong> {{ usuario.email }}</p>
       </div>
       <div class="col-8">
         <div class="row">
-          <h2>Direcciones</h2>
+          <h2>Mis Ubicaciones de Envio</h2>
           <button mat-button aria-label="Agregar dirección" (click)="crearDireccion()">Agregar dirección
             <mat-icon>home</mat-icon>
           </button>
@@ -28,7 +29,7 @@
           </ul>
         </div>
         <div class="row">
-          <h2>Métodos de pago</h2>
+          <h2>Mi Billetera</h2>
           <button mat-button aria-label="Agregar método de pago" (click)="crearMetodoPago()">Agregar método de pago
             <mat-icon>credit_card</mat-icon>
           </button>
