@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     //valores de prueba
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.id = this.authService.id;
+      this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.currentUser.user.id;
     this.cartService.countItems.subscribe((value)=>{
       this.qtyItems=value
      })
