@@ -62,16 +62,16 @@ export class UserEditComponent {
       usuarioId: this.currentUser.user.id,
     };
   
-    this.gService.create('producto/pregunta/' + productId, requestData)
+    this.gService.create('usuario/direccion/' + productId, requestData)
     .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {
           // Handle the API response, if necessary
           this.updateDirecciones(data);
-          this.router.navigate(['/producto'], {
+          this.router.navigate(['/usuario/perfil'], {
             queryParams: { create: 'true' }
           });
-          this.showSuccessMessage('Pregunta creada exitosamente!');
+          this.showSuccessMessage('Dirección creada exitosamente!');
           
         },
         (error) => {
@@ -95,16 +95,16 @@ export class UserEditComponent {
       usuarioId: this.currentUser.user.id,
     };
   
-    this.gService.create('producto/pregunta/' + productId, requestData)
+    this.gService.create('usuario/metodoPago/' + productId, requestData)
     .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {
           // Handle the API response, if necessary
           this.updateDirecciones(data);
-          this.router.navigate(['/producto'], {
+          this.router.navigate(['/usuario/perfil'], {
             queryParams: { create: 'true' }
           });
-          this.showSuccessMessage('Pregunta creada exitosamente!');
+          this.showSuccessMessage('Metodo de pago creado exitosamente!');
           
         },
         (error) => {
