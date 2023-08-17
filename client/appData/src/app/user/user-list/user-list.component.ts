@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
 
 
@@ -30,7 +31,8 @@ export class UserListComponent {
     private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private noti: NotificacionService) {
 
   }
 
@@ -53,16 +55,18 @@ export class UserListComponent {
       });
   }
   actualizarEstado(usuario: any) {
-    const nuevoEstado = usuario.estado === 1 ? 0 : 1;
     this.gService
-      .update(`usuario/${usuario.id}`, { estado: nuevoEstado }) // Make sure 'usuario.id' is defined and valid
+      .update('usuario/update', usuario)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        console.log(data);
-        // Actualizar la lista después de la actualización
         this.listaUsuariosActivos();
-      });
-  }
+        this.noti.mensaje(
+          'Realizado',
+          'El usuario se deshabilitó',
+          TipoMessage.success
+        );
+      });
+  }
 
   //localhost:3000/videojuego/1
   ngOnDestroy(){

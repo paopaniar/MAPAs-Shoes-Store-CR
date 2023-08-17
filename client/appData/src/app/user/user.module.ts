@@ -28,7 +28,8 @@ import { UserListInactivosComponent } from './user-list-inactivos/user-list-inac
     UserLoginComponent,
     UserIndexComponent,
     UserListComponent,
-    UserListInactivosComponent
+    UserListInactivosComponent,
+   
   ],
   imports: [
     CommonModule,
@@ -50,7 +51,8 @@ import { UserListInactivosComponent } from './user-list-inactivos/user-list-inac
   ],
   exports: [
     UserListComponent,
-    UserListInactivosComponent
+    UserListInactivosComponent,
+ 
   ],
 })
 export class UserModule { }

@@ -6,7 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
 @Component({
   selector: 'app-user-list-inactivos',
@@ -29,7 +29,8 @@ export class UserListInactivosComponent {
     private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private noti: NotificacionService) {
 
   }
 
@@ -51,6 +52,19 @@ export class UserListInactivosComponent {
         this.dataSource.paginator = this.paginator;
       });
   }
+  actualizarEstado(usuario: any) {
+    this.gService
+      .update('usuario/update', usuario)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.listaUsuariosActivos();
+        this.noti.mensaje(
+          'Realizado',
+          'El usuario se habilitó',
+          TipoMessage.success
+        );
+      });
+  }
 
   //localhost:3000/videojuego/1
   ngOnDestroy(){

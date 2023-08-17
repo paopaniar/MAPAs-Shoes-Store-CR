@@ -14,5 +14,5 @@ router.get("/", usuarioController.get);
 router.get('/:id',usuarioController.getById);
 router.get('/activos/:estado', usuarioController.getByStatus);
 router.get('/inactivos/:estado', usuarioController.getByStatus);
-router.put("/:id", usuarioController.update);
+router.put("/update/:id", usuarioController.update);
 module.exports = router;

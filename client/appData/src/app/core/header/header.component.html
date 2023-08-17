@@ -39,10 +39,10 @@
           <li class="nav-item" *ngIf="currentUser?.user?.rol === 'USER'">
             <a style="color: white;" class="nav-link" href="/orden/client">Mis Pedidos</a>
           </li>   
-          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
             <a style="color: white;" class="nav-link" href="/usuario/lista">Usuarios</a>
           </li>
-          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
             <a style="color: white;" class="nav-link" href="/usuario/inactivo">Inactivos</a>
           </li>
             

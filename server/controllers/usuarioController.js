@@ -35,17 +35,19 @@ module.exports.create = async (request, response, next) => {
 };
 //Actualizar un videojuego
 module.exports.update = async (request, response, next) => {
+  let id = parseInt(request.params.id);
+  const usuarioActual = await prisma.usuario.findUnique({
+    where: { id: id },
+  });
   try {
-    const idUsuario = parseInt(request.params.id);
-    const newData = request.body;
-    const usuarioActualizado = await prisma.usuario.update({
-      where: { id: idUsuario },
-      data: newData,
+    const updatedUsuario = await prisma.usuario.update({
+      where: { id: id },
+      data: { estado: usuarioActual.estado ? 0 : 1 },
     });
-    response.json(usuarioActualizado);
+    response.json(updatedUsuario);
   } catch (error) {
     next(error);
-  }
+  }
 };
 
 exports.getByStatus = async (request, response, next) => {
