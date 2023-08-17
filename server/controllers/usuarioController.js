@@ -39,10 +39,9 @@ module.exports.update = async (request, response, next) => {
 
 exports.getByStatus = async (request, response, next) => {
   const estado = parseInt(request.params.estado);
-
   try {
     const usuarios = await prisma.usuario.findMany({
-      where: { estado: estado === 1 }, // 1 para activos, 0 para inactivos
+      where: { estado: estado }, // 1 para activos, 0 para inactivos
       select: {
         id: true,
         nombre: true,

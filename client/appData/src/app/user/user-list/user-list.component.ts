@@ -24,7 +24,7 @@ export class UserListComponent {
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'email ','rol','estado','acciones'];
+  displayedColumns = ['id', 'email', 'rol', 'estado', 'acciones'];
 
   constructor(
     private gService:GenericService,
@@ -54,17 +54,7 @@ export class UserListComponent {
   }
   actualizarEstado() {
     // Asumiendo que en la URL tienes un parámetro 'estado' para filtrar (1 para activos, 0 para inactivos)
-    const estado = 1;
-    this.gService
-      .list(`usuario/activos/${estado}`) // Suponiendo que 'usuarios/:estado' es la ruta correcta para obtener usuarios filtrados
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        console.log(data);
-        this.datos = data;
-        this.dataSource.data = this.datos; // Use .data to set the data for MatTableDataSource
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+  
   }
 
   //localhost:3000/videojuego/1

@@ -10,7 +10,7 @@
   <div class="card">
     <div class="card-header card-header-warning" >
       <h4 class="card-title">Usuarios habilitados</h4>
-      <a style="color: white;" class="nav-link active" aria-current="page" href="/usuarios/inactivos">Ver usuarios deshabilitados</a>
+      <a style="color: white;" class="nav-link active" aria-current="page" href="/usuario/inactivo">Ver usuarios deshabilitados</a>
     </div>
 
     <mat-card-title class="tit">
@@ -21,19 +21,19 @@
         <!-- Columna Vendedor -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Identificación</th>
-          <td mat-cell *matCellDef="let row">{{ row.id}}</td>
+          <td mat-cell *matCellDef="let row">{{row.id}}</td>
         </ng-container>
 
         <!-- Columna Nombre -->
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Email</th>
-          <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+          <td mat-cell *matCellDef="let row">{{row.email}}</td>
         </ng-container>
 
         <!-- Columna Precio -->
         <ng-container matColumnDef="rol">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Rol</th>
-          <td mat-cell *matCellDef="let row">{{ row.rol }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.rol}}</td>
         </ng-container>
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado</th>
