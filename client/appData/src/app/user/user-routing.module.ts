@@ -5,6 +5,7 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserListInactivosComponent } from './user-list-inactivos/user-list-inactivos.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'login', component: UserLoginComponent },
     ],
   },
-    
+  {path: 'usuario/perfil/:id', component: UserEditComponent},
+
   {path: 'usuario/lista', component: UserListComponent},
   {path: 'usuario/inactivo', component: UserListInactivosComponent}
 
