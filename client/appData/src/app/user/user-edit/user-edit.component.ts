@@ -40,8 +40,9 @@ export class UserEditComponent {
       otrasSennas: ['', Validators.maxLength(50)]
     });
   
+    this.metodoPago = []; // Initialize direcciones as an empty array
     this.inputMetodoPago = this.formBuilder.group({
-      descripcion: ['', Validators.maxLength(50)] // Add more form controls if needed
+      descripcion: ['', Validators.maxLength(50)]
     });
   }
 
