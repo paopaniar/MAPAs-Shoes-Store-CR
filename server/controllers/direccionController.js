@@ -9,24 +9,37 @@ const prisma = new PrismaClient();
 //Obtener listado
 const axios = require('axios'); 
 
+// module.exports.get = async (request, response, next) => {
+//   try {
+//     // Make a GET request to the external API
+//     const apiResponse = await axios.get('https://api.pruebayerror.com/locaciones/v1/provincias?incluir=cantones,distritos');
+
+//     console.log(apiResponse.data); // Log the API response data to the console
+
+//     // Extract the desired data from the API response
+//     const provincias = apiResponse.data; // Adjust this line based on the response structure
+
+//     response.json(provincias);
+//   } catch (error) {
+//     // Handle the error and send an appropriate response
+//     console.error(error);
+//     response.status(500).json({ error: 'An error occurred' });
+//   }
+// };
+
 module.exports.get = async (request, response, next) => {
-  try {
-    // Make a GET request to the external API
-    const apiResponse = await axios.get('https://api.pruebayerror.com/locaciones/v1/provincias?incluir=cantones,distritos');
-
-    console.log(apiResponse.data); // Log the API response data to the console
-
-    // Extract the desired data from the API response
-    const provincias = apiResponse.data; // Adjust this line based on the response structure
-
-    response.json(provincias);
-  } catch (error) {
-    // Handle the error and send an appropriate response
-    console.error(error);
-    response.status(500).json({ error: 'An error occurred' });
-  }
-};
-
+    
+      const apiUrl = 'https://levelupcr.github.io/APIProvinciasCR/CRAPI.json'; // Reemplaza con la URL de la API externa
+  
+      // Realizar una solicitud GET a la API externa utilizando axios
+      const apiResponse = await axios.get(apiUrl);
+  
+      // Obtener los datos de la respuesta de la API
+      const dataFromApi = apiResponse.data;
+  
+      response.json(dataFromApi);
+    
+  };
 
 
 //Obtener por Id

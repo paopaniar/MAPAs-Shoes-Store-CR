@@ -1,30 +1,11 @@
 <br><br><br><br>
-<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearProducto(): actualizarProducto()"  novalidate class="contenido">
+<form [formGroup]="videojuegoForm" (ngSubmit)="isCreate ? crearVideojuego(): actualizarProducto()"  novalidate class="contenido">
     <input type="hidden" formControlName="id" />
     <mat-card class="shipping-card"> 
       <mat-card-header>
         <mat-card-title style="color: #edf2f8;">{{titleForm}} Producto</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-   
-        <!--
-        <div class="row">
-          <div class="col">
-            <input type="file" formControlName="myFile" accept="image/*" (change)="onFileChange($event)" multiple>
-            Seleccione hasta 5 imágenes
-            <mat-error *ngIf="errorHandling('myFile', 'required')">La foto es requerida</mat-error>
-            <mat-error *ngIf="countSelectedImages() > 5">No puede seleccionar más de 5 fotos</mat-error>
-          </div>
-        </div>
-        <div class="row" *ngIf="videojuegoForm.get('myFile').value && videojuegoForm.get('myFile').value.length > 0">
-          <div class="col">
-            <strong>Archivos seleccionados:</strong>
-            <ul>
-              <li *ngFor="let file of videojuegoForm.get('myFile').value">{{ file.name }}</li>
-            </ul>
-          </div>
-        </div>-->
-
         <div class="row" >
           <div class="col" >
             <mat-form-field class="full-width" >

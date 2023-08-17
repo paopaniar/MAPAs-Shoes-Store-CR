@@ -40,7 +40,10 @@
             <a style="color: white;" class="nav-link" href="/orden/client">Mis Pedidos</a>
           </li>   
           <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
-            <a style="color: white;" class="nav-link" href="/usuario">Usuarios</a>
+            <a style="color: white;" class="nav-link" href="/usuario/lista">Usuarios</a>
+          </li>
+          <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+            <a style="color: white;" class="nav-link" href="/usuario/inactivo">Inactivos</a>
           </li>
             
         </ul>
