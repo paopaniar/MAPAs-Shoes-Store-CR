@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { UserListInactivosComponent } from './user-list-inactivos/user-list-inactivos.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { UserListInactivosComponent } from './user-list-inactivos/user-list-inac
     UserIndexComponent,
     UserListComponent,
     UserListInactivosComponent,
+    UserEditComponent
    
   ],
   imports: [
@@ -52,6 +54,7 @@ import { UserListInactivosComponent } from './user-list-inactivos/user-list-inac
   exports: [
     UserListComponent,
     UserListInactivosComponent,
+    UserEditComponent,
  
   ],
 })

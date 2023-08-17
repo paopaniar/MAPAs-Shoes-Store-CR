@@ -6,12 +6,31 @@
     <mat-card-content>
       <div class="input-container">
         <mat-form-field class="full-width">
+          <mat-label>Identificación</mat-label>
+          <input matInput type="text" placeholder="Identificación" formControlName="identificacion" />
+         
+        </mat-form-field>
+      </div>
+      <div class="input-container">
+        <mat-form-field class="full-width">
           <mat-label>Nombre</mat-label>
           <input matInput type="text" placeholder="Nombre de usuario" formControlName="nombre" />
           <mat-error *ngIf="errorHandling('nombre', 'required')">El nombre es <strong>requerido</strong></mat-error>
         </mat-form-field>
       </div>
-
+      <div class="input-container">
+        <mat-form-field class="full-width">
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput type="text" placeholder="Primer Apellido" formControlName="primerApellido" />
+          <mat-error *ngIf="errorHandling('primerApellido', 'required')">El primer apellido es <strong>requerido</strong></mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-container">
+        <mat-form-field class="full-width">
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput type="text" placeholder="Primer Apellido" formControlName="segundoApellido" />
+        </mat-form-field>
+      </div>
       <div class="input-container">
         <mat-form-field class="full-width">
           <mat-label>Email</mat-label>

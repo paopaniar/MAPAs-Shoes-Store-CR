@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   isAutenticated: boolean;
   currentUser: any;
   qtyItems:Number = 0;
+  id: number;
   constructor(private cartService: CartService,
     private router: Router,
     private authService: AuthenticationService) {      
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
     //valores de prueba
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.authService.id;
     this.cartService.countItems.subscribe((value)=>{
       this.qtyItems=value
      })
@@ -35,6 +37,9 @@ export class HeaderComponent implements OnInit {
     logout(){
       this.authService.logout();
       this.router.navigate(['usuario/login']);
+    }
+    miPerfil(id: number) {
+      this.router.navigate(['/usuario/perfil', id]);
     }
   }
 
