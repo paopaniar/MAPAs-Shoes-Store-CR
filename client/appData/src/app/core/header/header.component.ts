@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['usuario/login']);
     }
     miPerfil(id: number) {
-      this.router.navigate(['/usuario/perfil', id]);
+      this.router.navigate(['usuario/perfil', id]);
     }
   }
 
