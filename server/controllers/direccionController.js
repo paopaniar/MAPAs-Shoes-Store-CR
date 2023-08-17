@@ -27,27 +27,47 @@ const axios = require('axios');
 //   }
 // };
 
-module.exports.get = async (request, response, next) => {
+// module.exports.get = async (request, response, next) => {
     
-      const apiUrl = 'https://levelupcr.github.io/APIProvinciasCR/CRAPI.json'; // Reemplaza con la URL de la API externa
-  
-      // Realizar una solicitud GET a la API externa utilizando axios
-      const apiResponse = await axios.get(apiUrl);
-  
-      // Obtener los datos de la respuesta de la API
-      const dataFromApi = apiResponse.data;
-  
-      response.json(dataFromApi);
-    
-  };
+//       const apiUrl = 'https://levelupcr.github.io/APIProvinciasCR/CRAPI.json'; // Reemplaza con la URL de la API externa
+//         const apiResponse = await axios.get(apiUrl);
+//         const dataFromApi = apiResponse.data;
+//       response.json(dataFromApi);
+//     
+//   };
 
-
-//Obtener por Id
+module.exports.get = async (request, response, next) => {
+  const direcciones = await prisma.direccion.findMany({
+    include: { usuario: true },
+  });
+  response.json(direcciones);
+};
 module.exports.getById = async (request, response, next) => {
+  let direccionId = parseInt(request.params.id);
+  const direccion = await prisma.direccion.findUnique({
+    where: { id: direccionId },
+    include: { usuario: true },
+  });
+  response.json(direccion);
 };
-//Crear un videojuego
+
+
 module.exports.create = async (request, response, next) => {
+  let direcciones=request.body;
+
+  const newDireccion =await prisma.direccion.create({
+    data:{
+      provincia: direccion.provincia,
+      canton: direccion.canton,
+      distrito: direccion.distrito,
+      barrio: direccion.barrio,
+      otrasSennas: direccion.otrasSennas,
+      usuarioId:direcciones.usuarioId,
+  },
+  });
+  response.json(newDireccion)
 };
+
 //Actualizar un videojuego
 module.exports.update = async (request, response, next) => {
 };

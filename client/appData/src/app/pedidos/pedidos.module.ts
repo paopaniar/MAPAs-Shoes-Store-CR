@@ -20,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PedidosDireccionComponent } from './pedidos-direccion/pedidos-direccion.component';
 
 
 
@@ -31,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PedidosDiagComponent,
     PedidosDetailComponent,
     PedidosCarritoComponent,
+    PedidosDireccionComponent,
   ],
   imports: [
     CommonModule,
