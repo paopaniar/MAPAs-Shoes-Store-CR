@@ -1,0 +1,10 @@
+.container {
+    background-color: #d7ebfc;
+    padding: 10px; /* Reduce padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Reduce the maximum width */
+    margin: 0 auto; /* Center the container */
+    max-height: 50%;
+    align-content: center;
+  }
+  
