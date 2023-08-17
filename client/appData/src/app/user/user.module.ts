@@ -19,6 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { UserListInactivosComponent } from './user-list-inactivos/user-list-inactivos.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatSortModule } from '@angular/material/sort';
     UserCreateComponent,
     UserLoginComponent,
     UserIndexComponent,
-    UserListComponent
+    UserListComponent,
+    UserListInactivosComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule
   ],
   exports: [
-    UserListComponent
+    UserListComponent,
+    UserListInactivosComponent
   ],
 })
 export class UserModule { }

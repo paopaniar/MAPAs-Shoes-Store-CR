@@ -8,13 +8,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 
-
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-user-list-inactivos',
+  templateUrl: './user-list-inactivos.component.html',
+  styleUrls: ['./user-list-inactivos.component.css']
 })
-export class UserListComponent {
+export class UserListInactivosComponent {
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
 
@@ -40,23 +39,9 @@ export class UserListComponent {
   //Llamar al API y obtener la lista de productos
   listaUsuariosActivos() {
     // Asumiendo que en la URL tienes un parámetro 'estado' para filtrar (1 para activos, 0 para inactivos)
-    const estado = 1;
+    const estado = 0;
     this.gService
-      .list(`usuario/activos/${estado}`) // Suponiendo que 'usuarios/:estado' es la ruta correcta para obtener usuarios filtrados
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        console.log(data);
-        this.datos = data;
-        this.dataSource.data = this.datos; // Use .data to set the data for MatTableDataSource
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
-  }
-  actualizarEstado() {
-    // Asumiendo que en la URL tienes un parámetro 'estado' para filtrar (1 para activos, 0 para inactivos)
-    const estado = 1;
-    this.gService
-      .list(`usuario/activos/${estado}`) // Suponiendo que 'usuarios/:estado' es la ruta correcta para obtener usuarios filtrados
+      .list(`usuario/inactivos/${estado}`) // Suponiendo que 'usuarios/:estado' es la ruta correcta para obtener usuarios filtrados
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         console.log(data);
