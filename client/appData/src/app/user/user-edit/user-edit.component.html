@@ -5,16 +5,15 @@
     </div>
     <div class="row">
       <div class="col-4">
-        <h2>Información personal</h2>
-        <p><strong>Nombre:</strong> {{ usuario.nombre }} {{ usuario.apellidos }}</p>
+        <h2>Mi información</h2>
         <p><strong>Identificación:</strong> {{ usuario.identificacion }}</p>
-        <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
-        <p><strong>Correo Electrónico:</strong> {{ usuario.correo }}</p>
+        <p><strong>Nombre:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
       </div>
       <div class="col-8">
         <div class="row">
           <h2>Direcciones</h2>
-          <button mat-button aria-label="Agregar dirección" (click)="agregarDireccion()">Agregar dirección
+          <button mat-button aria-label="Agregar dirección" (click)="crearDireccion()">Agregar dirección
             <mat-icon>home</mat-icon>
           </button>
           <ul>
@@ -30,7 +29,7 @@
         </div>
         <div class="row">
           <h2>Métodos de pago</h2>
-          <button mat-button aria-label="Agregar método de pago" (click)="agregarMetodoPago()">Agregar método de pago
+          <button mat-button aria-label="Agregar método de pago" (click)="crearMetodoPago()">Agregar método de pago
             <mat-icon>credit_card</mat-icon>
           </button>
           <ul>

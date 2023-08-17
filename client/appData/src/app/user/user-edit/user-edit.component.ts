@@ -34,11 +34,11 @@ export class UserEditComponent {
       });
   }
 
-  agregarDireccion(){
+  crearDireccion(){
     this.router.navigate(['/direccion/crear']);
   }
 
-  agregarMetodoPago(){
+  crearMetodoPago(){
     this.router.navigate(['/metodopago/crear']);
   }
 
