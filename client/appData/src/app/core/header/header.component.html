@@ -50,16 +50,16 @@
             >Mis Pedidos</a
           >
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
+        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
        
           <a [matMenuTriggerFor]="menu3" style="color: white" class="nav-link" 
-            >Usuarios</a>           
+            > Usuarios</a>           
         <mat-menu #menu3="matMenu">
           <br> <a style="color: black" class="nav-link" href="/usuario/lista">Habilitados</a
           >
           <br />
           <a style="color: black" class="nav-link" href="/usuario/inactivo"
-            >Deshabilitados</a
+            > Deshabilitados</a
           >
         </mat-menu>
         </li>

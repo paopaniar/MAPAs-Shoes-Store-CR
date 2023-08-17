@@ -10,8 +10,10 @@
   <div class="card">
     <div class="card-header card-header-warning" >
       <h4 class="card-title">Usuarios habilitados</h4>
-      <a style="color: white;" class="nav-link active" aria-current="page" href="/usuario/inactivo">Ver usuarios deshabilitados</a>
-    </div>
+      <a style="color: rgb(5, 5, 5); background-color: #9dbcfd; padding: 5px 10px; border-radius: 5px;" class="nav-link active" aria-current="page" href="/usuario/inactivo">
+        <mat-icon style="vertical-align: middle; color:green">label</mat-icon> Ir a Inhabilitados
+      </a>
+          </div>
 
     <mat-card-title class="tit">
     
@@ -36,9 +38,12 @@
           <td mat-cell *matCellDef="let row">{{ row.rol}}</td>
         </ng-container>
         <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado</th>       
-          <td mat-cell *matCellDef="let row">{{ row.estado }}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado</th>
+          <td mat-cell *matCellDef="let row" [ngClass]="{'red-text': row.estado === 0, 'green-text': row.estado === 1}">
+            {{ row.estado === 0 ? 'INACTIVO' : 'ACTIVO' }}
+          </td>
         </ng-container>
+        
 
         <!-- Columna Acciones -->
         <ng-container matColumnDef="acciones">

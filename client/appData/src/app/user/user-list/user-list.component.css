@@ -2,6 +2,15 @@
     width: 100%;
    background-color: #022146;
   }
+
+  .red-text {
+    color: red;
+  }
+  
+  .green-text {
+    color: green;
+  }
+  
   .square-icon {
     display: inline-flex;
     justify-content: center;
