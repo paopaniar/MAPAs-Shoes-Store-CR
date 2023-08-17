@@ -53,6 +53,7 @@ export class UserEditComponent {
       .subscribe((data: any) => {
         console.log(data);
         this.usuario = data;
+        this.direcciones = this.usuario.direcciones; // Initialize direcciones
       });
   }
 
@@ -71,7 +72,7 @@ export class UserEditComponent {
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     const productId = this.id;
     const requestData = {
-      mensaje: this.inputDireccion.value.pregunta,
+      otrasSennas: this.inputDireccion.value.otrasSennas,
       usuarioId: this.currentUser.user.id,
     };
   

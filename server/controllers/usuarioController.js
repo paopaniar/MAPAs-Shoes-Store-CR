@@ -26,7 +26,20 @@ module.exports.get = async (request, response, next) => {
 module.exports.getById = async (request, response, next) => {
     let idUser=parseInt(request.params.id);
     const usuarios=await prisma.usuario.findUnique({
-        where: {id: idUser}
+        where: {id: idUser},
+        select: {
+          id: true,
+          nombre: true,
+          email: true,
+          estado: true,
+          rol: true,
+          direcciones: {
+            select: {
+              id: true,
+              otrasSennas: true,
+            }
+          },
+        },
     })
     response.json(usuarios);
 };

@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
   }
 
   .grid-container {
@@ -16,8 +17,21 @@ body {
   .contenedor {
     text-align: center;
     background-color: #022146;
-    padding: 10px;
+    padding: 4px;
+    height: 78%;
   }
+  .input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+
+  
+  .input-form {
+    display: flex;
+    align-items: center;
+  }
+  
 
   .row {
     display: flex;
@@ -59,7 +73,7 @@ body {
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     cursor: pointer;
   }
 

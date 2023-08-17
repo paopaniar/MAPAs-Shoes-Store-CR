@@ -10,37 +10,34 @@
         <p><strong>Identificación:</strong> {{ usuario.identificacion }}</p>
         <p><strong>Nombre:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
         <p><strong>Email:</strong> {{ usuario.email }}</p>
-        <div *ngFor="let direcciones of usuario.direcciones">
-            <span style="color: #fff;" class="mat-title">  {{ "-" + direcciones.otrasSennas }}</span>
-          </div>
+        <h4>Direcciones</h4>
+        <div *ngFor="let direccion of usuario.direcciones">
+          <span style="color: #030303;" class="mat-title">
+           <h6> Direccion {{direccion.id }}:</h6> {{ direccion.otrasSennas ? direccion.otrasSennas : 'Aún no ha asignado ninguna dirección' }}
+          </span>
+        </div>
+        
       </div>
-
                 
       <div class="col-8">
         <div class="row">
-            <h2>Direcciones</h2>
-            
-            <ul>
-              <li *ngFor="let direccion of usuario.direcciones">
-                <p><b>Dirección exacta: </b>{{ direccion.otrasSennas }}</p>
-              </li>
-            </ul>
+          <h4>Nueva Dirección</h4>
             <form [formGroup]="inputDireccion" >
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="otrasSennas" maxlength="50" placeholder="Direccion exacta">
                   </mat-form-field>
+                  <mat-card-actions>
+                    <!-- Call the createQuestion1() method on form submission -->
+                    <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearDireccion()">Guardar</button>
+                  </mat-card-actions>
                 </div>
               </div>
-              <mat-card-actions>
-                <!-- Call the createQuestion1() method on form submission -->
-                <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearDireccion()">Guardar</button>
-              </mat-card-actions>
             </form>
           </div>
           <div class="row">
-            <h2>Métodos de pago</h2>
+            <h4>Métodos de pago</h4>
             <ul>
               <li *ngFor="let metodoPago of usuario.metodosPago">
                 <p><b>Tipo de Pago: </b>{{ metodoPago.tipoPago }}</p>
@@ -55,12 +52,12 @@
                   <mat-form-field class="full-width">
                     <input matInput formControlName="descripcion" maxlength="50" placeholder="Metodo de pago" >
                   </mat-form-field>
+                  <mat-card-actions>
+                    <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearMetodoPago()">Guardar</button>
+                  </mat-card-actions>
                 </div>
+              
               </div>
-              <mat-card-actions>
-                <!-- Call the createQuestion1() method on form submission -->
-                <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearMetodoPago()">Guardar</button>
-              </mat-card-actions>
             </form>
         </div>
       </div>
