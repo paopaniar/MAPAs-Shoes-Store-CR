@@ -19,6 +19,9 @@ export class MapasIndexComponent {
   filterDatos: any;
   itemsPerPage = 6;
   currentPage = 1;
+  sortByPriceAsc = false;
+sortByPriceDesc = false;
+categorias: any[] = [];
 
   get displayedData(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -39,6 +42,27 @@ startAnimation() {
 stopAnimation() {
   this.animationActive = false;
 }
+filterProducto(text: string) {
+  // Filter based on text and category
+  if (!text) {
+    this.filterDatos = this.datos;
+  } else {
+    this.filterDatos = this.datos.filter(producto =>
+      producto?.nombreProducto.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+}
+sortProductsByPrice() {
+  if (this.sortByPriceAsc) {
+    this.filterDatos.sort((a, b) => a.precio - b.precio);
+    this.sortByPriceAsc = false;
+    this.sortByPriceDesc = true;
+  } else if (this.sortByPriceDesc) {
+    this.filterDatos.sort((a, b) => b.precio - a.precio);
+    this.sortByPriceAsc = true;
+    this.sortByPriceDesc = false;
+  }
+}
 
   
   nextPage() {
@@ -58,6 +82,7 @@ stopAnimation() {
     this.listaZapatos() 
 
   }
+  
   //lista de zapatos es la table producto
   listaZapatos(){
     //localhost:3000/producto/
@@ -68,8 +93,16 @@ stopAnimation() {
         console.log(data);
         this.datos=data;
         this.filterDatos=this.datos;
+        this.categorias = this.extractCategories(data);
       })
   }
+  // Create a method to extract unique categories from the data
+extractCategories(data: any[]): any[] {
+  const allCategories = data.flatMap(producto => producto.categorias);
+  const uniqueCategories = [...new Set(allCategories)];
+  return uniqueCategories;
+}
+  
   filterProductos(text:string){
     if(!text){
       this.filterDatos=this.datos
