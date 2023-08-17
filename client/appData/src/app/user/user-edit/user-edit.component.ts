@@ -21,18 +21,28 @@ export class UserEditComponent {
   submitted = false;
   currentUser: any;
   direcciones: any;
+  metodoPago: any;
 
   constructor(
     private gService: GenericService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthenticationService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder) {
     let id = this.route.snapshot.paramMap.get('id');
     this.id = +id;
     if (!isNaN(Number(this.id))) {
       this.obtenerUsuario(Number(this.id));
     }
+    this.direcciones = []; // Initialize direcciones as an empty array
+    this.inputDireccion = this.formBuilder.group({
+      otrasSennas: ['', Validators.maxLength(50)]
+    });
+  
+    this.inputMetodoPago = this.formBuilder.group({
+      descripcion: ['', Validators.maxLength(50)] // Add more form controls if needed
+    });
   }
 
   obtenerUsuario(id: number) {
@@ -48,9 +58,11 @@ export class UserEditComponent {
   updateDirecciones(newData: any) {
     this.direcciones.push(newData);
   }
+  updateMetodoPago(newData: any) {
+    this.metodoPago.push(newData);
+  }
   crearDireccion(): void {
     this.submitted = true;
-  
     if (this.inputDireccion.invalid) {
       return;
     }
@@ -68,7 +80,7 @@ export class UserEditComponent {
         (data: any) => {
           // Handle the API response, if necessary
           this.updateDirecciones(data);
-          this.router.navigate(['/usuario/perfil'], {
+          this.router.navigate(['/usuario/perfil', this.usuario.id], {
             queryParams: { create: 'true' }
           });
           this.showSuccessMessage('Dirección creada exitosamente!');
@@ -100,7 +112,7 @@ export class UserEditComponent {
       .subscribe(
         (data: any) => {
           // Handle the API response, if necessary
-          this.updateDirecciones(data);
+          this.updateMetodoPago(data);
           this.router.navigate(['/usuario/perfil'], {
             queryParams: { create: 'true' }
           });

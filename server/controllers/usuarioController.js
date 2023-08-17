@@ -148,3 +148,43 @@ module.exports.register = async (request, response, next) => {
       })
     }
   };
+  module.exports.createDireccion = async (request, response, next) => {
+    try {
+      let { otrasSennas } = request.body;
+      let { usuarioId } = request.body;
+      const newPregunta = await prisma.direccion.create({
+        data: {
+          otrasSennas: otrasSennas,
+          usuarioId: usuarioId,
+        },
+      });
+  
+      response.json(newPregunta);
+    } catch (error) {
+      console.error('Error creating question:', error);
+      response.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  module.exports.createMetodoPago = async (request, response, next) => {
+    try {
+      let { descripcion } = request.body;
+      let { usuarioId } = request.body;
+      const newPregunta = await prisma.direccion.create({
+        data: {
+          descripcion: descripcion,
+          usuarioId: usuarioId,
+        },
+      });
+  
+      response.json(newPregunta);
+    } catch (error) {
+      console.error('Error creating question:', error);
+      response.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  module.exports.get = async (request, response, next) => {
+    const direcciones = await prisma.direccion.findMany({
+      include: { usuario: true },
+    });
+    response.json(direcciones);
+  };

@@ -10,25 +10,26 @@
         <p><strong>Identificación:</strong> {{ usuario.identificacion }}</p>
         <p><strong>Nombre:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
         <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <div *ngFor="let direcciones of usuario.direcciones">
+            <span style="color: #fff;" class="mat-title">  {{ "-" + direcciones.otrasSennas }}</span>
+          </div>
       </div>
+
+                
       <div class="col-8">
         <div class="row">
             <h2>Direcciones</h2>
             
             <ul>
               <li *ngFor="let direccion of usuario.direcciones">
-                <p><b>Provincia: </b>{{ direccion.provincia }}</p>
-                <p><b>Cantón: </b>{{ direccion.canton }}</p>
-                <p><b>Distrito: </b>{{ direccion.distrito }}</p>
-                <p><b>Barrio: </b>{{ direccion.barrio }}</p>
-                <p><b>Otras Señas: </b>{{ direccion.otrasSennas }}</p>
+                <p><b>Dirección exacta: </b>{{ direccion.otrasSennas }}</p>
               </li>
             </ul>
             <form [formGroup]="inputDireccion" >
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width">
-                    <input matInput formControlName="otrasSennas" maxlength="50" placeholder="Direccion exacta" >
+                    <input matInput formControlName="otrasSennas" maxlength="50" placeholder="Direccion exacta">
                   </mat-form-field>
                 </div>
               </div>
