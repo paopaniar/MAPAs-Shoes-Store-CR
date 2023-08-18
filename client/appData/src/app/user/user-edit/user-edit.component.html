@@ -6,60 +6,51 @@
     </div>
     <div class="row">
       <div class="col-4">
-        <h2>Datos Personales</h2>
+        <h3>Datos Personales</h3>
         <p><strong>Identificación:</strong> {{ usuario.identificacion }}</p>
-        <p><strong>Nombre:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
-        <p><strong>Email:</strong> {{ usuario.email }}</p>
-        <h4>Direcciones</h4>
-        <div *ngFor="let direccion of usuario.direcciones">
-          <span style="color: #030303;" class="mat-title">
-           <h6> Direccion {{direccion.id }}:</h6> {{ direccion.otrasSennas ? direccion.otrasSennas : 'Aún no ha asignado ninguna dirección' }}
-          </span>
-        </div>
-        
+        <p><strong>Nombre Completo:</strong> {{ usuario.nombre + usuario.primerApellido}}</p>  
+        <p><strong>Correo Electrónico:</strong> {{ usuario.email }}</p>
       </div>
                 
       <div class="col-8">
         <div class="row">
-          <h4>Nueva Dirección</h4>
-            <form [formGroup]="inputDireccion" >
-              <div class="row">
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput formControlName="otrasSennas" maxlength="50" placeholder="Direccion exacta">
-                  </mat-form-field>
-                  <mat-card-actions>
-                    <!-- Call the createQuestion1() method on form submission -->
-                    <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearDireccion()">Guardar</button>
-                  </mat-card-actions>
-                </div>
-              </div>
-            </form>
+          <div class="dirmet-card">
+              <button mat-button aria-label="Agregar dirección" class="custom-header" (click)="agregarDireccion()">Añadir nueva dirección<mat-icon>location_on</mat-icon></button>
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let direccion of usuario.direcciones">
+                <mat-expansion-panel-header class="custom-header">
+                  <mat-panel-title>
+                   Detalles de Direcciones
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p><b>Provincia: </b>{{ direccion.provincia }}</p>
+                <p><b>Cantón: </b>{{ direccion.canton }}</p>
+                <p><b>Distrito: </b>{{ direccion.distrito }}</p>
+                <p><b>Otras Señas: </b>{{ direccion.otrasSennas }}</p>
+              </mat-expansion-panel>
+            </mat-accordion>
+            
           </div>
+        </div>
           <div class="row">
-            <h4>Métodos de pago</h4>
-            <ul>
-              <li *ngFor="let metodoPago of usuario.metodosPago">
-                <p><b>Tipo de Pago: </b>{{ metodoPago.tipoPago }}</p>
-                <p><b>Proveedor: </b>{{ metodoPago.proveedor }}</p>
-                <p><b>Número de Cuenta: </b>{{ metodoPago.numeroCuenta }}</p>
-                <p><b>Fecha de Expiración: </b>{{ metodoPago.fechaExpiracion }}</p>
-              </li>
-            </ul>
-            <form [formGroup]="inputMetodoPago" >
-              <div class="row">
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput formControlName="descripcion" maxlength="50" placeholder="Metodo de pago" >
-                  </mat-form-field>
-                  <mat-card-actions>
-                    <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="crearMetodoPago()">Guardar</button>
-                  </mat-card-actions>
-                </div>
-              
+              <div class="dirmet-card">
+                  <button mat-button aria-label="Agregar método de pago" class="custom-header" (click)="agregarMetodoPago()">Añadir nuevo método de pago<mat-icon>account_balance_wallet</mat-icon>
+                    
+                  </button>
+             
+                  <mat-accordion>
+                    <mat-expansion-panel  *ngFor="let metodoPago of usuario.metodosPago" class="dirmet-item">
+                      <mat-expansion-panel-header class="custom-header">
+                        <mat-panel-title>
+                          Detalles de Métodos de Pago
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    <p><b>Descripcion: </b>{{ metodoPago.descripcion }}</p>
+                    </mat-expansion-panel >
+                </mat-accordion>
               </div>
-            </form>
+            </div>
+            
         </div>
       </div>
     </div>
-  </div>

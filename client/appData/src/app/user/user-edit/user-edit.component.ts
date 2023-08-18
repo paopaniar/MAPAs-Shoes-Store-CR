@@ -15,12 +15,14 @@ export class UserEditComponent {
   isAutenticated: boolean;
   id: number;
   usuario: any;
+  selectedMetodoPago : number = 0;
   destroy$: Subject<boolean> = new Subject<boolean>();
   inputDireccion: FormGroup;
   inputMetodoPago: FormGroup;
   submitted = false;
   currentUser: any;
   direcciones: any;
+  metodosPagoList: any;
   metodoPago: any;
 
   constructor(
@@ -34,15 +36,17 @@ export class UserEditComponent {
     this.id = +id;
     if (!isNaN(Number(this.id))) {
       this.obtenerUsuario(Number(this.id));
+      this.listaMetodosPago();    
+
     }
     this.direcciones = []; // Initialize direcciones as an empty array
     this.inputDireccion = this.formBuilder.group({
       otrasSennas: ['', Validators.maxLength(50)]
     });
   
-    this.metodoPago = []; // Initialize direcciones as an empty array
+    this.metodoPago = []; 
     this.inputMetodoPago = this.formBuilder.group({
-      descripcion: ['', Validators.maxLength(50)]
+      metodoPagoId: [null, Validators.required], // Initialize with null value and require selection
     });
   }
 
@@ -53,7 +57,9 @@ export class UserEditComponent {
       .subscribe((data: any) => {
         console.log(data);
         this.usuario = data;
-        this.direcciones = this.usuario.direcciones; // Initialize direcciones
+        this.direcciones = this.usuario.direcciones; 
+        this.metodoPago = this.usuario.metodosPago;
+        console.log('pagos', this.metodoPago)
       });
   }
 
@@ -95,17 +101,34 @@ export class UserEditComponent {
       );
 
   }
+  listaMetodosPago() {
+    this.metodosPagoList = null;
+    this.gService
+      .list('metodoPago')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.metodosPagoList = data;
+      });
+  }
+  agregarMetodoPago(){
+    this.router.navigate(['usuario/metodo']);
+  }
+  agregarDireccion(){
+    this.router.navigate(['usuario/direccion']);
+  }
   crearMetodoPago(): void {
     this.submitted = true;
   
     if (this.inputMetodoPago.invalid) {
       return;
     }
-    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+  
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    this.authService.isAuthenticated.subscribe((valor) => (this.isAutenticated = valor));
+  
     const productId = this.id;
     const requestData = {
-      mensaje: this.inputMetodoPago.value.pregunta,
+      metodoPagoId: this.inputMetodoPago.value.metodoPagoId,
       usuarioId: this.currentUser.user.id,
     };
   
@@ -115,7 +138,7 @@ export class UserEditComponent {
         (data: any) => {
           // Handle the API response, if necessary
           this.updateMetodoPago(data);
-          this.router.navigate(['/usuario/perfil'], {
+          this.router.navigate(['/usuario/perfil', this.usuario.id], {
             queryParams: { create: 'true' }
           });
           this.showSuccessMessage('Metodo de pago creado exitosamente!');

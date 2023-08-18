@@ -10,11 +10,30 @@ module.exports.get = async (request, response, next) => {
     });
     response.json(metodoPago); 
 };
+
+// Get all payment methods by usuarioId
+module.exports.getByUsuarioId = async (request, response, next) => {
+  try {
+    const usuarioId = parseInt(request.params.usuarioId);
+    
+    const metodosPago = await prisma.metodoPago.findMany({
+      where: {
+        usuarioId: usuarioId,
+      },
+    });
+    
+    response.json(metodosPago);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.create = async (request, response, next) => {
     try {
       let metodoPago = request.body;
       const createMetodoPago = await prisma.metodoPago.create({
         data: {
+            usuarioId: metodoPago.usuarioId,
             descripcion: metodoPago.descripcion
         },
       });

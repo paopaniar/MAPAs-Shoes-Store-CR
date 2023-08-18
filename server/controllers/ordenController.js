@@ -128,8 +128,6 @@ module.exports.create = async (request, response, next) => {
     data:{
       fechaOrden:infoOrden.fechaOrden,
       usuarioId: infoOrden.usuarioId,
-      metodoPagoId:parseInt(infoOrden.metodoPagoId),
-      direccionId:1,
       ordenProductos:{
         createMany:{
           data: infoOrden.ordenProductos

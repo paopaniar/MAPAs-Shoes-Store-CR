@@ -7,6 +7,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AuthGuard } from '../share/guards/auth.guard';
 import { UserListInactivosComponent } from './user-list-inactivos/user-list-inactivos.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserMetodoComponent } from './user-metodo/user-metodo.component';
+import { UserDireccionComponent } from './user-direccion/user-direccion.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,8 @@ const routes: Routes = [
     ],
   },
   {path: 'usuario/perfil/:id', component: UserEditComponent},
+  {path: 'usuario/metodo', component: UserMetodoComponent},
+  {path: 'usuario/direccion', component: UserDireccionComponent},
 
   {path: 'usuario/lista', component: UserListComponent,
   canActivate:[AuthGuard],

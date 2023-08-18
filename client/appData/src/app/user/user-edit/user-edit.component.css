@@ -6,6 +6,18 @@ body {
     padding: 0;
 
   }
+/* Adjust the width of the expansion panel header */
+.custom-header {
+  width: 100%; /* Set the desired width */
+  display: flex;
+  justify-content: space-between; /* Distribute the space between title and button */
+  align-items: center;
+}
+
+/* Ensure the button has the same width as the expansion panel header */
+.custom-header button {
+  width: 100%;
+}
 
   .grid-container {
     display: grid;
@@ -18,7 +30,6 @@ body {
     text-align: center;
     background-color: #022146;
     padding: 4px;
-    height: 78%;
   }
   .input-container {
     display: flex;
@@ -39,18 +50,16 @@ body {
     gap: 20px;
   }
 
-  .col-4,
-  .col-8 {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-  }
+
 
   h2 {
     color: #5cb85c;
     margin-bottom: 10px;
   }
-
+  h3 {
+    color: #5cb85c;
+    margin-bottom: 10px;
+  }
   h6 {
     color: #5cb85c;
     margin-bottom: 10px;

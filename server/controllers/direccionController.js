@@ -1,9 +1,3 @@
-//Nela deje notas importantes para que pueda entender el codigo con facilidad
-//por cada controlador vamos  a tener un archivo de rutas
-//para correr el servidor y verlo en la pag web npm run dev
-
-//response = requests.get('https://api.pruebayerror.com/locaciones/v1/');
-
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 //Obtener listado
@@ -51,19 +45,25 @@ module.exports.getById = async (request, response, next) => {
   response.json(direccion);
 };
 
+module.exports.getByUsuario = async (request, response, next) => {
+  let usuarioId = parseInt(request.params.usuarioId);
+  const direcciones = await prisma.direccion.findMany({
+    where: { usuarioId: usuarioId },
+    include: { usuario: true },
+  });
+  response.json(direcciones);
+};
 
 module.exports.create = async (request, response, next) => {
-  let direcciones=request.body;
-
-  const newDireccion =await prisma.direccion.create({
-    data:{
-      provincia: direccion.provincia,
-      canton: direccion.canton,
-      distrito: direccion.distrito,
-      barrio: direccion.barrio,
-      otrasSennas: direccion.otrasSennas,
-      usuarioId:direcciones.usuarioId,
-  },
+  let direccion = request.body;
+    const newDireccion = await prisma.direccion.create({
+      data: {
+        provincia: direccion.provincia.nombre,
+        canton: direccion.canton.nombre,
+        distrito: direccion.distrito.nombre,
+        otrasSennas: direccion.otrasSennas,
+        usuarioId: direccion.usuarioId,
+      },
   });
   response.json(newDireccion)
 };

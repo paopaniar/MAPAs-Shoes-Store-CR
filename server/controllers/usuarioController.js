@@ -17,6 +17,22 @@ module.exports.get = async (request, response, next) => {
       email: true,
       estado: true,
       rol: true,
+      direcciones: {
+        select: {
+          id: true,
+          otrasSennas: true,
+          otrasSennas: true,
+          provincia:true,
+          canton:true,
+          distrito:true,
+        }
+      },
+      metodosPago: {
+        select:{
+          id:true,
+          descripcion:true,
+        },
+      },
     },
   });
   response.json(usuarios);
@@ -37,7 +53,17 @@ module.exports.getById = async (request, response, next) => {
             select: {
               id: true,
               otrasSennas: true,
+              provincia:true,
+              canton:true,
+              distrito:true,
             }
+          },
+          metodosPago:
+          {
+            select:{
+              id:true,
+              descripcion:true,
+            },
           },
         },
     })
@@ -167,6 +193,9 @@ module.exports.register = async (request, response, next) => {
       let { usuarioId } = request.body;
       const newPregunta = await prisma.direccion.create({
         data: {
+          provincia:provincia,
+          canton:canton,
+          distrito:distrito,
           otrasSennas: otrasSennas,
           usuarioId: usuarioId,
         },
@@ -182,7 +211,7 @@ module.exports.register = async (request, response, next) => {
     try {
       let { descripcion } = request.body;
       let { usuarioId } = request.body;
-      const newPregunta = await prisma.direccion.create({
+      const newPregunta = await prisma.metodoPago.create({
         data: {
           descripcion: descripcion,
           usuarioId: usuarioId,

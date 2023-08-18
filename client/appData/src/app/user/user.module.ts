@@ -21,6 +21,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { UserListInactivosComponent } from './user-list-inactivos/user-list-inactivos.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserMetodoComponent } from './user-metodo/user-metodo.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { UserDireccionComponent } from './user-direccion/user-direccion.component';
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserIndexComponent,
     UserListComponent,
     UserListInactivosComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserMetodoComponent,
+    UserDireccionComponent
    
   ],
   imports: [
@@ -45,6 +50,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     MatIconModule,
     LayoutModule,
     MatCardModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     UserRoutingModule,
     MatPaginatorModule,

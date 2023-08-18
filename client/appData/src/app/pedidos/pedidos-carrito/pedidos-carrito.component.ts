@@ -15,20 +15,11 @@ export class PedidosCarritoComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   isAutenticated: boolean;
   total = 0;
-  selectedMetodoPago : number = 0;
-  provinciasList: any;
-  cantonesList: any;
-  provinceNames: string[] = []
-  cantonesNames: string[] = []
   fecha = Date.now();
-  metodosPagoList: any;
   qtyItems = 0;
   isUser: boolean; 
   currentUser: any;
-  selectedProvinceId: string | null = null;
-  selectedCantonName: string | null = null;
 
-  //Tabla
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
   constructor(
@@ -37,12 +28,7 @@ export class PedidosCarritoComponent implements OnInit {
     private authService: AuthenticationService,
     private gService: GenericService,
     private router: Router
-  ) {
-    this.listaMetodosPago();    
-    // this.listaProvincias();
-    // this.listaCantones(this.selectedProvinceId);
-
-  }
+  ) {}
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
@@ -57,9 +43,6 @@ export class PedidosCarritoComponent implements OnInit {
   actualizarCantidad(item: any) {
     this.cartService.addToCart(item);
     this.total=this.cartService.getTotal();
-   /*  this.noti.mensaje('Orden',
-    'Cantidad actualizada: '+item.cantidad,
-    TipoMessage.info) */
   }
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
@@ -69,75 +52,6 @@ export class PedidosCarritoComponent implements OnInit {
     TipoMessage.warning)
   }
 
-  listaMetodosPago() {
-    this.metodosPagoList = null;
-    this.gService
-      .list('metodoPago')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        // console.log(data);
-        this.metodosPagoList = data;
-      });
-  }
-
-
-
-
-  // filterProvinceNames(data: any): string[] {
-  //   const provinceNames: string[] = [];
-  
-  //   for (const provinceId in data.provincias) {
-  //     if (data.provincias.hasOwnProperty(provinceId)) {
-  //       const province = data.provincias[provinceId];
-  //       provinceNames.push(province.nombre);
-  //     }
-  //   }
-  
-  //   return provinceNames;
-  // }
-
-  // filterCantonesNames(data: any, selectedProvinceId: string): string[] {
-  //   const cantonNames: string[] = [];
-  
-  //   const selectedProvince = data.provincias[selectedProvinceId];
-  //   if (selectedProvince && selectedProvince.cantones) {
-  //     for (const cantonId in selectedProvince.cantones) {
-  //       if (selectedProvince.cantones.hasOwnProperty(cantonId)) {
-  //         const canton = selectedProvince.cantones[cantonId];
-  //         cantonNames.push(canton.nombre);
-  //       }
-  //     }
-  //   }
-  
-  //   return cantonNames;
-  // }
-  // selectProvince(provinceId: string) {
-  //   this.selectedProvinceId = provinceId;
-  //   this.listaCantones(provinceId); 
-  // }
-  // listaCantones(selectedProvinceId: string) {
-  //   this.cantonesList = null;
-  //   this.gService
-  //     .list('direccion')
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe((data: any) => {
-  //       this.cantonesList = data;
-  //       this.cantonesNames = this.filterCantonesNames(data, selectedProvinceId);
-  //       console.log('cantones', this.cantonesNames);
-  //     });
-  // }
-  
-  // listaProvincias() {
-  //   this.provinciasList = null;
-  //   this.gService
-  //     .list('direccion')
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe((data: any) => {
-  //       this.provinciasList = data;
-  //       this.provinceNames = this.filterProvinceNames(data); // Store filtered names
-  //     });
-  // }
-  
   registrarOrden() {
    if(this.cartService.getItems!=null){
       let itemsCarrito=this.cartService.getItems;
@@ -145,7 +59,6 @@ export class PedidosCarritoComponent implements OnInit {
         x=>({
           ['productoId']:x.idItem,
           ['cantidad']: x.cantidad,
-
         })
       );
       this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
@@ -154,11 +67,9 @@ export class PedidosCarritoComponent implements OnInit {
         'fechaOrden': new Date(this.fecha),
         'ordenProductos':detalles,  
         'usuarioId': this.currentUser.user.id,
-        'metodoPagoId': this.selectedMetodoPago.toString(),
       }
       console.log('currentUser:', this.currentUser);
       console.log('isAuthenticated:', this.isAutenticated);
-      console.log('Metodo de pago', this.selectedMetodoPago);
 
       this.gService.create('orden',infoOrden)
       .subscribe((respuesta:any)=>{
