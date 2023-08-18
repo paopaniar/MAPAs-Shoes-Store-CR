@@ -41,7 +41,6 @@ export class UserListComponent {
   }
   //Llamar al API y obtener la lista de productos
   listaUsuariosActivos() {
-    // Asumiendo que en la URL tienes un parámetro 'estado' para filtrar (1 para activos, 0 para inactivos)
     const estado = 1;
     this.gService
       .list(`usuario/activos/${estado}`) // Suponiendo que 'usuarios/:estado' es la ruta correcta para obtener usuarios filtrados

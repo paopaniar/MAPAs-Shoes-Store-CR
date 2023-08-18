@@ -35,8 +35,14 @@
         <!-- Columna Precio -->
         <ng-container matColumnDef="rol">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Rol</th>
-          <td mat-cell *matCellDef="let row">{{ row.rol}}</td>
+          <td mat-cell *matCellDef="let row">
+            <span *ngFor="let role of row.roles; let last = last">
+              {{ role.descripcion }}<!-- Assuming 'descripcion' is the property holding role description -->
+              <span *ngIf="!last">, </span><!-- Add comma if not the last role -->
+            </span>
+          </td>
         </ng-container>
+        
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado</th>
           <td mat-cell *matCellDef="let row" [ngClass]="{'red-text': row.estado === 0, 'green-text': row.estado === 1}">
