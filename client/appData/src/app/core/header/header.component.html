@@ -69,9 +69,10 @@
         <!--enlaces de la app-->
         <!--https://fonts.google.com/icons-->
         <!--https://material.angular.io/guide/typography-->
-
-        <button
+       
+        <button 
           class="example-icon"
+          *ngIf="currentUser?.user?.rol === 'USER'"
           mat-icon-button
           matBadgeColor="accent"
           [matBadge]="qtyItems.toString()"
@@ -103,8 +104,8 @@
             <span>Cerrar Sesión</span>
           </a>
           <a mat-menu-item *ngIf="isAutenticated" (click)="miPerfil(id)">
-            <mat-icon>edit</mat-icon>
-            <span>Editar mi perfil</span>
+            <mat-icon>person</mat-icon>
+            <span>Mi Cuenta</span>
           </a>
         </mat-menu>
       </div>

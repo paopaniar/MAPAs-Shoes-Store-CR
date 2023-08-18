@@ -45,6 +45,7 @@
         <div class="card-body" style="background-color: #9dbcfd;">
           <h5 class="card-title">{{item.nombreProducto}}</h5>
           <p class="card-text" style="color: #0e1335;" >Precio: ₡{{ item.precio | number: '1.2-2' }}</p>
+
           <div *ngIf="item.categorias">
             <p *ngFor="let categoria of item.categorias">{{'Categoría:'+ " "+ categoria.nombreCategoria }}</p>
           </div>          
@@ -64,6 +65,7 @@
               <button
               mat-mini-fab
               style="background-color: #0e1335;"
+              *ngIf="currentUser?.user?.rol === 'USER'"
               color="primary"
               matTooltip="Comprar"
               aria-label="Comprar"

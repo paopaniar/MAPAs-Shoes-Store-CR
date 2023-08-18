@@ -33,9 +33,11 @@ const routes: Routes = [
     roles: ['ADMIN']
   }},
 
-  {
-     path: 'ordenProducto',
-    component: PedidosCarritoComponent
+  {path: 'ordenProducto', component: PedidosCarritoComponent,
+  canActivate:[AuthGuard],
+    data:{
+      roles: ['USER']
+    }
   },
 
 ];

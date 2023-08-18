@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 import { CartService } from 'src/app/share/cart.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
   selector: 'app-mapas-index',
@@ -13,21 +14,26 @@ import { NotificacionService, TipoMessage } from 'src/app/share/notification.ser
   styleUrls: ['./mapas-index.component.css']
   
 })
-export class MapasIndexComponent {
+export class MapasIndexComponent implements OnInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
   filterDatos: any;
   itemsPerPage = 6;
   currentPage = 1;
   sortByPriceAsc = false;
-sortByPriceDesc = false;
-categorias: any[] = [];
+  sortByPriceDesc = false;
+  categorias: any[] = [];
+  isAutenticated: boolean;
+  currentUser: any;  id: number;
+
 
   get displayedData(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.datos.slice(startIndex, endIndex);
   }
+
+
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -77,10 +83,16 @@ sortProductsByPrice() {
     private router: Router,
     private route: ActivatedRoute,
     private cartService:CartService,
+    private authService: AuthenticationService,
     private notificacion:NotificacionService,
     private dialog: MatDialog){
     this.listaZapatos() 
 
+  }
+  ngOnInit(): void {
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.currentUser.user.id;
   }
   
   //lista de zapatos es la table producto
