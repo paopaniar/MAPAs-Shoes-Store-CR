@@ -89,26 +89,33 @@
       ></mat-footer-row>
     </mat-table>
   </mat-card-content>
+  <form [formGroup]="orderForm">
   <div class="card-header card-header-warning" style="border: none;background-color: #d1c6c4;">
 <mat-card-content>
 <div>
   <mat-form-field>
     <mat-label>Seleccionar Método de Pago</mat-label>
-    <mat-select [(ngModel)]="selectedPaymentMethod" name="metodosPago">
+    <mat-select [(ngModel)]="selectedPaymentMethod"  formControlName="selectedPaymentMethod" name="metodosPago">
       <mat-option *ngFor="let metodo of metodosPagoList" [value]="metodo.id">
         {{ metodo.descripcion }}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="orderForm.get('selectedPaymentMethod').hasError('required')">
+      Método de Pago es requerido
+    </mat-error>
   </mat-form-field>
 </div>
 <div>
   <mat-form-field>
     <mat-label>Seleccionar Dirección de Envio</mat-label>
-    <mat-select [(ngModel)]="selectedAddress" name="direcciones">
+    <mat-select [(ngModel)]="selectedAddress" name="direcciones"  formControlName="selectedAddress">
       <mat-option *ngFor="let direccion of direccionesList" [value]="direccion.id">
         {{ direccion.provincia + " "+ direccion.canton +" "+ direccion.distrito }}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="orderForm.get('selectedAddress').hasError('required')">
+      Dirección de Envio es requerida
+    </mat-error>
   </mat-form-field>
 </div>
   <mat-card-actions align="end">
@@ -123,4 +130,5 @@
   </mat-card-actions>
 </mat-card-content>
 </div>
+</form>
 </div>

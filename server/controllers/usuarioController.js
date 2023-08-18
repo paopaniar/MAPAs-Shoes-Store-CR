@@ -14,6 +14,9 @@ module.exports.get = async (request, response, next) => {
     select: {
       id: true,
       nombre: true,
+      primerApellido:true,
+      segundoApellido:true,
+      identificacion:true,
       email: true,
       estado: true,
       rol: true,
@@ -45,6 +48,9 @@ module.exports.getById = async (request, response, next) => {
         where: {id: idUser},
         select: {
           id: true,
+          primerApellido:true,
+          segundoApellido:true,
+          identificacion:true,
           nombre: true,
           email: true,
           estado: true,

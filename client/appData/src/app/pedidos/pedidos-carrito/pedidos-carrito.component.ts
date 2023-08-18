@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { CartService, ItemCart } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
@@ -16,6 +17,7 @@ export class PedidosCarritoComponent implements OnInit {
   isAutenticated: boolean;
   total = 0;
   fecha = Date.now();
+  orderForm: FormGroup;
   qtyItems = 0;
   isUser: boolean; 
   selectedPaymentMethod: any;
@@ -28,6 +30,7 @@ export class PedidosCarritoComponent implements OnInit {
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
   constructor(
+    private fb: FormBuilder,
     private cartService: CartService,
     private noti: NotificacionService,
     private authService: AuthenticationService,
@@ -36,6 +39,13 @@ export class PedidosCarritoComponent implements OnInit {
   ) {
     this.listaMetodosPago();
     this.listadirecciones();
+    this.formularioReactive();
+  }
+  formularioReactive() {
+    this.orderForm = this.fb.group({
+      selectedPaymentMethod: [null, Validators.required],
+      selectedAddress: [null, Validators.required]
+    });
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -95,6 +105,9 @@ listadirecciones() {
 
 
   registrarOrden() {
+    if (this.orderForm.invalid) {
+      return;
+    }  
    if(this.cartService.getItems!=null){
       let itemsCarrito=this.cartService.getItems;
       let detalles=itemsCarrito.map(
