@@ -78,7 +78,7 @@ export class MapasDiagComponent implements OnInit{
     const productId = this.datosDialog.id;
     const requestData = {
       mensaje: this.inputPregunta.value.pregunta,
-      usuarioId: this.currentUser.user.id,
+      usuarioId: this.currentUser.usuario.id,
     };
   
     this.gService.create('producto/pregunta/' + productId, requestData)
@@ -101,11 +101,7 @@ export class MapasDiagComponent implements OnInit{
 
   }
 
-  
-  
-  
-  
-  
+
   createAnswer1(preguntaId: number): void {
     this.submitted = true;
 
@@ -123,7 +119,7 @@ export class MapasDiagComponent implements OnInit{
         .pipe(takeUntil(this.destroy$))
         .subscribe(
             (data: any) => {
-                // Handle the API response, if necessary
+               
                 this.updateConsultaProductos(data); 
                 this.router.navigate(['/producto/vendedor'], {
                     queryParams: { create: 'true' }
@@ -131,17 +127,13 @@ export class MapasDiagComponent implements OnInit{
                 this.showSuccessMessage('Respuesta creada exitosamente!');
             },
             (error) => {
-                // Handle the error here, you can log it or show a proper error message
                 console.error('Error:', error);
             }
         );
         this.close()
 }
 
-  
 
-  
-  
   showSuccessMessage(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000, // Set the duration for how long the snackbar should be visible
@@ -166,7 +158,8 @@ export class MapasDiagComponent implements OnInit{
   }
 
   isUser():boolean{
-    return  this.currentUser.user.rol === "SALES";
+    const roleses = this.currentUser.usuario.roles || [];
+      return roleses.some(roles => roles.descripcion === 'Vendedor');
   }
   
   close(){
