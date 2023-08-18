@@ -136,7 +136,21 @@ module.exports.create = async (request, response, next) => {
         }
       }
   }
-  })
+  });
+  for (const detalle of infoOrden.ordenProductos) {
+    const product = await prisma.producto.findUnique({
+      where: { id: detalle.productoId }
+    });
+
+    if (product) {
+      const updatedQuantity = product.cantidadDisponible - detalle.cantidad;
+
+      await prisma.producto.update({
+        where: { id: detalle.productoId },
+        data: { cantidadDisponible: updatedQuantity }
+      });
+    }
+  }
   response.json(newProducto)
 };
 module.exports.update = async (request, response, next) => {

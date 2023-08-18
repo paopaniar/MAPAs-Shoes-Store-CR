@@ -86,6 +86,7 @@
         <div class="detalles"> 
           <mat-dialog-content class="letra">
             <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
+            <p><strong>Disponible:</strong> {{datos.cantidadDisponible}}</p>
             <b>Categoría: </b> <ul *ngIf="datos.categorias">
               <li *ngFor="let datos of datos.categorias"> {{datos.nombreCategoria}}</li>
            </ul>
@@ -135,17 +136,17 @@
            <!-- Add formGroup directive to the <form> element -->
           <form [formGroup]="inputPregunta">
             <div class="row">
-              <div class="col">
+              
                 <mat-form-field class="full-width">
                   <!-- Use formControlName to bind to the 'pregunta' form control -->
                   <input matInput formControlName="pregunta" maxlength="20" placeholder="Hacer pregunta">
+
                 </mat-form-field>
-              </div>
+                  <button mat-raised-button style="background-color: #5cb85c; color: #040618;" type="submit" (click)="createQuestion1()">Enviar</button>
+              
             </div>
-            <mat-card-actions>
-              <!-- Call the createQuestion1() method on form submission -->
-              <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit" (click)="createQuestion1()">Enviar</button>
-            </mat-card-actions>
+          
+            
           </form>
 
           </mat-dialog-content>
