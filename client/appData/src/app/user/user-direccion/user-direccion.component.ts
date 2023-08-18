@@ -43,8 +43,8 @@ export class UserDireccionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authService.currentUser.subscribe((x) => {
       this.currentUser = x;
-      if (x && x.user) {
-        this.idUsuario = x.user.id;
+      if (x && x.usuario) {
+        this.idUsuario = x.usuario.id;
       }
       console.log('usuario', this.idUsuario)
     });
