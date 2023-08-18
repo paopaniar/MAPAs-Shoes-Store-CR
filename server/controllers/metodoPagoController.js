@@ -11,7 +11,6 @@ module.exports.get = async (request, response, next) => {
     response.json(metodoPago); 
 };
 
-// Get all payment methods by usuarioId
 module.exports.getByUsuarioId = async (request, response, next) => {
   try {
     const usuarioId = parseInt(request.params.usuarioId);
@@ -41,4 +40,23 @@ module.exports.create = async (request, response, next) => {
     } catch (error) {
       next(error);
     }
-  };
+
+ 
+    // module.exports.update = async (request, response, next) => {
+    //   try {
+    //     let metodosPago = request.body;
+    //     let metodoPagoId = parseInt(request.body.id);
+    //     const updateMetodoPago = await prisma.metodoPago.update({
+    //       where: { id: metodoPagoId },
+    //       data: {
+    //         descripcion: metodosPago.descripcion,
+    //         usuarioId: metodosPago.usuarioId,
+    //       },
+    //     });
+    //     response.json(updateMetodoPago);
+    //   } catch (error) {
+    //     next(error);
+    //   }
+    // };
+
+}

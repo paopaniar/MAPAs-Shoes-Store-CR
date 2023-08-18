@@ -8,20 +8,6 @@
       >
        
       </a>
- 
-      <!--
-      <mat-card-title>
-       Nuevo Pedido
-        <a
-          mat-fab
-          matTooltip="Crear nuevo pedido"
-          aria-label="Crear nuevo pedido"
-          color="primary"
-        >
-          <mat-icon class="add">add</mat-icon>
-        </a>
-      </mat-card-title>-->
-      <!-- Table -->
      
   
       <br>  <br>  <br>
@@ -50,13 +36,13 @@
       <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado de Orden</th>
         <td mat-cell *matCellDef="let row">
-          <div class="finalizado" style="margin-right: 65%;">  
-            <ng-container *ngIf="row.estado === 1; else pendiente">
+          <div class="pendiente"style="margin-right: 65%;">  
+            <ng-container *ngIf="row.estado === 0; else pendiente">
             Finalizado
           </ng-container>
         </div>
          
-         <div class="pendiente" style="margin-right: 65%;">
+         <div class="finalizado" style="margin-right: 65%;">
           <ng-template #pendiente>
             Pendiente
           </ng-template>

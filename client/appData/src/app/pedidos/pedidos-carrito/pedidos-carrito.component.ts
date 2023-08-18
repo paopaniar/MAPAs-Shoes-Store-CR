@@ -18,7 +18,12 @@ export class PedidosCarritoComponent implements OnInit {
   fecha = Date.now();
   qtyItems = 0;
   isUser: boolean; 
+  selectedPaymentMethod: any;
+  selectedAddress: any;
   currentUser: any;
+  metodosPagoList: any;
+  direccionesList: any;
+  usuarioId: number = 0;
 
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
@@ -28,7 +33,10 @@ export class PedidosCarritoComponent implements OnInit {
     private authService: AuthenticationService,
     private gService: GenericService,
     private router: Router
-  ) {}
+  ) {
+    this.listaMetodosPago();
+    this.listadirecciones();
+  }
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
@@ -51,6 +59,40 @@ export class PedidosCarritoComponent implements OnInit {
     'Producto eliminado',
     TipoMessage.warning)
   }
+    listaMetodosPago() {
+      this.authService.currentUser.subscribe((x) => {
+        this.currentUser = x;
+        if (x && x.user) {
+          this.usuarioId = x.user.id;
+    this.metodosPagoList = null;
+    this.gService
+      .list('metodoPago/usuario/'+ this.usuarioId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.metodosPagoList = data;
+        console.log('metods', this.metodosPagoList)
+      });
+    }
+  });
+}
+
+listadirecciones() {
+  this.authService.currentUser.subscribe((x) => {
+    this.currentUser = x;
+    if (x && x.user) {
+    this.usuarioId = x.user.id;
+    this.direccionesList = null;
+    this.gService
+  .list('direccion/usuario/'+ this.usuarioId)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((data: any) => {
+    this.direccionesList = data;
+    console.log('direccines', this.direccionesList)
+  });
+}
+});
+}
+
 
   registrarOrden() {
    if(this.cartService.getItems!=null){
@@ -67,12 +109,15 @@ export class PedidosCarritoComponent implements OnInit {
         'fechaOrden': new Date(this.fecha),
         'ordenProductos':detalles,  
         'usuarioId': this.currentUser.user.id,
+        'direccionId': this.selectedAddress,
+        'metodoPagoId': this.selectedPaymentMethod
       }
       console.log('currentUser:', this.currentUser);
       console.log('isAuthenticated:', this.isAutenticated);
 
       this.gService.create('orden',infoOrden)
       .subscribe((respuesta:any)=>{
+        this.router.navigate(['orden/client']),
         this.noti.mensaje('Orden',
         'Orden registrada #'+respuesta.id,
         TipoMessage.success)

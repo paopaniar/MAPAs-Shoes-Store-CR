@@ -89,6 +89,9 @@ color8{
 .lila{
     color: #ba9dfd
 }
+.rojo{
+    color: #e94b4b
+}
   /* Example usage */
   .card {
     background-color: var(--neutral-color-1);

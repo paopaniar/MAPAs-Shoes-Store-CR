@@ -31,13 +31,13 @@
     background-color:  #750918;
   }
   .finalizado{
-    background-color: rgb(4, 77, 4);
+    background-color: #9dfdcd;
     text-align: center;
     border-radius: 4px;
     color: #E7E7E7;
   }
   .pendiente{
-    background-color: #750918;
+    background-color: #ffe862;
     text-align: center;
     border-radius: 4px;
   }
