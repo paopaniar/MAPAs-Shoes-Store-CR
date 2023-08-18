@@ -92,7 +92,7 @@ sortProductsByPrice() {
   ngOnInit(): void {
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.id = this.currentUser.user.id;
+    this.id = this.currentUser.usuario.id;
   }
   
   //lista de zapatos es la table producto
@@ -148,6 +148,10 @@ extractCategories(data: any[]): any[] {
         TipoMessage.success
       )
     });
+  }
+  esCliente() {
+    const roleses = this.currentUser.usuario.roles || [];
+    return roleses.some(roles => roles.descripcion === 'Cliente');
   }
   ngOnDestroy(){
     this.destroy$.next(true);

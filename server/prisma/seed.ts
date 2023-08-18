@@ -1,13 +1,21 @@
 import { PrismaClient } from "@prisma/client";
 import { categorias } from "./seeds/categorias";
-import {Role } from "@prisma/client";
+import { roles } from "./seeds/roles";
+const bcrypt = require("bcrypt");
 
 const prisma = new PrismaClient();
+
+const saltRounds = 10;
+const hashedPassword = bcrypt.hashSync("123456", saltRounds);
 
 const fs = require('fs');
 async function main() {
   await prisma.categoria.createMany({
     data: categorias
+  });
+
+  await prisma.rol.createMany({
+    data: roles,
   });
 
   await prisma.usuario.create({
@@ -16,8 +24,8 @@ async function main() {
       nombre: 'Paola',
       primerApellido: 'Paniagua',
       segundoApellido: 'Arroyo',
-      rol: Role.USER,
-      contrasenna: 'user1234',
+      roles: { connect: { id: 2 } },
+      contrasenna: hashedPassword,
       identificacion: '207940152',
       estado: 1
     }
@@ -28,8 +36,8 @@ async function main() {
       nombre: 'Administrador',
       primerApellido: 'Mapas',
       segundoApellido: 'Shoes',
-      rol: Role.ADMIN,
-      contrasenna: 'user1234',
+      roles: { connect: { id: 1 } },
+      contrasenna: hashedPassword,
       identificacion: '207940153',
       estado: 1
     }
@@ -40,8 +48,8 @@ async function main() {
       nombre: 'Vendedor',
       primerApellido: 'Mapas',
       segundoApellido: 'Shoes',
-      rol: Role.SALES,
-      contrasenna: 'user1234',
+      roles: { connect: [{ id: 2 }, { id: 3 }] },
+      contrasenna: hashedPassword,
       identificacion: '207940154',
       estado:1
     }
@@ -52,8 +60,8 @@ await prisma.usuario.create({
     nombre: 'Marianela',
     primerApellido: 'Romero',
     segundoApellido: 'Mendez',
-    rol: Role.USER,
-    contrasenna: 'user1234',
+    roles: { connect: [{ id: 2 }, { id: 3 }] },
+    contrasenna: hashedPassword,
     identificacion: '118460558',
     estado:1
     }
@@ -64,8 +72,8 @@ await prisma.usuario.create({
     nombre: 'Katia',
     primerApellido: 'Duran',
     segundoApellido: 'Gomez',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles: { connect: [{ id: 1 }, { id: 3 }] },
+    contrasenna: hashedPassword,
     identificacion: '235896479',
     estado:1
     }
@@ -76,8 +84,8 @@ await prisma.usuario.create({
     nombre: 'Leonardo',
     primerApellido: 'Hernandez',
     segundoApellido: 'Benavides',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles: { connect: { id: 3 } },
+    contrasenna: hashedPassword,
     identificacion: '118098703',
     estado:1
     }
@@ -88,8 +96,8 @@ await prisma.usuario.create({
     nombre: 'Sofia',
     primerApellido: 'Lai',
     segundoApellido: 'Solano',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles:  { connect: { id: 3 } },
+    contrasenna: hashedPassword,
     identificacion: '106350968',
     estado:1
     }
@@ -100,8 +108,8 @@ await prisma.usuario.create({
     nombre: 'ADIDAS',
     primerApellido: 'ADIDAS',
     segundoApellido: 'ADIDAS',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles:  { connect: { id: 3 } },
+    contrasenna: hashedPassword,
     identificacion: '111111111',
     estado: 1
   }
@@ -112,8 +120,8 @@ await prisma.usuario.create({
     nombre: 'NIKE',
     primerApellido: 'NIKE',
     segundoApellido: 'NIKE',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles:  { connect: { id: 3 } },
+    contrasenna: hashedPassword,
     identificacion: '222222222',
     estado: 1
   }
@@ -124,8 +132,8 @@ await prisma.usuario.create({
     nombre: 'Converse',
     primerApellido: 'Converse',
     segundoApellido: 'Converse',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles: { connect: [{ id: 2 }, { id: 3 }] },
+    contrasenna: hashedPassword,
     identificacion: '333333333',
     estado: 1
   }
@@ -137,8 +145,8 @@ await prisma.usuario.create({
     nombre: 'VANS',
     primerApellido: 'VANS',
     segundoApellido: 'VANS',
-    rol: Role.SALES,
-    contrasenna: 'user1234',
+    roles: { connect:  { id: 3 } },
+    contrasenna: hashedPassword,
     identificacion: '333333333',
     estado: 1
   }

@@ -17,7 +17,7 @@ model Usuario {
   nombre            String? //Puede ser nulo
   primerApellido    String? //Puede ser nulo
   segundoApellido   String? //Puede ser nulo
-  rol               Role                @default(USER)
+  roles               Rol[]             
   contrasenna       String?
   identificacion    String?
   estado            Int                 @default(1)
@@ -29,6 +29,11 @@ model Usuario {
   evaluaciones      Evaluacion[]
 }
 
+model Rol {
+  id          Int       @id @default(autoincrement())
+  descripcion String
+  usuarios    Usuario[]
+}
 //buena
 model MetodoPago {
   id          Int     @id @default(autoincrement())
@@ -138,10 +143,4 @@ model Evaluacion {
   usuario           Usuario @relation(fields: [usuarioId], references: [id])
   ordenId           Int
   orden             Orden   @relation(fields: [ordenId], references: [id])
-}
-
-enum Role {
-  USER
-  ADMIN
-  SALES
 }

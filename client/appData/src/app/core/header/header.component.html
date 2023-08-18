@@ -30,27 +30,27 @@
         <li class="nav-item">
           <a style="color: white" class="nav-link" href="/producto">Catálogo</a>
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+        <li class="nav-item"  *ngIf="esAdministrador()">
           <a style="color: white" class="nav-link" href="/producto/all"
             >Productos</a
           >
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
+        <li class="nav-item" *ngIf="esVendedor()">
           <a style="color: white" class="nav-link" href="/producto/vendedor"
             >Vendedor</a
           >
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'SALES'">
+        <li class="nav-item" *ngIf="esVendedor()">
           <a style="color: white" class="nav-link" href="/orden/vendedor"
             >Pedidos Vendedor</a
           >
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'USER'">
+        <li class="nav-item" *ngIf="esCliente()">
           <a style="color: white" class="nav-link" href="/orden/client"
             >Mis Pedidos</a
           >
         </li>
-        <li class="nav-item" *ngIf="currentUser?.user?.rol === 'ADMIN'">
+        <li class="nav-item" *ngIf="esAdministrador()">
        
           <a [matMenuTriggerFor]="menu3" style="color: white" class="nav-link" 
             > Usuarios</a>           
@@ -72,7 +72,7 @@
        
         <button 
           class="example-icon"
-          *ngIf="currentUser?.user?.rol === 'USER'"
+          *ngIf="esCliente()"
           mat-icon-button
           matBadgeColor="accent"
           [matBadge]="qtyItems.toString()"
@@ -84,7 +84,7 @@
         </button>
         <!--Usuario-->
         <span class="mat-caption" *ngIf="isAutenticated">{{
-          currentUser.user.email
+          currentUser.usuario.email
         }}</span>
         <button mat-icon-button [matMenuTriggerFor]="menu3">
           <mat-icon

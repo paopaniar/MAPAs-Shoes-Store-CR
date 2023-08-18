@@ -72,8 +72,8 @@ export class PedidosCarritoComponent implements OnInit {
     listaMetodosPago() {
       this.authService.currentUser.subscribe((x) => {
         this.currentUser = x;
-        if (x && x.user) {
-          this.usuarioId = x.user.id;
+        if (x && x.usuario) {
+          this.usuarioId = x.usuario.id;
     this.metodosPagoList = null;
     this.gService
       .list('metodoPago/usuario/'+ this.usuarioId)
@@ -89,8 +89,8 @@ export class PedidosCarritoComponent implements OnInit {
 listadirecciones() {
   this.authService.currentUser.subscribe((x) => {
     this.currentUser = x;
-    if (x && x.user) {
-    this.usuarioId = x.user.id;
+    if (x && x.usuario) {
+    this.usuarioId = x.usuario.id;
     this.direccionesList = null;
     this.gService
   .list('direccion/usuario/'+ this.usuarioId)
@@ -121,7 +121,7 @@ listadirecciones() {
       let infoOrden={
         'fechaOrden': new Date(this.fecha),
         'ordenProductos':detalles,  
-        'usuarioId': this.currentUser.user.id,
+        'usuarioId': this.currentUser.usuario.id,
         'direccionId': this.selectedAddress,
         'metodoPagoId': this.selectedPaymentMethod
       }

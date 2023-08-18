@@ -4,14 +4,20 @@
 
 const dotEnv = require("dotenv");
 const express = require("express");
+
 const { PrismaClient } = require("@prisma/client");
+
 const { request, response } = require("express");
+
 const cors = require("cors");
 const logger = require("morgan");
+
 const app = express();
 const prism = new PrismaClient();
+
+
 app.use(express.static('./images'));
-//---Archivos de rutas---
+
 const usuarioRoutes=require("./routes/usuarioRoutes");
 const productoRoutes=require("./routes/productoRoutes");
 const ordenRoutes=require("./routes/ordenRoutes");

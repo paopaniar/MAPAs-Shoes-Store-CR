@@ -14,6 +14,7 @@ export class UserLoginComponent implements OnInit {
   formulario: FormGroup;
   makeSubmit: boolean = false;
   infoUsuario: any;
+
   constructor(
     public fb: FormBuilder,
     private authService: AuthenticationService,
@@ -35,44 +36,54 @@ export class UserLoginComponent implements OnInit {
   }
 
   mensajes() {
-   let register=false;
-   let auth='';
-   //Obtener parámetros de la URL
-   this.route.queryParams.subscribe((params)=>{
-    register=params['register']==='true' || false;
-    auth=params['auth'] || '';
-    if(register){
-      this.notificacion.mensaje(
-        'Usuario',
-        'Usuario registrado! Especifique sus credenciales',
-        TipoMessage.success
-      )
-    }
-    if(auth){
-      this.notificacion.mensaje(
-        'Usuario',
-        'Acceso denegado',
-        TipoMessage.warning
-      )
-    }
-   })
-   
+    let register = false;
+    let auth = '';
+    this.route.queryParams.subscribe((params) => {
+      register = params['register'] === 'true' || false;
+      auth = params['auth'] || '';
+      if (register) {
+        this.notificacion.mensaje(
+          'Usuario registrado',
+          'Especifique sus credenciales',
+          TipoMessage.success
+        )
+      }
+      if (auth) {
+        this.notificacion.mensaje(
+          'Usuario',
+          'Acceso denegado',
+          TipoMessage.warning
+        )
+      }
+    });
   }
+
   onReset() {
     this.formulario.reset();
   }
   submitForm() {
-    this.makeSubmit=true;
-    //Validación
-    if(this.formulario.invalid){
-     return;
+    this.makeSubmit = true;
+    if (this.formulario.invalid) {
+      return;
     }
-    this.authService.loginUser(this.formulario.value)
-    .subscribe((respuesta:any)=>{
-     this.router.navigate(['/']);
-    })
-  }
-  /* Manejar errores de formulario en Angular */
+
+  this.authService.loginUser(this.formulario.value).subscribe(
+    (usuario: any) => {
+      if (usuario.data.usuario.estado == 1) {
+        this.router.navigate(['/']);
+      } else {
+        this.notificacion.mensaje(
+          'Usuario',
+          'Acceso denegado: El usuario está inactivo',
+          TipoMessage.warning
+        );
+      }
+    },
+    (error: any) => {
+      console.error('Error en inicio de sesión:', error);
+    }
+  );
+}
 
   public errorHandling = (control: string, error: string) => {
     return (

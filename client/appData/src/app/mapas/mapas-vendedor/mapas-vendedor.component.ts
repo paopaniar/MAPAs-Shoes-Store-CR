@@ -54,7 +54,7 @@ export class MapasVendedorComponent implements AfterViewInit{
     //localhost:3000/producto/
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    const vendedorId = this.currentUser.user.id;
+    const vendedorId = this.currentUser.usuario.id;
     this.gService
       .list(`producto/vendedor/${vendedorId}`)
       .pipe(takeUntil(this.destroy$))

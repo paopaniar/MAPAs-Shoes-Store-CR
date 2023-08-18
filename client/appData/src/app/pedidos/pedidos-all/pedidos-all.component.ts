@@ -45,7 +45,7 @@ export class PedidosAllComponent implements AfterViewInit{
     //localhost:3000/producto/
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    const clienteId = this.currentUser.user.id;
+    const clienteId = this.currentUser.usuario.id;
     this.gService
       .list(`orden/client/${clienteId}`)
       .pipe(takeUntil(this.destroy$))

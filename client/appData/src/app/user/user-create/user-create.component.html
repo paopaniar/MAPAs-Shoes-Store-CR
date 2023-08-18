@@ -50,14 +50,14 @@
         </mat-form-field>
       </div>
 
-      <div class="input-container">
-        <mat-form-field class="full-width">
-          <mat-label>Rol</mat-label>
-          <mat-select placeholder="Rol" formControlName="rol">
-            <mat-option *ngFor="let r of roles" [value]="r.id">{{ r.nombre }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="full-width">
+        <mat-label>Rol</mat-label>
+        <mat-select placeholder="Roles" formControlName="roles" multiple>
+          <mat-option *ngFor="let r of rolesList; let i = index" [value]="r.id">{{ r.descripcion }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="errorHandling('roles', 'required')">Debe seleccionar al menos un rol</mat-error>
+      </mat-form-field>
+      
     </mat-card-content>
     <mat-card-actions class="botones">
       <div class="button-container">

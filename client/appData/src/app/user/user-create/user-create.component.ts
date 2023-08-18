@@ -17,6 +17,7 @@ export class UserCreateComponent implements OnInit {
   hide = true;
   usuario: any;
   roles: any;
+  rolesList: any;
   formCreate: FormGroup;
   makeSubmit: boolean = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -37,22 +38,35 @@ export class UserCreateComponent implements OnInit {
       segundoApellido: [''],
       email: ['', [Validators.required]],
       contrasenna: ['', [Validators.required]],
-      rol: ['', [Validators.required]],
+      roles: ['', [Validators.required]],
     });
-    this.getRoles();
+    this.listaRoles();
   }
+
+  listaRoles() {
+    this.rolesList = null;
+    this.gService
+      .list('rol')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.rolesList = data.filter((rol: any) => rol.descripcion !== 'Administrador'); 
+      });
+  }
+
   ngOnInit(): void {}
+
   submitForm() {
     this.makeSubmit=true;
-    //Validación
+    
     if(this.formCreate.invalid){
      return;
     }
-    this.authService.createUser(this.formCreate.value)
-    .subscribe((respuesta:any)=>{
+    const formData = { ...this.formCreate.value, roles: this.formCreate.value.roles.map((rol) => parseInt(rol)),
+     };
+     console.log('roles', this.rolesList )
+    this.authService.createUser(formData).subscribe((respuesta: any) => {
       this.usuario=respuesta;
       this.router.navigate(['/usuario/login'],{
-        //Mostrar un mensaje
         queryParams:{register:'true'},
       })
     })
@@ -60,16 +74,7 @@ export class UserCreateComponent implements OnInit {
   onReset() {
     this.formCreate.reset();
   }
-  getRoles() {
-    let id=1;
-    this.gService
-      .list('rol/usuario')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.roles = data;
-        console.log( this.roles);
-      });
-  }
+
   public errorHandling = (control: string, error: string) => {
     return (
       this.formCreate.controls[control].hasError(error) &&

@@ -9,31 +9,31 @@ import { CartService } from './cart.service';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  //Header para afirmar el tipo de contenido JSON
-  //URL del API
   ServerUrl = environment.apiURL;
-  //Variable observable para gestionar la información del usuario, con características especiales
-  private currentUserSubject: BehaviorSubject<any>;
-  //Variable observable para gestionar la información del usuario
-  public currentUser: Observable<any>;
-  //Booleano para estado de usuario autenticado
-  private authenticated = new BehaviorSubject<boolean>(false);
-  //Inyectar cliente HTTP para las solicitudes al API
 
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
+  private authenticated = new BehaviorSubject<boolean>(false); 
+
+  usuarioId: number;
 
   constructor(private http: HttpClient, private cartService:CartService) {
     //Obtener los datos del usuario en localStorage, si existe
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
-    //Establecer un observable para acceder a los datos del usuario
+
     this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUser.subscribe((data) => {
+      this.usuarioId = data.usuario.id
+    })
+    console.log(this.currentUser)
   }
-  //Obtener el valor del usuario actual
+
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  //Establecer booleano verificando si esta autenticado
+
   get isAuthenticated() {
     if (this.currentUserValue != null) {
       this.authenticated.next(true);
@@ -42,30 +42,22 @@ export class AuthenticationService {
     }
     return this.authenticated.asObservable();
   }
-  //Crear usuario
-  createUser(user: any): Observable<any> {
-    return this.http.post<any>(
-      this.ServerUrl + 'usuario/registrar',
-      user
+
+  createUser(usuario: any): Observable<any> {
+    return this.http.post<any>(this.ServerUrl + 'usuario/register', usuario);
+  }
+
+  loginUser(usuario: any): Observable<any> {
+    return this.http.post<any>(this.ServerUrl + 'usuario/login', usuario).pipe(
+      map((usuario) => {
+        localStorage.setItem('currentUser', JSON.stringify(usuario.data));
+        this.authenticated.next(true);
+        this.currentUserSubject.next(usuario.data);
+        return usuario;
+      })
     );
   }
 
-  //Login
-  loginUser(user: any): Observable<any> {
-    return this.http
-      .post<any>(this.ServerUrl + 'usuario/login', user)
-      .pipe(
-        map((user) => {
-          // almacene los detalles del usuario y el token jwt
-          // en el almacenamiento local para mantener al usuario conectado entre las actualizaciones de la página
-          localStorage.setItem('currentUser', JSON.stringify(user.data));
-          this.authenticated.next(true);
-          this.currentUserSubject.next(user.data);
-          return user;
-        })
-      );
-  }
-  //Logout de usuario autentificado
   logout() {
     let usuario = this.currentUserSubject.value;
     if (usuario) {

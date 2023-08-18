@@ -22,8 +22,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     //valores de prueba
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-      this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.id = this.currentUser.user.id;
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.currentUser.usuario.id;
+    console.log('user', this.id)
     this.cartService.countItems.subscribe((value)=>{
       this.qtyItems=value
      })
@@ -40,6 +41,20 @@ export class HeaderComponent implements OnInit {
     }
     miPerfil(id: number) {
       this.router.navigate(['usuario/perfil', id]);
+    }
+    esCliente() {
+      const roleses = this.currentUser.usuario.roles || [];
+      return roleses.some(roles => roles.descripcion === 'Cliente');
+    }
+    
+    esAdministrador(){
+      const roleses = this.currentUser.usuario.roles || [];
+      return roleses.some(roles => roles.descripcion === 'Administrador');
+    }
+
+    esVendedor(){
+      const roleses = this.currentUser.usuario.roles || [];
+      return roleses.some(roles => roles.descripcion === 'Vendedor');
     }
   }
 

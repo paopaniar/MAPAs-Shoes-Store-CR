@@ -133,7 +133,7 @@ export class MapasCreateComponent implements OnInit {
     // let usuarioId: any = this.videojuegoForm.get('usuario').value;
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    let usuarioId= this.currentUser.user.id;
+    let usuarioId= this.currentUser.usuario.id;
 
     this.videojuegoForm.patchValue({ generos: gFormat });
     // this.videojuegoForm.patchValue({ usuario: usuarioId}); 

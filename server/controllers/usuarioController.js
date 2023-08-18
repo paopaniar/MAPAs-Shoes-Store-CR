@@ -1,14 +1,10 @@
-//Nela deje notas importantes para que pueda entender el codigo con facilidad
-//por cada controlador vamos  a tener un archivo de rutas
-//para correr el servidor y verlo en la pag web npm run dev
 
-const { PrismaClient, Role } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
-
-//--npm install bcrypt
 const bcrypt = require("bcrypt");
-//Obtener listado
+
+
 module.exports.get = async (request, response, next) => {
   const usuarios = await prisma.usuario.findMany({
     select: {
@@ -19,7 +15,6 @@ module.exports.get = async (request, response, next) => {
       identificacion:true,
       email: true,
       estado: true,
-      rol: true,
       direcciones: {
         select: {
           id: true,
@@ -36,6 +31,12 @@ module.exports.get = async (request, response, next) => {
           descripcion:true,
         },
       },
+    roles:{
+      select:{
+        id:true,
+        descripcion:true,
+      },
+    },
     },
   });
   response.json(usuarios);
@@ -54,7 +55,6 @@ module.exports.getById = async (request, response, next) => {
           nombre: true,
           email: true,
           estado: true,
-          rol: true,
           direcciones: {
             select: {
               id: true,
@@ -70,6 +70,12 @@ module.exports.getById = async (request, response, next) => {
               id:true,
               descripcion:true,
             },
+          },
+         roles: {
+          select:{
+            id:true,
+            descripcion:true,
+          },
           },
         },
     })
@@ -105,7 +111,7 @@ exports.getByStatus = async (request, response, next) => {
         nombre: true,
         email: true,
         estado: true,
-        rol: true,
+        roles: true,
       },
     });
 
@@ -123,15 +129,21 @@ module.exports.getByStatusFalse = async (request, response, next) => {
       nombre: true,    
       email: true,
       estado: true,
-      rol: true,
+      roles: true,
     },
   });
   response.json(usuarios);
 };
 module.exports.register = async (request, response, next) => {
-    const userData = request.body;
-      let salt= bcrypt.genSaltSync(10);
-    let hash=bcrypt.hashSync(userData.contrasenna,salt);
+
+  const userData = request.body;
+
+  let salt= bcrypt.genSaltSync(10);
+
+  const roles = userData.roles.map((rol) => parseInt(rol));
+
+  let hash=bcrypt.hashSync(userData.contrasenna,salt);
+
     const user = await prisma.usuario.create({
       data: {
         nombre: userData.nombre,
@@ -141,7 +153,9 @@ module.exports.register = async (request, response, next) => {
         segundoApellido: userData.segundoApellido,
         identificacion: userData.identificacion,
         estado: userData.estado,
-        rol: Role[userData.rol]
+        roles: {
+          connect: roles.map((rol) => ({ id: rol })),
+        },
       },
     });
     response.status(200).json({
@@ -150,49 +164,67 @@ module.exports.register = async (request, response, next) => {
       data: user,
     });
   };
+
+
   module.exports.login = async (request, response, next) => {
-    let userReq = request.body;
-    //Buscar el usuario según el email dado
-    const user = await prisma.usuario.findUnique({
-      where: {
-        email: userReq.email,
-      },
-    });
-    //Sino lo encuentra según su email
-    if (!user) {
-      response.status(401).send({
-        success: false,
-        message: "Usuario no registrado",
+    let solicitud = request.body;
+    console.log(solicitud);
+  
+    try {
+      const usuario = await prisma.usuario.findUnique({
+        where: { email: solicitud.email },
+        include: { roles: true },
       });
-    }
-    //Verifica la contraseña
-    const checkPassword=await bcrypt.compare(userReq.contrasenna, user.contrasenna);
-    if(checkPassword === false){
-      response.status(401).send({
-        success:false,
-        message: "Credenciales no validas"
-      })
-    }else{
-      //Usuario correcto
-      //Crear el payload
-      const payload={
-        email: user.email,
-        rol: user.rol
+  
+      if (!usuario) {
+        return response.status(401).send({
+          success: false,
+          message: "Acceso denegado: El usuario no existe",
+        });
       }
-      //Crear el token
-      const token= jwt.sign(payload,process.env.SECRET_KEY,{
-        expiresIn: process.env.JWT_EXPIRE
-      });
-      response.json({
-        success: true,
-        message: "Usuario registrado",
-        data: {
-          user,
-          token,
+        const verificarContrasenna = bcrypt.compareSync(
+        solicitud.contrasenna,
+        usuario.contrasenna
+      );
+  
+      if (verificarContrasenna) {
+        if (!usuario.estado) {
+          return response.status(401).send({
+            success: false,
+            message: "Acceso denegado: El usuario está inactivo",
+          });
         }
-      })
+  
+        const payload = {
+          email: usuario.email,
+          roles: usuario.roles,
+        };
+  
+        // Crear el token con el payload y el tiempo de expiración
+        const token = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: process.env.JWT_EXPIRE,
+        });
+  
+        return response.json({
+          success: true,
+          message: "Inicio de sesión exitoso",
+          data: { usuario, token },
+        });
+      } else {
+        return response.status(401).send({
+          success: false,
+          message: "Acceso denegado: Verifique los datos ingresados",
+        });
+      }
+    } catch (error) {
+      console.error("Error en inicio de sesión:", error);
+      return response.status(500).send({
+        success: false,
+        message: "Error en el servidor",
+      });
     }
   };
+  
   module.exports.createDireccion = async (request, response, next) => {
     try {
       let { otrasSennas } = request.body;

@@ -39,8 +39,8 @@ export class UserMetodoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authService.currentUser.subscribe((x) => {
       this.currentUser = x;
-      if (x && x.user) {
-        this.idUsuario = x.user.id;
+      if (x && x.usuario) {
+        this.idUsuario = x.usuario.id;
       }
     });
     this.activeRouter.params.subscribe((params: Params) => {

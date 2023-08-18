@@ -65,7 +65,7 @@
               <button
               mat-mini-fab
               style="background-color: #0e1335;"
-              *ngIf="currentUser?.user?.rol === 'USER'"
+              *ngIf="esCliente()"
               color="primary"
               matTooltip="Comprar"
               aria-label="Comprar"

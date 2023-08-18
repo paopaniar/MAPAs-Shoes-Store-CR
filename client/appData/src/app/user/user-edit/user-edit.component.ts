@@ -79,7 +79,7 @@ export class UserEditComponent {
     const productId = this.id;
     const requestData = {
       otrasSennas: this.inputDireccion.value.otrasSennas,
-      usuarioId: this.currentUser.user.id,
+      usuarioId: this.currentUser.usuario.id,
     };
   
     this.gService.create('usuario/direccion/' + productId, requestData)
@@ -129,7 +129,7 @@ export class UserEditComponent {
     const productId = this.id;
     const requestData = {
       metodoPagoId: this.inputMetodoPago.value.metodoPagoId,
-      usuarioId: this.currentUser.user.id,
+      usuarioId: this.currentUser.usuario.id,
     };
   
     this.gService.create('usuario/metodoPago/' + productId, requestData)
