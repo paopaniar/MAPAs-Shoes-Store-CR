@@ -28,24 +28,22 @@
       </ng-container>
       <ng-container matColumnDef="totalOrden">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Total</th>
-        <td mat-cell *matCellDef="let row">{{ row.totalOrden | currency : "₡" }}</td>
+        <td mat-cell *matCellDef="let row">{{ calculateTotalOrden(row) | currency : "₡" }}</td>
       </ng-container>
-
-      <!-- Columna precio --> 
       
       <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="titulo">Estado de Orden</th>
         <td mat-cell *matCellDef="let row">
-          <div class="pendiente"style="margin-right: 65%;">  
-            <ng-container *ngIf="row.estado === 1; else pendiente">
-            Finalizado
+          <div class="finalizado"style="margin-right: 65%;">  
+            <ng-container *ngIf="row.estado === 0;">
+            Completado
           </ng-container>
         </div>
          
-         <div class="finalizado" style="margin-right: 65%;">
-          <ng-template #pendiente>
-            Pendiente
-          </ng-template>
+         <div class="pendiente" style="margin-right: 65%;">
+          <ng-container *ngIf="row.estado === 1;">
+            Progreso...
+          </ng-container>
          </div>
         </td>
       </ng-container>    

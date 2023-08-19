@@ -12,6 +12,15 @@ module.exports.get = async (request, response, next) => {
             usuario: true,
             metodoPago:true,
             direccion:true,
+            ordenProductos: {
+              include: {
+                  producto:{
+                    include:{
+                      usuario: true,
+                    },
+                  },
+              },
+            },
         },
     });
     response.json(orden); 
@@ -114,6 +123,7 @@ module.exports.getByClient = async (request, response, next) => {
               }
             }
           }
+          
         }
       }
     }

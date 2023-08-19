@@ -13,10 +13,10 @@ export class PedidosDiagComponent implements OnInit{
   datosDialog:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
   ordenProductos: any;
+  subtotal: number = 0.0;
+  iva=0;
   totalSubtotal: number = 0;
-
-
-
+  totalOrden=0;
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
     private dialogRef:MatDialogRef<PedidosDiagComponent>,
@@ -30,16 +30,26 @@ export class PedidosDiagComponent implements OnInit{
     let totalSubtotal = 0;
     if (this.datos && this.datos.ordenProductos) {
       for (let producto of this.datos.ordenProductos) {
-        totalSubtotal += parseFloat(producto.subtotal);
+        totalSubtotal += parseFloat(producto.producto.precio);
+        
       }
     }
     return totalSubtotal;
   }
+  calcularTotalProductos() {
+    if (this.datos && this.datos.ordenProductos) {
+      this.totalSubtotal = this.datos.ordenProductos.reduce(
+        (total, producto) => total + (producto.producto.precio || 0),
+        0
+      );
+    }
+  }
+
   calculateIva(): number {
     let iva = 0;
     if (this.datos && this.datos.ordenProductos) {
       for (let producto of this.datos.ordenProductos) {
-        iva += parseFloat(producto.iva);
+        iva += parseFloat(producto.producto.precio)*0.13;
       }
     }
     return iva;
@@ -48,7 +58,7 @@ export class PedidosDiagComponent implements OnInit{
     let iva = 0;
     if (this.datos && this.datos.ordenProductos) {
       for (let producto of this.datos.ordenProductos) {
-        iva += parseFloat(producto.iva)*this.calculateTotalSubtotal();
+        iva += parseFloat(producto.producto.precio)*0.13;
       }
     }
     return iva;

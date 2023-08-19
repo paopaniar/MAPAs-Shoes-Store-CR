@@ -1,27 +1,27 @@
 .grid-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px;
+    color: #000000;
   }
-  
+
   .encabezado {
     background-color: #022146;
     color: white;
     text-align: center;
     padding: 10px;
-    margin-bottom: -4%;
+    margin-bottom: -1%;
     border-radius: 5px;
     font-size: 24px;
   }
   
   .direccion-card {
-    width: 100%;
-    background-color: #9dbcfd;
-    max-width: 600px;
-    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    text-align: center;
   }
   
   .full-width {

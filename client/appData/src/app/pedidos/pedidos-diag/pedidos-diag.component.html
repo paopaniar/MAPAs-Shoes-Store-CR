@@ -27,7 +27,7 @@
             <tr>
               <td>{{ producto.cantidad }}</td>
               <td>{{ producto.producto?.nombreProducto }}</td>
-              <td>{{ producto.subtotal | currency : "₡" }}</td>
+              <td>{{ producto.producto?.precio | currency : "₡" }}</td>
             </tr>
           </ng-container>
         </tbody>
@@ -36,7 +36,7 @@
       <div class="invoice-footer">
         <p><strong>Método de Pago:</strong> {{ datos.metodoPago.descripcion }}</p>
         <p><strong>Total IVA:</strong> {{ calculateIvaAsNumber() | currency : "₡" }}</p>
-        <p><strong>Total Subtotal:</strong> {{ calculateTotalSubtotal() | currency : "₡" }}</p>
+        <p><strong>Total Subtotal:</strong> {{ calculateTotalSubtotal()  | currency : "₡" }}</p>
         <p><strong>Total Orden:</strong> {{ calculateTotal() | currency : "₡" }}</p>
 
         <p class="status"> <span *ngIf="datos.estado === 1" class="green-text">Cancelado</span><span *ngIf="datos.estado !== 1" class="green-text">Pendiente</span></p>

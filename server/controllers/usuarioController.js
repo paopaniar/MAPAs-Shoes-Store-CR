@@ -25,6 +25,8 @@ module.exports.get = async (request, response, next) => {
           distrito:true,
         }
       },
+      ordenes:true,
+      productos:true,
       metodosPago: {
         select:{
           id:true,
@@ -52,6 +54,8 @@ module.exports.getById = async (request, response, next) => {
           primerApellido:true,
           segundoApellido:true,
           identificacion:true,
+          ordenes:true,
+          productos:true,
           nombre: true,
           email: true,
           estado: true,

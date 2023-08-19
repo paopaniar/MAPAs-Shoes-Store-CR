@@ -1,11 +1,13 @@
 <br>
 <br>
 <br>
+<br>
+<div class="grid">
 
 <div class="grid-container">
   <form [formGroup]="direccionForm" (ngSubmit)="isCreate ? crearDireccion() : actualizarDireccion()" novalidate>
     <div class="encabezado">
-      <h4>Mi Nueva Dirección</h4>
+      <h4><mat-icon>location_on</mat-icon>Mi Nueva Dirección</h4>
     </div>
     <input type="hidden" formControlName="id" />
     <input type="hidden" formControlName="usuarioId" />
@@ -57,4 +59,5 @@
       </mat-card-actions>
     </mat-card>
   </form>
+</div>
 </div>
