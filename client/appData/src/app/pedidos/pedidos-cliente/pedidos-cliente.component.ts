@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -33,7 +34,8 @@ export class PedidosClienteComponent  implements AfterViewInit{
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private noti: NotificacionService) {
 
   }
 
@@ -90,6 +92,20 @@ export class PedidosClienteComponent  implements AfterViewInit{
         this.dataSource.paginator = this.paginator;
       })
   }
+
+  actualizarEstado(id: any) {
+    this.gService
+      .update('orden/update', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.listaOrdenes();
+        this.noti.mensaje(
+          'Realizado',
+          'El estado se actualizó',
+          TipoMessage.success
+        );
+      });
+  }
 
   crearVideojuego() {
     this.router.navigate(['/producto/crear'], {

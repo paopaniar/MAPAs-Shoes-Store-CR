@@ -154,6 +154,19 @@ module.exports.create = async (request, response, next) => {
   response.json(newProducto)
 };
 module.exports.update = async (request, response, next) => {
+  let idOrden = parseInt(request.params.id); // Corrected variable name
+  const ordenActual = await prisma.orden.findUnique({
+    where: { id: idOrden },
+  });
+  try {
+    const estadoUpdated = await prisma.orden.update({
+      where: { id: idOrden }, // Corrected variable name
+      data: { estado: ordenActual.estado ? 0 : 1 }, // Flip the value of estado
+    });
+    response.json(estadoUpdated);
+  } catch (error) {
+    next(error);
+  }
 };
 
 
