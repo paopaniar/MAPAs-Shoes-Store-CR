@@ -1,11 +1,14 @@
 <div class="grid-container">
-  <form [formGroup]="formEvaluacion" (ngSubmit)="createEvaluacion()" novalidate class="form-container">
+  <form
+    [formGroup]="formEvaluacion"
+    (ngSubmit)="createEvaluacion()"
+    novalidate
+    class="form-container"
+  >
     <div class="icon-container">
-      <mat-icon class="icon" style="color: #ffd700;">feedback</mat-icon>
+      <mat-icon class="icon" style="color: #ffd700">feedback</mat-icon>
     </div>
-    <h5 class="form-title">
-      Evaluaciones
-    </h5>
+    <h5 class="form-title">Evaluaciones</h5>
     <mat-card class="metodopago-card">
       <mat-card-content>
         <div class="row">
@@ -22,6 +25,10 @@
                 <mat-option value="4">4 Estrellas</mat-option>
                 <mat-option value="5">5 Estrellas</mat-option>
               </mat-select>
+
+              <mat-error *ngIf="errorHandling('calificacionFinal', 'required')"
+                >Calificación Final es <strong>requerida</strong></mat-error
+              >
             </mat-form-field>
           </div>
         </div>
@@ -32,8 +39,11 @@
               <input
                 matInput
                 formControlName="comentario"
-                placeholder="comentario"
+                placeholder="Comentario"
               />
+              <mat-error *ngIf="errorHandling('comentario', 'required')"
+                >Comentario es <strong>requerida</strong></mat-error
+              >
             </mat-form-field>
           </div>
         </div>

@@ -42,18 +42,18 @@ export class HeaderComponent implements OnInit {
     miPerfil(id: number) {
       this.router.navigate(['usuario/perfil', id]);
     }
-    esCliente() {
-      const roleses = this.currentUser.usuario.roles || [];
+    esCliente():boolean {
+      const roleses = this.currentUser?.usuario.roles || [];
       return roleses.some(roles => roles.descripcion === 'Cliente');
     }
     
-    esAdministrador(){
-      const roleses = this.currentUser.usuario.roles || [];
+    esAdministrador():boolean{
+      const roleses = this.currentUser?.usuario.roles || [];
       return roleses.some(roles => roles.descripcion === 'Administrador');
     }
 
-    esVendedor(){
-      const roleses = this.currentUser.usuario.roles || [];
+    esVendedor():boolean{
+      const roleses = this.currentUser?.usuario.roles || [];
       return roleses.some(roles => roles.descripcion === 'Vendedor');
     }
   }

@@ -46,6 +46,9 @@ export class PedidosCalificacionComponent implements OnInit {
   }
 
   createEvaluacion() {
+    if (this.formEvaluacion.invalid) {
+      return;
+    } 
     this.submitted = true;
     this.formEvaluacion.patchValue({ usuarioId: this.idUsuario });
     console.log(this.formEvaluacion.value);

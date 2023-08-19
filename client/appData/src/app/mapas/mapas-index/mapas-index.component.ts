@@ -14,7 +14,7 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
   styleUrls: ['./mapas-index.component.css']
   
 })
-export class MapasIndexComponent implements OnInit{
+export class MapasIndexComponent{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
   filterDatos: any;
@@ -89,11 +89,7 @@ sortProductsByPrice() {
     this.listaZapatos() 
 
   }
-  ngOnInit(): void {
-    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.id = this.currentUser.usuario.id;
-  }
+
   
   //lista de zapatos es la table producto
   listaZapatos(){
