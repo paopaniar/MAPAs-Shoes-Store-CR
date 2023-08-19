@@ -26,17 +26,13 @@ module.exports.getById = async (request, response, next) => {
 
 module.exports.create = async (request, response, next) => {
     let evaluacion = request.body;
-    let idOrden = parseInt(request.params.ordenId);
+
     const newProducto = await prisma.evaluacion.create({
-        where: {
-            id: idOrden,
-          },
       data: { 
         comentario: evaluacion.comentario,
-        calificacionFinal: evaluacion.calificacionFinal, 
-        ordenId: parseInt(evaluacion.orden),
-        cantidadDisponible:parseInt(evaluacion.cantidadDisponible),
-        usuarioId: parseInt(evaluacion.usuario),
+        calificacionFinal: parseInt(evaluacion.calificacionFinal), 
+        ordenId: evaluacion.ordenId,
+        usuarioId: evaluacion.usuarioId,
           }, 
     });
   

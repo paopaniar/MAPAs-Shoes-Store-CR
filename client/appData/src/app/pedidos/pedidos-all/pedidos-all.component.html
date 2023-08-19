@@ -13,7 +13,10 @@
       <br>  <br>  <br>
   <div class="card">
   <div class="card-header card-header-warning" >
-    <h4 class="card-title">Pedidossdfs</h4>
+    <h4 class="card-title">Pedidos</h4>
+    <a style="color: rgb(5, 5, 5); background-color: #9dbcfd; padding: 5px 10px; border-radius: 5px;" class="nav-link active" aria-current="page" href="/pedido/finalizados">
+      <mat-icon style="vertical-align: middle; color:green">label</mat-icon> Ir a evaluar mis pedidos finalizados
+    </a>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="table" matSort aria-label="Elements" style="background-color:#fff;" >
@@ -63,19 +66,6 @@
         >
           <mat-icon class="square-icon">account_balance_wallet</mat-icon>
         </a>
-
-        <a
-        style="
-          color: #022146;
-          background-color: #9dbcfd"
-        mat-fab
-        matTooltip="Detalle"
-        aria-label="Detalle"
-        color="primary"
-        (click)="detalleOrden(row.id)"
-      >
-        <mat-icon class="square-icon">account_balance_wallet</mat-icon>
-      </a>
         
         </td>
       </ng-container>

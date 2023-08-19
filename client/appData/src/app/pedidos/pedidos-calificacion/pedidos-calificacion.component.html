@@ -1,0 +1,55 @@
+<div class="grid-container">
+  <form [formGroup]="formEvaluacion" (ngSubmit)="createEvaluacion()" novalidate class="form-container">
+    <div class="icon-container">
+      <mat-icon class="icon" style="color: #ffd700;">feedback</mat-icon>
+    </div>
+    <h5 class="form-title">
+      Evaluaciones
+    </h5>
+    <mat-card class="metodopago-card">
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Evaluaciones</mat-label>
+              <mat-select
+                formControlName="calificacionFinal"
+                placeholder="Calificación Final"
+              >
+                <mat-option value="1">1 Estrella</mat-option>
+                <mat-option value="2">2 Estrellas</mat-option>
+                <mat-option value="3">3 Estrellas</mat-option>
+                <mat-option value="4">4 Estrellas</mat-option>
+                <mat-option value="5">5 Estrellas</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Añadir un comentario</mat-label>
+              <input
+                matInput
+                formControlName="comentario"
+                placeholder="comentario"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          aria-label="Guardar Calificación"
+          type="submit"
+          style="background-color: #34c759"
+        >
+          Guardar
+          <mat-icon class="icon-right">check_box</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

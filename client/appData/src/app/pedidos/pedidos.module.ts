@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PedidosEvaluacionComponent } from './pedidos-evaluacion/pedidos-evaluacion.component';
+import { PedidosCalificacionComponent } from './pedidos-calificacion/pedidos-calificacion.component';
 
 
 
@@ -33,6 +34,7 @@ import { PedidosEvaluacionComponent } from './pedidos-evaluacion/pedidos-evaluac
     PedidosDetailComponent,
     PedidosCarritoComponent,
     PedidosEvaluacionComponent,
+    PedidosCalificacionComponent,
   ],
   imports: [
     CommonModule,

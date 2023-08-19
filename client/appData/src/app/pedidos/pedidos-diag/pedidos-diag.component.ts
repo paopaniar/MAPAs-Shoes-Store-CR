@@ -78,7 +78,6 @@ export class PedidosDiagComponent implements OnInit{
         console.log(this.datos);
         this.ordenProductos = this.datos.ordenProductos;
     });
-   
   }
   ngOnInit(): void {
     if(this.datosDialog.id){

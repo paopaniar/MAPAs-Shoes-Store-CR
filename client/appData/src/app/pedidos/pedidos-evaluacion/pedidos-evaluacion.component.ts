@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { CartService } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
+import { PedidosCalificacionComponent } from '../pedidos-calificacion/pedidos-calificacion.component';
 
 @Component({
   selector: 'app-pedidos-evaluacion',
@@ -28,7 +29,7 @@ export class PedidosEvaluacionComponent implements AfterViewInit{
   total=0;
   subtotal: number = 0.0;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'fechaOrden','totalOrden','estado','acciones'];
+  displayedColumns = ['id', 'fechaOrden','estado','acciones'];
   ngAfterViewInit(): void {
     this.listaOrdenes();
   }
@@ -48,7 +49,7 @@ export class PedidosEvaluacionComponent implements AfterViewInit{
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     const clienteId = this.currentUser.usuario.id;
     this.gService
-      .list(`orden/finalizados/${estado}`)
+      .list(`orden/finalizados/${clienteId}/${estado}`)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:any)=>{
         console.log(data);
@@ -59,6 +60,16 @@ export class PedidosEvaluacionComponent implements AfterViewInit{
       })
   }
 
+  
+  idOrden(id:Number){
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(PedidosCalificacionComponent, dialogConfig);
+  }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

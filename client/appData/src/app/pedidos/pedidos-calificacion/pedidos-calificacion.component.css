@@ -1,0 +1,16 @@
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #022146;
+  }
+
+  .form-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #022146;
+    color:white;
+  }
+  

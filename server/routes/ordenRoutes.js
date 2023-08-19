@@ -9,6 +9,6 @@ router.put("/update/:id", ordenController.update);
 router.get('/:id',ordenController.getById);
 router.get('/vendedor/:id',ordenController.getByVendedor);
 router.get('/client/:id',ordenController.getByClient);
-router.get('/finalizados/:estado',ordenController.getByClient);
+router.get('/finalizados/:id/:estado',ordenController.getByClientbyFinalizadas);
 
 module.exports = router;

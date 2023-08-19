@@ -28,7 +28,7 @@ const direccionRoutes=require("./routes/direccionRoutes");
 const metodoPagoRoutes=require("./routes/metodoPagoRoutes")
 const respuestaRoutes=require("./routes/respuestaRoutes");
 const rolRoutes=require("./routes/rolRoutes");
-
+const evaluacionRoutes=require("./routes/evaluacionRoutes");
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
 // Puerto que escucha por defecto 300 o definido .env
@@ -55,6 +55,7 @@ app.use("/consultaProductos/", consultaProductosRoutes);
 app.use("/respuesta/", respuestaRoutes);
 app.use("/metodoPago/", metodoPagoRoutes);
 app.use("/rol/", rolRoutes);
+app.use("/evaluacion/", evaluacionRoutes);
 // Servidor
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
