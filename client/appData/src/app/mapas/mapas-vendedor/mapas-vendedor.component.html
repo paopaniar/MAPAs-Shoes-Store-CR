@@ -5,24 +5,7 @@
         aria-label="Crear nuevo pedido"
         color="primary"
       >
-       
-      </a>
- 
-      <!--
-      <mat-card-title>
-       Nuevo Pedido
-        <a
-          mat-fab
-          matTooltip="Crear nuevo pedido"
-          aria-label="Crear nuevo pedido"
-          color="primary"
-        >
-          <mat-icon class="add">add</mat-icon>
-        </a>
-      </mat-card-title>-->
-      <!-- Table -->
-     
-  
+     </a>
       <br> 
   <div class="card">
   <div class="card-header card-header-warning" >
@@ -72,6 +55,7 @@
             matTooltip="Actualizar"
             aria-label="Actualizar"
             color="primary"
+            (click)="actualizarVideojuego(row.id)"
           >
           <mat-icon class="square-icon">edit</mat-icon>
 

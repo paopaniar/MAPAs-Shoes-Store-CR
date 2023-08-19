@@ -102,7 +102,7 @@ module.exports.update = async (request, response, next) => {
       nombreProducto: producto.nombreProducto,
       descripcion: producto.descripcion,
       precio: producto.precio,
-      cantidadDisponible: producto.cantidadDisponible,
+      cantidadDisponible: parseInt(producto.cantidadDisponible),
      
       categorias: {
         disconnect:productoViejo.categorias,

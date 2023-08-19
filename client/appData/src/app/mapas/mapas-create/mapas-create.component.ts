@@ -130,13 +130,10 @@ export class MapasCreateComponent implements OnInit {
     }
   
     let gFormat: any = this.videojuegoForm.get('categorias').value.map(x => ({ ['id']: x }));
-    // let usuarioId: any = this.videojuegoForm.get('usuario').value;
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     let usuarioId= this.currentUser.usuario.id;
-
     this.videojuegoForm.patchValue({ generos: gFormat });
-    // this.videojuegoForm.patchValue({ usuario: usuarioId}); 
     this.videojuegoForm.patchValue({ usuario: usuarioId}); 
 
     console.log(this.videojuegoForm.value);
@@ -155,25 +152,36 @@ export class MapasCreateComponent implements OnInit {
   actualizarProducto() {
     
     this.submitted=true;
+
     if(this.videojuegoForm.invalid){
       return;
     }
+
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    let usuarioId= this.currentUser.usuario.id;
+
     let uFormat:any=this.videojuegoForm.get('usuario').value;
-    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
-    this.videojuegoForm.patchValue({ categorias:gFormat});
     let nombreProducto = this.videojuegoForm.get('nombreProducto').value;
+    let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
+
     this.videojuegoForm.patchValue({ nombreProducto: nombreProducto });
     this.videojuegoForm.patchValue({usuario: uFormat});
+    this.videojuegoForm.patchValue({ usuario: usuarioId}); 
+    this.videojuegoForm.patchValue({ categorias:gFormat});
 
     console.log(this.videojuegoForm.value);
+    
     this.gService.update('producto',this.videojuegoForm.value)
-    .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
+    .pipe(takeUntil(this.destroy$)) 
+    .subscribe((data: any) => {
       this.respVideojuego=data;
       this.router.navigate(['/producto/all'],{
         queryParams: {update:'true'}
       });
     });
   }
+
   onReset() {
     this.submitted = false;
     this.videojuegoForm.reset();

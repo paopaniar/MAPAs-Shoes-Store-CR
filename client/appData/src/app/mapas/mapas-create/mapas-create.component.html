@@ -57,19 +57,7 @@
                 El precio debe contener <strong>solo números</strong>
               </mat-error>
             </mat-form-field>
-          </div>
-          
-          
-          <div class="col">
-            <mat-form-field class="full-width">
-              <mat-label>Usuarios Sales</mat-label>
-              <mat-select formControlName="usuario">
-                <mat-option *ngFor="let user of usuariosList" [value]="user.id">
-                  {{ user.nombre }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>          
+          </div>        
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Proveedor" formControlName="proveedor">
@@ -88,9 +76,6 @@
           </div>
         
         </div>
-       
-
-        
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button style="background-color: #5cb85c; color: #040618;" type="submit">Guardar</button>

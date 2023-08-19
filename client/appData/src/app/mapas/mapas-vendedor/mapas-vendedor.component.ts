@@ -86,7 +86,11 @@ export class MapasVendedorComponent implements AfterViewInit{
     };
     this.dialog.open(MapasFotografiasComponent, dialogConfig);
   }
-
+  actualizarVideojuego(id: number) {
+    this.router.navigate(['/producto/update', id], {
+      relativeTo: this.route,
+    });
+  }
   listaPreguntas(id:Number){
     console.log(id);
     const dialogConfig = new MatDialogConfig();
