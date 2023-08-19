@@ -1,56 +1,60 @@
+<br>
+<br>
+<br>
+
 <div class="grid-container">
+  <form [formGroup]="direccionForm" (ngSubmit)="isCreate ? crearDireccion() : actualizarDireccion()" novalidate>
     <div class="encabezado">
-      <h1>{{ titleForm }} dirección</h1>
+      <h4>Mi Nueva Dirección</h4>
     </div>
-    <form [formGroup]="direccionForm" (ngSubmit)="isCreate ? crearDireccion() : actualizarDireccion()" novalidate>
-      <input type="hidden" formControlName="id" />
-      <input type="hidden" formControlName="usuarioId" />
-      <mat-card class="direccion-card">
-        <mat-card-content>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="full-width">
-                <mat-label>Provincia</mat-label>
-                <mat-select formControlName="provincia" placeholder="Provincia">
-                  <mat-option *ngFor="let p of provincias" [value]="p" (click)="obtenerCantones(p.id)">{{ p.nombre }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="errorHandling('provincia', 'required')">La provincia es requerida</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="full-width">
-                <mat-label>Cantón</mat-label>
-                <mat-select formControlName="canton" placeholder="Cantón">
-                  <mat-option *ngFor="let c of cantones" [value]="c" (click)="obtenerDistritos(c.provinciaId, c.id)">{{ c.nombre }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="errorHandling('canton', 'required')">El cantón es requerido</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="full-width">
-                <mat-label>Distrito</mat-label>
-                <mat-select formControlName="distrito" placeholder="Distrito">
-                  <mat-option *ngFor="let d of distritos" [value]="d">{{ d.nombre }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="errorHandling('distrito', 'required')">El distrito es requerido</mat-error>
-              </mat-form-field>
-            </div>
+    <input type="hidden" formControlName="id" />
+    <input type="hidden" formControlName="usuarioId" />
+    <mat-card class="direccion-card">
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Provincia</mat-label>
+              <mat-select formControlName="provincia" placeholder="Provincia">
+                <mat-option *ngFor="let p of provincias" [value]="p" (click)="obtenerCantones(p.id)">{{ p.nombre }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="errorHandling('provincia', 'required')">La provincia es requerida</mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="full-width">
-                <mat-label>Dirección exacta</mat-label>
-                <input matInput formControlName="otrasSennas" placeholder="Dirección exacta" />
-                <mat-error *ngIf="errorHandling('otrasSennas', 'required')">La dirección exacta es requerida</mat-error>
-              </mat-form-field>
-            </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Cantón</mat-label>
+              <mat-select formControlName="canton" placeholder="Cantón">
+                <mat-option *ngFor="let c of cantones" [value]="c" (click)="obtenerDistritos(c.provinciaId, c.id)">{{ c.nombre }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="errorHandling('canton', 'required')">El cantón es requerido</mat-error>
+            </mat-form-field>
           </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button aria-label="Agregar dirección" type="submit">Nueva dirección de envio
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </form>
-  </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Distrito</mat-label>
+              <mat-select formControlName="distrito" placeholder="Distrito">
+                <mat-option *ngFor="let d of distritos" [value]="d">{{ d.nombre }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="errorHandling('distrito', 'required')">El distrito es requerido</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Dirección exacta</mat-label>
+              <input matInput formControlName="otrasSennas" placeholder="Dirección exacta" />
+              <mat-error *ngIf="errorHandling('otrasSennas', 'required')">La dirección exacta es requerida</mat-error>
+            </mat-form-field>
+         
+          </div>
+        
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button aria-label="Agregar dirección" type="submit">Guardar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

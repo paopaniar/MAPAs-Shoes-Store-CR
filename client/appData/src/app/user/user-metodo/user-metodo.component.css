@@ -1,0 +1,62 @@
+.grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .form-title {
+    background-color: #34c759;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .icon {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  .metodopago-card {
+    background-color: #022146;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .col {
+    flex: 1;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button[type="submit"] {
+    color: white;
+  }
+  
+  .icon-right {
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  

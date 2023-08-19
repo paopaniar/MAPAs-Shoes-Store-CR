@@ -2,31 +2,33 @@
 <br>
 <br><div class="grid-container">
 
-  <form [formGroup]="metodoForm" (ngSubmit)="isCreate ? crearMetodoPago() : actualizarMetodoPago()" novalidate  style="background-color: #022146;">  
-    <h5 style="color: #000000; background: #34c759;"><mat-icon>account_balance_wallet</mat-icon> Nuevo Método de Pago</h5>
+  <div class="grid-container">
+    <form [formGroup]="metodoForm" (ngSubmit)="isCreate ? crearMetodoPago() : actualizarMetodoPago()" novalidate class="form-container">
+      <h5 class="form-title"><mat-icon class="icon">account_balance_wallet</mat-icon> Nuevo Método de Pago</h5>
   
-    <mat-card class="metodopago-card" style="background-color: #022146;">
-      <mat-card-content>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <mat-label>Método de pago</mat-label>
-              <mat-select formControlName="descripcion" placeholder="Tipo de pago">
-                <mat-option value="Tarjeta">Tarjeta</mat-option>
-                <mat-option value="Sinpe">Sinpe/Transferencia</mat-option>
-                <mat-option value="Sinpe">Efectivo</mat-option>
-              </mat-select>
-              <mat-error *ngIf="errorHandling('metodosPago', 'required')">El método de pago es requerido</mat-error>
-            </mat-form-field>
+      <mat-card class="metodopago-card">
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Método de pago</mat-label>
+                <mat-select formControlName="descripcion" placeholder="Tipo de pago">
+                  <mat-option value="Tarjeta">Tarjeta</mat-option>
+                  <mat-option value="Sinpe">Sinpe/Transferencia</mat-option>
+                  <mat-option value="Efectivo">Efectivo</mat-option>
+                </mat-select>
+                <mat-error *ngIf="errorHandling('descripcion', 'required')">El método de pago es requerido</mat-error>
+              </mat-form-field>
+            </div>
           </div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions style="background-color: #34c759;">
-        <button mat-button aria-label="Agregar método de pago" type="submit" style="color: #fff;">
-          Guardar
-          <mat-icon style="margin-left: 5px;">check_box</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-</div>
+        </mat-card-content>
+        <mat-card-actions class="button-container">
+          <button mat-raised-button color="primary" aria-label="Agregar método de pago" type="submit" style="background-color: #34c759;">
+            Guardar
+            <mat-icon class="icon-right">check_box</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+  
