@@ -7,39 +7,42 @@ import { AuthenticationService } from '../authentication.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  isAuthenticated:boolean;
+  isAuthenticated: boolean;
   currentUser: any;
-  constructor(private authService:AuthenticationService, 
+  constructor(private authService: AuthenticationService,
     private router: Router) {
-     
-      this.authService.isAuthenticated.subscribe(
-        (valor) => (this.isAuthenticated = valor)
-      );
-    
-      this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    //Subscribirse para obtener si esta autenticado
+    this.authService.isAuthenticated.subscribe(
+      (valor) => (this.isAuthenticated = valor)
+    );
+    //Subscribirse para obtener el usuario autenticado
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }
-    canActivate(
-      route: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot,
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let url: string = state.url;
-      return this.checkUserLogin(route, url);
-    }
-  
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    let url: string = state.url;
+    return this.checkUserLogin(route, url);
+  }
+  //Verificar que el rol del usuario coincida con alguno de los indicados
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.isAuthenticated) {
-      const userRoles = this.currentUser.usuario.roles;
+      const userRole = this.currentUser.usuario.roles;
+      const userStatus = this.currentUser.usuario.estado;
       var roleIncl = false;
-      if(route.data['habilitado']){
-        if(!(route.data['roles'] === undefined)){
-          for(let index = 0; index < userRoles.length; index++){
-            if(route.data['roles'].includes(userRoles[index]['Rol'])){
-
+      console.log(userRole[0]['descripcion']);
+      //roles.length && roles.indexOf(verify.role)===-1
+      if (userStatus) {
+        if (!(route.data['roles'] === undefined)) {
+          for (let index = 0; index < userRole.length; index++) {
+            if (route.data['roles'].includes(userRole[index]['descripcion'])) {
+              roleIncl = true;
             }
           }
-          if(!(roleIncl)){
-            this.router.navigate(['/usuario/login'],{
-              queryParams:{auth: 'no'},
+          if (!(roleIncl)) {
+            this.router.navigate(['/usuario/login'],{   
+              queryParams: { auth: 'no' },
             });
             return false;
           }
@@ -47,25 +50,10 @@ export class AuthGuard implements CanActivate {
       }
       return true;
     }
-    this.router.navigate(['/usuario/login'],{
-      queryParams:{
-      auth: 'no'
-      },
+
+    this.router.navigate(['/usuario/login'], {
+      queryParams: { auth: 'no' },
     });
     return false;
   }
 }
-      // if (route.data['roles'].length && !route.data['roles'].includes(userRoles)) {
-      //   this.router.navigate(['/usuario/login'], {
-      //     //Parametro para mostrar mensaje en login
-      //     queryParams: { auth: 'no' }
-      //   });
-        // return false;
-    //   }
-    //   return true;
-    // } 
-
-    // this.router.navigate(['/usuario/login'], {
-    //   queryParams: { auth: 'no'}
-    // });
-  

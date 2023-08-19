@@ -26,12 +26,12 @@ const routes: Routes = [
   {path: 'usuario/lista', component: UserListComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['Administrador']
   }},
   {path: 'usuario/inactivo', component: UserListInactivosComponent,
 canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['Administrador']
   }}
 
 ];

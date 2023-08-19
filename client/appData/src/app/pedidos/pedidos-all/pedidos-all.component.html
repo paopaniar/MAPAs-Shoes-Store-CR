@@ -13,7 +13,7 @@
       <br>  <br>  <br>
   <div class="card">
   <div class="card-header card-header-warning" >
-    <h4 class="card-title">Pedidos</h4>
+    <h4 class="card-title">Pedidossdfs</h4>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="table" matSort aria-label="Elements" style="background-color:#fff;" >
@@ -63,6 +63,19 @@
         >
           <mat-icon class="square-icon">account_balance_wallet</mat-icon>
         </a>
+
+        <a
+        style="
+          color: #022146;
+          background-color: #9dbcfd"
+        mat-fab
+        matTooltip="Detalle"
+        aria-label="Detalle"
+        color="primary"
+        (click)="detalleOrden(row.id)"
+      >
+        <mat-icon class="square-icon">account_balance_wallet</mat-icon>
+      </a>
         
         </td>
       </ng-container>

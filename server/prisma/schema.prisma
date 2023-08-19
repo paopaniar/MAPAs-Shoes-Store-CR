@@ -11,29 +11,29 @@ datasource db {
 }
 
 //buena
-model Usuario {
-  id                Int                 @id @default(autoincrement())
-  email             String              @unique
-  nombre            String? //Puede ser nulo
-  primerApellido    String? //Puede ser nulo
-  segundoApellido   String? //Puede ser nulo
-  roles               Rol[]             
-  contrasenna       String?
-  identificacion    String?
-  estado            Int                 @default(1)
-  ordenes           Orden[]
-  productos         Producto[]
-  direcciones       Direccion[]
-  metodosPago       MetodoPago[]
-  consultaProductos ConsultaProductos[]
-  evaluaciones      Evaluacion[]
-}
+  model Usuario {
+    id                Int                 @id @default(autoincrement())
+    email             String              @unique
+    nombre            String? //Puede ser nulo
+    primerApellido    String? //Puede ser nulo
+    segundoApellido   String? //Puede ser nulo
+    roles               Rol[]             
+    contrasenna       String?
+    identificacion    String?
+    estado            Int                 @default(1)
+    ordenes           Orden[]
+    productos         Producto[]
+    direcciones       Direccion[]
+    metodosPago       MetodoPago[]
+    consultaProductos ConsultaProductos[]
+    evaluaciones      Evaluacion[]
+  }
 
-model Rol {
-  id          Int       @id @default(autoincrement())
-  descripcion String
-  usuarios    Usuario[]
-}
+  model Rol {
+    id          Int       @id @default(autoincrement())
+    descripcion String
+    usuarios    Usuario[]
+  }
 //buena
 model MetodoPago {
   id          Int     @id @default(autoincrement())
@@ -96,7 +96,7 @@ model OrdenDetalle {
 model Producto {
   id                 Int                 @id @default(autoincrement())
   nombreProducto     String
-  precio             Decimal
+  precio             Decimal  
   proveedor          String
   descripcion        String
   cantidadDisponible Int

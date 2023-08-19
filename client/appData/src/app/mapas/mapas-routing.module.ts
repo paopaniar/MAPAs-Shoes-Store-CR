@@ -16,38 +16,38 @@ const routes: Routes = [
   {path:'producto/crear', component: MapasCreateComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN', 'SALES']
+    roles: ['Administrador', 'Vendedor']
   }},
 
   {path:'producto/all', component: MapasAllComponent,
   canActivate:[AuthGuard],
     data:{
-      roles: ['ADMIN']
+      roles: ['Administrador']
     }
   },
   
   {path: 'producto/vendedor', component: MapasVendedorComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES']
+    roles: ['Vendedor']
   }},
 
   {path: 'producto/foto', component: MapasFotografiasComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES','ADMIN']
+    roles: ['Vendedor','Administrador']
   }},
 
   {path:'producto/:id', component: MapasDetailComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN', 'SALES']
+    roles: ['Administrador', 'Vendedor']
   }},
 
   {path:'producto/update/:id', component: MapasCreateComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN', 'SALES']
+    roles: ['Administrador', 'Vendedor']
   }},
 
   {path:'producto/pregunta/:id', component: MapasDetailComponent}

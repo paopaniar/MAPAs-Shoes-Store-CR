@@ -7,39 +7,44 @@ import { PedidosDiagComponent } from './pedidos-diag/pedidos-diag.component';
 import { PedidosCarritoComponent } from './pedidos-carrito/pedidos-carrito.component';
 import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.component';
 import { AuthGuard } from '../share/guards/auth.guard';
+import { PedidosEvaluacionComponent } from './pedidos-evaluacion/pedidos-evaluacion.component';
 
 const routes: Routes = [
   {path:'orden', component: PedidosIndexComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    descripcion: ['Administrador']
   }},
 
   {path:'orden/client', component: PedidosAllComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['USER']
+    roles: ['Cliente']
   }},
 
   {path: 'orden/vendedor', component: PedidosClienteComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES', 'ADMIN']
+    roles: ['Vendedor', 'Administrador']
   }},
 
   {path:'orden/:id', component: PedidosDiagComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['Administrador']
   }},
 
   {path: 'ordenProducto', component: PedidosCarritoComponent,
   canActivate:[AuthGuard],
     data:{
-      roles: ['USER']
+      roles: ['Cliente']
     }
   },
-
+  {path:'orden/finalizados', component: PedidosEvaluacionComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['Cliente']
+  }},
 ];
 
 @NgModule({

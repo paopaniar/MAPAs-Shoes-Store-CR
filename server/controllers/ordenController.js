@@ -130,6 +130,43 @@ module.exports.getByClient = async (request, response, next) => {
   });
   response.json(ordenes);
 };
+module.exports.getByClientbyFinalizadas = async (request, response, next) => {
+  let id = parseInt(request.params.id);
+  const estado = parseInt(request.params.estado);
+  const ordenes = await prisma.orden.findMany({
+    where: { usuarioId: id, estado: estado }, 
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
+        select: {
+          id: true,
+          cantidad: true,
+          iva: true,
+          subtotal: true,
+          total: true,
+          ordenId: true,
+          producto: {
+            select: {
+              nombreProducto: true,
+              precio: true,
+              descripcion: true,
+              usuario: {
+                select: {
+                  nombre: true,
+                  primerApellido: true,
+                  segundoApellido: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+  response.json(ordenes);
+};
 
 module.exports.create = async (request, response, next) => {
   let infoOrden=request.body;
