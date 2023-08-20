@@ -215,5 +215,15 @@ module.exports.update = async (request, response, next) => {
     next(error);
   }
 };
-
+module.exports.getCantidadCompras = async (request, response, next) => {
+  let dia = parseInt(request.params.dia ); 
+  const result= await prisma.$queryRaw(
+    Prisma.sql`SELECT o.id, SUM(od.cantidad) as 
+   suma FROM orden o, ordendetalle od, producto p
+   WHERE o.id=od.id and od.productoId=p.id 
+   AND DATE(o.fechaOrden) = DATE_ADD(CURRENT_DATE, INTERVAL ${dia - 1} DAY) GROUP BY od.productoId`
+  )
+  //SELECT v.nombre, SUM(ov.cantidad) as suma FROM orden o, ordenonvideojuego ov, videojuego v WHERE o.id=ov.ordenId and ov.videojuegoId=v.id AND MONTH(o.fechaOrden) = 10 GROUP BY ov.videojuegoId
+  response.json(result)
+};
 

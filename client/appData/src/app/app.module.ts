@@ -12,6 +12,7 @@ import { MapasModule } from './mapas/mapas.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { HttpErrorInterceptorService } from './share/http-error-interceptor.serv
     UserModule,
     MapasModule,
     PedidosModule,
+    DashboardModule,
    // VideojuegoModule,
     //siempre de ultimo
     AppRoutingModule,
@@ -43,4 +45,4 @@ import { HttpErrorInterceptorService } from './share/http-error-interceptor.serv
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { }
