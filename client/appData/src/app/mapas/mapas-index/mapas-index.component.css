@@ -12,6 +12,44 @@
   max-height:850px;
  
 }
+.green-text{
+  color: rgb(0, 0, 0)
+}
+.red-text{
+  color: rgb(0, 0, 0)
+}
+.red{
+  background-color: #e94b4b;
+}
+/* Estilo para el contenedor de filtros */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacio entre elementos */
+  align-items: center;
+  background-color: #f5f5f5; /* Color de fondo */
+  padding: 16px;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilo para los elementos de filtro */
+.filter-input {
+  flex: 1; /* Que ocupen todo el espacio disponible */
+}
+
+/* Estilo para el botón de búsqueda */
+mat-icon-button {
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del icono */
+  border-radius: 4px; /* Bordes redondeados */
+  transition: background-color 0.3s; /* Transición de color al pasar el mouse */
+}
+
+mat-icon-button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
 .card .carousel-container2 {
   flex-grow: 1;
   border-top-left-radius: 8px;

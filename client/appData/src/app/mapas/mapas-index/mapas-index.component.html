@@ -1,26 +1,36 @@
-<br><br><br><br>
+<br><br><br>
 <mat-card-content>
-  <mat-form-field class="full-width">
-    <mat-label>Nombre Producto</mat-label>
-    <input matInput #texto (keyup)="filterProductos(texto.value)">
-    <button mat-icon-button matSuffix color="primary">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>    
-  <mat-form-field class="full-width">
-    <mat-label>Categoría</mat-label>
-    <mat-select [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
-      <mat-option [value]="undefined">Seleccione una categoría</mat-option>
-      <mat-option *ngFor="let category of categorias" [value]="category">
-        {{ category?.nombreCategoria }}
-      </mat-option>      
-    </mat-select>
-  </mat-form-field>
+  <div class="filter-container" style="background-color: #5f899c;" [formGroup]="filtroForm">
+    <mat-form-field class="full-width filter-input">
+      <input matInput formControlName="filtroNombre" placeholder="Nombre" />
+      <button mat-icon-button matSuffix color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width filter-input">
+      <mat-select formControlName="filtroCategoria" placeholder="Categorías" multiple>
+        <mat-option *ngFor="let c of categoriasList" [value]="c.id">{{ c.nombreCategoria }}</mat-option>
+      </mat-select>
+      <mat-error>
+        La categoría es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width filter-input">
+      <mat-label>Filtrar por precio</mat-label>
+      <mat-select formControlName="filtroPrecio">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="menor">Menor a mayor</mat-option>
+        <mat-option value="mayor">Mayor a menor</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   
 </mat-card-content>
-
+<br>
 <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="filterDatos">
-  <mat-grid-tile *ngFor="let item of filterDatos" class="card">         
+  <mat-grid-tile *ngFor="let item of ordenarProductos(aplicarFiltros())" class="card">         
     <!--foto-->
     <div class="carousel-container2">
       <div *ngIf="item.fotografias && item.fotografias.length > 0" class="carousel-container2">
@@ -33,17 +43,20 @@
             <img [src]="'http://localhost:3000/' + foto.imagen" alt="Imagen" />
           </div>
         </div>
-        <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response" style="background-color: #85B8E1;">
+        <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response">
           <div class="textfotos">Aún no hay fotos para este producto.</div>
         </div>
       </div>
     </div>
     <!--fin foto-->
-    <div class="card-body" style="background-color: #9dbcfd;">
+    <div class="card-body" style="background-color: rgb(146, 179, 228);">
       <h5 class="card-title">{{ item.nombreProducto }}</h5>
-      <p class="card-text" style="color: #0e1335;">Precio: ₡{{ item.precio | number: '1.2-2' }}</p>
-      <div *ngIf="item.categorias">
-        <p *ngFor="let categoria of item.categorias">{{ 'Categoría:' + ' ' + categoria.nombreCategoria }}</p>
+      <h6 class="card-text" style="color: #0e1335;">Precio: ₡{{ item.precio | number: '1.2-2' }}</h6>
+      <div class="green">
+       <h6 *ngIf="item.cantidadDisponible >0" class="green-text">{{item.cantidadDisponible}} Disponibles</h6>
+      </div>
+      <div class="red">
+        <h6 *ngIf="item.cantidadDisponible < 0" class="red-text">Agotado</h6>
       </div>
       <div class="example-button-row">
         <div class="example-flex-container">             

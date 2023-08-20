@@ -7,6 +7,7 @@ import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 import { CartService } from 'src/app/share/cart.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-mapas-index',
@@ -18,10 +19,10 @@ export class MapasIndexComponent implements OnInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
   filterDatos: any;
-  categorias: any[] = [];
   itemsPerPage = 6;
   currentPage = 1;
-  selectedCategory: string | undefined;
+  categoriasList: any;
+  filtroForm: FormGroup;
   sortByPriceAsc = false;
   sortByPriceDesc = false;
   isAutenticated: boolean;
@@ -37,6 +38,7 @@ export class MapasIndexComponent implements OnInit{
   constructor(private gService:GenericService,
     private router: Router,
     private route: ActivatedRoute,
+    private fb: FormBuilder,
     private cartService:CartService,
     private authService: AuthenticationService,
     private notificacion:NotificacionService,
@@ -44,14 +46,33 @@ export class MapasIndexComponent implements OnInit{
     this.listaZapatos() 
 
   }
+  aplicarFiltros() {
+    const filtroCategoria = this.filtroForm.get('filtroCategoria').value;
+    const filtroNombre = this.filtroForm.get('filtroNombre').value.toLowerCase();
+    return this.datos.filter(item =>
+      (filtroNombre === '' || item.nombreProducto.toLowerCase().includes(filtroNombre)) &&
+      (filtroCategoria.length === 0 || item.categorias.some(cat => filtroCategoria.includes(cat.id)))
+    );
+  }
+
+  ordenarProductos(productos: any[]): any[] {
+    const filtroPrecio = this.filtroForm.get('filtroPrecio').value;
+    if (filtroPrecio === 'menor') {
+      return productos.slice().sort((a, b) => a.precio - b.precio);
+    } else if (filtroPrecio === 'mayor') {
+      return productos.slice().sort((a, b) => b.precio - a.precio);
+    } else {
+      return productos;
+    }
+  }
 
   ngOnInit(): void {
-    //valores de prueba
-    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.id = this.currentUser.usuario.id;
-    console.log('user', this.id)
-    console.log('filter', this.filterDatos)
+    this.filtroForm = this.fb.group({
+      filtroCategoria: [''],
+      filtroNombre: [''],
+      filtroPrecio: [''],
+    });
+    this.listaCategorias();
   }
 
   previousPage() {
@@ -111,26 +132,30 @@ sortProductsByPrice() {
         console.log(data);
         this.datos=data;
         this.filterDatos=this.datos;
-        this.categorias = this.extractCategories(data);
       })
   }
-  // Create a method to extract unique categories from the data
-extractCategories(data: any[]): any[] {
-  const allCategories = data.flatMap(categoria => categoria.nombreCategoria);
-  const uniqueCategories = [...new Set(allCategories)];
-  return uniqueCategories;
-}
-filterProductsByCategory() {
-  if (!this.selectedCategory) {
-    // Si no se selecciona ninguna categoría, mostrar todos los productos
-    this.filterDatos = this.datos;
-  } else {
-    // Filtrar productos por categoría
-    this.filterDatos = this.datos.filter(producto =>
-      producto.categorias.includes(this.selectedCategory)
-    );
+  listaCategorias() {
+    this.categoriasList = null;
+    this.gService
+      .list('categoria')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        // console.log(data);
+        this.categoriasList = data;
+      });
   }
-} 
+
+  filterCategorias(idCategoria:number) {
+    if (!idCategoria) {
+      this.filterDatos = this.datos; 
+    } else {
+      this.filterDatos = this.datos.filter(producto =>
+        producto.categorias.some(categoria => categoria.id === idCategoria)
+        );
+    }
+    console.log('Cate filtrados:', this.filterDatos);
+  }
+  
   detalleProducto(id:Number){
     console.log(id);
     const dialogConfig = new MatDialogConfig();
