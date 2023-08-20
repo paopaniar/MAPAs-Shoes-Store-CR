@@ -1,0 +1,38 @@
+<br><br>
+<br>
+<br>
+<br>
+<div class="contenido">
+    <h1 class="titulo">Calificaciones</h1>
+<mat-card class="dashboard-card" *ngIf="datos"  >
+    
+    <mat-card-header>
+   
+
+    </mat-card-header>
+    <mat-card-title>
+        <div class="pendiente">
+            <ng-container *ngIf="datos.calificacionFinal == null; ">
+               <h2>  No hay evaluaciones</h2>   
+            </ng-container>
+            <ng-container *ngIf="datos.calificacionFinal ==1; ">
+                <mat-icon style="color: #ffd700 ;">star</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="datos.calificacionFinal ==2; ">
+                <mat-icon style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="datos.calificacionFinal ==3; ">
+                <mat-icon  style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="datos.calificacionFinal ==4; ">
+                <mat-icon  style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="datos.calificacionFinal ==5; ">
+                <mat-icon style="color: #ffd700;">star</mat-icon><mat-icon style="color: #ffd700;">star</mat-icon><mat-icon style="color: #ffd700;">star</mat-icon>  <mat-icon  style="color: #ffd700;">star</mat-icon><mat-icon style="color: #ffd700;">star</mat-icon>  
+            </ng-container>
+          </div>
+           
+      </mat-card-title>
+  </mat-card>
+</div>
+  

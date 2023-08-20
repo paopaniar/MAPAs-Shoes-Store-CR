@@ -9,6 +9,7 @@ import { PedidosCarritoComponent } from './pedidos-carrito/pedidos-carrito.compo
 import { PedidosDetailComponent } from './pedidos-detail/pedidos-detail.component';
 import { AuthGuard } from '../share/guards/auth.guard';
 import { PedidosEvaluacionComponent } from './pedidos-evaluacion/pedidos-evaluacion.component';
+import { PedidosCalificadosComponent } from './pedidos-calificados/pedidos-calificados.component';
 
 const routes: Routes = [
   {path:'orden', component: PedidosIndexComponent,
@@ -50,6 +51,11 @@ const routes: Routes = [
   canActivate:[AuthGuard],
   data:{
     roles: ['Cliente']
+  }},
+  {path:'pedido/calificado', component: PedidosCalificadosComponent,
+  canActivate:[AuthGuard],
+  data:{
+    roles: ['Vendedor']
   }},
 ];
 

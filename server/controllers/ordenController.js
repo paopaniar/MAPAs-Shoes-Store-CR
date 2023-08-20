@@ -18,7 +18,11 @@ module.exports.get = async (request, response, next) => {
             include: {
               usuario: true,
             },
+<<<<<<< HEAD
           },
+=======
+            evaluaciones:true,
+>>>>>>> c365f61e17b6f553f26ce9dffc2bad95b010cae2
         },
       },
     },
@@ -41,11 +45,18 @@ module.exports.getById = async (request, response, next) => {
               usuario: true,
             },
           },
+<<<<<<< HEAD
         },
       },
     },
   });
   response.json(ordenes);
+=======
+          evaluaciones:true,
+     },
+    });
+    response.json(ordenes);
+>>>>>>> c365f61e17b6f553f26ce9dffc2bad95b010cae2
 };
 
 module.exports.getByVendedor = async (request, response, next) => {

@@ -15,13 +15,15 @@ module.exports.get = async (request, response, next) => {
 module.exports.getById = async (request, response, next) => {
   let idEvaluacion = parseInt(request.params.id);
   const evaluaciones = await prisma.evaluacion.findUnique({
-    where: { id: idEvaluacion },
+    where: {
+      id: idEvaluacion // Utiliza directamente el ID que obtuviste de los parámetros de la solicitud
+    },
     include: {
       usuario: true,
-      orden:true,
+      orden: true
     }
   });
-  response.json(productos);
+  response.json(evaluaciones);
 };
 
 module.exports.create = async (request, response, next) => {
