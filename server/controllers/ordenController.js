@@ -1,50 +1,51 @@
-const { PrismaClient, Prisma } = require('@prisma/client');
+const { PrismaClient, Prisma } = require("@prisma/client");
 const prisma = new PrismaClient();
+
 
 //Obtener listado
 module.exports.get = async (request, response, next) => {
-    const orden= await prisma.orden.findMany({
-        orderBy: {
-            fechaOrden: 'asc',
-          },
+  const orden = await prisma.orden.findMany({
+    orderBy: {
+      fechaOrden: "asc",
+    },
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
         include: {
-            usuario: true,
-            metodoPago:true,
-            direccion:true,
-            ordenProductos: {
-              include: {
-                  producto:{
-                    include:{
-                      usuario: true,
-                    },
-                  },
-              },
+          producto: {
+            include: {
+              usuario: true,
             },
+          },
         },
-    });
-    response.json(orden); 
+      },
+    },
+  });
+  response.json(orden);
 };
 
 module.exports.getById = async (request, response, next) => {
-    let idorden=parseInt(request.params.id);
-    const ordenes=await prisma.orden.findUnique({
-        where: {id: idorden},
-     include:{
-        usuario:true,
-        metodoPago:true,
-        direccion:true,
-        ordenProductos: {
+  let idorden = parseInt(request.params.id);
+  const ordenes = await prisma.orden.findUnique({
+    where: { id: idorden },
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
+        include: {
+          producto: {
             include: {
-                producto:{
-                  include:{
-                    usuario: true,
-                  },
-                },
+              usuario: true,
             },
           },
-     },
-    });
-    response.json(ordenes);
+        },
+      },
+    },
+  });
+  response.json(ordenes);
 };
 
 module.exports.getByVendedor = async (request, response, next) => {
@@ -54,10 +55,10 @@ module.exports.getByVendedor = async (request, response, next) => {
       ordenProductos: {
         every: {
           producto: {
-            usuarioId: id
-          }
-        }
-      }
+            usuarioId: id,
+          },
+        },
+      },
     },
     include: {
       usuario: true,
@@ -80,14 +81,14 @@ module.exports.getByVendedor = async (request, response, next) => {
                 select: {
                   nombre: true,
                   primerApellido: true,
-                  segundoApellido: true
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                  segundoApellido: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   });
   response.json(ordenes);
 };
@@ -95,7 +96,7 @@ module.exports.getByVendedor = async (request, response, next) => {
 module.exports.getByClient = async (request, response, next) => {
   let id = parseInt(request.params.id);
   const ordenes = await prisma.orden.findMany({
-    where: {usuarioId: id },
+    where: { usuarioId: id },
     include: {
       usuario: true,
       metodoPago: true,
@@ -117,15 +118,14 @@ module.exports.getByClient = async (request, response, next) => {
                 select: {
                   nombre: true,
                   primerApellido: true,
-                  segundoApellido: true
-                }
-              }
-            }
-          }
-          
-        }
-      }
-    }
+                  segundoApellido: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   });
   response.json(ordenes);
 };
@@ -133,7 +133,7 @@ module.exports.getByClientbyFinalizadas = async (request, response, next) => {
   let id = parseInt(request.params.id);
   const estado = parseInt(request.params.estado);
   const ordenes = await prisma.orden.findMany({
-    where: { usuarioId: id, estado: estado }, 
+    where: { usuarioId: id, estado: estado },
     include: {
       usuario: true,
       metodoPago: true,
@@ -168,24 +168,24 @@ module.exports.getByClientbyFinalizadas = async (request, response, next) => {
 };
 
 module.exports.create = async (request, response, next) => {
-  let infoOrden=request.body;
+  let infoOrden = request.body;
 
-  const newProducto =await prisma.orden.create({
-    data:{
-      fechaOrden:infoOrden.fechaOrden,
+  const newProducto = await prisma.orden.create({
+    data: {
+      fechaOrden: infoOrden.fechaOrden,
       usuarioId: infoOrden.usuarioId,
-      metodoPagoId:infoOrden.metodoPagoId,
-      direccionId:infoOrden.direccionId,
-      ordenProductos:{
-        createMany:{
-          data: infoOrden.ordenProductos
-        }
-      }
-  }
+      metodoPagoId: infoOrden.metodoPagoId,
+      direccionId: infoOrden.direccionId,
+      ordenProductos: {
+        createMany: {
+          data: infoOrden.ordenProductos,
+        },
+      },
+    },
   });
   for (const detalle of infoOrden.ordenProductos) {
     const product = await prisma.producto.findUnique({
-      where: { id: detalle.productoId }
+      where: { id: detalle.productoId },
     });
 
     if (product) {
@@ -193,11 +193,11 @@ module.exports.create = async (request, response, next) => {
 
       await prisma.producto.update({
         where: { id: detalle.productoId },
-        data: { cantidadDisponible: updatedQuantity }
+        data: { cantidadDisponible: updatedQuantity },
       });
     }
   }
-  response.json(newProducto)
+  response.json(newProducto);
 };
 module.exports.update = async (request, response, next) => {
   let idOrden = parseInt(request.params.id); // Corrected variable name
@@ -214,11 +214,94 @@ module.exports.update = async (request, response, next) => {
     next(error);
   }
 };
-  module.exports.getCantidadCompras = async (request, response, next) => {
-    const result= await prisma.$queryRaw(
-      Prisma.sql`SELECT * FROM mapas.orden WHERE DATE(fechaOrden) = CURDATE();`
-    );
-    response.json(result);
-  };
-  
+module.exports.getCantidadCompras = async (request, response, next) => {
+  const result = await prisma.$queryRaw(
+    Prisma.sql`SELECT * FROM mapas.orden order by fechaOrden ASC;` 
+  );
+  response.json(result); 
+};
+module.exports.getVentaProductoTop5 = async (request, response, next) => {
+  //let mes = parseInt(request.params.mes);
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+    SELECT p.nombreProducto, o.productoId, SUM(o.cantidad) AS totalCantidad
+FROM mapas.producto p
+INNER JOIN mapas.ordenDetalle o ON o.productoId = p.id
+GROUP BY p.nombreProducto, o.productoId
+ORDER BY totalCantidad DESC
+LIMIT 5;`
+  );
 
+  response.json(result);
+};
+
+module.exports.getMejoresVendedores = async (request, response, next) => {
+  //let mes = parseInt(request.params.mes); 
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+    SELECT u.id, u.nombre, u.primerApellido, u.segundoApellido, AVG(e.calificacionFinal) as promedio
+    FROM usuario u
+    INNER JOIN orden o ON u.id = o.usuarioId
+    INNER JOIN evaluacion e ON o.id = e.ordenId
+    WHERE u.roles LIKE '%Vendedor%'
+    GROUP BY u.id, u.nombre, u.primerApellido, u.segundoApellido
+    ORDER BY promedio DESC
+    LIMIT 5;`
+  );
+  response.json(result);
+};
+module.exports.getPeoresVendedores = async (request, response, next) => {
+  //let mes = parseInt(request.params.mes); 
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+    SELECT u.id, u.nombre, u.primerApellido, u.segundoApellido, AVG(e.calificacionFinal) as promedio
+    FROM usuario u
+    INNER JOIN orden o ON u.id = o.usuarioId
+    INNER JOIN evaluacion e ON o.id = e.ordenId
+    WHERE u.roles LIKE '%Vendedor%'
+    GROUP BY u.id, u.nombre, u.primerApellido, u.segundoApellido
+    ORDER BY promedio ASC
+    LIMIT 3;`
+  );
+
+  response.json(result);
+};
+module.exports.getProductoMasVendidoVendedor = async (request, response, next) => {
+  const vendedorId = request.params.id; // Id del vendedor logueado
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+      SELECT p.nombreProducto, SUM(od.cantidad) AS totalVentas
+      FROM producto p
+      INNER JOIN ordendetalle od ON p.id = od.productoId
+      INNER JOIN orden o ON od.ordenId = o.id
+      WHERE p.usuarioId = ${vendedorId}
+      GROUP BY p.id, p.nombreProducto
+      ORDER BY totalVentas DESC
+      LIMIT 1;`
+  );
+  response.json(result);
+};
+module.exports.getClienteConMasCompras = async (request, response, next) => {
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+      SELECT u.nombre, u.primerApellido, u.segundoApellido, COUNT(o.id) AS totalCompras, SUM(od.cantidad) AS totalProductosComprados
+      FROM usuario u
+      INNER JOIN orden o ON u.id = o.usuarioId
+      INNER JOIN ordendetalle od ON o.id = od.ordenId
+      GROUP BY u.id
+      ORDER BY totalCompras DESC, totalProductosComprados DESC
+      LIMIT 1;`
+  );
+
+  response.json(result);
+};
+module.exports.getCantidadEvaluacionesPorEscala = async (request, response, next) => {
+  const result = await prisma.$queryRaw(
+    Prisma.sql`
+      SELECT calificacionFinal, COUNT(*) AS cantidad
+      FROM evaluacion
+      GROUP BY calificacionFinal;`
+  );
+
+  response.json(result);
+};

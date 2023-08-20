@@ -6,5 +6,27 @@
 }
 .shipping-card {
     min-width: 120px;
-    margin: 20px auto;
+    margin: 20px auto; 
   }
+.contenido4{
+    width: 200px;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+.contenido1{
+    width: 200px;
+    height: 400px;
+    display: flex;
+  justify-content: space-between;
+}
+.contenido2{
+    width: 200px;
+    height: 400px;
+    display: flex;
+}
+.contenido3{
+    width: 200px;
+    height: 400px;
+    display: flex;
+}

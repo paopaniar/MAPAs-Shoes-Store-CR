@@ -4,7 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardSalesComponent } from './dashboard-sales/dashboard-sales.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
-
+import {MatIconModule} from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   exports: [
     DashboardSalesComponent,

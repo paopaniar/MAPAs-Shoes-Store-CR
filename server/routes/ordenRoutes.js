@@ -12,5 +12,11 @@ router.get('/:id',ordenController.getById);
 router.get('/vendedor/:id',ordenController.getByVendedor);
 router.get('/client/:id',ordenController.getByClient);
 router.get('/finalizados/:id/:estado',ordenController.getByClientbyFinalizadas);
+router.get("/productoTop",ordenController.getVentaProductoTop5);
+router.get("/vendedor",ordenController.getMejoresVendedores);
+router.get("/vendedor",ordenController.getPeoresVendedores);
+router.get('/vendedor/:id/producto-mas-vendido', ordenController.getProductoMasVendidoVendedor);
+router.get('/cliente-con-mas-compras', ordenController.getClienteConMasCompras);
+router.get('/evaluaciones-por-escala', ordenController.getCantidadEvaluacionesPorEscala);
 
 module.exports = router;

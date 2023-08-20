@@ -3,10 +3,13 @@ import Chart from 'chart.js/auto';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { DatePipe } from '@angular/common';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
 @Component({
   selector: 'app-dashboard-admin',
   templateUrl: './dashboard-admin.component.html',
-  styleUrls: ['./dashboard-admin.component.css']
+  styleUrls: ['./dashboard-admin.component.css'],
 })
 export class DashboardAdminComponent {
   canvas: any;
@@ -18,26 +21,25 @@ export class DashboardAdminComponent {
   grafico: any;
   //Datos para mostrar en el gráfico
   datos: any;
+  datos1: any;
+  datos2: any;
+  datos3: any;
   //Lista de meses para filtrar el gráfico
-  mesList:any;
- formattedDate: any;
+  mesList: any;
+  formattedDate: any;
   //Mes actual
-  filtro= new Date().getMonth();
+  filtro = new Date().getMonth();
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(
-    private gService: GenericService,
-    private datePipe: DatePipe
-  ) {
- 
-  }
- 
+  constructor(private gService: GenericService, private datePipe: DatePipe) {}
+
   ngAfterViewInit(): void {
     this.obtenerComprasDiaActual();
+    this.ngOnInit();
   }
 
-   obtenerComprasDiaActual() {
+  obtenerComprasDiaActual() {
     const fechaActual = new Date();
-   this.formattedDate = this.datePipe.transform(fechaActual, 'yyyy-MM-dd');
+    this.formattedDate = this.datePipe.transform(fechaActual, 'yyyy-MM-dd');
     this.gService
       .get('orden/producto', this.formattedDate)
       .pipe(takeUntil(this.destroy$))
@@ -46,47 +48,72 @@ export class DashboardAdminComponent {
         this.graficoBrowser();
       });
   }
-   //Configurar y crear gráfico
-   graficoBrowser(): void {
-    this.canvas=this.graficoCanvas.nativeElement;
+  //Configurar y crear gráfico
+  graficoBrowser(): void {
+    this.canvas = this.graficoCanvas.nativeElement;
     this.ctx = this.canvas.getContext('2d');
     //Si existe destruir el Canvas para mostrar el grafico
-    if(this.grafico){
-     this.grafico.destroy();
+    if (this.grafico) {
+      this.grafico.destroy();
     }
-    this.grafico= new Chart(this.ctx,{
-     type:'pie',
-     data:{
-       //Etiquetas debe ser un array
-       labels: this.datos.map(x => x.nombre),
-       datasets:[
-         {
-           backgroundColor: [
-             'rgba(255, 99, 132, 0.2)',
-             'rgba(255, 159, 64, 0.2)',
-             'rgba(255, 205, 86, 0.2)',
-             'rgba(75, 192, 192, 0.2)',
-             'rgba(54, 162, 235, 0.2)',
-             'rgba(153, 102, 255, 0.2)',
-             'rgba(201, 203, 207, 0.2)'
-         ],
-         //Datos del grafico, debe ser un array
-         data: this.datos.map(x => x.suma)
-         
-         },
-
-       ]
-     },
-         options:{
-           responsive:false,
-           maintainAspectRatio: false,
-         },
-       
+    this.grafico = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+        //Etiquetas debe ser un array
+        labels: this.datos.map((x) => x.nombre),
+        datasets: [
+          {
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)',
+            ],
+            //Datos del grafico, debe ser un array
+            data: this.datos.map((x) => x.suma),
+          },
+        ],
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+      },
     });
-   }
-   ngOnDestroy() {
-     this.destroy$.next(true);
-     // Desinscribirse
-     this.destroy$.unsubscribe();
-   }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Desinscribirse
+    this.destroy$.unsubscribe();
+  }
+  ngOnInit(): void {
+    //Obtener información del API
+    this.gService
+      .list('orden/productoTop')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.datos1 = data;
+      });
+      console.log(this.datos1);
+  }
+  openPDF() {
+    //htmlData: id del elemento HTML
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      //Configuración del ancho y alto del Canvas de la imagen
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      //devuelve un data URI,el cual contiene una representación
+      // de la imagen en el formato especificado por el parámetro type
+      const FILEURI = canvas.toDataURL('image/png');
+      //Orientación, unidad, formato
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      //Agregar imagen al PDF
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('reporte.pdf');
+    });
+  }
 }
