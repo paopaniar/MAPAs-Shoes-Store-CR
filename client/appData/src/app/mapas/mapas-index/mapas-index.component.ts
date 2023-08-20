@@ -67,6 +67,7 @@ export class MapasIndexComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.filtroForm = this.fb.group({
       filtroCategoria: [''],
       filtroNombre: [''],
@@ -166,10 +167,9 @@ sortProductsByPrice() {
     this.dialog.open(MapasDiagComponent, dialogConfig);
   }
   comprar(id: number) {
-    // Verificar si el usuario está autenticado
-   
-    // Si llegamos aquí, el usuario está autenticado y es un cliente
-    // Realiza la lógica de compra
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.currentUser.usuario.id;
     this.gService
       .get('producto', id)
       .pipe(takeUntil(this.destroy$))
@@ -185,8 +185,6 @@ sortProductsByPrice() {
           console.log('Usuario no autenticado');
           return;
         }
-      
-        // Verificar si el usuario es un cliente
         if (!this.esCliente()) {
           this.notificacion.mensaje(
             'Denagado!',

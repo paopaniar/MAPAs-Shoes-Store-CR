@@ -19,6 +19,7 @@ export class PedidosCarritoComponent implements OnInit {
   fecha = Date.now();
   orderForm: FormGroup;
   qtyItems = 0;
+  subtotal=0;
   isUser: boolean; 
   selectedPaymentMethod: any;
   selectedAddress: any;
@@ -57,6 +58,7 @@ export class PedidosCarritoComponent implements OnInit {
     this.dataSource=new MatTableDataSource(data)
    })
    this.total=this.cartService.getTotal()
+
   }
   actualizarCantidad(item: any) {
     this.cartService.addToCart(item);
@@ -86,6 +88,36 @@ export class PedidosCarritoComponent implements OnInit {
   });
 }
 
+actualizarSubtotal(element: any) {
+  const stockDisponible = element.producto.cantidadDisponible;
+
+  if (element.cantidad > 0 && element.cantidad <= stockDisponible) {
+    // Calcular el subtotal en tiempo real
+    element.subtotal = element.cantidad * element.precio;
+  } else {
+    // Si la cantidad no es válida, establecer el subtotal en 0 o cualquier otro valor predeterminado
+    element.subtotal = 0;
+  }
+
+  // Recalcular el total del carrito si es necesario
+  this.total = this.cartService.getTotal();
+}
+
+
+
+disponnibilidad(item: any) {
+  const stockDisponible = item.producto.cantidadDisponible; // Obtener el stock disponible del producto
+  if (item.cantidad > 0 && item.cantidad <= stockDisponible) {
+    // Verificar si la cantidad es válida y no excede el stock disponible
+    this.cartService.updateCartItemQuantity(item.product, item.cantidad);
+    this.total = this.cartService.getTotal();
+    
+  } else if (item.cantidad > stockDisponible) {
+    this.noti.mensaje('Atención!', 'No existen artículos disponibles', TipoMessage.error);
+  } else {
+    this.noti.mensaje('Atención!', 'No hay suficientes artículos', TipoMessage.warning);
+  }
+}
 listadirecciones() {
   this.authService.currentUser.subscribe((x) => {
     this.currentUser = x;
@@ -104,44 +136,50 @@ listadirecciones() {
 }
 
 
-  registrarOrden() {
-    if (this.orderForm.invalid) {
-      return;
-    }  
-   if(this.cartService.getItems!=null){
-      let itemsCarrito=this.cartService.getItems;
-      let detalles=itemsCarrito.map(
-        x=>({
-          ['productoId']:x.idItem,
-          ['cantidad']: x.cantidad,
-        })
-      );
-      this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-      this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-      let infoOrden={
-        'fechaOrden': new Date(this.fecha),
-        'ordenProductos':detalles,  
-        'usuarioId': this.currentUser.usuario.id,
-        'direccionId': this.selectedAddress,
-        'metodoPagoId': this.selectedPaymentMethod
-      }
-      console.log('currentUser:', this.currentUser);
-      console.log('isAuthenticated:', this.isAutenticated);
-
-      this.gService.create('orden',infoOrden)
-      .subscribe((respuesta:any)=>{
-        this.router.navigate(['orden/client']),
-        this.noti.mensaje('Orden',
-        'Orden registrada #'+respuesta.id,
-        TipoMessage.success)
-        this.cartService.deleteCart();
-        this.total=this.cartService.getTotal();
-        console.log(respuesta)
-      })
-   }else{
-    this.noti.mensaje('Orden',
-    'Agregue productos a la orden',
-    TipoMessage.warning)
-   }
+registrarOrden() {
+  if (this.orderForm.invalid) {
+    return;
   }
+
+  let itemsCarrito = this.cartService.getItems;
+
+  if (itemsCarrito.every(item => item.cantidad <= item.product.cantidadDisponible)) {
+    let itemsCarrito = this.cartService.getItems;
+    let detalles = itemsCarrito.map((x) => ({
+      ['productoId']: x.idItem,
+      ['cantidad']: x.cantidad,
+    }));
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    this.authService.isAuthenticated.subscribe((valor) => (this.isAutenticated = valor));
+    let infoOrden = {
+      'fechaOrden': new Date(this.fecha),
+      'ordenProductos': detalles,
+      'usuarioId': this.currentUser.usuario.id,
+      'direccionId': this.selectedAddress,
+      'metodoPagoId': this.selectedPaymentMethod,
+    };
+    console.log('currentUser:', this.currentUser);
+    console.log('isAuthenticated:', this.isAutenticated);
+
+    this.gService.create('orden', infoOrden).subscribe(
+      (respuesta: any) => {
+        this.router.navigate(['orden/client']);
+        this.noti.mensaje('Orden', 'Orden registrada #' + respuesta.id, TipoMessage.success);
+        this.cartService.deleteCart();
+        this.total = this.cartService.getTotal();
+      },
+      (error) => {
+        console.error(error); // Manejo de errores
+        this.noti.mensaje('Atención!!', 'No se pudo registrar el pedido', TipoMessage.error);
+      }
+    );
+  } else {
+    this.noti.mensaje(
+      'Atención!!',
+      'No hay suficientes artículos disponibles',
+      TipoMessage.warning
+    );
+  }
+}
+
 }
