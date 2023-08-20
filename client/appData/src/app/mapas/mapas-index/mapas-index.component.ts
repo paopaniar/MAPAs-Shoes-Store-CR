@@ -14,7 +14,7 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
   styleUrls: ['./mapas-index.component.css']
   
 })
-export class MapasIndexComponent{
+export class MapasIndexComponent implements OnInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
   filterDatos: any;
@@ -32,7 +32,13 @@ export class MapasIndexComponent{
     const endIndex = startIndex + this.itemsPerPage;
     return this.datos.slice(startIndex, endIndex);
   }
-
+  ngOnInit(): void {
+    //valores de prueba
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.id = this.currentUser.usuario.id;
+    console.log('user', this.id)
+  }
 
   previousPage() {
     if (this.currentPage > 1) {
@@ -130,21 +136,44 @@ extractCategories(data: any[]): any[] {
     };
     this.dialog.open(MapasDiagComponent, dialogConfig);
   }
-  comprar(id:number){
+  comprar(id: number) {
+    // Verificar si el usuario está autenticado
+   
+    // Si llegamos aquí, el usuario está autenticado y es un cliente
+    // Realiza la lógica de compra
     this.gService
-    .get('producto',id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
-      //Agregar videojuego obtenido del API al carrito
-      this.cartService.addToCart(data);
-      //Notificar al usuario
-      this.notificacion.mensaje(
-        'Orden',
-        'Producto: '+data.nombreProducto+ ' agregado a la orden',
-        TipoMessage.success
-      )
-    });
+      .get('producto', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.cartService.addToCart(data);
+        if (!this.isAutenticated) {
+          this.notificacion.mensaje(
+            'Atención!',
+            'Inicie Sesión',
+            TipoMessage.warning
+          );   
+          this.router.navigate(['usuario/login']);
+          console.log('Usuario no autenticado');
+          return;
+        }
+      
+        // Verificar si el usuario es un cliente
+        if (!this.esCliente()) {
+          this.notificacion.mensaje(
+            'Denagado!',
+            'Debe iniciar sesión como Cliente',
+            TipoMessage.warning
+          );
+          return;
+        }
+              this.notificacion.mensaje(
+          'Orden',
+          'Producto: ' + data.nombreProducto + ' agregado a la orden',
+          TipoMessage.success
+        );
+      });
   }
+  
   esCliente() {
     const roleses = this.currentUser.usuario.roles || [];
     return roleses.some(roles => roles.descripcion === 'Cliente');
