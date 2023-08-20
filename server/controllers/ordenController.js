@@ -215,13 +215,8 @@ module.exports.update = async (request, response, next) => {
   }
 };
   module.exports.getCantidadCompras = async (request, response, next) => {
-    let dia = parseInt(request.params.dia ); 
     const result= await prisma.$queryRaw(
-      Prisma.sql`SELECT o.id, 
-      SUM(od.cantidad) as suma 
-      FROM orden o, ordendetalle od, producto p
-      WHERE o.id=od.id and od.productoId=p.id 
-      AND DATE(o.fechaOrden) = DATE_ADD(CURRENT_DATE, INTERVAL ${dia - 1} DAY) GROUP BY od.productoId`
+      Prisma.sql`SELECT * FROM mapas.orden WHERE DATE(fechaOrden) = CURDATE();`
     );
     response.json(result);
   };

@@ -1,92 +1,83 @@
-
-  <br><br><br><br>
-  <mat-card-content>
-    <mat-form-field class="full-width">
-      <mat-label>Nombre Producto</mat-label>
-      <input matInput #texto (keyup)="filterProductos(texto.value)">
-      <button mat-icon-button matSuffix color="primary">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>    
-    <mat-form-field class="full-width">
-      <mat-label>Categoría</mat-label>
-      <mat-select>
-        <mat-option>Seleccione una categoría</mat-option>
-        <mat-option *ngFor="let category of categorias" [value]="category.id">
-          {{ category.nombreCategoria }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-card-content>
+<br><br><br><br>
+<mat-card-content>
+  <mat-form-field class="full-width">
+    <mat-label>Nombre Producto</mat-label>
+    <input matInput #texto (keyup)="filterProductos(texto.value)">
+    <button mat-icon-button matSuffix color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>    
+  <mat-form-field class="full-width">
+    <mat-label>Categoría</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
+      <mat-option [value]="undefined">Seleccione una categoría</mat-option>
+      <mat-option *ngFor="let category of categorias" [value]="category">
+        {{ category?.nombreCategoria }}
+      </mat-option>      
+    </mat-select>
+  </mat-form-field>
   
-  <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
-    <mat-grid-tile  *ngFor="let item of filterDatos" class="card">         
-       <!--foto-->
-       <div class="carousel-container2">
-        <div *ngIf="item.fotografias && item.fotografias.length > 0" class="carousel-container2">
-              <div class="carousel-inner">
-                <div
-                  *ngFor="let foto of item.fotografias; let i = index"
-                  class="carousel-item"
-                  [class.active]="i === 0"
-                >
-                  <img
-                    [src]="'http://localhost:3000/' + foto.imagen"
-                    alt="Imagen"
-                  />
-                </div>
-              </div>
+</mat-card-content>
 
+<mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="filterDatos">
+  <mat-grid-tile *ngFor="let item of filterDatos" class="card">         
+    <!--foto-->
+    <div class="carousel-container2">
+      <div *ngIf="item.fotografias && item.fotografias.length > 0" class="carousel-container2">
+        <div class="carousel-inner">
+          <div
+            *ngFor="let foto of item.fotografias; let i = index"
+            class="carousel-item"
+            [class.active]="i === 0"
+          >
+            <img [src]="'http://localhost:3000/' + foto.imagen" alt="Imagen" />
+          </div>
+        </div>
         <div *ngIf="!item.fotografias || item.fotografias.length === 0" class="no-response" style="background-color: #85B8E1;">
           <div class="textfotos">Aún no hay fotos para este producto.</div>
         </div>
       </div>
     </div>
-       <!--fin foto-->
-        <div class="card-body" style="background-color: #9dbcfd;">
-          <h5 class="card-title">{{item.nombreProducto}}</h5>
-          <p class="card-text" style="color: #0e1335;" >Precio: ₡{{ item.precio | number: '1.2-2' }}</p>
-
-          <div *ngIf="item.categorias">
-            <p *ngFor="let categoria of item.categorias">{{'Categoría:'+ " "+ categoria.nombreCategoria }}</p>
-          </div>          
-          <div class="example-button-row">
-            <div class="example-flex-container">             
-              <button 
-              mat-mini-fab
-              style="background-color: #0e1335; "
-              matTooltip="Comprar"
-              aria-label="Comprar"
-              color="primary"
-              (click)="detalleProducto(item.id)">
-              <mat-icon>info</mat-icon>
-            </button>
-            </div>
-            <div class="example-flex-container">
-              <button
-              mat-mini-fab
-              style="background-color: #0e1335;"
-              color="primary"
-              matTooltip="Comprar"
-              aria-label="Comprar"
-              (click)="comprar(item.id)">
-              <mat-icon class="mat-18">add_shopping_cart</mat-icon>
-            </button>
-            </div>
-      
-        </div> 
+    <!--fin foto-->
+    <div class="card-body" style="background-color: #9dbcfd;">
+      <h5 class="card-title">{{ item.nombreProducto }}</h5>
+      <p class="card-text" style="color: #0e1335;">Precio: ₡{{ item.precio | number: '1.2-2' }}</p>
+      <div *ngIf="item.categorias">
+        <p *ngFor="let categoria of item.categorias">{{ 'Categoría:' + ' ' + categoria.nombreCategoria }}</p>
+      </div>
+      <div class="example-button-row">
+        <div class="example-flex-container">             
+          <button 
+            mat-mini-fab
+            style="background-color: #0e1335;"
+            matTooltip="Comprar"
+            aria-label="Comprar"
+            color="primary"
+            (click)="detalleProducto(item.id)">
+            <mat-icon>info</mat-icon>
+          </button>
+        </div>
+        <div class="example-flex-container">
+          <button
+            mat-mini-fab
+            style="background-color: #0e1335;"
+            color="primary"
+            matTooltip="Comprar"
+            aria-label="Comprar"
+            (click)="comprar(item.id)">
+            <mat-icon class="mat-18">add_shopping_cart</mat-icon>
+          </button>
+        </div>
       </div> 
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div> 
+  </mat-grid-tile>
+</mat-grid-list>
 
-  <div class="button-container">
-    <button mat-icon-button class="pagination-button" (click)="previousPage()" [disabled]="currentPage === 1">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-
-    </button>
-    <button mat-icon-button class="pagination-button" (click)="nextPage()" [disabled]="currentPage === 20">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-
-    </button>
-  </div>
-
+<div class="button-container">
+  <button mat-icon-button class="pagination-button" (click)="previousPage()" [disabled]="currentPage === 1">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <button mat-icon-button class="pagination-button" (click)="nextPage()" [disabled]="currentPage === 20">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</div>

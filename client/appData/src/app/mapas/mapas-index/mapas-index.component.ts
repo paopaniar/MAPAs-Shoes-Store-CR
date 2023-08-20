@@ -18,11 +18,12 @@ export class MapasIndexComponent implements OnInit{
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
   filterDatos: any;
+  categorias: any[] = [];
   itemsPerPage = 6;
   currentPage = 1;
+  selectedCategory: string | undefined;
   sortByPriceAsc = false;
   sortByPriceDesc = false;
-  categorias: any[] = [];
   isAutenticated: boolean;
   currentUser: any;  id: number;
 
@@ -115,12 +116,21 @@ sortProductsByPrice() {
   }
   // Create a method to extract unique categories from the data
 extractCategories(data: any[]): any[] {
-  const allCategories = data.flatMap(producto => producto.categorias);
+  const allCategories = data.flatMap(categoria => categoria.nombreCategoria);
   const uniqueCategories = [...new Set(allCategories)];
   return uniqueCategories;
 }
-  
- 
+filterProductsByCategory() {
+  if (!this.selectedCategory) {
+    // Si no se selecciona ninguna categoría, mostrar todos los productos
+    this.filterDatos = this.datos;
+  } else {
+    // Filtrar productos por categoría
+    this.filterDatos = this.datos.filter(producto =>
+      producto.categorias.includes(this.selectedCategory)
+    );
+  }
+} 
   detalleProducto(id:Number){
     console.log(id);
     const dialogConfig = new MatDialogConfig();

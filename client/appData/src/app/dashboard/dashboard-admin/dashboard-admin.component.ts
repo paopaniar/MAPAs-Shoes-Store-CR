@@ -72,7 +72,9 @@ export class DashboardAdminComponent {
          ],
          //Datos del grafico, debe ser un array
          data: this.datos.map(x => x.suma)
+         
          },
+
        ]
      },
          options:{
