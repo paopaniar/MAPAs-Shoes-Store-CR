@@ -3,7 +3,6 @@ import Chart from 'chart.js/auto';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-dashboard-admin',
   templateUrl: './dashboard-admin.component.html',

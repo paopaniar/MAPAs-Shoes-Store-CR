@@ -5,15 +5,16 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { AuthGuard } from '../share/guards/auth.guard';
 
 const routes: Routes = [
-  {path:'orden/grafico', component: DashboardAdminComponent,
+  {path: 'admin/grafico', component: DashboardAdminComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['ADMIN']
+    roles: ['Administrador']
   }},
-  {path:'', component: DashboardSalesComponent,
+
+  {path:'grafico/vendedor', component: DashboardSalesComponent,
   canActivate:[AuthGuard],
   data:{
-    roles: ['SALES']
+    roles: ['Vendedor']
   }},
 ];
 

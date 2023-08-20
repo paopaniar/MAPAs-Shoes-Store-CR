@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
  
 
   ],
-  providers: [{
+  providers: [
+    DatePipe,{
     provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorService, multi: true
   }],
   bootstrap: [AppComponent]
