@@ -20,6 +20,7 @@ module.exports.get = async (request, response, next) => {
                   },
               },
             },
+            evaluaciones:true,
         },
     });
     response.json(orden); 
@@ -42,6 +43,7 @@ module.exports.getById = async (request, response, next) => {
                 },
             },
           },
+          evaluaciones:true,
      },
     });
     response.json(ordenes);

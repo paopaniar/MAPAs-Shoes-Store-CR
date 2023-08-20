@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
+import { PedidosCalificadosComponent } from '../pedidos-calificados/pedidos-calificados.component';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 
@@ -28,7 +29,7 @@ export class PedidosClienteComponent  implements AfterViewInit{
   dataSource=new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fechaOrden','cantidad','totalOrden','estado','acciones'];
+  displayedColumns = ['fechaOrden','cantidad','totalOrden','estado','acciones', 'evaluacin'];
 
   constructor(private gService:GenericService,
     private router: Router,
@@ -52,9 +53,10 @@ export class PedidosClienteComponent  implements AfterViewInit{
     let total = 0;
     if (row && row.ordenProductos) {
       for (let producto of row.ordenProductos) {
-        total += parseFloat(producto.subtotal);
+        total += parseFloat(producto.producto?.precio);
       }
     }
+    console.log('to', total)
     return total;
   };
   calculateIvaAsNumber(row: any): number {
@@ -73,7 +75,7 @@ export class PedidosClienteComponent  implements AfterViewInit{
   }
   ngAfterViewInit(): void {
     this.listaOrdenes();
-
+  
   };
   //Llamar al API y obtener la lista de productos
   listaOrdenes(){
@@ -126,6 +128,16 @@ export class PedidosClienteComponent  implements AfterViewInit{
       id: id,
     };
     this.dialog.open(PedidosDiagComponent, dialogConfig);
+  }
+
+  detalleCalificacion(id:Number){
+    console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = {
+      id: id,
+    };
+    this.dialog.open(PedidosCalificadosComponent, dialogConfig);
   }
   ngOnDestroy(){
     this.destroy$.next(true);

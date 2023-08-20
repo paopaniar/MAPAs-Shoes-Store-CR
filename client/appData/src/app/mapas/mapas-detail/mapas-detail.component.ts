@@ -15,7 +15,6 @@ export class MapasDetailComponent {
   constructor(private gService: GenericService,
     private route: ActivatedRoute
     ){
-      //Obtener el parámetro
       let id=this.route.snapshot.paramMap.get('id');
       if(!isNaN(Number(id))){
         this.obtenerProducto(id);
