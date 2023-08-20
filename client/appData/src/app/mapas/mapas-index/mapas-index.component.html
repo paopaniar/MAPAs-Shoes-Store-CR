@@ -3,11 +3,11 @@
   <mat-card-content>
     <mat-form-field class="full-width">
       <mat-label>Nombre Producto</mat-label>
-      <input matInput #texto >
-      <button mat-icon-button matSuffix color="primary" (click)="filterProductos(texto.value)" >
+      <input matInput #texto (keyup)="filterProductos(texto.value)">
+      <button mat-icon-button matSuffix color="primary">
         <mat-icon>search</mat-icon>
       </button>
-    </mat-form-field> 
+    </mat-form-field>    
     <mat-form-field class="full-width">
       <mat-label>Categoría</mat-label>
       <mat-select>
@@ -18,8 +18,9 @@
       </mat-select>
     </mat-form-field>
   </mat-card-content>
+  
   <mat-grid-list [cols]="3" rowHeight="10em" gutterSize="10px" *ngIf="datos">
-    <mat-grid-tile *ngFor="let item of displayedData" class="card">         
+    <mat-grid-tile  *ngFor="let item of filterDatos" class="card">         
        <!--foto-->
        <div class="carousel-container2">
         <div *ngIf="item.fotografias && item.fotografias.length > 0" class="carousel-container2">

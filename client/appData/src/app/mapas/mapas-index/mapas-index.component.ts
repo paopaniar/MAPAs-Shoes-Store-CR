@@ -32,12 +32,25 @@ export class MapasIndexComponent implements OnInit{
     const endIndex = startIndex + this.itemsPerPage;
     return this.datos.slice(startIndex, endIndex);
   }
+    
+  constructor(private gService:GenericService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private cartService:CartService,
+    private authService: AuthenticationService,
+    private notificacion:NotificacionService,
+    private dialog: MatDialog){
+    this.listaZapatos() 
+
+  }
+
   ngOnInit(): void {
     //valores de prueba
     this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     this.id = this.currentUser.usuario.id;
     console.log('user', this.id)
+    console.log('filter', this.filterDatos)
   }
 
   previousPage() {
@@ -54,8 +67,7 @@ startAnimation() {
 stopAnimation() {
   this.animationActive = false;
 }
-filterProducto(text: string) {
-  // Filter based on text and category
+filterProductos(text: string) {
   if (!text) {
     this.filterDatos = this.datos;
   } else {
@@ -63,7 +75,9 @@ filterProducto(text: string) {
       producto?.nombreProducto.toLowerCase().includes(text.toLowerCase())
     );
   }
+  console.log(this.filterDatos)
 }
+
 sortProductsByPrice() {
   if (this.sortByPriceAsc) {
     this.filterDatos.sort((a, b) => a.precio - b.precio);
@@ -84,17 +98,6 @@ sortProductsByPrice() {
     }
   }
   
-  
-  constructor(private gService:GenericService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private cartService:CartService,
-    private authService: AuthenticationService,
-    private notificacion:NotificacionService,
-    private dialog: MatDialog){
-    this.listaZapatos() 
-
-  }
 
   
   //lista de zapatos es la table producto
@@ -117,16 +120,7 @@ extractCategories(data: any[]): any[] {
   return uniqueCategories;
 }
   
-  filterProductos(text:string){
-    if(!text){
-      this.filterDatos=this.datos
-    }else{
-      this.filterDatos=this.datos.filter(
-        producto=> producto?.nombreProducto.toLowerCase().
-                            includes(text.toLowerCase())
-      )
-    }
-  }
+ 
   detalleProducto(id:Number){
     console.log(id);
     const dialogConfig = new MatDialogConfig();
