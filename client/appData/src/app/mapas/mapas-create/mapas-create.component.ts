@@ -169,14 +169,16 @@ export class MapasCreateComponent implements OnInit {
     this.videojuegoForm.patchValue({usuario: uFormat});
     this.videojuegoForm.patchValue({ usuario: usuarioId}); 
     this.videojuegoForm.patchValue({ categorias:gFormat});
+   
 
     console.log(this.videojuegoForm.value);
     
     this.gService.update('producto',this.videojuegoForm.value)
     .pipe(takeUntil(this.destroy$)) 
     .subscribe((data: any) => {
+      this.noti.mensaje('Exito', 'Producto modificado!', TipoMessage.success)
       this.respVideojuego=data;
-      this.router.navigate(['/producto/all'],{
+      this.router.navigate(['/producto/vendedor'],{
         queryParams: {update:'true'}
       });
     });

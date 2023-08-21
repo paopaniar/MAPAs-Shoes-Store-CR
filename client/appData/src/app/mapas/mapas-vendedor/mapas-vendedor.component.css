@@ -15,7 +15,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 24px; /* Adjust the width as needed */
+  width: 24x; /* Adjust the width as needed */
   height: 24px; /* Adjust the height as needed */
   border-radius: 4px; /* Adjust the border-radius as needed */
 
@@ -60,4 +60,7 @@
 }
 .card-title{
   color: #EFEFEF;
+}
+.crear{
+  color: #fff;
 }

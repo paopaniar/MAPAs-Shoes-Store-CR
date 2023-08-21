@@ -1,15 +1,23 @@
+<br>  <br>  <br>  <br> 
 
-      <a
-        mat-fab
-        matTooltip="Crear nuevo pedido"
-        aria-label="Crear nuevo pedido"
-        color="primary"
-      >
-     </a>
+
+
       <br> 
   <div class="card">
   <div class="card-header card-header-warning" >
     <h4 class="card-title">Productos vendedor</h4>
+    <mat-card-title class="crear">
+     Crear producto
+       <a
+         mat-fab
+         matTooltip="Crear nuevo pedido"
+         aria-label="Crear nuevo pedido"
+         color="primary"
+         href="producto/crear"
+       >
+         <mat-icon class="add">add</mat-icon>
+       </a>
+     </mat-card-title>
   </div>
   <div class="mat-elevation-z8" >
     <table mat-table [dataSource]="dataSource" class="table" matSort aria-label="Elements" style="background-color:#fff;" >
