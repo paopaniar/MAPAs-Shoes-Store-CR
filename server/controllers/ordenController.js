@@ -18,11 +18,10 @@ module.exports.get = async (request, response, next) => {
             include: {
               usuario: true,
             },
-<<<<<<< HEAD
           },
-=======
+
             evaluaciones:true,
->>>>>>> c365f61e17b6f553f26ce9dffc2bad95b010cae2
+
         },
       },
     },
@@ -31,32 +30,26 @@ module.exports.get = async (request, response, next) => {
 };
 
 module.exports.getById = async (request, response, next) => {
-  let idorden = parseInt(request.params.id);
-  const ordenes = await prisma.orden.findUnique({
-    where: { id: idorden },
-    include: {
-      usuario: true,
-      metodoPago: true,
-      direccion: true,
-      ordenProductos: {
-        include: {
-          producto: {
+    let idorden=parseInt(request.params.id);
+    const ordenes=await prisma.orden.findUnique({
+        where: {id: idorden},
+     include:{
+        usuario:true,
+        metodoPago:true,
+        direccion:true,
+        ordenProductos: {
             include: {
-              usuario: true,
+                producto:{
+                  include:{
+                    usuario: true,
+                  },
+                },
             },
           },
-<<<<<<< HEAD
-        },
-      },
-    },
-  });
-  response.json(ordenes);
-=======
           evaluaciones:true,
      },
     });
     response.json(ordenes);
->>>>>>> c365f61e17b6f553f26ce9dffc2bad95b010cae2
 };
 
 module.exports.getByVendedor = async (request, response, next) => {
