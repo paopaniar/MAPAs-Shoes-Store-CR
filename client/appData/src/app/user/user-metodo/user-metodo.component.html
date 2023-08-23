@@ -13,11 +13,37 @@
               <mat-form-field class="full-width">
                 <mat-label>Método de pago</mat-label>
                 <mat-select formControlName="descripcion" placeholder="Tipo de pago">
-                  <mat-option value="Tarjeta">Tarjeta</mat-option>
-                  <mat-option value="Sinpe">Sinpe/Transferencia</mat-option>
-                  <mat-option value="Efectivo">Efectivo</mat-option>
+                  <mat-option value="Tarjeta de crédito">Tarjeta de Crédito</mat-option>
+                  <mat-option value="Tarjeta de débito">Tarjeta de Débito</mat-option>
                 </mat-select>
                 <mat-error *ngIf="errorHandling('descripcion', 'required')">El método de pago es requerido</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Proveedor</mat-label>
+                <mat-select formControlName="proveedor" placeholder="Proveedor">
+                  <mat-option value="Mastercard">Mastercard</mat-option>
+                  <mat-option value="Visa">Visa</mat-option>
+                </mat-select>
+                <mat-error *ngIf="errorHandling('proveedor', 'required')">El proveedor es requerido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="numeroTarjeta" placeholder="Numero de Tarjeta" maxlength="19" />
+                <mat-error *ngIf="errorHandling('numeroTarjeta', 'required')">El número de cuenta es requerido</mat-error>
+                <mat-error *ngIf="errorHandling('numeroTarjeta', 'pattern')">El número de cuenta debe contener solo dígitos</mat-error>
+                <mat-error *ngIf="errorHandling('numeroTarjeta', 'incompleteLength')">El número de cuenta debe contener 16 dígitos</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="vencimiento" placeholder="Fecha de Vencimiento" maxlength="7" />
+                <mat-error *ngIf="errorHandling('vencimiento', 'required')">Fecha de Vencimiento es requerida</mat-error>
+                <mat-error *ngIf="errorHandling('vencimiento', 'pattern')">Fecha debe ser en formato Mes/Año</mat-error>
               </mat-form-field>
             </div>
           </div>

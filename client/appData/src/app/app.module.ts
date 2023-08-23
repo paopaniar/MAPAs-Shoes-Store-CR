@@ -14,14 +14,12 @@ import { PedidosModule } from './pedidos/pedidos.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DatePipe } from '@angular/common';
-import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
-import { MetodoPagoFormComponent } from './metodoPago/metodo-pago-form/metodo-pago-form.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MetodoPagoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +39,6 @@ import { MetodoPagoFormComponent } from './metodoPago/metodo-pago-form/metodo-pa
     //siempre de ultimo
     AppRoutingModule,
    BrowserAnimationsModule,
-   MetodoPagoModule,
  
 
   ],
@@ -50,8 +47,6 @@ import { MetodoPagoFormComponent } from './metodoPago/metodo-pago-form/metodo-pa
     provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorService, multi: true
   }],
   bootstrap: [AppComponent],
-  exports: [
-    MetodoPagoFormComponent
-  ]
+  exports: []  
 })
 export class AppModule { }

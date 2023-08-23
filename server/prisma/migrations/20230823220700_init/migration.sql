@@ -25,6 +25,9 @@ CREATE TABLE `Rol` (
 CREATE TABLE `MetodoPago` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `descripcion` VARCHAR(191) NOT NULL,
+    `numeroTarjeta` INTEGER NULL,
+    `proveedor` VARCHAR(191) NULL,
+    `vencimiento` DATETIME(3) NULL,
     `usuarioId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)

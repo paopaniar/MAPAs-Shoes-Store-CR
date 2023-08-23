@@ -55,6 +55,9 @@ export class UserMetodoComponent implements OnInit, OnDestroy {
             this.metodoForm.patchValue({
               id: this.metodoPagoInfo.id,
               descripcion: this.metodoPagoInfo.descripcion,
+              proveedor: this.metodoPagoInfo.proveedor,
+              numeroTarjeta: this.metodoPagoInfo.numeroTarjeta,
+              vencimiento: this.metodoPagoInfo.vencimiento,
               usuarioId: this.metodoPagoInfo.usuarioId,
             });
           });
@@ -67,9 +70,36 @@ export class UserMetodoComponent implements OnInit, OnDestroy {
       id: [null],
       descripcion: [null, Validators.required],
       usuarioId: [null, Validators.required],
+      proveedor: [null, Validators.required],
+      numeroTarjeta: [null, [Validators.required, Validators.pattern('^[0-9]*$'), this.validarNumeroCuenta,]],
+      vencimiento: [null, [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/20[2-9][0-9]$'), this.validarFechaExpiracion,]],
     });
   }
+  validarNumeroCuenta(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value) {
+      const numericValue = value.replace(/\D/g, '');
+      if (numericValue.length > 0 && numericValue.length < 16) {
+        return { incompleteLength: true };
+      }
+      const formattedValue = numericValue.match(/.{1,4}/g)?.join('-') || '';
+      control.setValue(formattedValue, { emitEvent: false });
+    }
+    return null;
+  }
 
+  validarFechaExpiracion(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value) {
+      const numericValue = value.replace(/\D/g, '');
+      if (numericValue.length > 0 && numericValue.length < 6) {
+        return { incompleteLength: true };
+      }
+      const formattedValue = numericValue.replace(/(\d{2})(\d{0,4})/, '$1/$2');
+      control.setValue(formattedValue, { emitEvent: false });
+    }
+    return null;
+  }
   public errorHandling = (control: string, error: string) => {
     const formControl = this.metodoForm.get(control);
     return formControl ? formControl.hasError(error) : false;

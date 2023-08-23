@@ -38,8 +38,9 @@ datasource db {
 model MetodoPago {
   id              Int      @id @default(autoincrement())
   descripcion     String
-  numeroTarjeta   Int
-  vencimiento     DateTime  
+  numeroTarjeta   Int?
+  proveedor       String?
+  vencimiento     DateTime? 
   usuarioId       Int
   usuario         Usuario  @relation(fields: [usuarioId], references: [id])
   ordenes         Orden[]
