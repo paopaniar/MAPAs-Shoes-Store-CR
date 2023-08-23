@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { MapasDiagComponent } from '../mapas-diag/mapas-diag.component';
 
 
 @Component({
@@ -17,22 +18,20 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
   templateUrl: './mapas-respuestas.component.html',
   styleUrls: ['./mapas-respuestas.component.css']
 })
-export class MapasRespuestasComponent {
+export class MapasRespuestasComponent implements OnInit{
   isAutenticated: boolean;
-  currentUser: any;
   datos:any;
-  datosDialog:any;
-  preguntasForm: FormGroup;
-  isUser: boolean; 
   submitted = false;
-  questionForms: { [key: string]: FormGroup } = {}; // Store question forms with IDs as keys
-  respPregunta: any;
-  consultaProductos: any;
+  currentUser: any;
+  inputPregunta: FormGroup;
+  inputRespuesta: FormGroup;
+  mensaje: any; 
+  datosDialog:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
-
+  consultaProductos: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
-    private dialogRef:MatDialogRef<MapasRespuestasComponent>,
+    private dialogRef:MatDialogRef<MapasDiagComponent>,
     private gService:GenericService,
     private router: Router,
     private authService: AuthenticationService,
@@ -42,65 +41,101 @@ export class MapasRespuestasComponent {
     private snackBar: MatSnackBar
   ) { 
     this.datosDialog=data;
-    this.preguntasForm = this.formBuilder.group({
-      respuesta: ['', [Validators.required, Validators.maxLength(20)]]
-    });
     
   }
-  getQuestionForm(questionId: string): FormGroup {
-    if (!this.questionForms[questionId]) {
-      this.questionForms[questionId] = this.formBuilder.group({
-        respuesta: ['', [Validators.required, Validators.maxLength(20)]]
-      });
-    }
-    return this.questionForms[questionId];
-  }
-
-
-  obtenerProducto(id: any) {
+  obtenerProducto(id:any){
     console.log(id);
-    this.gService
-      .get('consultaProductos/', id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.datos = data; 
-        this.consultaProductos = this.datos; // Assign the fetched data
-      });
-  }
-  
+   this.gService
+  .get('producto', id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((data: any) => {
+    this.datos = data; 
+    console.log(this.datos);
+    this.consultaProductos = this.datos.consultaProductos;
+  });
 
-  actualizarProducto(consulta: any) {
+  }
+  updateConsultaProductos(newData: any) {
+    this.consultaProductos.push(newData);
+  }
+
+  createQuestion() {
+    // Assuming you have the necessary question data to be sent
+    const questionData = {
+      mensaje: 'Your question message here', // Replace with the actual question message
+      productoId: this.datosDialog.id, // Assuming you want to associate the question with the product ID from the dialog data
+      usuarioId: 1, // Replace with the actual user ID if needed
+    };
+  }
+
+
+  createQuestion1(): void {
     this.submitted = true;
-    if (this.questionForms[consulta.id].invalid) {
+  
+    if (this.inputPregunta.invalid) {
       return;
     }
-    
-    let respuesta = this.questionForms[consulta.id].get('respuesta').value;
-    this.questionForms[consulta.id].patchValue({ respuesta: respuesta });
-    
-    const updateData = {
-      id: consulta.id // Use the ID from the consulta object
-      // Add other fields if necessary
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    const productId = this.datosDialog.id;
+    const requestData = {
+      mensaje: this.inputPregunta.value.pregunta,
+      usuarioId: this.currentUser.usuario.id,
     };
   
-    this.gService.update('consultaProductos/consultas', updateData)
+    this.gService.create('producto/pregunta/' + productId, requestData)
     .pipe(takeUntil(this.destroy$))
-    .subscribe((data: any) => {
-      this.respPregunta = data;
-      this.router.navigate(['/producto'], {
-        queryParams: { update: 'true' }
-      });
-  
-      // Update the data in the frontend
-      const indexToUpdate = this.consultaProductos.findIndex(consulta => consulta.id === consulta.id);
-      if (indexToUpdate !== -1) {
-        this.consultaProductos[indexToUpdate] = data; // Assuming the response contains the updated data
-      }
-    });
-    this.obtenerProducto(this.datosDialog.id);
+      .subscribe(
+        (data: any) => {
+          // Handle the API response, if necessary
+          this.updateConsultaProductos(data);
+          this.router.navigate(['/producto'], {
+            queryParams: { create: 'true' }
+          });
+          this.showSuccessMessage('Pregunta creada exitosamente!');
+          
+        },
+        (error) => {
+          // Handle the error here, you can log it or show a proper error message
+          console.error('Error:', error);
+        }
+      );
 
   }
-  
+
+
+  createAnswer1(preguntaId: number): void {
+    this.submitted = true;
+
+    if (this.inputRespuesta.invalid) {
+        return;
+    }
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    const requestData = {
+        respuesta: this.inputRespuesta.value.respuesta,
+      };
+      console.log('curretn user', this.currentUser.user.id)
+
+    this.gService.create('producto/respuesta/' + preguntaId, requestData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+            (data: any) => {
+               
+                this.updateConsultaProductos(data); 
+                this.router.navigate(['/producto/vendedor'], {
+                    queryParams: { create: 'true' }
+                });
+                this.showSuccessMessage('Respuesta creada exitosamente!');
+            },
+            (error) => {
+                console.error('Error:', error);
+            }
+        );
+        this.close()
+}
+
+
   showSuccessMessage(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000, // Set the duration for how long the snackbar should be visible
@@ -108,19 +143,30 @@ export class MapasRespuestasComponent {
     });
   }
   ngOnInit(): void {
-    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
-    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
-    this.isUser = this.currentUser?.rol === 'USER';
-    console.log(this.currentUser);
-    if(this.datosDialog.id){
+    if (this.datosDialog && this.datosDialog.id) {
       this.obtenerProducto(this.datosDialog.id);
     }
+    
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    this.inputPregunta = this.formBuilder.group({
+      pregunta: ['', [Validators.required, Validators.maxLength(20)]]
+    });
+    console.log(this.currentUser.user)
+    this.inputRespuesta = this.formBuilder.group({
+      respuesta: ['', [Validators.required, Validators.maxLength(20)]]
+    });
+    console.log(this.currentUser)
   }
 
-    close(){
+  isUser():boolean{
+    const roleses = this.currentUser.usuario.roles || [];
+      return roleses.some(roles => roles.descripcion === 'Vendedor');
+  }
+  
+  close(){
     //Dentro de close ()
      //this.form.value 
     this.dialogRef.close();
   }
 }
-

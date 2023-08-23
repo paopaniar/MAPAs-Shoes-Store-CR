@@ -12,6 +12,7 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 import { PedidosCalificacionComponent } from '../pedidos-calificacion/pedidos-calificacion.component';
 import { PedidosCalificoclienteComponent } from '../pedidos-calificocliente/pedidos-calificocliente.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -24,7 +25,9 @@ export class PedidosClienteComponent  implements AfterViewInit{
   isAutenticated: boolean;
   datos:any;//Guarda la respuesta del API
   destroy$: Subject<boolean>=new Subject<boolean>();
-
+  estadoSeleccionado: number | null = null; // Estado seleccionado inicialmente como null
+  filtroForm: FormGroup;
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   //@ViewChild(MatTable) table!: MatTable<VideojuegoAllItem>;
@@ -41,7 +44,21 @@ export class PedidosClienteComponent  implements AfterViewInit{
     private noti: NotificacionService) {
 
   }
-
+  todosLosPedidos: any[] = [
+    { id: 1, estado: 1, /* otras propiedades */ },
+    { id: 2, estado: 0, /* otras propiedades */ },
+    // Agrega más pedidos según tu estructura de datos
+  ];
+  filtrarPorEstado(estado: number | null): void {
+    this.estadoSeleccionado = estado;
+  
+    const filtroEstado = this.filtroForm.get('filtrarPorEstado').value as number[]; // Obtén los estados seleccionados desde el formulario
+  
+    this.dataSource.data = this.todosLosPedidos.filter(item =>
+      (filtroEstado.length === 0 || filtroEstado.includes(item.estado))
+    );
+  }
+  
   calculateCantidad(row: any): number {
     let cantidad = 0;
     if (row && row.ordenProductos) {

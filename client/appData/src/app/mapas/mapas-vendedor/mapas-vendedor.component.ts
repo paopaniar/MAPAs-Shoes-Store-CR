@@ -75,7 +75,7 @@ export class MapasVendedorComponent implements AfterViewInit{
     dialogConfig.data = {
       id: id,
     };
-    this.dialog.open(MapasDiagComponent, dialogConfig);
+    this.dialog.open(MapasRespuestasComponent, dialogConfig);
   }
   asignarFotoProducto(id:Number){
     console.log(id);

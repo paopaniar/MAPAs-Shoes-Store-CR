@@ -1,28 +1,163 @@
-<div class="contenido">
-  <mat-dialog-content class="letra">
-    <b style="color: #161d50;">Preguntas: </b>
-    <ul *ngIf="consultaProductos">
-      <br>
-      <h6 class="pregunta" *ngFor="let consulta of consultaProductos">
-        {{ consulta.mensaje }}
-      
-        <form [formGroup]="getQuestionForm(consulta.id)" (ngSubmit)="actualizarProducto(consulta)">
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="full-width">
-                {{ consulta.respuesta }}
 
-<input matInput formControlName="respuesta" maxlength="20"
-       placeholder="Responder" [disabled]="isUser">
-              </mat-form-field>
+
+<div class="container">
+  <div class="row">
+    <!-- First column - Carousel -->
+    <div class="col-lg-4 d-flex justify-content-center align-items-center">
+      <div class="carousel-container2">
+        <div *ngIf="datos.fotografias && datos.fotografias.length > 0" class="carousel-container2">
+          <mat-card class="carrusel">
+            <div
+              id="carouselExampleAutoplaying"
+              class="carousel carousel-dark slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <div
+                  *ngFor="let foto of datos.fotografias; let i = index"
+                  class="carousel-item"
+                  [class.active]="i === 0"
+                >
+                  <img
+                    [src]="'http://localhost:3000/' + foto.imagen"
+                    alt="Imagen"
+                   
+                  />
+                </div>
+              </div>
+              <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleAutoplaying"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleAutoplaying"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
             </div>
+          </mat-card>
+        </div>
+
+        <div *ngIf="!datos.fotografias || datos.fotografias.length === 0" class="no-response">
+          <div class="textfotos">Aún no hay fotos para este producto.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second column - Product Information -->
+    <div class="col-lg-4" id="informacion">
+      <div class="detalles"> 
+        <mat-dialog-content class="letra">
+          <p><strong>Descripción:</strong> {{ datos.descripcion }}</p>
+          <p><strong>Disponible:</strong> {{datos.cantidadDisponible}}</p>
+          <b>Categoría: </b> <ul *ngIf="datos.categorias">
+            <li *ngFor="let datos of datos.categorias"> {{datos.nombreCategoria}}</li>
+         </ul>
+          <p><b>Proveedor: </b>{{ datos.proveedor }}</p>
+          <p><strong>Precio: </strong>{{ datos.precio | currency : "₡" }}</p>
+          <div class="green">
+            <span *ngIf="datos.estado === 1" class="green-text">Nuevos</span>
+            <span *ngIf="datos.estado !== 1" class="green-text">Viejo</span>
           </div>
-          <mat-card-actions>
-            <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="submit">Enviar</button>
-          </mat-card-actions>
-          <br><br>
+        </mat-dialog-content>
+        <mat-expansion-panel class="bodyDiag" expanded>
+          <mat-expansion-panel-header>
+            <span class="mat-title" style="color:#457FAD;">Preguntas Frecuentes</span>
+          </mat-expansion-panel-header>
+          <mat-accordion>
+            <mat-expansion-panel class="mesage" *ngFor="let consulta of datos.consultaProductos">
+              <mat-expansion-panel-header>
+                <span style="color: #fff;" class="mat-title">{{ consulta.mensaje + "  " }}</span>
+
+                
+              </mat-expansion-panel-header>
+              <div *ngFor="let consulta of consulta.respuestas">
+                <span style="color: #fff;" class="mat-title">  {{ "-" + consulta.respuesta }}</span>
+              </div>
+              <mat-panel-description>
+                <div class="nose" *ngIf="isUser()">
+                <form [formGroup]="inputRespuesta" >
+                  <div class="row">
+                    <div class="col">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="respuesta" maxlength="50" placeholder="Responder" >
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <mat-card-actions>
+                    <!-- Call the createQuestion1() method on form submission -->
+                    <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="createAnswer1(consulta.id)">Responder</button>
+                  </mat-card-actions>
+                </form>
+              </div>
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-expansion-panel>
+               
+        <mat-dialog-content class="letra">
+         <!-- Add formGroup directive to the <form> element -->
+        <form [formGroup]="inputPregunta">
+          <div class="row">
+            
+              <mat-form-field class="full-width">
+                <!-- Use formControlName to bind to the 'pregunta' form control -->
+                <input matInput formControlName="pregunta" maxlength="20" placeholder="Hacer pregunta">
+
+              </mat-form-field>
+                <button mat-raised-button style="background-color: #5cb85c; color: #040618;" type="submit" (click)="createQuestion1()">Enviar</button>
+            
+          </div>
+        
+          
         </form>
-      </h6>
-    </ul>
-  </mat-dialog-content>
+
+        </mat-dialog-content>
+        
+        
+      </div>
+     
+    </div>
+
+    <!-- Third column - FAQs -->
+    
+  </div>
 </div>
+

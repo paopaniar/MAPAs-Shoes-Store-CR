@@ -1,14 +1,117 @@
-.contenido{
-    background-color: #DCDFE0;
+
+/* Add these styles to your existing styles.css or styles.scss file */
+
+/* Main container */
+
+
+.container {
+    background-color: #022146;
     padding: 10px; /* Reduce padding */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 100%; /* Reduce the maximum width */
     margin: 0 auto; /* Center the container */
-    max-height: 100%;
+    max-height: 50%;
     align-content: center;
-    min-width: 50%;
-
-}
-.pregunta{
-    color: #0E1335;
-}
+  }
+  
+  /* Header for the product name */
+  .headerh1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 10px;
+  }
+  
+  /* Styling for the FAQ table */
+  .faq-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .faq-table th,
+  .faq-table td {
+    border: 1px solid #A8D5FA;
+    padding: 8px;
+    color: #060920;
+  }
+  
+  .faq-table th {
+    background-color: #240f0f;
+    text-align: left;
+    color: aliceblue;
+  }
+  
+  /* Green status (Nuevos/Viejo) */
+  .green {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .green-text {
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  .carousel-container2 {
+    margin: 10px auto;
+    max-width: 100%;
+  }
+  
+  .carrusel {
+    max-width: 350px;
+    height: 350px; /* Ajusta la altura según tus necesidades */
+    border-radius: 8px;
+    overflow: hidden;
+    
+  }
+  
+  .carousel-inner img {
+    max-width: 350px;
+    height: 350px;/* Ajusta la altura para que las imágenes llenen el carousel */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .bodyDiag{
+    background-color: #fff;
+    color: #060920;
+  width: 350px;
+  align-content: flex-start;
+  
+  }
+  .mesage{
+    background-color: #161d50;
+  }
+  .panel .mat-expansion-panel-header.mesage:hover {
+    background-color: #060920; /* Change to your desired hover background color */
+  }
+  .answer{
+    background-color: #161d50;
+  }
+  
+  /* Additional styles for buttons and other elements can be added here */
+  
+  /* Responsiveness for smaller screens */
+  @media (max-width: 576px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .headerh1 h2 {
+      font-size: 24px;
+    }
+  
+    .carousel-inner img {
+      height: 150px; /* Adjust the height for smaller screens */
+    }
+  }
+  
+  .textfotos{
+    color: #060920;
+  }
+  .letra{
+    color: #060920;
+  }
+  
+  .detalles{
+    background-color: #fff;
+    width: 350px;
+  }

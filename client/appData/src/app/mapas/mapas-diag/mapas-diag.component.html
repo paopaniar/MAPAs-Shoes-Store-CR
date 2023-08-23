@@ -111,23 +111,7 @@
                 <div *ngFor="let consulta of consulta.respuestas">
                   <span style="color: #fff;" class="mat-title">  {{ "-" + consulta.respuesta }}</span>
                 </div>
-                <mat-panel-description>
-                  <div class="nose" *ngIf="isUser()">
-                  <form [formGroup]="inputRespuesta" >
-                    <div class="row">
-                      <div class="col">
-                        <mat-form-field class="full-width">
-                          <input matInput formControlName="respuesta" maxlength="50" placeholder="Responder" >
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <mat-card-actions>
-                      <!-- Call the createQuestion1() method on form submission -->
-                      <button mat-raised-button style="background-color: #FF8977; color: #040618;" type="button" (click)="createAnswer1(consulta.id)">Responder</button>
-                    </mat-card-actions>
-                  </form>
-                </div>
-                </mat-panel-description>
+              
               </mat-expansion-panel>
             </mat-accordion>
           </mat-expansion-panel>

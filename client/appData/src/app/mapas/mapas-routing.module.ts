@@ -6,6 +6,7 @@ import { MapasDetailComponent } from './mapas-detail/mapas-detail.component';
 import { MapasVendedorComponent } from './mapas-vendedor/mapas-vendedor.component';
 import { MapasCreateComponent } from './mapas-create/mapas-create.component';
 import { MapasFotografiasComponent } from './mapas-fotografias/mapas-fotografias.component';
+import { MapasRespuestasComponent } from './mapas-respuestas/mapas-respuestas.component';
 
 
 import { AuthGuard } from '../share/guards/auth.guard';
@@ -50,7 +51,8 @@ const routes: Routes = [
     roles: ['Administrador', 'Vendedor']
   }},
 
-  {path:'producto/pregunta/:id', component: MapasDetailComponent}
+  {path:'producto/pregunta/:id', component: MapasDetailComponent},
+  {path:'responder/miproducto/:id', component: MapasDetailComponent}
 
 ];
 
