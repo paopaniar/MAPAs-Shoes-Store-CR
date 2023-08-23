@@ -27,7 +27,7 @@ export class PedidosCarritoComponent implements OnInit {
   metodosPagoList: any;
   direccionesList: any;
   usuarioId: number = 0;
-
+  impuesto = 0.13;
   displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
   constructor(
@@ -67,6 +67,7 @@ export class PedidosCarritoComponent implements OnInit {
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
     this.total=this.cartService.getTotal();
+    console.log('Actualizando total (eliminarItem):', this.total);
     this.noti.mensaje('Pedido',
     'Producto eliminado',
     TipoMessage.warning)
@@ -92,31 +93,33 @@ actualizarSubtotal(element: any) {
   const stockDisponible = element.producto.cantidadDisponible;
 
   if (element.cantidad > 0 && element.cantidad <= stockDisponible) {
-    // Calcular el subtotal en tiempo real
     element.subtotal = element.cantidad * element.precio;
   } else {
-    // Si la cantidad no es válida, establecer el subtotal en 0 o cualquier otro valor predeterminado
     element.subtotal = 0;
   }
 
-  // Recalcular el total del carrito si es necesario
+  console.log('Actualizando subtotal:', element.subtotal);
+  
   this.total = this.cartService.getTotal();
+  console.log('Actualizando total:', this.total);
 }
 
 
 
 disponnibilidad(item: any) {
-  const stockDisponible = item.producto.cantidadDisponible; // Obtener el stock disponible del producto
+  if (item.producto && item.producto.cantidadDisponible !== undefined) {
+    const stockDisponible = item.producto.cantidadDisponible;// Obtener el stock disponible del producto
   if (item.cantidad > 0 && item.cantidad <= stockDisponible) {
     // Verificar si la cantidad es válida y no excede el stock disponible
     this.cartService.updateCartItemQuantity(item.product, item.cantidad);
     this.total = this.cartService.getTotal();
-    
+    console.log('Actualizando total (disponnibilidad):', this.total);
   } else if (item.cantidad > stockDisponible) {
     this.noti.mensaje('Atención!', 'No existen artículos disponibles', TipoMessage.error);
   } else {
     this.noti.mensaje('Atención!', 'No hay suficientes artículos', TipoMessage.warning);
   }
+}
 }
 listadirecciones() {
   this.authService.currentUser.subscribe((x) => {
@@ -148,6 +151,8 @@ registrarOrden() {
     let detalles = itemsCarrito.map((x) => ({
       ['productoId']: x.idItem,
       ['cantidad']: x.cantidad,
+      ['subtotal']: x.subtotal,
+      ['total']: (x.subtotal + (x.cantidad*x.subtotal)*this.impuesto),
     }));
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
     this.authService.isAuthenticated.subscribe((valor) => (this.isAutenticated = valor));
