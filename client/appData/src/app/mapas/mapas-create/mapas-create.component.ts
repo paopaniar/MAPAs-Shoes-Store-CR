@@ -42,32 +42,29 @@ export class MapasCreateComponent implements OnInit {
   ) {
     this.formularioReactive();
     this.listaCategorias();
-    this.listaUsuariosSales();
   }
   ngOnInit(): void {
 
-    this.activeRouter.params.subscribe((params:Params)=>{
-      this.idProducto=params['id'];
-      // this.idUsuarioSales=params['id'];
-      if(this.idProducto!=undefined){
-        this.isCreate=false;
-        this.titleForm="Actualizar";
+    this.activeRouter.params.subscribe((params: Params) => {
+      this.idProducto = params['id'];
+      if (this.idProducto != undefined) {
+        this.isCreate = false;
+        this.titleForm = "Actualizar";
 
-        this.gService
-        .get('producto',this.idProducto)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data:any)=>{
+        this.gService.get('producto', this.idProducto).pipe(takeUntil(this.destroy$))
+          .subscribe((data: any) => {
           this.videojuegoInfo=data;
+          console.log('trae los datos en el actualizar?',data);
+
           this.videojuegoForm.setValue({
-            id:this.videojuegoInfo.id,
-            nombreProducto:this.videojuegoInfo.nombreProducto,
-            descripcion:this.videojuegoInfo.descripcion,
-            precio:this.videojuegoInfo.precio,
-            categorias:this.videojuegoInfo.categorias.map(({id}) => id),
-            cantidadDisponible:this.videojuegoInfo.cantidadDisponible,
-            proveedor:this.videojuegoInfo.proveedor,
-            usuario: this.videojuegoInfo.usuarioId,
-           });
+            id: this.videojuegoInfo.id,
+            nombreProducto: this.videojuegoInfo.nombreProducto,
+            descripcion: this.videojuegoInfo.descripcion,
+            precio: this.videojuegoInfo.precio,
+            categorias: this.videojuegoInfo.categorias.map(({ id }) => id),
+            cantidadDisponible: this.videojuegoInfo.cantidadDisponible,
+            proveedor: this.videojuegoInfo.proveedor,
+          });          
          });
       }
 
@@ -83,28 +80,25 @@ export class MapasCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ])],
-      descripcion: [null, 
+      descripcion: [null, Validators.compose([
         Validators.required,
-        Validators.minLength(3)],
-      precio: [null, 
-      Validators.required,
-      Validators.pattern("^[0-9]*$")],
-      cantidadDisponible: [null, Validators.required],
-      proveedor:  [null, Validators.required],
+        Validators.minLength(3)])],
+        precio: [null, Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\d+(\.\d{1,2})?$/)
+        ])],
+      cantidadDisponible: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern(/^[1-9]\d*$/)
+      ])],
+      proveedor:  [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])],
       categorias: [null, Validators.required],
-      usuario: [null],
     })
   }
 
-  listaUsuariosSales() {
-    this.gService
-    .list('usuario') // Cambiar 'usuario' por el endpoint correcto para obtener la lista de usuarios
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data: any) => {
-      // Filtrar la lista de usuarios por rol SALES
-      this.usuariosList = data.filter((usuario: any) => usuario.rol === 'SALES');
-      });
-  }
   
   listaCategorias() {
     this.categoriasList = null;
@@ -161,12 +155,12 @@ export class MapasCreateComponent implements OnInit {
     this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
     let usuarioId= this.currentUser.usuario.id;
 
-    let uFormat:any=this.videojuegoForm.get('usuario').value;
+
     let nombreProducto = this.videojuegoForm.get('nombreProducto').value;
     let gFormat:any=this.videojuegoForm.get('categorias').value.map(x=>({['id']: x }));
 
     this.videojuegoForm.patchValue({ nombreProducto: nombreProducto });
-    this.videojuegoForm.patchValue({usuario: uFormat});
+
     this.videojuegoForm.patchValue({ usuario: usuarioId}); 
     this.videojuegoForm.patchValue({ categorias:gFormat});
    

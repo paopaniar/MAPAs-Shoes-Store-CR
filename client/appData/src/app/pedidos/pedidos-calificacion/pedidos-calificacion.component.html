@@ -44,21 +44,27 @@
               <mat-error *ngIf="errorHandling('comentario', 'required')"
                 >Comentario es <strong>requerida</strong></mat-error
               >
+              <mat-error *ngIf="errorHandling('comentario','minlength')">
+                Mínimo <strong>3 caracteres</strong>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
       </mat-card-content>
       <mat-card-actions class="button-container">
         <button
-          mat-raised-button
-          color="primary"
-          aria-label="Guardar Calificación"
-          type="submit"
-          style="background-color: #34c759"
-        >
-          Guardar
-          <mat-icon class="icon-right">check_box</mat-icon>
-        </button>
+        mat-raised-button
+        color="primary"
+        aria-label="Guardar Calificación"
+        type="submit"
+        style="background-color: #34c759"
+        [disabled]="formEvaluacion.get('calificacionFinal').value <= 0"
+      >
+        Guardar
+        <mat-icon class="icon-right">check_box</mat-icon>
+      </button>
+      
+      
       </mat-card-actions>
     </mat-card>
   </form>

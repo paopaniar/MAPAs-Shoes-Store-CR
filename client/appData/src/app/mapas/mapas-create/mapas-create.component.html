@@ -28,6 +28,9 @@
               <mat-error *ngIf="errorHandling('descripcion','required')">
                 La descripción es <strong>requerida</strong>
               </mat-error>
+              <mat-error *ngIf="errorHandling('nombreProducto','minlength')">
+                Descripción requiere de al menos <strong>3 caracteres</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           
@@ -49,15 +52,12 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Precio" formControlName="precio">
-              <mat-error *ngIf="errorHandling('precio', 'required')">
-                El precio es <strong>requerido</strong>
-              </mat-error>
-              <mat-error *ngIf="errorHandling('precio', 'pattern')">
-                El precio debe contener <strong>solo números</strong>
-              </mat-error>
+              <mat-label>Precio</mat-label>
+              <input matInput formControlName="precio" placeholder="Precio" />
+              <mat-error *ngIf="errorHandling('precio', 'required')">El precio es requerido</mat-error>
+              <mat-error *ngIf="errorHandling('precio', 'pattern')">El precio debe ser un número válido</mat-error>
             </mat-form-field>
-          </div>        
+          </div> 
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Proveedor" formControlName="proveedor">
@@ -71,6 +71,7 @@
               <input matInput placeholder="Cantidad disponible" formControlName="cantidadDisponible">
               <mat-error *ngIf="errorHandling('cantidadDisponible','required')">
                 La cantidad es <strong>requerida</strong>
+                <mat-error *ngIf="errorHandling('cantidad', 'pattern')">Ingrese solo números</mat-error>
               </mat-error>
             </mat-form-field>
           </div>

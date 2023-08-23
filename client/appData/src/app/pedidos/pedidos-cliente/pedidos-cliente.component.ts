@@ -10,6 +10,8 @@ import { PedidosDiagComponent } from '../pedidos-diag/pedidos-diag.component';
 import { PedidosCalificadosComponent } from '../pedidos-calificados/pedidos-calificados.component';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
+import { PedidosCalificacionComponent } from '../pedidos-calificacion/pedidos-calificacion.component';
+import { PedidosCalificoclienteComponent } from '../pedidos-calificocliente/pedidos-calificocliente.component';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -108,7 +110,17 @@ export class PedidosClienteComponent  implements AfterViewInit{
         );
       });
   }
-
+idOrden(id:Number,idUsuario: number){
+  console.log('orden',id);
+  console.log('cliente',idUsuario);
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.data = {
+    id: id,
+    idUsuario: idUsuario,
+  };
+  this.dialog.open(PedidosCalificoclienteComponent, dialogConfig);
+}
   crearVideojuego() {
     this.router.navigate(['/producto/crear'], {
       relativeTo: this.route,

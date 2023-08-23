@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PedidosEvaluacionComponent } from './pedidos-evaluacion/pedidos-evaluacion.component';
 import { PedidosCalificacionComponent } from './pedidos-calificacion/pedidos-calificacion.component';
 import { PedidosCalificadosComponent } from './pedidos-calificados/pedidos-calificados.component';
+import { PedidosCalificoclienteComponent } from './pedidos-calificocliente/pedidos-calificocliente.component';
 
 
 
@@ -37,6 +38,7 @@ import { PedidosCalificadosComponent } from './pedidos-calificados/pedidos-calif
     PedidosEvaluacionComponent,
     PedidosCalificacionComponent,
     PedidosCalificadosComponent,
+    PedidosCalificoclienteComponent,
   ],
   imports: [
     CommonModule,
