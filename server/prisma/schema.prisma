@@ -36,11 +36,13 @@ datasource db {
   }
 //buena
 model MetodoPago {
-  id          Int     @id @default(autoincrement())
-  descripcion String
-  usuarioId   Int
-  usuario     Usuario @relation(fields: [usuarioId], references: [id])
-  ordenes     Orden[]
+  id              Int      @id @default(autoincrement())
+  descripcion     String
+  numeroTarjeta   Int
+  vencimiento     DateTime  
+  usuarioId       Int
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id])
+  ordenes         Orden[]
 }
 
 //Buena
