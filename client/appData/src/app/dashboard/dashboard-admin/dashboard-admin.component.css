@@ -17,6 +17,7 @@
 .contenido1{
     width: 200px;
     height: 400px;
+    margin-left: 45px;
     display: flex;
   justify-content: space-between;
 }

@@ -71,7 +71,7 @@ export class PedidosCalificacionComponent implements OnInit {
         TipoMessage.success)
         this.respMetodoPago = data;
         console.log(data);
-        this.router.navigate(['orden/client']);
+        this.router.navigate(['pedido/finalizados']);
         this.dialogRef.close();
       });
   }

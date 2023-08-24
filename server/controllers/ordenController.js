@@ -251,17 +251,16 @@ module.exports.getMejoresVendedores = async (request, response, next) => {
   //let mes = parseInt(request.params.mes);
   const result = await prisma.$queryRaw(
     Prisma.sql`
-    SELECT u.id, u.nombre, u.primerApellido, u.segundoApellido, AVG(e.calificacionFinal) as promedio
-    FROM usuario u
-    INNER JOIN orden o ON u.id = o.usuarioId
-    INNER JOIN evaluacion e ON o.id = e.ordenId
-    WHERE u.roles LIKE '%Vendedor%'
-    GROUP BY u.id, u.nombre, u.primerApellido, u.segundoApellido
-    ORDER BY promedio DESC
-    LIMIT 5;`
+    SELECT u.id, u.nombre, ru.* 
+FROM mapas.usuario u 
+INNER JOIN mapas.orden o ON u.id = o.usuarioId 
+INNER JOIN mapas.evaluacion e ON o.id = e.ordenId 
+INNER JOIN mapas._roltousuario ru ON u.id = ru.B 
+WHERE ru.A = 3`
   );
   response.json(result);
 };
+
 module.exports.getPeoresVendedores = async (request, response, next) => {
   //let mes = parseInt(request.params.mes);
   const result = await prisma.$queryRaw(
@@ -292,7 +291,7 @@ module.exports.getProductoMasVendidoVendedor = async (
       INNER JOIN orden o ON od.ordenId = o.id
       WHERE p.usuarioId = ${vendedorId}
       GROUP BY p.id, p.nombreProducto
-      ORDER BY totalVentas DESC
+      ORDER BY totalVentas ASC
       LIMIT 1;`
   );
   response.json(result);
@@ -308,7 +307,7 @@ module.exports.getClienteConMasCompras = async (request, response, next) => {
       ORDER BY totalCompras DESC, totalProductosComprados DESC
       LIMIT 1;`
   );
-
+console.log(result);
   response.json(result);
 };
 module.exports.getCantidadEvaluacionesPorEscala = async (

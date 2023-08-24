@@ -11,7 +11,7 @@ const routes: Routes = [
     roles: ['Administrador']
   }},
 
-  {path:'grafico/vendedor', component: DashboardSalesComponent,
+  {path:'vendedor/grafico', component: DashboardSalesComponent,
   canActivate:[AuthGuard],
   data:{
     roles: ['Vendedor']

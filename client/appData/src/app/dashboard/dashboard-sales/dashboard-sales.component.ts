@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -28,25 +29,36 @@ export class DashboardSalesComponent {
   mesList: any;
   productoMasVendido: any;
   formattedDate: any;
+  currentUser: any;
+  isAutenticated: boolean;
+  productoVendido: any;
   //Mes actual
   filtro = new Date().getMonth();
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private gService: GenericService, private datePipe: DatePipe) {}
+  constructor(private gService: GenericService, private datePipe: DatePipe,
+    private authService: AuthenticationService,) {}
   ngAfterViewInit(): void {
-    this.obtenerComprasDiaActual();
+    this.ngOnInit();
   }
 
-  obtenerComprasDiaActual() {
-    const fechaActual = new Date();
-    this.formattedDate = this.datePipe.transform(fechaActual, 'yyyy-MM-dd');
+  productoVendedor(){
+    this.authService.currentUser.subscribe((x)=>(this.currentUser=x));
+    this.authService.isAuthenticated.subscribe((valor)=>(this.isAutenticated=valor));
+    let usuarioId= this.currentUser.usuario.id;
     this.gService
-      .get('orden/producto', this.formattedDate)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.datos = data;
-        this.graficoBrowser();
-      });
+    .get('orden/masVendido',usuarioId)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+      this.productoVendido = data[0];
+      if(this.productoMasVendido== null){
+        this.productoMasVendido="No tiene productos vendidos";
+      }else{
+        this.productoMasVendido = this.productoVendido.nombreProducto;
+      }
+     
+    })
   }
+
   //Configurar y crear gráfico
   graficoBrowser(): void {
     this.canvas = this.graficoCanvas.nativeElement;
@@ -88,14 +100,9 @@ export class DashboardSalesComponent {
     this.destroy$.unsubscribe();
   }
 
-/*   ngOnInit(): void {
+   ngOnInit(): void {
     // Obtener el ID del vendedor logueado (reemplaza con tu lógica de obtención de ID)
-    const vendedorId = 123; // Ejemplo 
-    this.gService.get(`orden/vendedor/${vendedorId}/producto-mas-vendido`)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.productoMasVendido = data[0]; // El producto más vendido estará en data[0]
-      });
-  } */
+    this.productoVendedor();
+  } 
   
 }

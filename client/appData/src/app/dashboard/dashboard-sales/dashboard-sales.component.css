@@ -1,3 +1,10 @@
+.contenido1{
+    width: 200px;
+    height: 400px;
+    margin-left: 45px;
+    display: flex;
+  justify-content: space-between;
+}
 .chart{
     display: block;
     width: 400px;
@@ -6,5 +13,5 @@
 }
 .shipping-card {
     min-width: 120px;
-    margin: 20px auto;
+    margin: 20px auto; 
   }

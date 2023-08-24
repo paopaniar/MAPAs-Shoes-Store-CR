@@ -1,21 +1,48 @@
 <br><br><br><br><br>
 <div class="contenido1">
-<mat-card class="shipping-card">
-  <mat-card-title>Cantidad de compras del día:</mat-card-title>
-  <mat-card-content>
-<p>{{cantOrdenes}}</p>
-  </mat-card-content>
+
+<br><br>
+<div class="row marginTile" style="margin-left: 45px;">
+  <div class="col headerCardcolor2">
+    <p>Productos más vendidos en {{ mes }}</p>
+  </div>
+  <div class="col backChart">
+    <canvas #graficoCanvas width="702" height="351" class="chart"></canvas>
+  </div>
+</div>
+<mat-card class="shipping-card" style="background-color: transparent; border: none; border-color: transparent;margin-left: 60px;">
+  <mat-card-title>Cantidad de compras del día: {{cantOrdenes}}</mat-card-title>
 </mat-card>
 </div>
 
+<!--
 <div class="contenido2">
   <div class="row marginTile">
     <div class="col headerCardcolor2">
-      <p>Top 5 Productos vendidos en {{ mes }}</p>
+      <p>Top 5 mejores vendedores</p>
     </div>
     <div class="col backChart">
       <canvas #graficoCanvas width="702" height="351" class="chart"></canvas>
     </div>
   </div>
-</div>
+  <div class="row marginTile">
+    <div class="col headerCardcolor2">
+      <p>Top 3 peores vendedores</p>
+    </div>
+    <div class="col backChart">
+      <canvas #graficoCanvas width="702" height="351" class="chart"></canvas>
+    </div>
+  </div>
+</div>-->
+<!--
+<div class="contenido2">
+  <div class="row marginTile">
+    <div class="col headerCardcolor2">
+      <p>Top 5 mejores vendedores</p>
+    </div>
+    <div class="col backChart">
+      <canvas #graficoCanvas width="702" height="351" class="chart"></canvas>
+    </div>
+  </div>
+</div> -->
 

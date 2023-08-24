@@ -55,6 +55,11 @@
             >Dashboard</a
           >
         </li>
+        <li class="nav-item" *ngIf="esVendedor()">
+          <a style="color: white" class="nav-link" href="/vendedor/grafico"
+            >Dashboard</a
+          >
+        </li>
         <li class="nav-item" *ngIf="esAdministrador()">
        
           <a [matMenuTriggerFor]="menu3" style="color: white" class="nav-link" 

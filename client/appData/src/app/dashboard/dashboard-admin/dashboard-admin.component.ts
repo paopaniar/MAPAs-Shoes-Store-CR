@@ -13,6 +13,7 @@ import jsPDF from 'jspdf';
 })
 export class DashboardAdminComponent {
   canvas: any;
+  canvas1: any;
   //Contexto del Canvas
   ctx: any;
   //Elemento html del Canvas
@@ -33,6 +34,8 @@ export class DashboardAdminComponent {
   filtro = new Date().getMonth();
   destroy$: Subject<boolean> = new Subject<boolean>();
   cantOrdenes: any;
+  mejorVendedor:any
+  peorVendedor: any;
   cantProductos: any;
   constructor(private gService: GenericService, private datePipe: DatePipe) {
     const fechaActual = new Date();
@@ -46,13 +49,22 @@ export class DashboardAdminComponent {
   ngAfterViewInit(): void {
     this.ngOnInit();
   }
-
+  inicioGrafico2() {
+    this.gService
+      .list('orden/mejor')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.mejorVendedor = data.length;
+        this.graficoBrowser1();
+      });
+  }
   obtenerComprasDiaActual() {
     this.gService
       .list('orden/cantidades')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.cantOrdenes = data.length;
+        
       });
   }
  
@@ -64,6 +76,16 @@ export class DashboardAdminComponent {
       .subscribe((data: any) => {
         this.datos = data;
         this.graficoBrowser();
+      });
+  }
+  
+  inicioGrafico3() {
+    this.gService
+      .list('orden/peor')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.peorVendedor = data.length;
+        this.graficoBrowser1();
       });
   }
 
@@ -83,10 +105,75 @@ export class DashboardAdminComponent {
         datasets: [
           {
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 205, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
+              'rgba(91, 185, 28, 0.5)',
+              'rgba(219, 182, 60, 0.5)',
+              'rgba(205, 53, 69, 0.5)',
+              'rgba(99, 53, 205, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
+            ],
+            //Datos del grafico, debe ser un array
+            data: this.datos.map((x) => x.suma),
+          },
+        ],
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+      },
+    });
+  }
+  graficoBrowser1(): void {
+    this.canvas1 = this.graficoCanvas.nativeElement;
+    this.ctx = this.canvas1.getContext('2d');
+    //Si existe destruir el Canvas para mostrar el grafico
+    if (this.grafico) {
+      this.grafico.destroy();
+    }
+    this.grafico = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+        //Etiquetas debe ser un array
+        labels: this.datos.map((x) => x.nombre),
+        datasets: [
+          {
+            backgroundColor: [
+              'rgba(91, 185, 28, 0.5)',
+              'rgba(219, 182, 60, 0.5)',
+              'rgba(205, 53, 69, 0.5)',
+              'rgba(99, 53, 205, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
+            ],
+            //Datos del grafico, debe ser un array
+            data: this.datos.map((x) => x.suma),
+          },
+        ],
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+      },
+    });
+  }
+  graficoBrowser3(): void {
+    this.canvas1 = this.graficoCanvas.nativeElement;
+    this.ctx = this.canvas1.getContext('2d');
+    //Si existe destruir el Canvas para mostrar el grafico
+    if (this.grafico) {
+      this.grafico.destroy();
+    }
+    this.grafico = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+        //Etiquetas debe ser un array
+        labels: this.datos.map((x) => x.nombre),
+        datasets: [
+          {
+            backgroundColor: [
+              'rgba(91, 185, 28, 0.5)',
+              'rgba(219, 182, 60, 0.5)',
+              'rgba(205, 53, 69, 0.5)',
+              'rgba(99, 53, 205, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
             ],
             //Datos del grafico, debe ser un array
             data: this.datos.map((x) => x.suma),
@@ -107,6 +194,8 @@ export class DashboardAdminComponent {
   ngOnInit(): void {
     this.obtenerComprasDiaActual();
     this.inicioGrafico1();
+   // this.inicioGrafico2();
+   //inicioGrafico3();
   }
   openPDF() {
     //htmlData: id del elemento HTML
