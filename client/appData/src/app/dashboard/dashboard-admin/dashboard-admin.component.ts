@@ -27,27 +27,46 @@ export class DashboardAdminComponent {
   //Lista de meses para filtrar el gráfico
   mesList: any;
   formattedDate: any;
+  mes: any;
+  numeroMes: any;
   //Mes actual
   filtro = new Date().getMonth();
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private gService: GenericService, private datePipe: DatePipe) {}
+  cantOrdenes: any;
+  cantProductos: any;
+  constructor(private gService: GenericService, private datePipe: DatePipe) {
+    const fechaActual = new Date();
+    const opcionDeFormato: Intl.DateTimeFormatOptions = { month: 'long' };
+    this.mes = fechaActual.toLocaleDateString('es', opcionDeFormato);
+    this.numeroMes = parseInt(
+      fechaActual.toLocaleDateString('es', { month: 'numeric' })
+    );
+  }
 
   ngAfterViewInit(): void {
-    this.obtenerComprasDiaActual();
     this.ngOnInit();
   }
 
   obtenerComprasDiaActual() {
-    const fechaActual = new Date();
-    this.formattedDate = this.datePipe.transform(fechaActual, 'yyyy-MM-dd');
     this.gService
-      .get('orden/producto', this.formattedDate)
+      .list('orden/cantidades')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.cantOrdenes = data.length;
+      });
+  }
+ 
+
+  inicioGrafico1() {
+    this.gService
+      .get('orden/productoTop', this.numeroMes)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.datos = data;
         this.graficoBrowser();
       });
   }
+
   //Configurar y crear gráfico
   graficoBrowser(): void {
     this.canvas = this.graficoCanvas.nativeElement;
@@ -68,9 +87,6 @@ export class DashboardAdminComponent {
               'rgba(255, 159, 64, 0.2)',
               'rgba(255, 205, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)',
             ],
             //Datos del grafico, debe ser un array
             data: this.datos.map((x) => x.suma),
@@ -89,14 +105,8 @@ export class DashboardAdminComponent {
     this.destroy$.unsubscribe();
   }
   ngOnInit(): void {
-    //Obtener información del API
-    this.gService
-      .list('orden/productoTop')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.datos1 = data;
-      });
-      console.log(this.datos1);
+    this.obtenerComprasDiaActual();
+    this.inicioGrafico1();
   }
   openPDF() {
     //htmlData: id del elemento HTML

@@ -1,7 +1,6 @@
 const { PrismaClient, Prisma } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
 //Obtener listado
 module.exports.get = async (request, response, next) => {
   const orden = await prisma.orden.findMany({
@@ -27,26 +26,26 @@ module.exports.get = async (request, response, next) => {
 };
 
 module.exports.getById = async (request, response, next) => {
-    let idorden=parseInt(request.params.id);
-    const ordenes=await prisma.orden.findUnique({
-        where: {id: idorden},
-     include:{
-        usuario:true,
-        metodoPago:true,
-        direccion:true,
-        ordenProductos: {
+  let idorden = parseInt(request.params.id);
+  const ordenes = await prisma.orden.findUnique({
+    where: { id: idorden },
+    include: {
+      usuario: true,
+      metodoPago: true,
+      direccion: true,
+      ordenProductos: {
+        include: {
+          producto: {
             include: {
-                producto:{
-                  include:{
-                    usuario: true,
-                  },
-                },
+              usuario: true,
             },
           },
-          evaluaciones:true,
-     },
-    });
-    response.json(ordenes);
+        },
+      },
+      evaluaciones: true,
+    },
+  });
+  response.json(ordenes);
 };
 
 module.exports.getByVendedor = async (request, response, next) => {
@@ -216,28 +215,39 @@ module.exports.update = async (request, response, next) => {
   }
 };
 module.exports.getCantidadCompras = async (request, response, next) => {
-  const result = await prisma.$queryRaw(
-    Prisma.sql`SELECT * FROM mapas.orden order by fechaOrden ASC;` 
-  );
-  response.json(result); 
+  const hoy = new Date();
+  hoy.setUTCHours(0, 0, 0, 0); // Set UTC time to the start of the day
+  const mannana = new Date(hoy);
+  mannana.setUTCDate(mannana.getUTCDate() + 1); // Get the start of the next UTC day
+  const pedidosHoy = await prisma.orden.findMany({
+    where: {
+      fechaOrden: {
+        gte: hoy.toISOString(),
+        lt: mannana.toISOString(),
+      },
+    },
+  });
+  response.json(pedidosHoy);
 };
+
 module.exports.getVentaProductoTop5 = async (request, response, next) => {
-  //let mes = parseInt(request.params.mes);
+  let numeroMes = parseInt(request.params.numeroMes);
   const result = await prisma.$queryRaw(
     Prisma.sql`
     SELECT p.nombreProducto, o.productoId, SUM(o.cantidad) AS totalCantidad
 FROM mapas.producto p
 INNER JOIN mapas.ordenDetalle o ON o.productoId = p.id
 GROUP BY p.nombreProducto, o.productoId
-ORDER BY totalCantidad DESC
+AND MONTH(o.fechaOrden) = ${numeroMes}
+GROUP BY od.productoId
 LIMIT 5;`
   );
-
+  console.log(result);
   response.json(result);
 };
 
 module.exports.getMejoresVendedores = async (request, response, next) => {
-  //let mes = parseInt(request.params.mes); 
+  //let mes = parseInt(request.params.mes);
   const result = await prisma.$queryRaw(
     Prisma.sql`
     SELECT u.id, u.nombre, u.primerApellido, u.segundoApellido, AVG(e.calificacionFinal) as promedio
@@ -252,7 +262,7 @@ module.exports.getMejoresVendedores = async (request, response, next) => {
   response.json(result);
 };
 module.exports.getPeoresVendedores = async (request, response, next) => {
-  //let mes = parseInt(request.params.mes); 
+  //let mes = parseInt(request.params.mes);
   const result = await prisma.$queryRaw(
     Prisma.sql`
     SELECT u.id, u.nombre, u.primerApellido, u.segundoApellido, AVG(e.calificacionFinal) as promedio
@@ -267,7 +277,11 @@ module.exports.getPeoresVendedores = async (request, response, next) => {
 
   response.json(result);
 };
-module.exports.getProductoMasVendidoVendedor = async (request, response, next) => {
+module.exports.getProductoMasVendidoVendedor = async (
+  request,
+  response,
+  next
+) => {
   const vendedorId = request.params.id; // Id del vendedor logueado
   const result = await prisma.$queryRaw(
     Prisma.sql`
@@ -296,7 +310,11 @@ module.exports.getClienteConMasCompras = async (request, response, next) => {
 
   response.json(result);
 };
-module.exports.getCantidadEvaluacionesPorEscala = async (request, response, next) => {
+module.exports.getCantidadEvaluacionesPorEscala = async (
+  request,
+  response,
+  next
+) => {
   const result = await prisma.$queryRaw(
     Prisma.sql`
       SELECT calificacionFinal, COUNT(*) AS cantidad

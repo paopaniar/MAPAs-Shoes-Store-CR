@@ -1,98 +1,21 @@
 <br><br><br><br><br>
 <div class="contenido1">
 <mat-card class="shipping-card">
-  <mat-card-title>Cantidad de compras del día: </mat-card-title>
+  <mat-card-title>Cantidad de compras del día:</mat-card-title>
   <mat-card-content>
-    <canvas #graficoCanvas class="chart"></canvas>
+<p>{{cantOrdenes}}</p>
   </mat-card-content>
 </mat-card>
 </div>
 
 <div class="contenido2">
-<mat-card class="shipping-card">
-  <mat-card-content>
-    <div id="htmlData"  class="contenedor">
-      <h2 class="titulo">Top 5 productos más vendidos</h2>
-      <table class="tabla">
-          <thead>
-        <tr class="table-primary">
-          <th>Producto</th>
-          <th>Total Ventas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of datos1">
-          <th>{{ item.nombreProducto }}</th>
-          <td>&dollar;{{ item.total }}</td>
-        </tr>
-      </tbody>
-      </table>
+  <div class="row marginTile">
+    <div class="col headerCardcolor2">
+      <p>Top 5 Productos vendidos en {{ mes }}</p>
     </div>
-    <div class="col-md-4 text-right">
-      <button mat-flat-button color="accent" (click)="openPDF()" >
-          Descargar PDF
-          <mat-icon>download</mat-icon> 
-          </button>
-      
+    <div class="col backChart">
+      <canvas #graficoCanvas width="702" height="351" class="chart"></canvas>
     </div>
-  </mat-card-content>
-  </mat-card>
+  </div>
 </div>
 
-<div class="contenido3">
-  <mat-card class="shipping-card">
-    <mat-card-content>
-      <div id="htmlData"  class="contenedor">
-        <h2 class="titulo">Top 5 mejores vendedores</h2>
-        <table class="tabla">
-            <thead>
-          <tr class="table-primary">
-            <th>Vendedor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of datos2">
-            <th>{{ item.nombre }}</th>
-          </tr>
-        </tbody>
-        </table>
-      </div>
-      <div class="col-md-4 text-right">
-        <button mat-flat-button color="accent" (click)="openPDF()" >
-            Descargar PDF
-            <mat-icon>download</mat-icon> 
-            </button>
-        
-      </div>
-    </mat-card-content>
-    </mat-card>
-  </div>
-  
-  <div class="contenido4">
-    <mat-card class="shipping-card">
-      <mat-card-content>
-        <div id="htmlData"  class="contenedor">
-          <h2 class="titulo">Top 3 peores vendedores</h2>
-          <table class="tabla">
-              <thead>
-            <tr class="table-primary">
-              <th>Vendedor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of datos3">
-              <th>{{ item.nombre }}</th>
-            </tr>
-          </tbody>
-          </table>
-        </div>
-        <div class="col-md-4 text-right">
-          <button mat-flat-button color="accent" (click)="openPDF()" >
-              Descargar PDF
-              <mat-icon>download</mat-icon> 
-              </button>
-          
-        </div>
-      </mat-card-content>
-      </mat-card>
-    </div>
