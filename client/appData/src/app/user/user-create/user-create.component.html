@@ -8,7 +8,7 @@
         <mat-form-field class="full-width">
           <mat-label>Identificación</mat-label>
           <input matInput type="text" placeholder="Identificación" formControlName="identificacion" />
-         
+          <mat-error *ngIf="errorHandling('identificacion', 'minlength')">La identificación debe tener 9 dígitos</mat-error>
         </mat-form-field>
       </div>
       <div class="input-container">
