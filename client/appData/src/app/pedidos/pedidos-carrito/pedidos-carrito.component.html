@@ -37,7 +37,7 @@
               type="number"
               class="form-control mb-2"
               [(ngModel)]="element.cantidad"
-              (change)="disponnibilidad(element)"
+              (change)="actualizarSubtotal(element)"
             />
           </mat-form-field>
         </mat-cell>
@@ -45,16 +45,20 @@
           >Total
         </mat-footer-cell>
       </ng-container>
-
+      <ng-container matColumnDef="impuestos">
+        <mat-header-cell *matHeaderCellDef> Impuestos </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.cantidad * element.subtotal * 0.13 | currency : "₡" }}</mat-cell>
+        <mat-footer-cell *matFooterCellDef class="footer-total">{{ total * 0.13 + total | currency : "₡" }}</mat-footer-cell>
+      </ng-container>
       <ng-container matColumnDef="subtotal">
         <mat-header-cell *matHeaderCellDef class="titulo">
           Subtotal
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.subtotal | currency : "₡" }}
+          {{ element.subtotal * element.cantidad   | currency : "₡" }}
         </mat-cell>
         <mat-footer-cell *matFooterCellDef class="footer-total" style="color: #457FAD;">
-          {{total | currency : "₡"
+          {{ total | currency : "₡"
         }}</mat-footer-cell>
       </ng-container>
 

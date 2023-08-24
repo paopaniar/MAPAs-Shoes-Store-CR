@@ -19,9 +19,6 @@ module.exports.get = async (request, response, next) => {
               usuario: true,
             },
           },
-
-            evaluaciones:true,
-
         },
       },
     },

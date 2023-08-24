@@ -30,7 +30,7 @@ export class PedidosDiagComponent implements OnInit{
     let totalSubtotal = 0;
     if (this.datos && this.datos.ordenProductos) {
       for (let producto of this.datos.ordenProductos) {
-        totalSubtotal += parseFloat(producto.producto.precio);
+        totalSubtotal += parseFloat(producto.producto.precio)* producto.cantidad;
         
       }
     }

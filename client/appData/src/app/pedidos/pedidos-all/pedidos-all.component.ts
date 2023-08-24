@@ -48,7 +48,6 @@ export class PedidosAllComponent implements AfterViewInit{
       // Utiliza el método reduce para sumar los precios de los productos
       this.subtotal = this.datos.ordenProductos.reduce((total, producto) => {
         if (producto.producto && producto.producto.precio) {
-          // Convierte el precio a número y súmalo al total
           total += parseFloat(producto.producto.precio);
         }
         return total;
@@ -67,7 +66,7 @@ export class PedidosAllComponent implements AfterViewInit{
     let total = 0;
     if (row.ordenProductos && row.ordenProductos.length > 0) {
       for (let producto of row.ordenProductos) {
-        total += parseFloat(producto.producto.precio);
+        total += parseFloat(producto.producto.precio) * (producto.cantidad);
       }
     }
     return total;

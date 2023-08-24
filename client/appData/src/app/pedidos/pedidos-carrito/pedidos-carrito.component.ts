@@ -28,7 +28,7 @@ export class PedidosCarritoComponent implements OnInit {
   direccionesList: any;
   usuarioId: number = 0;
   impuesto = 0.13;
-  displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'subtotal','acciones'];
+  displayedColumns: string[] = ['producto', 'precio', 'cantidad', 'impuestos' ,'subtotal','acciones'];
   dataSource = new MatTableDataSource<any>();
   constructor(
     private fb: FormBuilder,
@@ -58,11 +58,27 @@ export class PedidosCarritoComponent implements OnInit {
     this.dataSource=new MatTableDataSource(data)
    })
    this.total=this.cartService.getTotal()
+   console.log('total', this.total)
 
   }
   actualizarCantidad(item: any) {
-    this.cartService.addToCart(item);
-    this.total=this.cartService.getTotal();
+    
+    if (item.product.cantidad>0&&item.cantidad+1<=item.product.cantidad) {
+      this.cartService.addToCart(item);
+      this.total = this.cartService.getTotal();
+      this.noti.mensaje(
+      'Orden',
+      'Cantidad Actualizada ' + item.cantidad,
+      TipoMessage.info
+    );
+    }else{
+      this.noti.mensaje(
+        'Orden',
+        'No existe esta cantidad en stock, el maximo disponible son: '+item.product.cantidad,
+        TipoMessage.warning
+      );
+    }
+    
   }
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
@@ -90,7 +106,7 @@ export class PedidosCarritoComponent implements OnInit {
 }
 
 actualizarSubtotal(element: any) {
-  const stockDisponible = element.producto.cantidadDisponible;
+  const stockDisponible = element.cantidad;
 
   if (element.cantidad > 0 && element.cantidad <= stockDisponible) {
     element.subtotal = element.cantidad * element.precio;
@@ -100,7 +116,7 @@ actualizarSubtotal(element: any) {
 
   console.log('Actualizando subtotal:', element.subtotal);
   
-  this.total = this.cartService.getTotal();
+  this.total = this.cartService.getTotal()*element.cantidad;
   console.log('Actualizando total:', this.total);
 }
 
@@ -108,11 +124,11 @@ actualizarSubtotal(element: any) {
 
 disponnibilidad(item: any) {
   if (item.producto && item.producto.cantidadDisponible !== undefined) {
-    const stockDisponible = item.producto.cantidadDisponible;// Obtener el stock disponible del producto
+    const stockDisponible = item.producto.cantidadDisponible;
   if (item.cantidad > 0 && item.cantidad <= stockDisponible) {
-    // Verificar si la cantidad es válida y no excede el stock disponible
+    
     this.cartService.updateCartItemQuantity(item.product, item.cantidad);
-    this.total = this.cartService.getTotal();
+    this.total =+ this.cartService.getTotal()* item.cantidad;
     console.log('Actualizando total (disponnibilidad):', this.total);
   } else if (item.cantidad > stockDisponible) {
     this.noti.mensaje('Atención!', 'No existen artículos disponibles', TipoMessage.error);
@@ -151,8 +167,7 @@ registrarOrden() {
     let detalles = itemsCarrito.map((x) => ({
       ['productoId']: x.idItem,
       ['cantidad']: x.cantidad,
-      ['subtotal']: x.subtotal,
-      ['total']: (x.subtotal + (x.cantidad*x.subtotal)*this.impuesto),
+    
     }));
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
     this.authService.isAuthenticated.subscribe((valor) => (this.isAutenticated = valor));
