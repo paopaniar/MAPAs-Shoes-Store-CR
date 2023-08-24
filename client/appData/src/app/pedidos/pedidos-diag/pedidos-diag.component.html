@@ -27,7 +27,7 @@
             <tr>
               <td>{{ producto.cantidad }}</td>
               <td>{{ producto.producto?.nombreProducto }}</td>
-              <td>{{ producto.producto?.precio | currency : "₡" }}</td>
+              <td>{{ producto.producto?.precio* producto.cantidad | currency : "₡" }}</td>
             </tr>
           </ng-container>
         </tbody>
