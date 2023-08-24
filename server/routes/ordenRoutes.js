@@ -17,5 +17,5 @@ router.get("/vendedor",ordenController.getPeoresVendedores);
 router.get('/vendedor/:id/producto-mas-vendido', ordenController.getProductoMasVendidoVendedor);
 router.get('/cliente-con-mas-compras', ordenController.getClienteConMasCompras);
 router.get('/evaluaciones-por-escala', ordenController.getCantidadEvaluacionesPorEscala);
-router.get('/productoTop', ordenController.getVentaProductoTop5);
+router.get('/productoTop/:numeroMes', ordenController.getVentaProductoTop5);
 module.exports = router;

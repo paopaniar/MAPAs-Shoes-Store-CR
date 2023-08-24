@@ -79,7 +79,7 @@ export class DashboardAdminComponent {
       type: 'pie',
       data: {
         //Etiquetas debe ser un array
-        labels: this.datos.map((x) => x.nombre),
+        labels: this.datos.map((x) => x.nombreProducto),
         datasets: [
           {
             backgroundColor: [

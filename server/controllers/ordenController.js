@@ -234,13 +234,14 @@ module.exports.getVentaProductoTop5 = async (request, response, next) => {
   let numeroMes = parseInt(request.params.numeroMes);
   const result = await prisma.$queryRaw(
     Prisma.sql`
-    SELECT p.nombreProducto, o.productoId, SUM(o.cantidad) AS totalCantidad
-FROM mapas.producto p
-INNER JOIN mapas.ordenDetalle o ON o.productoId = p.id
-GROUP BY p.nombreProducto, o.productoId
-AND MONTH(o.fechaOrden) = ${numeroMes}
-GROUP BY od.productoId
-LIMIT 5;`
+    SELECT p.nombreProducto, SUM(od.cantidad) as suma 
+    FROM orden o
+    INNER JOIN ordenDetalle od ON o.id = od.ordenId
+    INNER JOIN producto p ON od.productoId = p.id
+    WHERE MONTH(o.fechaOrden) = ${numeroMes} 
+    GROUP BY p.id 
+    ORDER BY suma DESC 
+    LIMIT 5`
   );
   console.log(result);
   response.json(result);
