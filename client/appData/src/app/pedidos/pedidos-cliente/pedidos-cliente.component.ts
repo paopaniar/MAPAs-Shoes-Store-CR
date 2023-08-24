@@ -72,7 +72,7 @@ export class PedidosClienteComponent  implements AfterViewInit{
     let total = 0;
     if (row && row.ordenProductos) {
       for (let producto of row.ordenProductos) {
-        total += parseFloat(producto.producto?.precio);
+        total += parseFloat(producto.producto?.precio)*producto.cantidad;
       }
     }
     console.log('to', total)
