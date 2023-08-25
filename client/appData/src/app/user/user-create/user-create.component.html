@@ -8,8 +8,9 @@
         <mat-form-field class="full-width">
           <mat-label>Identificación</mat-label>
           <input matInput type="text" placeholder="Identificación" formControlName="identificacion" />
-          <mat-error *ngIf="errorHandling('identificacion', 'minlength')">La identificación debe tener 9 dígitos</mat-error>
-        </mat-form-field>
+          <mat-error *ngIf="errorHandling('identificacion', 'required')">Es requerida</mat-error>
+          <mat-error *ngIf="errorHandling('identificacion', 'pattern')">Debe tener solo dígitos</mat-error>
+          <mat-error *ngIf="errorHandling('identificacion', 'minlength')">Debe tener máximo 9 dígitos</mat-error>   </mat-form-field>
       </div>
       <div class="input-container">
         <mat-form-field class="full-width">
@@ -36,6 +37,7 @@
           <mat-label>Email</mat-label>
           <input matInput type="email" placeholder="Email de usuario" formControlName="email" />
           <mat-error *ngIf="errorHandling('email', 'required')">El email es <strong>requerido</strong></mat-error>
+          <mat-error *ngIf="errorHandling('email', 'email')">Verifique el formato</mat-error>
         </mat-form-field>
       </div>
 
